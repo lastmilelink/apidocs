@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Booking Service</title>
+    <title>OTD V2.0 Booking Service</title>
 
     <style>
       .highlight table td { padding: 5px; }
@@ -201,7 +201,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;phyton&quot;,&quot;curl&quot;,&quot;json&quot;,&quot;javascript&quot;,&quot;go&quot;,&quot;rust&quot;]">
+  <body class="index" data-languages="[&quot;shell&quot;,&quot;curl&quot;,&quot;json&quot;,null]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -212,13 +212,9 @@
       <img src="images/logo.png" class="logo" alt="Logo" />
         <div class="lang-selector">
               <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="phyton">phyton</a>
               <a href="#" data-language-name="curl">curl</a>
               <a href="#" data-language-name="json">json</a>
-              <a href="#" data-language-name="javascript">javascript</a>
-              <a href="#" data-language-name="go">go</a>
-              <a href="#" data-language-name="rust">rust</a>
+              <a href="#" data-language-name=""></a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -230,114 +226,44 @@
           </li>
           <li>
             <a href="#quick-start" class="toc-h1 toc-link" data-title="Quick Start">Quick Start</a>
-          </li>
-          <li>
-            <a href="#core-concepts" class="toc-h1 toc-link" data-title="Core Concepts">Core Concepts</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#creat-a-booking" class="toc-h2 toc-link" data-title="Creat a booking">Creat a booking</a>
+                    <a href="#before-you-start" class="toc-h2 toc-link" data-title="Before You Start">Before You Start</a>
                   </li>
                   <li>
-                    <a href="#before-you-start" class="toc-h2 toc-link" data-title="Before You Start">Before You Start</a>
+                    <a href="#security" class="toc-h2 toc-link" data-title="Security">Security</a>
                   </li>
               </ul>
           </li>
           <li>
-            <a href="#job-journey-type" class="toc-h1 toc-link" data-title="Job Journey Type">Job Journey Type</a>
-          </li>
-          <li>
-            <a href="#service-type" class="toc-h1 toc-link" data-title="Service Type">Service Type</a>
-          </li>
-          <li>
-            <a href="#place" class="toc-h1 toc-link" data-title="Place">Place</a>
-          </li>
-          <li>
-            <a href="#status" class="toc-h1 toc-link" data-title="Status">Status</a>
+            <a href="#booking-service-api-39-s-v2-0" class="toc-h1 toc-link" data-title="Booking Service API's V2.0">Booking Service API's V2.0</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#job-status" class="toc-h2 toc-link" data-title="Job Status">Job Status</a>
+                    <a href="#create-an-order" class="toc-h2 toc-link" data-title="Create an order">Create an order</a>
                   </li>
                   <li>
-                    <a href="#order-status" class="toc-h2 toc-link" data-title="Order Status">Order Status</a>
+                    <a href="#search-an-order" class="toc-h2 toc-link" data-title="Search an order">Search an order</a>
+                  </li>
+                  <li>
+                    <a href="#get-an-order" class="toc-h2 toc-link" data-title="Get an order">Get an order</a>
+                  </li>
+                  <li>
+                    <a href="#amend-an-order" class="toc-h2 toc-link" data-title="Amend an order">Amend an order</a>
+                  </li>
+                  <li>
+                    <a href="#cancell-an-order" class="toc-h2 toc-link" data-title="Cancell an order">Cancell an order</a>
+                  </li>
+                  <li>
+                    <a href="#http-error-codes" class="toc-h2 toc-link" data-title="Http Error Codes">Http Error Codes</a>
                   </li>
                   <li>
                     <a href="#exceptions-incidents" class="toc-h2 toc-link" data-title="Exceptions (Incidents)">Exceptions (Incidents)</a>
                   </li>
-              </ul>
-          </li>
-          <li>
-            <a href="#eta" class="toc-h1 toc-link" data-title="ETA">ETA</a>
-              <ul class="toc-list-h2">
                   <li>
-                    <a href="#amend-and-cancellation" class="toc-h2 toc-link" data-title="Amend and Cancellation">Amend and Cancellation</a>
-                  </li>
-              </ul>
-          </li>
-          <li>
-            <a href="#search" class="toc-h1 toc-link" data-title="Search">Search</a>
-          </li>
-          <li>
-            <a href="#error-codes" class="toc-h1 toc-link" data-title="Error Codes">Error Codes</a>
-          </li>
-          <li>
-            <a href="#advanced-features" class="toc-h1 toc-link" data-title="Advanced Features">Advanced Features</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#timeslots" class="toc-h2 toc-link" data-title="Timeslots">Timeslots</a>
+                    <a href="#chronos" class="toc-h2 toc-link" data-title="Chronos">Chronos</a>
                   </li>
                   <li>
-                    <a href="#helpers" class="toc-h2 toc-link" data-title="Helpers">Helpers</a>
-                  </li>
-              </ul>
-          </li>
-          <li>
-            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
-          </li>
-          <li>
-            <a href="#v2-accounts-accountid-timeslots" class="toc-h1 toc-link" data-title="/V2/ACCOUNTS/{ACCOUNTID}/TIMESLOTS">/V2/ACCOUNTS/{ACCOUNTID}/TIMESLOTS</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#post" class="toc-h2 toc-link" data-title="POST"><strong><em>POST</em></strong></a>
-                  </li>
-              </ul>
-          </li>
-          <li>
-            <a href="#v2-accounts-accountid-orders" class="toc-h1 toc-link" data-title="/V2/ACCOUNTS/{ACCOUNTID}/ORDERS">/V2/ACCOUNTS/{ACCOUNTID}/ORDERS</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#post-2" class="toc-h2 toc-link" data-title="POST"><strong><em>POST</em></strong></a>
-                  </li>
-              </ul>
-          </li>
-          <li>
-            <a href="#v2-accounts-accountid-orders-orderid" class="toc-h1 toc-link" data-title="/V2/ACCOUNTS/{ACCOUNTID}/ORDERS/{ORDERID}">/V2/ACCOUNTS/{ACCOUNTID}/ORDERS/{ORDERID}</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#get" class="toc-h2 toc-link" data-title="GET"><strong><em>GET</em></strong></a>
-                  </li>
-              </ul>
-          </li>
-          <li>
-            <a href="#v2-accounts-accountid-orders-search" class="toc-h1 toc-link" data-title="/V2/ACCOUNTS/{ACCOUNTID}/ORDERS/SEARCH">/V2/ACCOUNTS/{ACCOUNTID}/ORDERS/SEARCH</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#post-3" class="toc-h2 toc-link" data-title="POST"><strong><em>POST</em></strong></a>
-                  </li>
-              </ul>
-          </li>
-          <li>
-            <a href="#v2-accounts-accountid-orders-orderid-cancel" class="toc-h1 toc-link" data-title="/V2/ACCOUNTS/{ACCOUNTID}/ORDERS/{ORDERID}/CANCEL">/V2/ACCOUNTS/{ACCOUNTID}/ORDERS/{ORDERID}/CANCEL</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#put" class="toc-h2 toc-link" data-title="PUT"><strong><em>PUT</em></strong></a>
-                  </li>
-              </ul>
-          </li>
-          <li>
-            <a href="#v2-accounts-accountid-orders-orderid-amend" class="toc-h1 toc-link" data-title="/V2/ACCOUNTS/{ACCOUNTID}/ORDERS/{ORDERID}/AMEND">/V2/ACCOUNTS/{ACCOUNTID}/ORDERS/{ORDERID}/AMEND</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#put-2" class="toc-h2 toc-link" data-title="PUT"><strong><em>PUT</em></strong></a>
+                    <a href="#web-hooks" class="toc-h2 toc-link" data-title="Web-hooks">Web-hooks</a>
                   </li>
               </ul>
           </li>
@@ -346,240 +272,63 @@
           </li>
       </ul>
         <ul class="toc-footer">
+            <li>Documentation Typography conventions</li>
             <li><a href='#'>Sign Up for a Developer Key</a></li>
-            <li><a href='https://github.com/lavkumarv'>Documentation Powered by lav</a></li>
+            <li><a href='https://github.com/lord/slate'>Powered by SLATE</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='introduction'>Introduction</h1>
-<p><img src="images/OTD-APIs.png" alt="APIs" /></p>
+        <style>
+.flex-container {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction:row;
+    flex-direction:row;
+    max-width:70%;
+  }
 
-<p><strong>Welcome to the On the dot Booking API Reference documentation.</strong></p>
+.flex-container > div {
+    background-color: #f1f1f1;
+    margin: 10px;
+  }
 
-<p>This documentation is currently in Beta and will be updated over the next few months. For assistance with using the APIs, please contact our Partner team.</p>
+  .flex-container div a {
+    height:30px;
+  }
+</style>
+<h1 id='introduction'>Introduction</h1>
+<p><strong>Welcome to the On the dot Booking Service V2.0 API&#39;s Reference documentation.</strong></p>
 
-<p><strong>All APIs require an <code>Authorization</code> header.</strong></p>
+<p>This documentation is currently in <code>Beta</code> and will be updated over the next few months. Should you require further assistance using our API&#39;s, please contact our Partner team <strong>partners@onthedot.com</strong></p>
 
-<p>You will need to register with this site to receive a token which is used in the request headers. </p>
-<h1 id='quick-start'>Quick Start</h1>
-<p><img src="images/OTD-API-HLV-slate.png" alt="HLV" /></p>
-<h1 id='core-concepts'>Core Concepts</h1>
-<p>An order comprises the following parts:</p>
+<p><body>
+<div class="flex-container">
+  <div><a href="#get-it-now" id="close-image"><img src="images/OTD_GITN.png"></a></div>
+  <div><a href="#get-it-later" id="close-image"><img src="images/OTD_GITL.png"></a></div>
+  <div><a href="#return-to-depot" id="close-image"><img src="images/OTD_RTD.png"></a></div>
+  <div><a href="#real-time-tracking" id="close-image"><img src="images/OTD_RTTE.png"></a></div>
+  <div><a href="#real-time-notifications" id="close-image"><img src="images/OTD_RTN.png"></a></div>
+</div>
+</body></p>
 
 <ul>
-<li><p><strong>job</strong>: a parcel to be collected and delivered.  A job has one collection stop and one delivery stop, together with timeslots (explained below).  An order can contain multiple jobs.</p></li>
-<li><p><strong>stop</strong>: a geographical location.  Each job has one collection stop and one delivery stop.</p></li>
-<li><p><strong>timeslot</strong>: a period of time where collection and delivery should happen.  A timeslot defines a start time and an end time.  The user can either specify the timeslot values in request, or get a timeslot ID from OTD and use it.</p></li>
-<li><p><strong>webhooks</strong>: real time push requests to an endpoint of your choice for all supported events.
-<img src="images/WebHooks.png" alt="Webhooks" /></p></li>
+<li>The illustrates below is a high level view of our API features. Swagger files are downloadable from the corresponding section below</li>
 </ul>
-<h2 id='creat-a-booking'>Creat a booking</h2>
-<p>Here is an example request to create an order.
-<strong>POST</strong> <code>https://&lt;[env]-lastmilelink.eu&gt;/v2/accounts/myaccount/orders</code></p>
-<h3 id='sending-this-request-with-the-payload-to-the-right-will-result-in-a-booking'>Sending this request with the payload to the right will result in a booking.</h3><h3 id='consideration-must-be-given-to-the-following-attributes'>Consideration must be given to the following attributes:</h3>
-<p>`{</p>
 
-<p>&quot;id&quot;: &quot;unique partner order number&quot;,</p>
+<p><img src="images/OTD-API-HLV-slate.png" alt="HLV" /></p>
 
-<p>&quot;metadata&quot;: {
-    &quot;clientRefId&quot;: &quot;unique OfficeOutlet order number&quot;,
-    &quot;serviceType&quot;: &quot;4hour&quot;,
-  },
-  &quot;customData&quot;: {
-        &quot;reference_1&quot;: &quot;PartnerName&quot;,
-        &quot;reference_2&quot;: &quot; Office Outlet - Staples Corner”,
-        &quot;reference_3&quot;: “44002”
-                &quot;citytrak-department&quot;: &quot;unique Schuh order number”,
-  },
-  ...
-      &quot;requires&quot;: [
-                &quot;ageVerification&quot;,
-                &quot;collectionSignOff&quot;,
-                 &quot;deliverySignOff&quot;
-      ],
-  ...`</p>
-<pre class="highlight shell tab-shell"><code><span class="s1">'POST https://&lt;[env]-lastmilelink.eu&gt;/v2/accounts/myaccount/orders`
-</span></code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code>
+<ul>
+<li><p><strong>Swagger 2.0</strong></p>
 
-curl -X POST <span class="se">\</span>
-  <span class="s1">'http://{{host}}/{{bookingService}}/v2/accounts/{{myaccount}}/orders'</span> <span class="se">\</span>
-  -H <span class="s1">'authorization: &lt;your_api_token&gt;'</span> <span class="se">\</span>
-  -H <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
-  -H <span class="s1">'x-trace-id: 79b6b8b6-d0df-4e12-8f4d-4b435162f4e7'</span> <span class="se">\</span>
-  -d <span class="s1">'
-
-{
-  "id": "myorder",
-  "metadata": {
-    "serviceType": "asap"
-  },
-  "jobs": [
-    {
-      "id": "job0",
-      "metadata": {
-        "journeyType": "delivery"
-      },
-      "items": [
-        {
-          "id": "itemgroup0:item0",
-          "quantity": 1
-        }
-      ],
-      "collection": {
-        "stopId": "stop0"
-      },
-      "delivery": {
-        "stopId": "stop1"
-      },
-      "timeslot": {
-        "collection": {
-          "from": "2019-01-02T13:30:00.000Z",
-          "to": "2019-01-02T14:30:00.000Z"
-        },
-        "delivery": {
-          "from": "2019-01-02T18:30:00.000Z",
-          "to": "2019-01-02T19:30:00.000Z"
-        }
-      }
-    }
-  ],
-  "stops": [
-    {
-      "id": "stop0",
-      "place": {
-        "address": {
-          "country": "GBR",
-          "town": "London",
-          "streets": [
-            "Royal Opera House",
-            "Bow Street"
-          ],
-          "postcode": "WC2E 9DD"
-        }
-      }
-    },
-    {
-      "id": "stop1",
-      "place": {
-        "address": {
-          "country": "GBR",
-          "town": "London",
-          "streets": [
-            "English National Opera",
-            "St Martin'</span>s Lane<span class="s2">"
-          ],
-          "</span>postcode<span class="s2">": "</span>WC2N 4ES<span class="s2">"
-        }
-      }
-    }
-  ]
-}
-</span></code></pre>
-<p>And here is an example response when getting an order (or the response of creating an order)</p>
-<pre class="highlight shell tab-shell"><code>GET https://TODO/v2/accounts/myaccount/orders/myorder
-
-Response:
-
-<span class="o">{</span>
-  <span class="s2">"id"</span>: <span class="s2">"myorder"</span>,
-  <span class="s2">"metadata"</span>: <span class="o">{</span>
-    <span class="s2">"vehicleType"</span>: <span class="s2">"bicycle"</span>,
-    <span class="s2">"serviceType"</span>: <span class="s2">"asap"</span>,
-    <span class="s2">"trackingUrl"</span>: <span class="s2">"https://trackmydriver-prod.lastmilelink.eu/myaccount::myorder?token=7%2FI9ZlUZ7rnNBUkKORI2fGrPdEIaMV%2BNkrYbLFSQQW4%3D"</span>
-  <span class="o">}</span>,
-  <span class="s2">"jobs"</span>: <span class="o">[</span>
-    <span class="o">{</span>
-      <span class="s2">"id"</span>: <span class="s2">"job0"</span>,
-      <span class="s2">"metadata"</span>: <span class="o">{</span>
-        <span class="s2">"journeyType"</span>: <span class="s2">"delivery"</span>
-      <span class="o">}</span>,
-      <span class="s2">"items"</span>: <span class="o">[</span>
-        <span class="o">{</span>
-          <span class="s2">"id"</span>: <span class="s2">"itemgroup0:item0"</span>,
-          <span class="s2">"quantity"</span>: 1
-        <span class="o">}</span>
-      <span class="o">]</span>,
-      <span class="s2">"collection"</span>: <span class="o">{</span>
-        <span class="s2">"stopId"</span>: <span class="s2">"stop0"</span>
-      <span class="o">}</span>,
-      <span class="s2">"delivery"</span>: <span class="o">{</span>
-        <span class="s2">"stopId"</span>: <span class="s2">"stop1"</span>
-      <span class="o">}</span>,
-      <span class="s2">"timeslot"</span>: <span class="o">{</span>
-        <span class="s2">"collection"</span>: <span class="o">{</span>
-          <span class="s2">"from"</span>: <span class="s2">"2019-01-02T13:30:00.000Z"</span>,
-          <span class="s2">"to"</span>: <span class="s2">"2019-01-02T14:30:00.000Z"</span>
-        <span class="o">}</span>,
-        <span class="s2">"delivery"</span>: <span class="o">{</span>
-          <span class="s2">"from"</span>: <span class="s2">"2019-01-02T18:30:00.000Z"</span>,
-          <span class="s2">"to"</span>: <span class="s2">"2019-01-02T19:30:00.000Z"</span>
-        <span class="o">}</span>
-      <span class="o">}</span>,
-      <span class="s2">"status"</span>: <span class="o">{</span>
-        <span class="s2">"progressStatus"</span>: <span class="o">{</span>
-          <span class="s2">"status"</span>: <span class="s2">"created"</span>,
-          <span class="s2">"updatedAt"</span>: <span class="s2">"2019-01-02T13:30:00.048Z"</span>
-        <span class="o">}</span>
-      <span class="o">}</span>
-    <span class="o">}</span>
-  <span class="o">]</span>,
-  <span class="s2">"stops"</span>: <span class="o">[</span>
-    <span class="o">{</span>
-      <span class="s2">"id"</span>: <span class="s2">"stop0"</span>,
-      <span class="s2">"place"</span>: <span class="o">{</span>
-        <span class="s2">"position"</span>: <span class="o">{</span>
-          <span class="s2">"coordinates"</span>: <span class="o">{</span>
-            <span class="s2">"longitude"</span>: -0.1265741,
-            <span class="s2">"latitude"</span>: 51.5136986
-          <span class="o">}</span>
-        <span class="o">}</span>,
-        <span class="s2">"address"</span>: <span class="o">{</span>
-          <span class="s2">"country"</span>: <span class="s2">"GBR"</span>,
-          <span class="s2">"town"</span>: <span class="s2">"London"</span>,
-          <span class="s2">"streets"</span>: <span class="o">[</span>
-            <span class="s2">"Royal Opera House"</span>,
-            <span class="s2">"Bow Street"</span>
-          <span class="o">]</span>,
-          <span class="s2">"postcode"</span>: <span class="s2">"WC2E 9DD"</span>
-        <span class="o">}</span>
-      <span class="o">}</span>
-    <span class="o">}</span>,
-    <span class="o">{</span>
-      <span class="s2">"id"</span>: <span class="s2">"stop1"</span>,
-      <span class="s2">"place"</span>: <span class="o">{</span>
-        <span class="s2">"id"</span>: <span class="s2">"place2"</span>,
-        <span class="s2">"position"</span>: <span class="o">{</span>
-          <span class="s2">"coordinates"</span>: <span class="o">{</span>
-            <span class="s2">"longitude"</span>: -0.1288661,
-            <span class="s2">"latitude"</span>: 51.5098553
-          <span class="o">}</span>
-        <span class="o">}</span>,
-        <span class="s2">"address"</span>: <span class="o">{</span>
-          <span class="s2">"country"</span>: <span class="s2">"GBR"</span>,
-          <span class="s2">"town"</span>: <span class="s2">"London"</span>,
-          <span class="s2">"streets"</span>: <span class="o">[</span>
-            <span class="s2">"English National Opera"</span>,
-            <span class="s2">"St Martin's Lane"</span>
-          <span class="o">]</span>,
-          <span class="s2">"postcode"</span>: <span class="s2">"WC2N 4ES"</span>
-        <span class="o">}</span>
-      <span class="o">}</span>
-    <span class="o">}</span>
-  <span class="o">]</span>,
-  <span class="s2">"status"</span>: <span class="o">{</span>
-    <span class="s2">"status"</span>: <span class="s2">"created"</span>,
-    <span class="s2">"updatedAt"</span>: <span class="s2">"2019-01-02T13:30:00.048Z"</span>
-  <span class="o">}</span>,
-  <span class="s2">"createdAt"</span>: <span class="s2">"2019-01-02T13:30:00.048Z"</span>,
-  <span class="s2">"updatedAt"</span>: <span class="s2">"2019-01-02T13:30:00.048Z"</span>
-<span class="o">}</span>
-</code></pre><h2 id='before-you-start'>Before You Start</h2>
+<ul>
+<li><a href="#">Click to download the <code>version2.0 .yaml</code> files</a> .
+    * <code>OAS3.0 coming soon</code></li>
+<li><a href="https://github.com/Rebilly/generator-openapi-repo">Find out how to create Github repo for your OpenAPI spec.</a></li>
+</ul></li>
+</ul>
+<h1 id='quick-start'>Quick Start</h1><h2 id='before-you-start'>Before You Start</h2>
 <p>Please contact OTD support to set up the following:</p>
 
 <ul>
@@ -587,7 +336,7 @@ Response:
 <li>Service types</li>
 <li>Places (optional)</li>
 </ul>
-<h1 id='job-journey-type'>Job Journey Type</h1>
+<h3 id='job-journey-type'>Job Journey Type</h3>
 <p>Each job must have a <code>&lt;order&gt;.&lt;job&gt;.metadata.journeyType</code> defined.  The valid values are:</p>
 
 <table><thead>
@@ -609,50 +358,50 @@ Response:
 <blockquote>
 <p><strong>Note</strong>: regardless of <code>journeyType</code>, <code>collection</code> is always the pick up location, and <code>delivery</code> is always the drop off location.</p>
 </blockquote>
-<h1 id='service-type'>Service Type</h1>
+<h3 id='service-type'>Service Type</h3>
 <p>A service type defines a set of pre-agreed constraints for orders.  A new user must have the service type set up before they can create orders.</p>
 
 <p>Currently supported service types: <code>timeslot</code>, <code>asap</code>, <code>return</code>, <code>2hour</code>, <code>3hour</code>, <code>4hour</code>, <code>sameday</code>, <code>2hour-later</code>, <code>4hour-later</code>.</p>
-<h1 id='place'>Place</h1>
+<h3 id='place'>Place</h3>
 <p>A stop must contain a valid place, which represents a physical location.</p>
 
 <p>The user can either contact OTD support to set up places for them (so they can use a place ID when creating orders), or use a valid address when creating orders.</p>
-<h1 id='status'>Status</h1>
+<h3 id='status'>Status</h3>
 <p>Both order and job have status.  They are updated with realtime events.</p>
-<h2 id='job-status'>Job Status</h2>
+<h3 id='job-status'>Job Status</h3>
 <blockquote>
 <p>Status representing a job&#39;s execution state.</p>
 </blockquote>
-<pre class="highlight plaintext"><code>"status": {
-  "progressStatus": {
-    "status": "allocated",
-    "updatedAt": "2019-01-02T13:18:53.087Z"
-  },
-  "courierStatus": {
-    "location": {
-      "longitude": 0.1701,
-      "latitude": 51.5701
-    },
-    "updatedAt": "2019-01-02T13:18:53.087Z"
-  },
-  "incidents": [
-    {
-      "id": "85ad3dd6-05d3-4023-b1e6-74042b7ff138",
-      "status": "created",
-      "reason": {
-        "code": "1B",
-        "description": "Partner Cancellation"
-      },
-      "impact": {
-        "code": "7H",
-        "description": "Unable to Fulfil Order"
-      },
-      "createdAt": "2019-01-02T13:18:53.087Z",
-      "updatedAt": "2019-01-02T13:18:53.087Z"
-    }
-  ]
-}
-</code></pre>
+<pre class="highlight json tab-json"><code><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="s2">"progressStatus"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"allocated"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-02T13:18:53.087Z"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"courierStatus"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"location"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1701</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">51.5701</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-02T13:18:53.087Z"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"incidents"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"85ad3dd6-05d3-4023-b1e6-74042b7ff138"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"created"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"reason"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1B"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Partner Cancellation"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"impact"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7H"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unable to Fulfil Order"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-02T13:18:53.087Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-02T13:18:53.087Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 <p>Here is an example job status object.</p>
 
 <ul>
@@ -666,18 +415,6 @@ Response:
   &quot;updatedAt&quot;: &quot;2019-01-02T13:18:53.087Z&quot;
 }
 </code></p>
-<h3 id='courier-status'>Courier Status</h3>
-<p>Example:
-<code>
-&quot;courierStatus&quot;: {
-  &quot;location&quot;: {
-    &quot;longitude&quot;: 0.1701,
-    &quot;latitude&quot;: 51.5701
-  },
-  &quot;updatedAt&quot;: &quot;2019-01-02T13:18:53.087Z&quot;
-}
-</code>
-This gives the realtime courier location data.</p>
 
 <table><thead>
 <tr>
@@ -722,7 +459,7 @@ This gives the realtime courier location data.</p>
 <td>The job is offline (this means an internal error, please contact OTD support).</td>
 </tr>
 </tbody></table>
-<h2 id='order-status'>Order Status</h2>
+<h3 id='order-status'>Order Status</h3>
 <p>Order status is an aggregation of job statuses.</p>
 
 <p>Example:</p>
@@ -785,217 +522,26 @@ This gives the realtime courier location data.</p>
 <td><code>cancelled</code>, this can only happen if customer cancelled the order and then returned to depot was called.</td>
 </tr>
 </tbody></table>
-<h2 id='exceptions-incidents'>Exceptions (Incidents)</h2>
-<p>COSMO has an <code>Incident</code> service responsable of managing any job real time exceptions during:
-* <code>Collection</code>
-* <code>Transit</code>
-* <code>Delivery</code></p>
-
-<p>The service will log the reason and code and trigger various notifcations, for example webhooks messages.</p>
-
+<h3 id='courier-status'>Courier Status</h3>
 <p>Example:
 <code>
-&quot;incidents&quot;: [
-  {
-    &quot;id&quot;: &quot;85ad3dd6-05d3-4023-b1e6-74042b7ff138&quot;,
-    &quot;status&quot;: &quot;created&quot;,
-    &quot;reason&quot;: {
-      &quot;code&quot;: &quot;1B&quot;,
-      &quot;description&quot;: &quot;Partner Cancellation&quot;
-    },
-    &quot;impact&quot;: {
-      &quot;code&quot;: &quot;7H&quot;,
-      &quot;description&quot;: &quot;Unable to Fulfil Order&quot;
-    },
-    &quot;createdAt&quot;: &quot;2019-01-02T13:18:53.087Z&quot;,
-    &quot;updatedAt&quot;: &quot;2019-01-02T13:18:53.087Z&quot;
-  }
-]
-</code></p>
-
-<p>Incidents represents a list of exceptions that happened during the job&#39;s lifetime.</p>
-
-<table><thead>
-<tr>
-<th>Status</th>
-<th>Meaning</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code>created</code></td>
-<td>An incident was created for the job.</td>
-</tr>
-<tr>
-<td><code>deleted</code></td>
-<td>An incident was deleted from the job.</td>
-</tr>
-</tbody></table>
-
-<p>TODO: incident codes and meaning</p>
-<h1 id='eta'>ETA</h1>
-<p>Example:
-<code>
-{
-  &quot;id&quot;: &quot;myorder&quot;,
-  &quot;jobs&quot;: [
-    {
-      &quot;id&quot;: &quot;job0&quot;,
-      //...
-      &quot;eta&quot;: {
-        &quot;collection&quot;: {
-          &quot;courierId&quot;: &quot;mycourier&quot;,
-          &quot;time&quot;: &quot;2019-01-30T15:16:17.540Z&quot;
-        },
-        &quot;delivery&quot;: {
-          &quot;courierId&quot;: &quot;mycourier&quot;,
-          &quot;time&quot;: &quot;2019-01-30T15:19:27.546Z&quot;
-        }
-      }
-    }
-  ],
-  //...
+&quot;courierStatus&quot;: {
+  &quot;location&quot;: {
+    &quot;longitude&quot;: 0.1701,
+    &quot;latitude&quot;: 51.5701
+  },
+  &quot;updatedAt&quot;: &quot;2019-01-02T13:18:53.087Z&quot;
 }
-</code></p>
-
-<p><code>collection</code> shows ETA to collection, <code>delivery</code> shows ETA to delivery.</p>
-
-<p>Note <code>collection</code> is only available after the job has entered state <code>allocated</code>, and <code>delivery</code> is only available after <code>collected</code>.</p>
-<h2 id='amend-and-cancellation'>Amend and Cancellation</h2>
-<p>Orders and jobs can be amended after they are created, subject to certain conditions:</p>
+</code>
+* This gives the realtime courier location data.</p>
+<h2 id='security'>Security</h2>
+<p><strong>All APIs require an <code>Authorization</code> header.</strong></p>
 
 <ul>
-<li>Job&#39;s stop and timing details cannot be amended after it has entered <code>allocated</code> state.</li>
-<li>Job&#39;s item details cannot be amended after it has entered <code>collected</code> state.</li>
+<li>You will need to register <a href="apigee%20address">here</a> to obtain a token by creating an <code>app</code> and subscribing to our <code>Sandbox</code>.</li>
+<li>The <code>token</code>  must be used in the request headers as <code>Authorization:{{Token}}</code> header. </li>
 </ul>
-
-<p>Orders can be cancelled if and only if all of the jobs are in <code>created</code> state.</p>
-<h1 id='search'>Search</h1>
-<p>Orders can be searched using the search API.  The API supports paging using a <code>length</code> and <code>offset</code> concept.</p>
-
-<p>Please see API for details.</p>
-<h1 id='error-codes'>Error Codes</h1>
-<p>All error messages have the following format.</p>
-<pre class="highlight plaintext"><code>{
-  "code": "booking:0203",
-  "description": "job not found",
-  "message": "more details"
-}
-</code></pre>
-<p>A list of all error codes and HTTP response code.
-| full code | http code | description |
-| --- | --- | --- |
-| default:0000 | 500 | Unknown |
-| default:0001 | 400 | Invalid request |
-| default:0002 | 404 | Not found |
-| booking:0101 | 500 | geocode service failed |
-| booking:0102 | 500 | place service failed |
-| booking:0103 | 500 | SLA service failed |
-| booking:0104 | 500 | job service failed |
-| booking:0105 | 500 | chronos service failed |
-| booking:0106 | 500 | capacity service failed |
-| booking:0107 | 500 | account service failed |
-| booking:0108 | 500 | tracking service failed |
-| booking:0108 | 500 | capacity service (zone API) failed |
-| booking:0202 | 422 | invalid place. please create a support ticket to configure your account with otd |
-| booking:0203 | 422 | invalid SLA. please create a support ticket to configure your account with otd |
-| booking:0206 | 422 | invalid timeslot. please create a support ticket to configure your account with otd |
-| booking:0207 | 422 | invalid capacity. please create a support ticket to configure your account with otd |
-| booking:0208 | 422 | invalid account. please create a support ticket to configure your account with otd |
-| booking:0210 | 422 | invalid zone. please create a support ticket to configure your account with otd |
-| booking:0301 | 422 | order not cancellable |
-| booking:0302 | 409 | concurrent modification |
-| booking:0303 | 500 | failed to delete job |
-| booking:0304 | 400 | order not amendable |
-| booking:02XX | 500 | unknown server error with On the dot services |
-| booking:401 | 401 | Invalid authentication credentials |
-| booking:403 | 403 | Permission denied to access resource |</p>
-<h1 id='advanced-features'>Advanced Features</h1><h2 id='timeslots'>Timeslots</h2>
-<blockquote>
-<p>Note: this feature only works if you have places configured in OTD.  Please contact OTD support to set them up.</p>
-</blockquote>
-
-<p>Users might want to get a list of available timeslots for their delivery, and then choose the ones they like.</p>
-
-<p>This is implemented by a timeslot API.  Here is an example request:</p>
-<pre class="highlight plaintext"><code>POST https://TODO/v2/accounts/myaccount/timeslots
-
-{
-  "serviceType": "timeslot",
-  "collection": {
-    "id": "myplace"
-  },
-  "delivery": {
-    "address": {
-      "streets": [
-        "Royal Opera House",
-        "Bow Street"
-      ],
-      "town": "London",
-      "country": "GBR",
-      "postcode": "WC2E 9DD"
-    }
-  },
-  "packageReadyAt": "2019-01-30T16:25:00.000Z",
-  "additionalNoOfDays": 0 // TODO this is not yet changed, since we don't have time to implement it
-}
-</code></pre>
-<p>And here is an example response:
-<code>
-{
-  &quot;chronos&quot;: {
-    &quot;2019-01-30&quot;: [
-      {
-        &quot;id&quot;: &quot;YTZkOWNjN2QtMWJkNS00MDkyLWFiZGItNGM4YmM0OWJkMDBlfjRwdkVNMEdrY3p3RDdQbWNCYWJOd2t0ck5ua2FtMX5FQzJBKzRQSH5XQzJFKzlERH4xNTQ4ODYzNTEzfjE1NDg4NjQwNjB+MH4wfjQuOTEyMDAwfnRpbWVzbG90fmZhbHNlfmZhbHNl&quot;,
-        &quot;collectionSlot&quot;: {
-          &quot;collectFrom&quot;: &quot;2019-01-30T16:25:00.619Z&quot;,
-          &quot;collectBy&quot;: &quot;2019-01-30T16:25:00.619Z&quot;
-        },
-        &quot;deliverySlot&quot;: {
-          &quot;deliverFrom&quot;: &quot;2019-01-30T16:40:00.619Z&quot;,
-          &quot;deliverBy&quot;: &quot;2019-01-30T16:40:00.619Z&quot;
-        },
-        &quot;slotExpiresAt&quot;: &quot;2019-01-30T16:01:00.000Z&quot;
-      },
-      {
-        &quot;id&quot;: &quot;YTZkOWNjN2QtMWJkNS00MDkyLWFiZGItNGM4YmM0OWJkMDBlfjhPeGtZNXFuaHdlWExwT2hkMzVNTFJIdjJMbm9OMX5FQzJBKzRQSH5XQzJFKzlERH4xNTQ4ODYzNTEzfjE1NDg4NjQwNjB+MH4wfjQuOTEyMDAwfnRpbWVzbG90fmZhbHNlfmZhbHNl&quot;,
-        &quot;collectionSlot&quot;: {
-          &quot;collectFrom&quot;: &quot;2019-01-30T16:30:00.619Z&quot;,
-          &quot;collectBy&quot;: &quot;2019-01-30T16:30:00.619Z&quot;
-        },
-        &quot;deliverySlot&quot;: {
-          &quot;deliverFrom&quot;: &quot;2019-01-30T16:45:00.619Z&quot;,
-          &quot;deliverBy&quot;: &quot;2019-01-30T16:45:00.619Z&quot;
-        },
-        &quot;slotExpiresAt&quot;: &quot;2019-01-30T16:01:00.000Z&quot;
-      },
-      //...
-    ]
-  }
-}
-</code></p>
-
-<p>The user should use the <code>id</code> value in create order API as <code>&lt;order&gt;.&lt;job&gt;.timeslot.id</code>.</p>
-
-<blockquote>
-<p>Note: please ensure to use the same addresses for timeslot.</p>
-</blockquote>
-<h2 id='helpers'>Helpers</h2>
-<p>Jobs can have helper jobs attached to them.  A helper is a new job that is associated with a target item group/job, and shares the the same parameters (timing, stops, etc).</p>
-
-<p>Helper jobs are created by specifying in the parent job the number of helpers required.</p>
-
-<p>The limit of helpers per job is 10.</p>
-
-<blockquote>
-<p>Note: helper jobs cannot be amended</p>
-</blockquote>
-<h3 id='helpers-and-status'>Helpers and Status</h3>
-<p>Helper jobs have the same set of statuses as a normal job, but they <strong>do not</strong> contribute to order status.</p>
-
-<p><strong>Version:</strong> 2.0 </p>
-
-<p><a href="https://github.com/Rebilly/generator-openapi-repo">Find out how to create Github repo for your OpenAPI spec.</a> </p>
-<h1 id='authentication'>Authentication</h1>
+<h3 id='authentication'>Authentication</h3>
 <table><thead>
 <tr>
 <th>apiKey</th>
@@ -1003,72 +549,52 @@ This gives the realtime courier location data.</p>
 </tr>
 </thead><tbody>
 </tbody></table>
-<h1 id='v2-accounts-accountid-timeslots'>/V2/ACCOUNTS/{ACCOUNTID}/TIMESLOTS</h1><h2 id='post'><strong><em>POST</em></strong></h2>
-<p><strong>Summary:</strong> Get available timeslots for a booking</p>
+<h1 id='booking-service-api-39-s-v2-0'>Booking Service API&#39;s V2.0</h1><h2 id='create-an-order'>Create an order</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unique partner order number"</span><span class="p">,</span><span class="w">
 
-<p><strong>Description:</strong> This API returns a list of available timeslots. Allows the options to be 
-presented to an end-user for selection.</p>
-<h3 id='http-request'>HTTP Request</h3>
-<p><code>***POST*** /v2/accounts/{accountId}/timeslots</code> </p>
+  </span><span class="s2">"metaData"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"clientRefId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unique partner order number"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"serviceType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4hour"</span><span class="p">,</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"customData"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"reference_1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PartnerName"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"reference_2"</span><span class="p">:</span><span class="w"> </span><span class="s2">" PartnerStore - Staples Corner”,
+        "</span><span class="err">reference_</span><span class="mi">3</span><span class="s2">": “44002”
+                "</span><span class="err">citytrak-department</span><span class="s2">": "</span><span class="err">unique</span><span class="w"> </span><span class="err">partner</span><span class="w"> </span><span class="err">order</span><span class="w"> </span><span class="err">number”</span><span class="p">,</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="err">...</span><span class="w">
+      </span><span class="s2">"requires"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"ageVerification"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"collectionSignOff"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"deliverySignOff"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+  </span><span class="err">...</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Below you have specific examples for each of the order types you can create using our <code>booking service</code>.</p>
 
-<p><strong>Parameters</strong></p>
+<ul>
+<li>Consideration must be given to the following attributes shown left in <code>metaData</code>, <code>customData</code> and <code>requires</code> sections of request body depending on the agreed operations flow with us.</li>
+</ul>
 
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Located in</th>
-<th>Description</th>
-<th>Required</th>
-<th>Type</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>accountId</td>
-<td>path</td>
-<td>account ID</td>
-<td>Yes</td>
-<td>string</td>
-</tr>
-<tr>
-<td>body</td>
-<td>body</td>
-<td>Chronos parameters</td>
-<td>Yes</td>
-<td></td>
-</tr>
-</tbody></table>
+<hr>
 
-<p><strong>Responses</strong></p>
+<ul>
+<li><code>POST</code> /V2/ACCOUNTS/{ACCOUNTID}/ORDERS</li>
+</ul>
 
-<table><thead>
-<tr>
-<th>Code</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>200</td>
-<td>OK</td>
-</tr>
-<tr>
-<td>400</td>
-<td>Bad request</td>
-</tr>
-<tr>
-<td>401</td>
-<td>Unauthorized</td>
-</tr>
-</tbody></table>
-<h1 id='v2-accounts-accountid-orders'>/V2/ACCOUNTS/{ACCOUNTID}/ORDERS</h1><h2 id='post-2'><strong><em>POST</em></strong></h2>
-<p><strong>Summary:</strong> Create order</p>
+<hr>
 
-<p><strong>Description:</strong> This API creates an order with the specified ID.</p>
+<aside class="notice">
+  <strong>Summary:</strong> Create order
+  <strong>Description</strong> This API creates an order with the specified ID.
+</aside>
+
+<p>(Express/ASAP)</p>
 
 <p>This API allows the caller to override all values (timeslots, stops) with their own values.</p>
 
 <p>If the caller sends only timeslot ID or place ID, then the relevant services will be called to get the details.</p>
-<h3 id='http-request-2'>HTTP Request</h3>
-<p><code>***POST*** /v2/accounts/{accountId}/orders</code> </p>
 
 <p><strong>Parameters</strong></p>
 
@@ -1122,12 +648,313 @@ presented to an end-user for selection.</p>
 <td>Conflict</td>
 </tr>
 </tbody></table>
-<h1 id='v2-accounts-accountid-orders-orderid'>/V2/ACCOUNTS/{ACCOUNTID}/ORDERS/{ORDERID}</h1><h2 id='get'><strong><em>GET</em></strong></h2>
-<p><strong>Summary:</strong> Get order</p>
 
-<p><strong>Description:</strong> This API gets order with account ID and order ID.</p>
-<h3 id='http-request-3'>HTTP Request</h3>
-<p><code>***GET*** /v2/accounts/{accountId}/orders/{orderId}</code> </p>
+<hr>
+<h3 id='get-it-now'>Get it now</h3>
+<aside class="notice">
+(Express/ASAP)
+</aside>
+
+<blockquote>
+<p><code>POST</code>  <strong><em><code>URL</code>/v2/accounts/<code>myaccount</code>/orders</em></strong></p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="err">\</span><span class="w">
+  </span><span class="err">'http</span><span class="p">:</span><span class="err">//</span><span class="p">{{</span><span class="err">host</span><span class="p">}}</span><span class="err">/</span><span class="p">{{</span><span class="err">bookingService</span><span class="p">}}</span><span class="err">/v</span><span class="mi">2</span><span class="err">/accounts/</span><span class="p">{{</span><span class="err">myaccount</span><span class="p">}}</span><span class="err">/orders'</span><span class="w"> </span><span class="err">\</span><span class="w">
+  </span><span class="err">-H</span><span class="w"> </span><span class="err">'authorization</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;your_api_token&gt;'</span><span class="w"> </span><span class="err">\</span><span class="w">
+  </span><span class="err">-H</span><span class="w"> </span><span class="err">'content-type</span><span class="p">:</span><span class="w"> </span><span class="err">application/json'</span><span class="w"> </span><span class="err">\</span><span class="w">
+  </span><span class="err">-H</span><span class="w"> </span><span class="err">'x-trace-id</span><span class="p">:</span><span class="w"> </span><span class="mi">79</span><span class="err">b</span><span class="mi">6</span><span class="err">b</span><span class="mi">8</span><span class="err">b</span><span class="mi">6</span><span class="err">-d</span><span class="mi">0</span><span class="err">df</span><span class="mi">-4</span><span class="err">e</span><span class="mi">12-8</span><span class="err">f</span><span class="mi">4</span><span class="err">d</span><span class="mi">-4</span><span class="err">b</span><span class="mi">435162</span><span class="err">f</span><span class="mi">4</span><span class="err">e</span><span class="mi">7</span><span class="err">'</span><span class="w"> </span><span class="err">\</span><span class="w">
+  </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"myorder"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"serviceType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"asap"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"jobs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"job0"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"journeyType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"delivery"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"itemgroup0:item0"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"collection"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"stopId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stop0"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"delivery"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"stopId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stop1"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"timeslot"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"collection"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"from"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-02T13:30:00.000Z"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"to"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-02T14:30:00.000Z"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"delivery"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"from"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-02T18:30:00.000Z"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"to"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-02T19:30:00.000Z"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"stops"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stop0"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"place"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GBR"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"town"</span><span class="p">:</span><span class="w"> </span><span class="s2">"London"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"streets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"Royal Opera House"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Bow Street"</span><span class="w">
+          </span><span class="p">],</span><span class="w">
+          </span><span class="s2">"postcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WC2E 9DD"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stop1"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"place"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GBR"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"town"</span><span class="p">:</span><span class="w"> </span><span class="s2">"London"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"streets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"English National Opera"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"St Martin's Lane"</span><span class="w">
+          </span><span class="p">],</span><span class="w">
+          </span><span class="s2">"postcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WC2N 4ES"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p><strong><em>Note</em></strong> The above command returns JSON structured like this: here is an example response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"myorder"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"vehicleType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bicycle"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"serviceType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"asap"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"trackingUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://trackmydriver-prod.lastmilelink.eu/myaccount::myorder?token=7%2FI9ZlUZ7rnNBUkKORI2fGrPdEIaMV%2BNkrYbLFSQQW4%3D"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"jobs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"job0"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"journeyType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"delivery"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"itemgroup0:item0"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"collection"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"stopId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stop0"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"delivery"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"stopId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stop1"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"timeslot"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"collection"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"from"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-02T13:30:00.000Z"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"to"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-02T14:30:00.000Z"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"delivery"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"from"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-02T18:30:00.000Z"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"to"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-02T19:30:00.000Z"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"progressStatus"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"created"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-02T13:30:00.048Z"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"stops"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stop0"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"place"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"position"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.1265741</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">51.5136986</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GBR"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"town"</span><span class="p">:</span><span class="w"> </span><span class="s2">"London"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"streets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"Royal Opera House"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Bow Street"</span><span class="w">
+          </span><span class="p">],</span><span class="w">
+          </span><span class="s2">"postcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WC2E 9DD"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stop1"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"place"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"place2"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"position"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.1288661</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">51.5098553</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GBR"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"town"</span><span class="p">:</span><span class="w"> </span><span class="s2">"London"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"streets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"English National Opera"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"St Martin's Lane"</span><span class="w">
+          </span><span class="p">],</span><span class="w">
+          </span><span class="s2">"postcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WC2N 4ES"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"created"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-02T13:30:00.048Z"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-02T13:30:00.048Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-02T13:30:00.048Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><img src="images/OTD_H_GITN.png" alt="Express/ASAP" /></p>
+
+<ul>
+<li>This booking type will allow you to create express/asap orders. Those deliveries will always start from <code>Now</code> </li>
+</ul>
+
+<hr>
+<h3 id='get-it-later'>Get it later</h3>
+<aside class="notice">
+(Scheduled)
+</aside>
+
+<p><img src="images/OTD_H_GITL.png" alt="Scheduled" /></p>
+
+<hr>
+<h3 id='return-to-depot'>Return to depot</h3>
+<aside class="notice">
+(Scheduled)
+</aside>
+
+<p><img src="images/OTD_H_RTD.png" alt="Returns to Depot/Origin" /></p>
+
+<hr>
+<h3 id='real-time-tracking'>Real time tracking</h3>
+<aside class="notice">
+  Real time tracking and dynamic ETA's : <code>ETC ( estimated time of collection )</code> and <code>ETD ( estimated time of delivery )</code>
+</aside>
+
+<p><img src="images/OTD_H_RTTE.png" alt="Real Time Notifications" /></p>
+
+<hr>
+<h3 id='real-time-notifications'>Real time notifications</h3>
+<p><img src="images/OTD_H_RTN.png" alt="Real Time Notifications" /></p>
+<h2 id='search-an-order'>Search an order</h2><pre class="highlight json tab-json"><code><span class="w">
+  </span><span class="err">code_sample</span><span class="w">
+
+</span></code></pre>
+<hr>
+
+<ul>
+<li><code>POST</code> /v2/accounts/{accountId}/orders/search</li>
+</ul>
+
+<hr>
+
+<aside class="notice">
+  <strong>Summary:</strong> Search an order
+  <strong>Description</strong> This API returns a list of orders based on the provided search criteria.
+</aside>
+
+<p><code>createdAt</code>, <code>collectedBy</code> and <code>deliveredBy</code> are time ranges.  If there are multiple jobs in the order, then any job satisfying these will cause the order to be returned.</p>
+
+<p><code>coordinates</code> can be any point on Earth.</p>
+
+<p>Paging is supported.  See request and response for details.</p>
+
+<p><strong>HTTP Request</strong>
+<code>POST</code><code>/v2/accounts/{accountId}/orders/search</code> </p>
+
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Located in</th>
+<th>Description</th>
+<th>Required</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>accountId</td>
+<td>path</td>
+<td>account ID</td>
+<td>Yes</td>
+<td>string</td>
+</tr>
+<tr>
+<td>body</td>
+<td>body</td>
+<td>The search order parameters</td>
+<td>Yes</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<p><strong>Responses</strong></p>
+
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>OK</td>
+</tr>
+<tr>
+<td>400</td>
+<td>Bad request</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized</td>
+</tr>
+</tbody></table>
+<h2 id='get-an-order'>Get an order</h2><pre class="highlight json tab-json"><code><span class="w">
+</span><span class="err">code_sample</span><span class="w">
+
+</span></code></pre>
+<hr>
+
+<ul>
+<li><code>GET</code> /v2/accounts/{accountId}/orders/{orderId}</li>
+</ul>
+
+<hr>
+
+<aside class="notice">
+  <strong>Summary:</strong> <code>GET</code> order
+  <strong>Description</strong> This API gets an order by <code>accountID</code> and <code>orderID</code>.
+</aside>
+
+<p><strong>HTTP Request</strong>
+<code>GET</code> /v2/accounts/{accountId}/orders/{orderId}</p>
 
 <p><strong>Parameters</strong></p>
 
@@ -1181,137 +1008,20 @@ presented to an end-user for selection.</p>
 <td>Not found</td>
 </tr>
 </tbody></table>
-<h1 id='v2-accounts-accountid-orders-search'>/V2/ACCOUNTS/{ACCOUNTID}/ORDERS/SEARCH</h1><h2 id='post-3'><strong><em>POST</em></strong></h2>
-<p><strong>Summary:</strong> Search order</p>
+<h2 id='amend-an-order'>Amend an order</h2><pre class="highlight json tab-json"><code><span class="err">code</span><span class="p">:</span><span class="err">sample</span><span class="w">
+</span></code></pre>
+<hr>
 
-<p><strong>Description:</strong> This API returns a list of orders based on the provided search criteria.</p>
+<ul>
+<li><code>PUT</code> /V2/ACCOUNTS/{ACCOUNTID}/ORDERS/{ORDERID}/AMEND</li>
+</ul>
 
-<p><code>createdAt</code>, <code>collectedBy</code> and <code>deliveredBy</code> are time ranges.  If there are multiple jobs in the order, then any job satisfying these will cause the order to be returned.</p>
+<hr>
 
-<p><code>coordinates</code> can be any point on Earth.</p>
-
-<p>Paging is supported.  See request and response for details.</p>
-<h3 id='http-request-4'>HTTP Request</h3>
-<p><code>***POST*** /v2/accounts/{accountId}/orders/search</code> </p>
-
-<p><strong>Parameters</strong></p>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Located in</th>
-<th>Description</th>
-<th>Required</th>
-<th>Type</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>accountId</td>
-<td>path</td>
-<td>account ID</td>
-<td>Yes</td>
-<td>string</td>
-</tr>
-<tr>
-<td>body</td>
-<td>body</td>
-<td>The search order parameters</td>
-<td>Yes</td>
-<td></td>
-</tr>
-</tbody></table>
-
-<p><strong>Responses</strong></p>
-
-<table><thead>
-<tr>
-<th>Code</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>200</td>
-<td>OK</td>
-</tr>
-<tr>
-<td>400</td>
-<td>Bad request</td>
-</tr>
-<tr>
-<td>401</td>
-<td>Unauthorized</td>
-</tr>
-</tbody></table>
-<h1 id='v2-accounts-accountid-orders-orderid-cancel'>/V2/ACCOUNTS/{ACCOUNTID}/ORDERS/{ORDERID}/CANCEL</h1><h2 id='put'><strong><em>PUT</em></strong></h2>
-<p><strong>Summary:</strong> Cancel order</p>
-
-<p><strong>Description:</strong> This API can be used to cancel an order, under the following conditions:</p>
-
-<ol>
-<li><p>The order exists.</p></li>
-<li><p>None of the jobs of the order have the status <code>collected</code> yet.</p></li>
-</ol>
-
-<p>Once an order is cancelled, it cannot be re-created or un-cancelled.  You will need to create a new order in this case.</p>
-<h3 id='http-request-5'>HTTP Request</h3>
-<p><code>***PUT*** /v2/accounts/{accountId}/orders/{orderId}/cancel</code> </p>
-
-<p><strong>Parameters</strong></p>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Located in</th>
-<th>Description</th>
-<th>Required</th>
-<th>Type</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>accountId</td>
-<td>path</td>
-<td>account ID</td>
-<td>Yes</td>
-<td>string</td>
-</tr>
-<tr>
-<td>orderId</td>
-<td>path</td>
-<td>order ID</td>
-<td>Yes</td>
-<td>string</td>
-</tr>
-</tbody></table>
-
-<p><strong>Responses</strong></p>
-
-<table><thead>
-<tr>
-<th>Code</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>200</td>
-<td>OK</td>
-</tr>
-<tr>
-<td>400</td>
-<td>Bad request</td>
-</tr>
-<tr>
-<td>401</td>
-<td>Unauthorized</td>
-</tr>
-<tr>
-<td>403</td>
-<td>Forbidden</td>
-</tr>
-</tbody></table>
-<h1 id='v2-accounts-accountid-orders-orderid-amend'>/V2/ACCOUNTS/{ACCOUNTID}/ORDERS/{ORDERID}/AMEND</h1><h2 id='put-2'><strong><em>PUT</em></strong></h2>
-<p><strong>Summary:</strong> Amend order</p>
-
-<p><strong>Description:</strong> This API amends an order and updates the corresponding jobs in COSMO.</p>
+<aside class="notice">
+  <strong>Summary:</strong> Amend order
+  <strong>Description</strong> This API amends an order and updates the corresponding jobs in COSMO.
+</aside>
 
 <p>The following rules apply:</p>
 
@@ -1329,8 +1039,9 @@ presented to an end-user for selection.</p>
 <p>4) If stops corresponding to the job are changed, then rule 2) applies.</p>
 
 <p>Note <code>customData</code> uses incremental update.  All other fields are full-replacement update.</p>
-<h3 id='http-request-6'>HTTP Request</h3>
-<p><code>PUT /v2/accounts/{accountId}/orders/{orderId}/amend</code> </p>
+
+<p>** HTTP Request **
+<code>PUT /v2/accounts/{accountId}/orders/{orderId}/amend</code> </p>
 
 <p><strong>Parameters</strong></p>
 
@@ -1392,63 +1103,607 @@ presented to an end-user for selection.</p>
 </tr>
 </tbody></table>
 
-<!-- Converted with the swagger-to-slate https://github.com/lavkumarv/swagger-to-slate -->
-<h1 id='errors'>Errors</h1>
+<p>Orders and jobs can be amended after they are created, subject to certain conditions:</p>
+
+<ul>
+<li>Job&#39;s stop and timing details cannot be amended after it has entered <code>allocated</code> state.</li>
+<li>Job&#39;s item details cannot be amended after it has entered <code>collected</code> state.</li>
+</ul>
+<h2 id='cancell-an-order'>Cancell an order</h2><pre class="highlight json tab-json"><code><span class="w">
+  </span><span class="err">code_sample</span><span class="w">
+
+</span></code></pre>
+<hr>
+
+<ul>
+<li><code>PUT</code> /v2/accounts/{accountId}/orders/{orderId}/cancel</li>
+</ul>
+
+<hr>
+
 <aside class="notice">
-This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
+  <strong>Summary:</strong> Cancel order
+  <strong>Description</strong> This API can be used to cancel an order, under the following conditions:
 </aside>
 
-<p>The Kittn API uses the following error codes:</p>
+<p>Orders can be cancelled if and only if all of the jobs are in <code>created</code> state.</p>
+
+<ol>
+<li><p>The order exists.</p></li>
+<li><p>None of the jobs of the order have the status <code>collected</code> yet.</p></li>
+</ol>
+
+<p>Once an order is cancelled, it cannot be re-created or un-cancelled.  You will need to create a new order in this case.</p>
+
+<p><strong>HTTP Request</strong>
+<code>PUT</code> /v2/accounts/{accountId}/orders/{orderId}/cancel</p>
+
+<p><strong>Parameters</strong></p>
 
 <table><thead>
 <tr>
-<th>Error Code</th>
+<th>Name</th>
+<th>Located in</th>
+<th>Description</th>
+<th>Required</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>accountId</td>
+<td>path</td>
+<td>account ID</td>
+<td>Yes</td>
+<td>string</td>
+</tr>
+<tr>
+<td>orderId</td>
+<td>path</td>
+<td>order ID</td>
+<td>Yes</td>
+<td>string</td>
+</tr>
+</tbody></table>
+
+<p><strong>Responses</strong></p>
+
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>OK</td>
+</tr>
+<tr>
+<td>400</td>
+<td>Bad request</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden</td>
+</tr>
+</tbody></table>
+<h2 id='http-error-codes'>Http Error Codes</h2><pre class="highlight json tab-json"><code><span class="err">Sample</span><span class="w"> </span><span class="err">error</span><span class="w"> </span><span class="err">code</span><span class="w"> </span><span class="err">response</span><span class="p">:</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"booking:0203"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"job not found"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"more details"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><code>All error messages have the following format.</code></p>
+
+<p>Below is a table with all <code>error codes</code> and <code>http</code> response code.</p>
+
+<table><thead>
+<tr>
+<th>full code</th>
+<th>http code</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>default:0000</td>
+<td>500</td>
+<td>Unknown</td>
+</tr>
+<tr>
+<td>default:0001</td>
+<td>400</td>
+<td>Invalid request</td>
+</tr>
+<tr>
+<td>default:0002</td>
+<td>404</td>
+<td>Not found</td>
+</tr>
+<tr>
+<td>booking:0101</td>
+<td>500</td>
+<td>geocode service failed</td>
+</tr>
+<tr>
+<td>booking:0102</td>
+<td>500</td>
+<td>place service failed</td>
+</tr>
+<tr>
+<td>booking:0103</td>
+<td>500</td>
+<td>SLA service failed</td>
+</tr>
+<tr>
+<td>booking:0104</td>
+<td>500</td>
+<td>job service failed</td>
+</tr>
+<tr>
+<td>booking:0105</td>
+<td>500</td>
+<td>chronos service failed</td>
+</tr>
+<tr>
+<td>booking:0106</td>
+<td>500</td>
+<td>capacity service failed</td>
+</tr>
+<tr>
+<td>booking:0107</td>
+<td>500</td>
+<td>account service failed</td>
+</tr>
+<tr>
+<td>booking:0108</td>
+<td>500</td>
+<td>tracking service failed</td>
+</tr>
+<tr>
+<td>booking:0108</td>
+<td>500</td>
+<td>capacity service (zone API) failed</td>
+</tr>
+<tr>
+<td>booking:0202</td>
+<td>422</td>
+<td>invalid place. please create a support ticket to configure your account with otd</td>
+</tr>
+<tr>
+<td>booking:0203</td>
+<td>422</td>
+<td>invalid SLA. please create a support ticket to configure your account with otd</td>
+</tr>
+<tr>
+<td>booking:0206</td>
+<td>422</td>
+<td>invalid timeslot. please create a support ticket to configure your account with otd</td>
+</tr>
+<tr>
+<td>booking:0207</td>
+<td>422</td>
+<td>invalid capacity. please create a support ticket to configure your account with otd</td>
+</tr>
+<tr>
+<td>booking:0208</td>
+<td>422</td>
+<td>invalid account. please create a support ticket to configure your account with otd</td>
+</tr>
+<tr>
+<td>booking:0210</td>
+<td>422</td>
+<td>invalid zone. please create a support ticket to configure your account with otd</td>
+</tr>
+<tr>
+<td>booking:0301</td>
+<td>422</td>
+<td>order not cancellable</td>
+</tr>
+<tr>
+<td>booking:0302</td>
+<td>409</td>
+<td>concurrent modification</td>
+</tr>
+<tr>
+<td>booking:0303</td>
+<td>500</td>
+<td>failed to delete job</td>
+</tr>
+<tr>
+<td>booking:0304</td>
+<td>400</td>
+<td>order not amendable</td>
+</tr>
+<tr>
+<td>booking:02XX</td>
+<td>500</td>
+<td>unknown server error with On the dot services</td>
+</tr>
+<tr>
+<td>booking:401</td>
+<td>401</td>
+<td>Invalid authentication credentials</td>
+</tr>
+<tr>
+<td>booking:403</td>
+<td>403</td>
+<td>Permission denied to access resource</td>
+</tr>
+</tbody></table>
+<h2 id='exceptions-incidents'>Exceptions (Incidents)</h2><pre class="highlight json tab-json"><code><span class="s2">"incidents"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"85ad3dd6-05d3-4023-b1e6-74042b7ff138"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"created"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"reason"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1B"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Partner Cancellation"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"impact"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7H"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unable to Fulfil Order"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-02T13:18:53.087Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-02T13:18:53.087Z"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<aside class="notice">
+COSMO has an internal `Incident` service responsable of managing any job real time exceptions during:
+</aside>
+
+<ul>
+<li><code>Collection</code></li>
+<li><code>Transit</code></li>
+<li><code>Delivery</code></li>
+</ul>
+
+<p>The service will log the <code>code, verbose reason</code> then trigger various notifcations if configured, for example send web-hooks, sms&#39;s or e-mails.</p>
+
+<p>Incidents represents a list of exceptions that happened during the job&#39;s lifetime.</p>
+
+<table><thead>
+<tr>
+<th>Status</th>
 <th>Meaning</th>
 </tr>
 </thead><tbody>
 <tr>
+<td><code>created</code></td>
+<td>An incident was created for the job.</td>
+</tr>
+<tr>
+<td><code>deleted</code></td>
+<td>An incident was deleted from the job.</td>
+</tr>
+</tbody></table>
+
+<p>TODO: incident codes and meaning</p>
+
+<p>|Code|Description|Applytostops:|
+|1A|    PartnerAmendment|   na
+|1B |PartnerCancellation|   collection,delivery
+|1C|    COA|    collection,delivery
+|1D |CannotVerifyAge|   na
+|1F|    CollectiontooFar|   na
+|8A|    OutsideTimeslot-Control|    na
+|8B|    OutsideTimeslot-Courier|    na
+|8C |OutsideTimeslot-Short| na
+|8D|    TrafficIncident–Notified| na
+|9A|    ArrivedOnTime|  collection,delivery
+|9B|    CardLeft    delivery|
+|9C|    CitytrakkerIssues|  na
+|9D |ConsignmentDamaged|    collection,delivery
+|9E |ContactUnavailable|    na
+|9G|    CourierBrokenDown|  na
+|9I|    HeldUpOnPreviousDelivery|   collection
+|9J|    DelayedOnsiteByClient|  collection,delivery
+|9K|    Collected/DeliveredEarly|   collection,delivery
+|9L|    OutsideTimeslot(ClientReq)| delivery
+|9M |Collected/DeliveredLate|   collection,delivery
+|9N|    DeliveryRefused|    delivery
+|9O|    GoodsNotReady|  collection
+|9P|    IncorrectAddress|   collection,delivery
+|9R|    Late-OutOfTime| na
+|9S|    Late-UnableToDeliver|   na
+|9T|    NobodyHome/NoAnswer|    delivery
+|9U |PoliceIncident|    na
+|9V|    Redirected| na
+|9W|    Rta/TrafficConditions|  na
+|9X|    UnableToLocate/CompanyMoved|    delivery
+|9Y|    WeatherConditions|  na</p>
+<h2 id='chronos'>Chronos</h2><pre class="highlight json tab-json"><code><span class="w">
+</span><span class="err">sample_code</span><span class="w">
+
+</span></code></pre>
+<hr>
+
+<p><code>POST</code> /V2/ACCOUNTS/{ACCOUNTID}/TIMESLOTS</p>
+
+<hr>
+
+<aside class="notice">
+<strong>Summary:</strong> Get available timeslots for a booking
+
+<strong>Description:</strong> This API returns a list of available timeslots. Allows the options to be 
+presented to an end-user for selection.
+</aside>
+
+<p><strong>HTTP Request</strong>
+<code>POST</code> /v2/accounts/{accountId}/timeslots` </p>
+
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Located in</th>
+<th>Description</th>
+<th>Required</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>accountId</td>
+<td>path</td>
+<td>account ID</td>
+<td>Yes</td>
+<td>string</td>
+</tr>
+<tr>
+<td>body</td>
+<td>body</td>
+<td>Chronos parameters</td>
+<td>Yes</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<p><strong>Responses</strong></p>
+
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>OK</td>
+</tr>
+<tr>
 <td>400</td>
-<td>Bad Request -- Your request is invalid.</td>
+<td>Bad request</td>
 </tr>
 <tr>
 <td>401</td>
+<td>Unauthorized</td>
+</tr>
+</tbody></table>
+<h2 id='web-hooks'>Web-hooks</h2><pre class="highlight json tab-json"><code><span class="w">
+</span><span class="err">sample_code</span><span class="w">
+
+</span></code></pre>
+<hr>
+
+<p><code>POST</code> /V2/ACCOUNTS/{ACCOUNTID}/TIMESLOTS</p>
+
+<hr>
+
+<aside class="notice">
+<strong>Summary</strong> Get push notifcations on the endpoint of your choice
+
+<strong>Description</strong> This API returns a push messages for a range of events or exceptions
+</aside>
+
+<!-- Converted with the swagger-to-slate https://github.com/lavkumarv/swagger-to-slate -->
+<h1 id='errors'>Errors</h1><pre class="highlight json tab-json"><code><span class="err">Sample</span><span class="w"> </span><span class="err">error</span><span class="w"> </span><span class="err">code</span><span class="w"> </span><span class="err">response</span><span class="p">:</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"booking:0203"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"job not found"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"more details"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<aside class="notice">
+General html error codes and the specific codes OTD V2 API will return.
+</aside>
+
+<hr>
+
+<table><thead>
+<tr>
+<th style="text-align: center">General HTML Error Codes</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">400</td>
+<td>Bad Request -- Your request is invalid.</td>
+</tr>
+<tr>
+<td style="text-align: center">401</td>
 <td>Unauthorized -- Your API key is wrong.</td>
 </tr>
 <tr>
-<td>403</td>
+<td style="text-align: center">403</td>
 <td>Forbidden -- The kitten requested is hidden for administrators only.</td>
 </tr>
 <tr>
-<td>404</td>
+<td style="text-align: center">404</td>
 <td>Not Found -- The specified kitten could not be found.</td>
 </tr>
 <tr>
-<td>405</td>
+<td style="text-align: center">405</td>
 <td>Method Not Allowed -- You tried to access a kitten with an invalid method.</td>
 </tr>
 <tr>
-<td>406</td>
+<td style="text-align: center">406</td>
 <td>Not Acceptable -- You requested a format that isn&#39;t json.</td>
 </tr>
 <tr>
-<td>410</td>
-<td>Gone -- The kitten requested has been removed from our servers.</td>
+<td style="text-align: center">410</td>
+<td>Gone -- The resource requested has been removed from our servers.</td>
 </tr>
 <tr>
-<td>418</td>
+<td style="text-align: center">418</td>
 <td>I&#39;m a teapot.</td>
 </tr>
 <tr>
-<td>429</td>
+<td style="text-align: center">429</td>
 <td>Too Many Requests -- You&#39;re requesting too many kittens! Slow down!</td>
 </tr>
 <tr>
-<td>500</td>
+<td style="text-align: center">500</td>
 <td>Internal Server Error -- We had a problem with our server. Try again later.</td>
 </tr>
 <tr>
-<td>503</td>
+<td style="text-align: center">503</td>
 <td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
+</tr>
+</tbody></table>
+
+<hr>
+
+<p><code>All error messages have the following format.</code></p>
+
+<p>Below is a table with all <code>error codes</code> and <code>http</code> response code OTD COSMO V2 API&#39;s may return:</p>
+
+<table><thead>
+<tr>
+<th>full code</th>
+<th>http code</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>default:0000</td>
+<td>500</td>
+<td>Unknown</td>
+</tr>
+<tr>
+<td>default:0001</td>
+<td>400</td>
+<td>Invalid request</td>
+</tr>
+<tr>
+<td>default:0002</td>
+<td>404</td>
+<td>Not found</td>
+</tr>
+<tr>
+<td>booking:0101</td>
+<td>500</td>
+<td>geocode service failed</td>
+</tr>
+<tr>
+<td>booking:0102</td>
+<td>500</td>
+<td>place service failed</td>
+</tr>
+<tr>
+<td>booking:0103</td>
+<td>500</td>
+<td>SLA service failed</td>
+</tr>
+<tr>
+<td>booking:0104</td>
+<td>500</td>
+<td>job service failed</td>
+</tr>
+<tr>
+<td>booking:0105</td>
+<td>500</td>
+<td>chronos service failed</td>
+</tr>
+<tr>
+<td>booking:0106</td>
+<td>500</td>
+<td>capacity service failed</td>
+</tr>
+<tr>
+<td>booking:0107</td>
+<td>500</td>
+<td>account service failed</td>
+</tr>
+<tr>
+<td>booking:0108</td>
+<td>500</td>
+<td>tracking service failed</td>
+</tr>
+<tr>
+<td>booking:0108</td>
+<td>500</td>
+<td>capacity service (zone API) failed</td>
+</tr>
+<tr>
+<td>booking:0202</td>
+<td>422</td>
+<td>invalid place. please create a support ticket to configure your account with otd</td>
+</tr>
+<tr>
+<td>booking:0203</td>
+<td>422</td>
+<td>invalid SLA. please create a support ticket to configure your account with otd</td>
+</tr>
+<tr>
+<td>booking:0206</td>
+<td>422</td>
+<td>invalid timeslot. please create a support ticket to configure your account with otd</td>
+</tr>
+<tr>
+<td>booking:0207</td>
+<td>422</td>
+<td>invalid capacity. please create a support ticket to configure your account with otd</td>
+</tr>
+<tr>
+<td>booking:0208</td>
+<td>422</td>
+<td>invalid account. please create a support ticket to configure your account with otd</td>
+</tr>
+<tr>
+<td>booking:0210</td>
+<td>422</td>
+<td>invalid zone. please create a support ticket to configure your account with otd</td>
+</tr>
+<tr>
+<td>booking:0301</td>
+<td>422</td>
+<td>order not cancellable</td>
+</tr>
+<tr>
+<td>booking:0302</td>
+<td>409</td>
+<td>concurrent modification</td>
+</tr>
+<tr>
+<td>booking:0303</td>
+<td>500</td>
+<td>failed to delete job</td>
+</tr>
+<tr>
+<td>booking:0304</td>
+<td>400</td>
+<td>order not amendable</td>
+</tr>
+<tr>
+<td>booking:02XX</td>
+<td>500</td>
+<td>unknown server error with On the dot services</td>
+</tr>
+<tr>
+<td>booking:401</td>
+<td>401</td>
+<td>Invalid authentication credentials</td>
+</tr>
+<tr>
+<td>booking:403</td>
+<td>403</td>
+<td>Permission denied to access resource</td>
 </tr>
 </tbody></table>
 
@@ -1456,13 +1711,9 @@ This error section is stored in a separate file in <code>includes/_errors.md</co
       <div class="dark-box">
           <div class="lang-selector">
                 <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="phyton">phyton</a>
                 <a href="#" data-language-name="curl">curl</a>
                 <a href="#" data-language-name="json">json</a>
-                <a href="#" data-language-name="javascript">javascript</a>
-                <a href="#" data-language-name="go">go</a>
-                <a href="#" data-language-name="rust">rust</a>
+                <a href="#" data-language-name=""></a>
           </div>
       </div>
     </div>

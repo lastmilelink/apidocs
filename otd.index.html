@@ -1775,62 +1775,209 @@ Remember — a happy kitten is an authenticated kitten!
 <td>The ID of the kitten to delete</td>
 </tr>
 </tbody></table>
-<h1 id='errors'>Errors</h1>
+<h1 id='errors'>Errors</h1><pre class="highlight json tab-json"><code><span class="err">Sample</span><span class="w"> </span><span class="err">error</span><span class="w"> </span><span class="err">code</span><span class="w"> </span><span class="err">response</span><span class="p">:</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"booking:0203"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"job not found"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"more details"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 <aside class="notice">
-This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
+General html error codes and the specific codes OTD V2 API will return.
 </aside>
 
-<p>The Kittn API uses the following error codes:</p>
+<hr>
 
 <table><thead>
 <tr>
-<th>Error Code</th>
+<th style="text-align: center">General HTML Error Codes</th>
 <th>Meaning</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>400</td>
+<td style="text-align: center">400</td>
 <td>Bad Request -- Your request is invalid.</td>
 </tr>
 <tr>
-<td>401</td>
+<td style="text-align: center">401</td>
 <td>Unauthorized -- Your API key is wrong.</td>
 </tr>
 <tr>
-<td>403</td>
+<td style="text-align: center">403</td>
 <td>Forbidden -- The kitten requested is hidden for administrators only.</td>
 </tr>
 <tr>
-<td>404</td>
+<td style="text-align: center">404</td>
 <td>Not Found -- The specified kitten could not be found.</td>
 </tr>
 <tr>
-<td>405</td>
+<td style="text-align: center">405</td>
 <td>Method Not Allowed -- You tried to access a kitten with an invalid method.</td>
 </tr>
 <tr>
-<td>406</td>
+<td style="text-align: center">406</td>
 <td>Not Acceptable -- You requested a format that isn&#39;t json.</td>
 </tr>
 <tr>
-<td>410</td>
-<td>Gone -- The kitten requested has been removed from our servers.</td>
+<td style="text-align: center">410</td>
+<td>Gone -- The resource requested has been removed from our servers.</td>
 </tr>
 <tr>
-<td>418</td>
+<td style="text-align: center">418</td>
 <td>I&#39;m a teapot.</td>
 </tr>
 <tr>
-<td>429</td>
+<td style="text-align: center">429</td>
 <td>Too Many Requests -- You&#39;re requesting too many kittens! Slow down!</td>
 </tr>
 <tr>
-<td>500</td>
+<td style="text-align: center">500</td>
 <td>Internal Server Error -- We had a problem with our server. Try again later.</td>
 </tr>
 <tr>
-<td>503</td>
+<td style="text-align: center">503</td>
 <td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
+</tr>
+</tbody></table>
+
+<hr>
+
+<p><code>All error messages have the following format.</code></p>
+
+<p>Below is a table with all <code>error codes</code> and <code>http</code> response code OTD COSMO V2 API&#39;s may return:</p>
+
+<table><thead>
+<tr>
+<th>full code</th>
+<th>http code</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>default:0000</td>
+<td>500</td>
+<td>Unknown</td>
+</tr>
+<tr>
+<td>default:0001</td>
+<td>400</td>
+<td>Invalid request</td>
+</tr>
+<tr>
+<td>default:0002</td>
+<td>404</td>
+<td>Not found</td>
+</tr>
+<tr>
+<td>booking:0101</td>
+<td>500</td>
+<td>geocode service failed</td>
+</tr>
+<tr>
+<td>booking:0102</td>
+<td>500</td>
+<td>place service failed</td>
+</tr>
+<tr>
+<td>booking:0103</td>
+<td>500</td>
+<td>SLA service failed</td>
+</tr>
+<tr>
+<td>booking:0104</td>
+<td>500</td>
+<td>job service failed</td>
+</tr>
+<tr>
+<td>booking:0105</td>
+<td>500</td>
+<td>chronos service failed</td>
+</tr>
+<tr>
+<td>booking:0106</td>
+<td>500</td>
+<td>capacity service failed</td>
+</tr>
+<tr>
+<td>booking:0107</td>
+<td>500</td>
+<td>account service failed</td>
+</tr>
+<tr>
+<td>booking:0108</td>
+<td>500</td>
+<td>tracking service failed</td>
+</tr>
+<tr>
+<td>booking:0108</td>
+<td>500</td>
+<td>capacity service (zone API) failed</td>
+</tr>
+<tr>
+<td>booking:0202</td>
+<td>422</td>
+<td>invalid place. please create a support ticket to configure your account with otd</td>
+</tr>
+<tr>
+<td>booking:0203</td>
+<td>422</td>
+<td>invalid SLA. please create a support ticket to configure your account with otd</td>
+</tr>
+<tr>
+<td>booking:0206</td>
+<td>422</td>
+<td>invalid timeslot. please create a support ticket to configure your account with otd</td>
+</tr>
+<tr>
+<td>booking:0207</td>
+<td>422</td>
+<td>invalid capacity. please create a support ticket to configure your account with otd</td>
+</tr>
+<tr>
+<td>booking:0208</td>
+<td>422</td>
+<td>invalid account. please create a support ticket to configure your account with otd</td>
+</tr>
+<tr>
+<td>booking:0210</td>
+<td>422</td>
+<td>invalid zone. please create a support ticket to configure your account with otd</td>
+</tr>
+<tr>
+<td>booking:0301</td>
+<td>422</td>
+<td>order not cancellable</td>
+</tr>
+<tr>
+<td>booking:0302</td>
+<td>409</td>
+<td>concurrent modification</td>
+</tr>
+<tr>
+<td>booking:0303</td>
+<td>500</td>
+<td>failed to delete job</td>
+</tr>
+<tr>
+<td>booking:0304</td>
+<td>400</td>
+<td>order not amendable</td>
+</tr>
+<tr>
+<td>booking:02XX</td>
+<td>500</td>
+<td>unknown server error with On the dot services</td>
+</tr>
+<tr>
+<td>booking:401</td>
+<td>401</td>
+<td>Invalid authentication credentials</td>
+</tr>
+<tr>
+<td>booking:403</td>
+<td>403</td>
+<td>Permission denied to access resource</td>
 </tr>
 </tbody></table>
 
