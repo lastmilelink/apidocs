@@ -429,8 +429,8 @@ body {
         max-width: 100%;
     }
     code {
-        background-color: rgb(241, 223, 156);
-        color: #0757f7;
+        background-color: rgba(211, 211, 211, 0.3);
+        color: coral;
         padding: 3px;
         border-radius: 3px;
         @extend %break-words;

@@ -10,7 +10,6 @@ language_tabs:
 - 
 
 toc_footers:
-   - Documentation Typography conventions 
    - <a href='https://onthedot-bookingdraft.apigee.io/api-menu' target="_blank">Sign Up for a Developer Key</a> 
    - <a href='https://github.com/lord/slate'>Powered by SLATE</a> 
 
@@ -42,7 +41,8 @@ search: true
 
 **Welcome to the On the dot Booking Service V2.0 API's Reference documentation.**
 
-This documentation is currently in `Beta` and will be updated over the next few months. Should you require further assistance using our API's, please contact our Partner team **partners@onthedot.com**
+This documentation is currently in `Beta` and will be updated over the next few months. Should you require further assistance using our API's, please contact our Partner team **partners@onthedot.com**.
+
 
 <body>
 <div class="flex-container">
@@ -54,13 +54,17 @@ This documentation is currently in `Beta` and will be updated over the next few 
 </div>
 </body>
 
-* The illustrates below is a high level view of our API features. Swagger files are downloadable from the corresponding section below
- 
+<aside class="success">
+Illustration below is a high level view of our API features and integration features. Swagger files are downloadable from the corresponding section below
+</aside>
+
  ![HLV](/images/OTD-API-HLV-slate.png)
 
-* **Swagger 2.0**
+* **Swagger 2.0 files**
 
-      * [Click to download the `version2.0 .yaml` files](#) .
+      * Click [here](/swagger/v2_otd_public.yaml) to download the `v2_otd_public.yaml` file.
+      * Click [here](/swagger/v2_otd_public.json) to download the `v2_otd_public.json` file.
+
             * `OAS3.0 coming soon`
 
       * [Find out how to create Github repo for your OpenAPI spec.](https://github.com/Rebilly/generator-openapi-repo)
@@ -68,9 +72,37 @@ This documentation is currently in `Beta` and will be updated over the next few 
 
 
 # Quick Start
+## Signup to OTD Sandbox
+
+* Signup to get access to our Sandbox
+
+    * Create an app and subcribe to the sandbox API product to obtain your `API Token`
+
+          * Child
+
+<aside class="notice">
+Sandbox seed data below allows developers to test their integration with orders <code><strong>within</strong> configured SLA</code> and <code><strong>outside</strong> configured SLA</code>.
+</aside>
+
+**Account**
+
+* Sandbox seed data `accountID` is: **`sbx-partner`**
+
+
+**Places**
+
+* Sandbox has 1 place configured: **`sbx-place`**
+
+      * Maximul allowed distance for `sbx-place` is: **`X miles`**
+
+
+**SLA's**
+
+* Sandbox account `sbx-partner` had the following `services` configured:`timeslot`,`timewindow`,`asap`,`return`,`2hour`,`3hour`,`4hour`,`sameday`,`2hour-later`,`4hour-later`
+
 ## Before You Start
 
-Please contact OTD support to set up the following:
+Please contact OTD partners team at [partners@onthedot.com](mailto:partners@onthedot.com) to set up the following:
 
 * Account
 * Service types
@@ -95,13 +127,13 @@ Currently supported service types: `timeslot`, `asap`, `return`, `2hour`, `3hour
 
 ### Place
 
-A stop must contain a valid place, which represents a physical location.
+Each stop must contain a valid place(address), which represents a physical location.
 
-The user can either contact OTD support to set up places for them (so they can use a place ID when creating orders), or use a valid address when creating orders.
+The user can either contact OTD to set up places for them so they can use a place ID when creating orders, or use a valid address instead.
 
 ### Status
 
-Both order and job have status.  They are updated with realtime events.
+Both `order` and `job` have status.  They are updated with realtime events.
 
 ### Job Status
 
@@ -152,6 +184,7 @@ Example:
   "updatedAt": "2019-01-02T13:18:53.087Z"
 }
 ```
+>`Nearby` is a new status trigger when a courier is xx metres from a stop.
 
 | Status | Meaning |
 | ------ | ------- |
@@ -201,7 +234,7 @@ Example:
 ## Security
 **All APIs require an `Authorization` header.**
 
-* You will need to register [here](apigee address) to obtain a token by creating an `app` and subscribing to our `Sandbox`.
+* You will need to register [here](https://developer.onthedot.com/create) to obtain a token by creating an `app` and subscribing to our `Sandbox`.
 * The `token`  must be used in the request headers as `Authorization:{{Token}}` header. 
 
 ### Authentication 
@@ -222,9 +255,9 @@ Example:
   },
   "customData": {
         "reference_1": "PartnerName",
-        "reference_2": " PartnerStore - Staples Corner”,
-        "reference_3": “44002”
-                "citytrak-department": "unique partner order number”,
+        "reference_2": "PartnerStore - Staples Corner”,
+        'reference_3": "4002”,
+        'citytrak-department": "unique partner order number”
   },
   ...
       "requires": [
@@ -245,17 +278,12 @@ Below you have specific examples for each of the order types you can create usin
 * `POST` /V2/ACCOUNTS/{ACCOUNTID}/ORDERS
 
 ---
-<aside class="notice">
+<aside class="success">
   <strong>Summary:</strong> Create order
   <strong>Description</strong> This API creates an order with the specified ID.
 </aside>
 
-
-
-(Express/ASAP)
-
-
-This API allows the caller to override all values (timeslots, stops) with their own values.
+This API allows the caller to set all the job, stops, notifcations, timeslots, stops, items... with their own values.
 
 If the caller sends only timeslot ID or place ID, then the relevant services will be called to get the details.
 
@@ -274,17 +302,19 @@ If the caller sends only timeslot ID or place ID, then the relevant services wil
 | 400 | Bad request |
 | 401 | Unauthorized |
 | 409 | Conflict |
+
 ---
+
 ### Get it now
 
-<aside class="notice">
-(Express/ASAP)
+<aside class="success">
+The <code>code</code> panel exemplifies how to send an <code>Express/ASAP</code> request
 </aside>
 
 
->`POST`  ***`URL`/v2/accounts/`myaccount`/orders***
+>`POST`  URL`/v2/accounts/`myaccount`/orders
 
-```json
+```curl
 curl -X POST \
   'http://{{host}}/{{bookingService}}/v2/accounts/{{myaccount}}/orders' \
   -H 'authorization: <your_api_token>' \
@@ -359,7 +389,7 @@ curl -X POST \
   ]
 }
 ```
-> ***Note*** The above command returns JSON structured like this: here is an example response
+> ***Note*** The above command returns the following JSON response.
 
 ```json
 {
@@ -459,36 +489,31 @@ curl -X POST \
 
 ![Express/ASAP](/images/OTD_H_GITN.png)
 
-* This booking type will allow you to create express/asap orders. Those deliveries will always start from `Now` 
 
----
 ### Get it later 
 
-<aside class="notice">
-(Scheduled)
+<aside class="success">
+The request in the <code>code pane</code> will create an order scheduled for later same day or another day in the future.
 </aside>
 
 ![Scheduled](/images/OTD_H_GITL.png)
 
----
 ### Return to depot
 
-<aside class="notice">
-(Scheduled)
+<aside class="success">
+The request sample in the left <code>code pane</code> will create a return to depot order.
 </aside>
 
 ![Returns to Depot/Origin](/images/OTD_H_RTD.png)
 
----
 ### Real time tracking
 
-<aside class="notice">
-  Real time tracking and dynamic ETA's : <code>ETC ( estimated time of collection )</code> and <code>ETD ( estimated time of delivery )</code>
+<aside class="success">
+  Real time tracking and dynamic ETA's : <code><strong>ETC</strong> ( estimated time of collection )</code> and <code><strong>ETD</strong> ( estimated time of delivery )</code>
 </aside>
 
 ![Real Time Notifications](/images/OTD_H_RTTE.png)
 
----
 ### Real time notifications
 ![Real Time Notifications](/images/OTD_H_RTN.png)
 
@@ -506,7 +531,7 @@ curl -X POST \
 
 ---
 
-<aside class="notice">
+<aside class="success">
   <strong>Summary:</strong> Search an order
   <strong>Description</strong> This API returns a list of orders based on the provided search criteria.
 </aside>
@@ -549,7 +574,7 @@ code_sample
 * `GET` /v2/accounts/{accountId}/orders/{orderId}
 
 ---
-<aside class="notice">
+<aside class="success">
   <strong>Summary:</strong> <code>GET</code> order
   <strong>Description</strong> This API gets an order by <code>accountID</code> and <code>orderID</code>.
 </aside>
@@ -585,7 +610,7 @@ code:sample
 
 ---
 
-<aside class="notice">
+<aside class="success">
   <strong>Summary:</strong> Amend order
   <strong>Description</strong> This API amends an order and updates the corresponding jobs in COSMO.
 </aside>
@@ -646,7 +671,7 @@ Orders and jobs can be amended after they are created, subject to certain condit
 
 ---
 
-<aside class="notice">
+<aside class="success">
   <strong>Summary:</strong> Cancel order
   <strong>Description</strong> This API can be used to cancel an order, under the following conditions:
 </aside>
@@ -744,7 +769,7 @@ Below is a table with all `error codes` and `http` response code.
   }
 ]
 ```
-<aside class="notice">
+<aside class="success">
 COSMO has an internal `Incident` service responsable of managing any job real time exceptions during:
 </aside>
 * `Collection`
@@ -760,40 +785,40 @@ Incidents represents a list of exceptions that happened during the job's lifetim
 | `created` | An incident was created for the job. |
 | `deleted` | An incident was deleted from the job. |
 
-TODO: incident codes and meaning
 
-|Code|Description|Applytostops:|
-|1A|	PartnerAmendment|	na
-|1B	|PartnerCancellation|	collection,delivery
-|1C|	COA|	collection,delivery
-|1D	|CannotVerifyAge|	na
-|1F|	CollectiontooFar|	na
-|8A|	OutsideTimeslot-Control|	na
-|8B|	OutsideTimeslot-Courier|	na
-|8C	|OutsideTimeslot-Short|	na
-|8D|	TrafficIncident–Notified|	na
-|9A|	ArrivedOnTime|	collection,delivery
-|9B|	CardLeft	delivery|
-|9C|	CitytrakkerIssues|	na
-|9D	|ConsignmentDamaged|	collection,delivery
-|9E	|ContactUnavailable|	na
-|9G|	CourierBrokenDown|	na
-|9I|	HeldUpOnPreviousDelivery|	collection
-|9J|	DelayedOnsiteByClient|	collection,delivery
-|9K|	Collected/DeliveredEarly|	collection,delivery
-|9L|	OutsideTimeslot(ClientReq)|	delivery
-|9M	|Collected/DeliveredLate|	collection,delivery
-|9N|	DeliveryRefused|	delivery
-|9O|	GoodsNotReady|	collection
-|9P|	IncorrectAddress|	collection,delivery
-|9R|	Late-OutOfTime|	na
-|9S|	Late-UnableToDeliver|	na
-|9T|	NobodyHome/NoAnswer|	delivery
-|9U	|PoliceIncident|	na
-|9V|	Redirected|	na
-|9W|	Rta/TrafficConditions|	na
-|9X|	UnableToLocate/CompanyMoved|	delivery
-|9Y|	WeatherConditions|	na
+Code|Description|Apply to stops
+-----|----------|---------------
+1A|Partner Amendment|na
+1B|Partner Cancellation|collection, delivery
+1C|COA|collection| delivery
+1D|Cannot Verify Age|na
+1F|Collection too Far|na
+8A|Outside Timeslot - Control|na
+8B|Outside Timeslot - Courier|na
+8C|Outside Timeslot - Short|na
+8D|Traffic Incident – Notified|na
+9A|Arrived On Time|collection, delivery
+9B|Card Left|delivery
+9C|Citytrakker Issues|na
+9D|Consignment Damaged|collection, delivery
+9E|Contact Unavailable|na
+9G|Courier Broken Down|na
+9I|Held Up On Previous Delivery|collection
+9J|Delayed Onsite By Client|collection, delivery
+9K|Collected/Delivered Early|collection, delivery
+9L|Outside Timeslot (Client Req)|delivery
+9M|Collected/Delivered Late|collection, delivery
+9N|Delivery Refused|delivery
+9O|Goods Not Ready|collection
+9P|Incorrect Address|collection| delivery
+9R|Late - Out Of Time|na
+9S|Late - Unable To Deliver|na
+9T|Nobody Home/No Answer|delivery
+9U|Police Incident|na
+9V|Redirected|na
+9W|Rta/Traffic Conditions|na
+9X|Unable To Locate/Company Moved|delivery
+9Y|Weather Conditions|na
 
 ## Chronos
 
@@ -809,7 +834,7 @@ sample_code
 
 ---
 
-<aside class="notice">
+<aside class="success">
 <strong>Summary:</strong> Get available timeslots for a booking
 
 <strong>Description:</strong> This API returns a list of available timeslots. Allows the options to be 
@@ -835,7 +860,7 @@ presented to an end-user for selection.
 | 401 | Unauthorized |
 
 
-## Web-hooks
+# Web-hooks
 
 ```json
 
@@ -848,7 +873,7 @@ sample_code
 `POST` /V2/ACCOUNTS/{ACCOUNTID}/TIMESLOTS
 
 ---
-<aside class="notice">
+<aside class="success">
 <strong>Summary</strong> Get push notifcations on the endpoint of your choice
 
 <strong>Description</strong> This API returns a push messages for a range of events or exceptions
