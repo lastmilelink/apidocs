@@ -228,6 +228,9 @@
             <a href="#quick-start" class="toc-h1 toc-link" data-title="Quick Start">Quick Start</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#signup-to-otd-sandbox" class="toc-h2 toc-link" data-title="Signup to OTD Sandbox">Signup to OTD Sandbox</a>
+                  </li>
+                  <li>
                     <a href="#before-you-start" class="toc-h2 toc-link" data-title="Before You Start">Before You Start</a>
                   </li>
                   <li>
@@ -262,17 +265,16 @@
                   <li>
                     <a href="#chronos" class="toc-h2 toc-link" data-title="Chronos">Chronos</a>
                   </li>
-                  <li>
-                    <a href="#web-hooks" class="toc-h2 toc-link" data-title="Web-hooks">Web-hooks</a>
-                  </li>
               </ul>
+          </li>
+          <li>
+            <a href="#web-hooks" class="toc-h1 toc-link" data-title="Web-hooks">Web-hooks</a>
           </li>
           <li>
             <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
           </li>
       </ul>
         <ul class="toc-footer">
-            <li>Documentation Typography conventions</li>
             <li><a href='https://onthedot-bookingdraft.apigee.io/api-menu' target="_blank">Sign Up for a Developer Key</a></li>
             <li><a href='https://github.com/lord/slate'>Powered by SLATE</a></li>
         </ul>
@@ -301,7 +303,7 @@
 <h1 id='introduction'>Introduction</h1>
 <p><strong>Welcome to the On the dot Booking Service V2.0 API&#39;s Reference documentation.</strong></p>
 
-<p>This documentation is currently in <code>Beta</code> and will be updated over the next few months. Should you require further assistance using our API&#39;s, please contact our Partner team <strong>partners@onthedot.com</strong></p>
+<p>This documentation is currently in <code>Beta</code> and will be updated over the next few months. Should you require further assistance using our API&#39;s, please contact our Partner team <strong>partners@onthedot.com</strong>.</p>
 
 <p><body>
 <div class="flex-container">
@@ -313,23 +315,63 @@
 </div>
 </body></p>
 
-<ul>
-<li>The illustrates below is a high level view of our API features. Swagger files are downloadable from the corresponding section below</li>
-</ul>
+<aside class="success">
+Illustration below is a high level view of our API features and integration features. Swagger files are downloadable from the corresponding section below
+</aside>
 
 <p><img src="images/OTD-API-HLV-slate.png" alt="HLV" /></p>
 
 <ul>
-<li><p><strong>Swagger 2.0</strong></p>
+<li><p><strong>Swagger 2.0 files</strong></p>
 
 <ul>
-<li><a href="#">Click to download the <code>version2.0 .yaml</code> files</a> .
-    * <code>OAS3.0 coming soon</code></li>
-<li><a href="https://github.com/Rebilly/generator-openapi-repo">Find out how to create Github repo for your OpenAPI spec.</a></li>
+<li>Click <a href="swagger/v2_otd_public.yaml">here</a> to download the <code>v2_otd_public.yaml</code> file.</li>
+<li><p>Click <a href="swagger/v2_otd_public.json">here</a> to download the <code>v2_otd_public.json</code> file.</p>
+
+<p>* <code>OAS3.0 coming soon</code></p></li>
+<li><p><a href="https://github.com/Rebilly/generator-openapi-repo">Find out how to create Github repo for your OpenAPI spec.</a></p></li>
 </ul></li>
 </ul>
-<h1 id='quick-start'>Quick Start</h1><h2 id='before-you-start'>Before You Start</h2>
-<p>Please contact OTD support to set up the following:</p>
+<h1 id='quick-start'>Quick Start</h1><h2 id='signup-to-otd-sandbox'>Signup to OTD Sandbox</h2>
+<ul>
+<li><p>Signup to get access to our Sandbox</p>
+
+<ul>
+<li><p>Create an app and subcribe to the sandbox API product to obtain your <code>API Token</code></p>
+
+<ul>
+<li>Child</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<aside class="notice">
+Sandbox seed data below allows developers to test their integration with orders <code><strong>within</strong> configured SLA</code> and <code><strong>outside</strong> configured SLA</code>.
+</aside>
+
+<p><strong>Account</strong></p>
+
+<ul>
+<li>Sandbox seed data <code>accountID</code> is: <strong><code>sbx-partner</code></strong></li>
+</ul>
+
+<p><strong>Places</strong></p>
+
+<ul>
+<li><p>Sandbox has 1 place configured: <strong><code>sbx-place</code></strong></p>
+
+<ul>
+<li>Maximul allowed distance for <code>sbx-place</code> is: <strong><code>X miles</code></strong></li>
+</ul></li>
+</ul>
+
+<p><strong>SLA&#39;s</strong></p>
+
+<ul>
+<li>Sandbox account <code>sbx-partner</code> had the following <code>services</code> configured:<code>timeslot</code>,<code>timewindow</code>,<code>asap</code>,<code>return</code>,<code>2hour</code>,<code>3hour</code>,<code>4hour</code>,<code>sameday</code>,<code>2hour-later</code>,<code>4hour-later</code></li>
+</ul>
+<h2 id='before-you-start'>Before You Start</h2>
+<p>Please contact OTD partners team at <a href="mailto:partners@onthedot.com">partners@onthedot.com</a> to set up the following:</p>
 
 <ul>
 <li>Account</li>
@@ -363,11 +405,11 @@
 
 <p>Currently supported service types: <code>timeslot</code>, <code>asap</code>, <code>return</code>, <code>2hour</code>, <code>3hour</code>, <code>4hour</code>, <code>sameday</code>, <code>2hour-later</code>, <code>4hour-later</code>.</p>
 <h3 id='place'>Place</h3>
-<p>A stop must contain a valid place, which represents a physical location.</p>
+<p>Each stop must contain a valid place(address), which represents a physical location.</p>
 
-<p>The user can either contact OTD support to set up places for them (so they can use a place ID when creating orders), or use a valid address when creating orders.</p>
+<p>The user can either contact OTD to set up places for them so they can use a place ID when creating orders, or use a valid address instead.</p>
 <h3 id='status'>Status</h3>
-<p>Both order and job have status.  They are updated with realtime events.</p>
+<p>Both <code>order</code> and <code>job</code> have status.  They are updated with realtime events.</p>
 <h3 id='job-status'>Job Status</h3>
 <blockquote>
 <p>Status representing a job&#39;s execution state.</p>
@@ -415,6 +457,10 @@
   &quot;updatedAt&quot;: &quot;2019-01-02T13:18:53.087Z&quot;
 }
 </code></p>
+
+<blockquote>
+<p><code>Nearby</code> is a new status trigger when a courier is xx metres from a stop.</p>
+</blockquote>
 
 <table><thead>
 <tr>
@@ -538,7 +584,7 @@
 <p><strong>All APIs require an <code>Authorization</code> header.</strong></p>
 
 <ul>
-<li>You will need to register <a href="apigee%20address">here</a> to obtain a token by creating an <code>app</code> and subscribing to our <code>Sandbox</code>.</li>
+<li>You will need to register <a href="https://developer.onthedot.com/create">here</a> to obtain a token by creating an <code>app</code> and subscribing to our <code>Sandbox</code>.</li>
 <li>The <code>token</code>  must be used in the request headers as <code>Authorization:{{Token}}</code> header. </li>
 </ul>
 <h3 id='authentication'>Authentication</h3>
@@ -558,18 +604,18 @@
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"customData"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"reference_1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PartnerName"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"reference_2"</span><span class="p">:</span><span class="w"> </span><span class="s2">" PartnerStore - Staples Corner”,
-        "</span><span class="err">reference_</span><span class="mi">3</span><span class="s2">": “44002”
-                "</span><span class="err">citytrak-department</span><span class="s2">": "</span><span class="err">unique</span><span class="w"> </span><span class="err">partner</span><span class="w"> </span><span class="err">order</span><span class="w"> </span><span class="err">number”</span><span class="p">,</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="err">...</span><span class="w">
-      </span><span class="s2">"requires"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-                </span><span class="s2">"ageVerification"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"collectionSignOff"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"deliverySignOff"</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-  </span><span class="err">...</span><span class="w">
-</span><span class="p">}</span><span class="w">
+        </span><span class="s2">"reference_2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PartnerStore - Staples Corner”,
+        'reference_3"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4002”,
+        'citytrak-department"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unique partner order number”
+  },
+  ...
+      "</span><span class="err">requires</span><span class="s2">": [
+                "</span><span class="err">ageVerification</span><span class="s2">",
+                "</span><span class="err">collectionSignOff</span><span class="s2">",
+                "</span><span class="err">deliverySignOff</span><span class="s2">"
+      ],
+  ...
+}
 </span></code></pre>
 <p>Below you have specific examples for each of the order types you can create using our <code>booking service</code>.</p>
 
@@ -585,14 +631,12 @@
 
 <hr>
 
-<aside class="notice">
+<aside class="success">
   <strong>Summary:</strong> Create order
   <strong>Description</strong> This API creates an order with the specified ID.
 </aside>
 
-<p>(Express/ASAP)</p>
-
-<p>This API allows the caller to override all values (timeslots, stops) with their own values.</p>
+<p>This API allows the caller to set all the job, stops, notifcations, timeslots, stops, items... with their own values.</p>
 
 <p>If the caller sends only timeslot ID or place ID, then the relevant services will be called to get the details.</p>
 
@@ -651,89 +695,89 @@
 
 <hr>
 <h3 id='get-it-now'>Get it now</h3>
-<aside class="notice">
-(Express/ASAP)
+<aside class="success">
+The <code>code</code> panel exemplifies how to send an <code>Express/ASAP</code> request
 </aside>
 
 <blockquote>
-<p><code>POST</code>  <strong><em><code>URL</code>/v2/accounts/<code>myaccount</code>/orders</em></strong></p>
+<p><code>POST</code>  URL<code>/v2/accounts/</code>myaccount`/orders</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="err">curl</span><span class="w"> </span><span class="err">-X</span><span class="w"> </span><span class="err">POST</span><span class="w"> </span><span class="err">\</span><span class="w">
-  </span><span class="err">'http</span><span class="p">:</span><span class="err">//</span><span class="p">{{</span><span class="err">host</span><span class="p">}}</span><span class="err">/</span><span class="p">{{</span><span class="err">bookingService</span><span class="p">}}</span><span class="err">/v</span><span class="mi">2</span><span class="err">/accounts/</span><span class="p">{{</span><span class="err">myaccount</span><span class="p">}}</span><span class="err">/orders'</span><span class="w"> </span><span class="err">\</span><span class="w">
-  </span><span class="err">-H</span><span class="w"> </span><span class="err">'authorization</span><span class="p">:</span><span class="w"> </span><span class="err">&lt;your_api_token&gt;'</span><span class="w"> </span><span class="err">\</span><span class="w">
-  </span><span class="err">-H</span><span class="w"> </span><span class="err">'content-type</span><span class="p">:</span><span class="w"> </span><span class="err">application/json'</span><span class="w"> </span><span class="err">\</span><span class="w">
-  </span><span class="err">-H</span><span class="w"> </span><span class="err">'x-trace-id</span><span class="p">:</span><span class="w"> </span><span class="mi">79</span><span class="err">b</span><span class="mi">6</span><span class="err">b</span><span class="mi">8</span><span class="err">b</span><span class="mi">6</span><span class="err">-d</span><span class="mi">0</span><span class="err">df</span><span class="mi">-4</span><span class="err">e</span><span class="mi">12-8</span><span class="err">f</span><span class="mi">4</span><span class="err">d</span><span class="mi">-4</span><span class="err">b</span><span class="mi">435162</span><span class="err">f</span><span class="mi">4</span><span class="err">e</span><span class="mi">7</span><span class="err">'</span><span class="w"> </span><span class="err">\</span><span class="w">
-  </span><span class="err">-d</span><span class="w"> </span><span class="err">'</span><span class="w">
+<pre class="highlight plaintext"><code>curl -X POST \
+  'http://{{host}}/{{bookingService}}/v2/accounts/{{myaccount}}/orders' \
+  -H 'authorization: &lt;your_api_token&gt;' \
+  -H 'content-type: application/json' \
+  -H 'x-trace-id: 79b6b8b6-d0df-4e12-8f4d-4b435162f4e7' \
+  -d '
 
-</span><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"myorder"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"serviceType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"asap"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"jobs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"job0"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"journeyType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"delivery"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"itemgroup0:item0"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="s2">"collection"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"stopId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stop0"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"delivery"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"stopId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stop1"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"timeslot"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"collection"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"from"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-02T13:30:00.000Z"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"to"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-02T14:30:00.000Z"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"delivery"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"from"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-02T18:30:00.000Z"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"to"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-02T19:30:00.000Z"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"stops"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stop0"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"place"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GBR"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"town"</span><span class="p">:</span><span class="w"> </span><span class="s2">"London"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"streets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-            </span><span class="s2">"Royal Opera House"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"Bow Street"</span><span class="w">
-          </span><span class="p">],</span><span class="w">
-          </span><span class="s2">"postcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WC2E 9DD"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stop1"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"place"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GBR"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"town"</span><span class="p">:</span><span class="w"> </span><span class="s2">"London"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"streets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-            </span><span class="s2">"English National Opera"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"St Martin's Lane"</span><span class="w">
-          </span><span class="p">],</span><span class="w">
-          </span><span class="s2">"postcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WC2N 4ES"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
+{
+  "id": "myorder",
+  "metadata": {
+    "serviceType": "asap"
+  },
+  "jobs": [
+    {
+      "id": "job0",
+      "metadata": {
+        "journeyType": "delivery"
+      },
+      "items": [
+        {
+          "id": "itemgroup0:item0",
+          "quantity": 1
+        }
+      ],
+      "collection": {
+        "stopId": "stop0"
+      },
+      "delivery": {
+        "stopId": "stop1"
+      },
+      "timeslot": {
+        "collection": {
+          "from": "2019-01-02T13:30:00.000Z",
+          "to": "2019-01-02T14:30:00.000Z"
+        },
+        "delivery": {
+          "from": "2019-01-02T18:30:00.000Z",
+          "to": "2019-01-02T19:30:00.000Z"
+        }
+      }
+    }
+  ],
+  "stops": [
+    {
+      "id": "stop0",
+      "place": {
+        "address": {
+          "country": "GBR",
+          "town": "London",
+          "streets": [
+            "Royal Opera House",
+            "Bow Street"
+          ],
+          "postcode": "WC2E 9DD"
+        }
+      }
+    },
+    {
+      "id": "stop1",
+      "place": {
+        "address": {
+          "country": "GBR",
+          "town": "London",
+          "streets": [
+            "English National Opera",
+            "St Martin's Lane"
+          ],
+          "postcode": "WC2N 4ES"
+        }
+      }
+    }
+  ]
+}
+</code></pre>
 <blockquote>
-<p><strong><em>Note</em></strong> The above command returns JSON structured like this: here is an example response</p>
+<p><strong><em>Note</em></strong> The above command returns the following JSON response.</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"myorder"</span><span class="p">,</span><span class="w">
@@ -830,36 +874,24 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p><img src="images/OTD_H_GITN.png" alt="Express/ASAP" /></p>
-
-<ul>
-<li>This booking type will allow you to create express/asap orders. Those deliveries will always start from <code>Now</code> </li>
-</ul>
-
-<hr>
 <h3 id='get-it-later'>Get it later</h3>
-<aside class="notice">
-(Scheduled)
+<aside class="success">
+The request in the <code>code pane</code> will create an order scheduled for later same day or another day in the future.
 </aside>
 
 <p><img src="images/OTD_H_GITL.png" alt="Scheduled" /></p>
-
-<hr>
 <h3 id='return-to-depot'>Return to depot</h3>
-<aside class="notice">
-(Scheduled)
+<aside class="success">
+The request sample in the left <code>code pane</code> will create a return to depot order.
 </aside>
 
 <p><img src="images/OTD_H_RTD.png" alt="Returns to Depot/Origin" /></p>
-
-<hr>
 <h3 id='real-time-tracking'>Real time tracking</h3>
-<aside class="notice">
-  Real time tracking and dynamic ETA's : <code>ETC ( estimated time of collection )</code> and <code>ETD ( estimated time of delivery )</code>
+<aside class="success">
+  Real time tracking and dynamic ETA's : <code><strong>ETC</strong> ( estimated time of collection )</code> and <code><strong>ETD</strong> ( estimated time of delivery )</code>
 </aside>
 
 <p><img src="images/OTD_H_RTTE.png" alt="Real Time Notifications" /></p>
-
-<hr>
 <h3 id='real-time-notifications'>Real time notifications</h3>
 <p><img src="images/OTD_H_RTN.png" alt="Real Time Notifications" /></p>
 <h2 id='search-an-order'>Search an order</h2><pre class="highlight json tab-json"><code><span class="w">
@@ -874,7 +906,7 @@
 
 <hr>
 
-<aside class="notice">
+<aside class="success">
   <strong>Summary:</strong> Search an order
   <strong>Description</strong> This API returns a list of orders based on the provided search criteria.
 </aside>
@@ -948,7 +980,7 @@
 
 <hr>
 
-<aside class="notice">
+<aside class="success">
   <strong>Summary:</strong> <code>GET</code> order
   <strong>Description</strong> This API gets an order by <code>accountID</code> and <code>orderID</code>.
 </aside>
@@ -1018,7 +1050,7 @@
 
 <hr>
 
-<aside class="notice">
+<aside class="success">
   <strong>Summary:</strong> Amend order
   <strong>Description</strong> This API amends an order and updates the corresponding jobs in COSMO.
 </aside>
@@ -1121,7 +1153,7 @@
 
 <hr>
 
-<aside class="notice">
+<aside class="success">
   <strong>Summary:</strong> Cancel order
   <strong>Description</strong> This API can be used to cancel an order, under the following conditions:
 </aside>
@@ -1352,7 +1384,7 @@
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
-<aside class="notice">
+<aside class="success">
 COSMO has an internal `Incident` service responsable of managing any job real time exceptions during:
 </aside>
 
@@ -1382,40 +1414,169 @@ COSMO has an internal `Incident` service responsable of managing any job real ti
 </tr>
 </tbody></table>
 
-<p>TODO: incident codes and meaning</p>
-
-<p>|Code|Description|Applytostops:|
-|1A|    PartnerAmendment|   na
-|1B |PartnerCancellation|   collection,delivery
-|1C|    COA|    collection,delivery
-|1D |CannotVerifyAge|   na
-|1F|    CollectiontooFar|   na
-|8A|    OutsideTimeslot-Control|    na
-|8B|    OutsideTimeslot-Courier|    na
-|8C |OutsideTimeslot-Short| na
-|8D|    TrafficIncident–Notified| na
-|9A|    ArrivedOnTime|  collection,delivery
-|9B|    CardLeft    delivery|
-|9C|    CitytrakkerIssues|  na
-|9D |ConsignmentDamaged|    collection,delivery
-|9E |ContactUnavailable|    na
-|9G|    CourierBrokenDown|  na
-|9I|    HeldUpOnPreviousDelivery|   collection
-|9J|    DelayedOnsiteByClient|  collection,delivery
-|9K|    Collected/DeliveredEarly|   collection,delivery
-|9L|    OutsideTimeslot(ClientReq)| delivery
-|9M |Collected/DeliveredLate|   collection,delivery
-|9N|    DeliveryRefused|    delivery
-|9O|    GoodsNotReady|  collection
-|9P|    IncorrectAddress|   collection,delivery
-|9R|    Late-OutOfTime| na
-|9S|    Late-UnableToDeliver|   na
-|9T|    NobodyHome/NoAnswer|    delivery
-|9U |PoliceIncident|    na
-|9V|    Redirected| na
-|9W|    Rta/TrafficConditions|  na
-|9X|    UnableToLocate/CompanyMoved|    delivery
-|9Y|    WeatherConditions|  na</p>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+<th>Apply to stops</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1A</td>
+<td>Partner Amendment</td>
+<td>na</td>
+</tr>
+<tr>
+<td>1B</td>
+<td>Partner Cancellation</td>
+<td>collection, delivery</td>
+</tr>
+<tr>
+<td>1C</td>
+<td>COA</td>
+<td>collection</td>
+</tr>
+<tr>
+<td>1D</td>
+<td>Cannot Verify Age</td>
+<td>na</td>
+</tr>
+<tr>
+<td>1F</td>
+<td>Collection too Far</td>
+<td>na</td>
+</tr>
+<tr>
+<td>8A</td>
+<td>Outside Timeslot - Control</td>
+<td>na</td>
+</tr>
+<tr>
+<td>8B</td>
+<td>Outside Timeslot - Courier</td>
+<td>na</td>
+</tr>
+<tr>
+<td>8C</td>
+<td>Outside Timeslot - Short</td>
+<td>na</td>
+</tr>
+<tr>
+<td>8D</td>
+<td>Traffic Incident – Notified</td>
+<td>na</td>
+</tr>
+<tr>
+<td>9A</td>
+<td>Arrived On Time</td>
+<td>collection, delivery</td>
+</tr>
+<tr>
+<td>9B</td>
+<td>Card Left</td>
+<td>delivery</td>
+</tr>
+<tr>
+<td>9C</td>
+<td>Citytrakker Issues</td>
+<td>na</td>
+</tr>
+<tr>
+<td>9D</td>
+<td>Consignment Damaged</td>
+<td>collection, delivery</td>
+</tr>
+<tr>
+<td>9E</td>
+<td>Contact Unavailable</td>
+<td>na</td>
+</tr>
+<tr>
+<td>9G</td>
+<td>Courier Broken Down</td>
+<td>na</td>
+</tr>
+<tr>
+<td>9I</td>
+<td>Held Up On Previous Delivery</td>
+<td>collection</td>
+</tr>
+<tr>
+<td>9J</td>
+<td>Delayed Onsite By Client</td>
+<td>collection, delivery</td>
+</tr>
+<tr>
+<td>9K</td>
+<td>Collected/Delivered Early</td>
+<td>collection, delivery</td>
+</tr>
+<tr>
+<td>9L</td>
+<td>Outside Timeslot (Client Req)</td>
+<td>delivery</td>
+</tr>
+<tr>
+<td>9M</td>
+<td>Collected/Delivered Late</td>
+<td>collection, delivery</td>
+</tr>
+<tr>
+<td>9N</td>
+<td>Delivery Refused</td>
+<td>delivery</td>
+</tr>
+<tr>
+<td>9O</td>
+<td>Goods Not Ready</td>
+<td>collection</td>
+</tr>
+<tr>
+<td>9P</td>
+<td>Incorrect Address</td>
+<td>collection</td>
+</tr>
+<tr>
+<td>9R</td>
+<td>Late - Out Of Time</td>
+<td>na</td>
+</tr>
+<tr>
+<td>9S</td>
+<td>Late - Unable To Deliver</td>
+<td>na</td>
+</tr>
+<tr>
+<td>9T</td>
+<td>Nobody Home/No Answer</td>
+<td>delivery</td>
+</tr>
+<tr>
+<td>9U</td>
+<td>Police Incident</td>
+<td>na</td>
+</tr>
+<tr>
+<td>9V</td>
+<td>Redirected</td>
+<td>na</td>
+</tr>
+<tr>
+<td>9W</td>
+<td>Rta/Traffic Conditions</td>
+<td>na</td>
+</tr>
+<tr>
+<td>9X</td>
+<td>Unable To Locate/Company Moved</td>
+<td>delivery</td>
+</tr>
+<tr>
+<td>9Y</td>
+<td>Weather Conditions</td>
+<td>na</td>
+</tr>
+</tbody></table>
 <h2 id='chronos'>Chronos</h2><pre class="highlight json tab-json"><code><span class="w">
 </span><span class="err">sample_code</span><span class="w">
 
@@ -1426,7 +1587,7 @@ COSMO has an internal `Incident` service responsable of managing any job real ti
 
 <hr>
 
-<aside class="notice">
+<aside class="success">
 <strong>Summary:</strong> Get available timeslots for a booking
 
 <strong>Description:</strong> This API returns a list of available timeslots. Allows the options to be 
@@ -1484,7 +1645,7 @@ presented to an end-user for selection.
 <td>Unauthorized</td>
 </tr>
 </tbody></table>
-<h2 id='web-hooks'>Web-hooks</h2><pre class="highlight json tab-json"><code><span class="w">
+<h1 id='web-hooks'>Web-hooks</h1><pre class="highlight json tab-json"><code><span class="w">
 </span><span class="err">sample_code</span><span class="w">
 
 </span></code></pre>
@@ -1494,7 +1655,7 @@ presented to an end-user for selection.
 
 <hr>
 
-<aside class="notice">
+<aside class="success">
 <strong>Summary</strong> Get push notifcations on the endpoint of your choice
 
 <strong>Description</strong> This API returns a push messages for a range of events or exceptions
