@@ -201,7 +201,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;curl&quot;,&quot;json&quot;,null]">
+  <body class="index" data-languages="[&quot;shell&quot;,&quot;curl&quot;,&quot;json&quot;,&quot;go&quot;,&quot;rust&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -214,7 +214,8 @@
               <a href="#" data-language-name="shell">shell</a>
               <a href="#" data-language-name="curl">curl</a>
               <a href="#" data-language-name="json">json</a>
-              <a href="#" data-language-name=""></a>
+              <a href="#" data-language-name="go">go</a>
+              <a href="#" data-language-name="rust">rust</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -243,6 +244,21 @@
               <ul class="toc-list-h2">
                   <li>
                     <a href="#create-an-order" class="toc-h2 toc-link" data-title="Create an order">Create an order</a>
+                  </li>
+                  <li>
+                    <a href="#get-it-now" class="toc-h2 toc-link" data-title="Get it now">Get it now</a>
+                  </li>
+                  <li>
+                    <a href="#get-it-later" class="toc-h2 toc-link" data-title="Get it later">Get it later</a>
+                  </li>
+                  <li>
+                    <a href="#return-to-depot" class="toc-h2 toc-link" data-title="Return to depot">Return to depot</a>
+                  </li>
+                  <li>
+                    <a href="#real-time-tracking" class="toc-h2 toc-link" data-title="Real time tracking">Real time tracking</a>
+                  </li>
+                  <li>
+                    <a href="#real-time-notifications" class="toc-h2 toc-link" data-title="Real time notifications">Real time notifications</a>
                   </li>
                   <li>
                     <a href="#search-an-order" class="toc-h2 toc-link" data-title="Search an order">Search an order</a>
@@ -453,7 +469,7 @@ Sandbox seed data below allows developers to test their integration with orders 
 </ul>
 <h3 id='progress-status'>Progress Status</h3>
 <p>Example:
-<code>
+<code>json
 &quot;progressStatus&quot;: {
   &quot;status&quot;: &quot;allocated&quot;,
   &quot;updatedAt&quot;: &quot;2019-01-02T13:18:53.087Z&quot;
@@ -572,7 +588,7 @@ Sandbox seed data below allows developers to test their integration with orders 
 </tbody></table>
 <h3 id='courier-status'>Courier Status</h3>
 <p>Example:
-<code>
+<code>json
 &quot;courierStatus&quot;: {
   &quot;location&quot;: {
     &quot;longitude&quot;: 0.1701,
@@ -597,24 +613,24 @@ Sandbox seed data below allows developers to test their integration with orders 
 </tr>
 </thead><tbody>
 </tbody></table>
-<h1 id='booking-service-api-39-s-v2-0'>Booking Service API&#39;s V2.0</h1><h2 id='create-an-order'>Create an order</h2><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unique partner order number"</span><span class="p">,</span><span class="w">
+<h1 id='booking-service-api-39-s-v2-0'>Booking Service API&#39;s V2.0</h1><h2 id='create-an-order'>Create an order</h2><pre class="highlight rust tab-rust"><code><span class="p">{</span>
+  <span class="s">"id"</span><span class="p">:</span> <span class="s">"unique partner order number"</span><span class="p">,</span>
 
-  </span><span class="s2">"metaData"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"clientRefId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unique partner order number"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"serviceType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4hour"</span><span class="p">,</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"customData"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"reference_1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PartnerName"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"reference_2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PartnerStore - Staples Corner”,
-        'reference_3"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4002”,
-        'citytrak-department"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unique partner order number”
+  <span class="s">"metaData"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">"clientRefId"</span><span class="p">:</span> <span class="s">"unique partner order number"</span><span class="p">,</span>
+    <span class="s">"serviceType"</span><span class="p">:</span> <span class="s">"4hour"</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="s">"customData"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">"reference_1"</span><span class="p">:</span> <span class="s">"PartnerName"</span><span class="p">,</span>
+        <span class="s">"reference_2"</span><span class="p">:</span> <span class="s">"PartnerStore - Staples Corner”,
+        'reference_3"</span><span class="p">:</span> <span class="s">"4002”,
+        'citytrak-department"</span><span class="p">:</span> <span class="s">"unique partner order number”
   },
   ...
-      "</span><span class="err">requires</span><span class="s2">": [
-                "</span><span class="err">ageVerification</span><span class="s2">",
-                "</span><span class="err">collectionSignOff</span><span class="s2">",
-                "</span><span class="err">deliverySignOff</span><span class="s2">"
+      "</span><span class="n">requires</span><span class="s">": [
+                "</span><span class="n">ageVerification</span><span class="s">",
+                "</span><span class="n">collectionSignOff</span><span class="s">",
+                "</span><span class="n">deliverySignOff</span><span class="s">"
       ],
   ...
 }
@@ -696,7 +712,7 @@ Sandbox seed data below allows developers to test their integration with orders 
 </tbody></table>
 
 <hr>
-<h3 id='get-it-now'>Get it now</h3>
+<h2 id='get-it-now'>Get it now</h2>
 <aside class="success">
 The <code>code</code> panel exemplifies how to send an <code>Express/ASAP</code> request
 </aside>
@@ -876,25 +892,25 @@ The <code>code</code> panel exemplifies how to send an <code>Express/ASAP</code>
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p><img src="images/OTD_H_GITN.png" alt="Express/ASAP" /></p>
-<h3 id='get-it-later'>Get it later</h3>
+<h2 id='get-it-later'>Get it later</h2>
 <aside class="success">
 The request in the <code>code pane</code> will create an order scheduled for later same day or another day in the future.
 </aside>
 
 <p><img src="images/OTD_H_GITL.png" alt="Scheduled" /></p>
-<h3 id='return-to-depot'>Return to depot</h3>
+<h2 id='return-to-depot'>Return to depot</h2>
 <aside class="success">
 The request sample in the left <code>code pane</code> will create a return to depot order.
 </aside>
 
 <p><img src="images/OTD_H_RTD.png" alt="Returns to Depot/Origin" /></p>
-<h3 id='real-time-tracking'>Real time tracking</h3>
+<h2 id='real-time-tracking'>Real time tracking</h2>
 <aside class="success">
   Real time tracking and dynamic ETA's : <code><strong>ETC</strong> ( estimated time of collection )</code> and <code><strong>ETD</strong> ( estimated time of delivery )</code>
 </aside>
 
 <p><img src="images/OTD_H_RTTE.png" alt="Real Time Notifications" /></p>
-<h3 id='real-time-notifications'>Real time notifications</h3>
+<h2 id='real-time-notifications'>Real time notifications</h2>
 <p><img src="images/OTD_H_RTN.png" alt="Real Time Notifications" /></p>
 <h2 id='search-an-order'>Search an order</h2><pre class="highlight json tab-json"><code><span class="w">
   </span><span class="err">code_sample</span><span class="w">
@@ -1876,7 +1892,8 @@ General html error codes and the specific codes OTD V2 API will return.
                 <a href="#" data-language-name="shell">shell</a>
                 <a href="#" data-language-name="curl">curl</a>
                 <a href="#" data-language-name="json">json</a>
-                <a href="#" data-language-name=""></a>
+                <a href="#" data-language-name="go">go</a>
+                <a href="#" data-language-name="rust">rust</a>
           </div>
       </div>
     </div>
