@@ -7,7 +7,8 @@ language_tabs:
 - shell
 - curl
 - json
-- 
+- go
+- rust
 
 toc_footers:
    - <a href='https://onthedot-bookingdraft.apigee.io' target="_blank">Sign Up for a Developer Key</a> 
@@ -180,7 +181,7 @@ Here is an example job status object.
 ### Progress Status
 
 Example:
-```
+```json
 "progressStatus": {
   "status": "allocated",
   "updatedAt": "2019-01-02T13:18:53.087Z"
@@ -222,7 +223,7 @@ Example:
 ### Courier Status
 
 Example:
-```
+```json
 "courierStatus": {
   "location": {
     "longitude": 0.1701,
@@ -247,7 +248,7 @@ Example:
 
 ## Create an order
 
-```json
+```rust
 {
   "id": "unique partner order number",
 
@@ -307,7 +308,7 @@ If the caller sends only timeslot ID or place ID, then the relevant services wil
 
 ---
 
-### Get it now
+## Get it now
 
 <aside class="success">
 The <code>code</code> panel exemplifies how to send an <code>Express/ASAP</code> request
@@ -492,7 +493,7 @@ curl -X POST \
 ![Express/ASAP](/images/OTD_H_GITN.png)
 
 
-### Get it later 
+## Get it later 
 
 <aside class="success">
 The request in the <code>code pane</code> will create an order scheduled for later same day or another day in the future.
@@ -500,7 +501,7 @@ The request in the <code>code pane</code> will create an order scheduled for lat
 
 ![Scheduled](/images/OTD_H_GITL.png)
 
-### Return to depot
+## Return to depot
 
 <aside class="success">
 The request sample in the left <code>code pane</code> will create a return to depot order.
@@ -508,7 +509,7 @@ The request sample in the left <code>code pane</code> will create a return to de
 
 ![Returns to Depot/Origin](/images/OTD_H_RTD.png)
 
-### Real time tracking
+## Real time tracking
 
 <aside class="success">
   Real time tracking and dynamic ETA's : <code><strong>ETC</strong> ( estimated time of collection )</code> and <code><strong>ETD</strong> ( estimated time of delivery )</code>
@@ -516,7 +517,7 @@ The request sample in the left <code>code pane</code> will create a return to de
 
 ![Real Time Notifications](/images/OTD_H_RTTE.png)
 
-### Real time notifications
+## Real time notifications
 ![Real Time Notifications](/images/OTD_H_RTN.png)
 
 ## Search an order
