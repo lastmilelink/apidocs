@@ -501,7 +501,7 @@ The request in the <code>code pane</code> will create an order scheduled for lat
 
 ![Scheduled](/images/OTD_H_GITL.png)
 
-## Return to depot
+## Returns
 
 <aside class="success">
 The request sample in the left <code>code pane</code> will create a return to depot order.
