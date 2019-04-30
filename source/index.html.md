@@ -10,7 +10,7 @@ language_tabs:
 - 
 
 toc_footers:
-   - <a href='https://onthedot-bookingdraft.apigee.io/api-menu' target="_blank">Sign Up for a Developer Key</a> 
+   - <a href='https://onthedot-bookingdraft.apigee.io' target="_blank">Sign Up for a Developer Key</a> 
    - <a href='https://github.com/lord/slate'>Powered by SLATE</a> 
 
 includes: 
@@ -74,7 +74,9 @@ Illustration below is a high level view of our API features and integration feat
 # Quick Start
 ## Signup to OTD Sandbox
 
-* Signup to get access to our Sandbox
+![Dev](/images/OTD_H_DEV.png)
+
+* Signup to get access to our Sandbox [here](https://developer.onthedot.com/create).
 
     * Create an app and subcribe to the sandbox API product to obtain your `API Token`
 

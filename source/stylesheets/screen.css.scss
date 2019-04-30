@@ -445,13 +445,16 @@ body {
         padding-bottom: 1em;
         margin-top: 1.5em;
         margin-bottom: 1.5em;
-        background: $aside-notice-bg;
+        background: #b4e6fd85;
+        //$aside-notice-bg;
         line-height: 1.6;
         &.warning {
-            background-color: $aside-warning-bg;
+            background-color: rgb(255, 225, 225);
+            //$aside-warning-bg;
         }
         &.success {
-            background-color: $aside-success-bg;
+            background-color: rgba(234, 247, 252, 0.913);
+            //$aside-success-bg;
         }
     }
     aside:before {
