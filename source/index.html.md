@@ -11,32 +11,13 @@ language_tabs:
 - rust
 
 toc_footers:
-   - <a href='https://onthedot-bookingdraft.apigee.io' target="_blank">Sign Up for a Developer Key</a> 
-   - <a href='https://github.com/lord/slate'>Powered by SLATE</a> 
+   - <a href='https://onthedot-bookingdraft.apigee.io' target="_blank">Sign Up for a Developer Key</a>
 
 includes: 
-   - errors 
 
 search: true 
 
---- 
-
-<style>
-.flex-container {
-    display: flex;
-    flex-direction:row;
-    max-width:70%;
-  }
-
-.flex-container > div {
-    //background-color: #f1f1f1;
-    margin: 10px;
-  }
-
-  .flex-container div a {
-    height:30px;
-  }
-</style>
+---
 
 # Introduction 
 

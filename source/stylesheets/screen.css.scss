@@ -229,6 +229,24 @@ body {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+// IMAGE TILES - Eduard 2019
+////////////////////////////////////////////////////////////////////////////////
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    max-width: 70%;
+}
+
+.flex-container>div {
+    //background-color: #f1f1f1;
+    margin: 10px;
+}
+
+.flex-container div a {
+    height: 30px;
+}
+
+////////////////////////////////////////////////////////////////////////////////
 // PAGE LAYOUT AND CODE SAMPLE BACKGROUND
 ////////////////////////////////////////////////////////////////////////////////
 .page-wrapper {
@@ -430,7 +448,7 @@ body {
     }
     code {
         background-color: rgba(211, 211, 211, 0.3);
-        color: coral;
+        color: rgb(244, 167, 3);
         padding: 3px;
         border-radius: 3px;
         @extend %break-words;
