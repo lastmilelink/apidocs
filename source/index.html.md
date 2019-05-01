@@ -5,10 +5,6 @@ title: OTD V2.0 Booking Service
 language_tabs: 
 
 - shell
-- curl
-- json
-- go
-- rust
 
 toc_footers:
    - <a href='https://onthedot-bookingdraft.apigee.io' target="_blank">Sign Up for a Developer Key</a>
