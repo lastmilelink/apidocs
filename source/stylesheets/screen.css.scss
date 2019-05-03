@@ -480,14 +480,17 @@ body {
         background: $aside-notice-bg;
         line-height: 1.6;
         border-radius: 10px;
+        border-left: 4px solid $aside-notice-bord-left;
         max-width: 100%-($examples-width+2%);
         // display: flex;
         // flex-direction: inherit;
         &.warning {
             background-color: $aside-warning-bg;
+            border-left: 4px solid $aside-warning-bord-left;
         }
         &.success {
             background-color: $aside-success-bg;
+            border-left: 4px solid $aside-success-bord-left;
         }
     }
     aside:before {
@@ -497,12 +500,15 @@ body {
     }
     aside.notice:before {
         @extend %icon-info-sign;
+        color: $aside-notice-bord-left;
     }
     aside.warning:before {
         @extend %icon-exclamation-sign;
+        color: $aside-warning-bord-left;
     }
     aside.success:before {
         @extend %icon-ok-sign;
+        color: $aside-success-bord-left;
     }
     .search-highlight {
         padding: 2px;
