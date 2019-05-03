@@ -50,7 +50,6 @@ let api = OTD_API_Token.authorize('meowmeowmeow');
 
 This documentation is currently in `Beta` and will be updated over the next few months. Should you require further assistance using our API's, please contact our Partner team **partners@onthedot.com**.
 
-
 <body>
 <div class="flex-container">
   <div><a href="#get-it-now" id="close-image"><img src="/images/OTD_GITN.png"></a></div>
@@ -84,11 +83,9 @@ Illustration below is a high level view of our API features and integration feat
 ![Dev](/images/OTD_H_DEV.png)
 
 * Signup to get access to our Sandbox [here](https://developer.onthedot.com/create).
-
     * Create an app and subcribe to the sandbox API product to obtain your `API Token`
-
-          * Child
-
+          * Download and configure the Postman collection and build your app
+                
 <aside class="warning">
 Sandbox <code>seed data</code> below allows developers to test their integration with orders <code>within configured SLA</code> and <code>outside configured SLA</code>.
 </aside>
@@ -351,6 +348,11 @@ The request sample in the left <code>code pane</code> will create a return to de
 ![Real Time Notifications](/images/OTD_H_RTTE.png)
 
 ## Real time notifications
+
+<aside class="notice">
+  Real time notifications as `e-mail`, `sms` or `web-hooks` containing dynamic ETA's : <code><strong>ETC</strong> ( estimated time of collection )</code> and <code><strong>ETD</strong> ( estimated time of delivery )</code>, `courier name`, `proof of delivery and collection`, e.t.c.
+</aside>
+
 ![Real Time Notifications](/images/OTD_H_RTN.png)
 
 ## Search an order
