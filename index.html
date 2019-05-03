@@ -201,7 +201,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;]">
+  <body class="index" data-languages="[]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -210,9 +210,6 @@
     </a>
     <div class="toc-wrapper">
       <img src="images/logo.png" class="logo" alt="Logo" />
-        <div class="lang-selector">
-              <a href="#" data-language-name="shell">shell</a>
-        </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
         </div>
@@ -228,7 +225,7 @@
                     <a href="#signup-to-otd-sandbox" class="toc-h2 toc-link" data-title="Signup to OTD Sandbox">Signup to OTD Sandbox</a>
                   </li>
                   <li>
-                    <a href="#before-you-start" class="toc-h2 toc-link" data-title="Before You Start">Before You Start</a>
+                    <a href="#before-you-start" class="toc-h2 toc-link" data-title="Before you start">Before you start</a>
                   </li>
                   <li>
                     <a href="#security" class="toc-h2 toc-link" data-title="Security">Security</a>
@@ -337,8 +334,8 @@ Illustration below is a high level view of our API features and integration feat
 </ul></li>
 </ul>
 
-<aside class="notice">
-Sandbox seed data below allows developers to test their integration with orders <code><strong>within</strong> configured SLA</code> and <code><strong>outside</strong> configured SLA</code>.
+<aside class="warning">
+Sandbox <code>seed data</code> below allows developers to test their integration with orders <code>within configured SLA</code> and <code>outside configured SLA</code>.
 </aside>
 
 <p><strong>Account</strong></p>
@@ -362,7 +359,7 @@ Sandbox seed data below allows developers to test their integration with orders 
 <ul>
 <li>Sandbox account <code>sbx-partner</code> had the following <code>services</code> configured:<code>timeslot</code>,<code>timewindow</code>,<code>asap</code>,<code>return</code>,<code>2hour</code>,<code>3hour</code>,<code>4hour</code>,<code>sameday</code>,<code>2hour-later</code>,<code>4hour-later</code></li>
 </ul>
-<h2 id='before-you-start'>Before You Start</h2>
+<h2 id='before-you-start'>Before you start</h2>
 <p>Please contact OTD partners team at <a href="mailto:partners@onthedot.com">partners@onthedot.com</a> to set up the following:</p>
 
 <ul>
@@ -406,36 +403,36 @@ Sandbox seed data below allows developers to test their integration with orders 
 <blockquote>
 <p>Status representing a job&#39;s execution state.</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-  </span><span class="s2">"progressStatus"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"allocated"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-02T13:18:53.087Z"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"courierStatus"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"location"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1701</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">51.5701</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-02T13:18:53.087Z"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"incidents"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"85ad3dd6-05d3-4023-b1e6-74042b7ff138"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"created"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"reason"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1B"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Partner Cancellation"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"impact"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7H"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unable to Fulfil Order"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-02T13:18:53.087Z"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-02T13:18:53.087Z"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<pre class="highlight rust tab-rust"><code><span class="s">"status"</span><span class="p">:</span> <span class="p">{</span>
+  <span class="s">"progressStatus"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">"status"</span><span class="p">:</span> <span class="s">"allocated"</span><span class="p">,</span>
+    <span class="s">"updatedAt"</span><span class="p">:</span> <span class="s">"2019-01-02T13:18:53.087Z"</span>
+  <span class="p">},</span>
+  <span class="s">"courierStatus"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">"location"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s">"longitude"</span><span class="p">:</span> <span class="mf">0.1701</span><span class="p">,</span>
+      <span class="s">"latitude"</span><span class="p">:</span> <span class="mf">51.5701</span>
+    <span class="p">},</span>
+    <span class="s">"updatedAt"</span><span class="p">:</span> <span class="s">"2019-01-02T13:18:53.087Z"</span>
+  <span class="p">},</span>
+  <span class="s">"incidents"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s">"id"</span><span class="p">:</span> <span class="s">"85ad3dd6-05d3-4023-b1e6-74042b7ff138"</span><span class="p">,</span>
+      <span class="s">"status"</span><span class="p">:</span> <span class="s">"created"</span><span class="p">,</span>
+      <span class="s">"reason"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">"code"</span><span class="p">:</span> <span class="s">"1B"</span><span class="p">,</span>
+        <span class="s">"description"</span><span class="p">:</span> <span class="s">"Partner Cancellation"</span>
+      <span class="p">},</span>
+      <span class="s">"impact"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">"code"</span><span class="p">:</span> <span class="s">"7H"</span><span class="p">,</span>
+        <span class="s">"description"</span><span class="p">:</span> <span class="s">"Unable to Fulfil Order"</span>
+      <span class="p">},</span>
+      <span class="s">"createdAt"</span><span class="p">:</span> <span class="s">"2019-01-02T13:18:53.087Z"</span><span class="p">,</span>
+      <span class="s">"updatedAt"</span><span class="p">:</span> <span class="s">"2019-01-02T13:18:53.087Z"</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</code></pre>
 <p>Here is an example job status object.</p>
 
 <ul>
@@ -443,7 +440,7 @@ Sandbox seed data below allows developers to test their integration with orders 
 </ul>
 <h3 id='progress-status'>Progress Status</h3>
 <p>Example:
-<code>json
+<code>
 &quot;progressStatus&quot;: {
   &quot;status&quot;: &quot;allocated&quot;,
   &quot;updatedAt&quot;: &quot;2019-01-02T13:18:53.087Z&quot;
@@ -587,28 +584,32 @@ Sandbox seed data below allows developers to test their integration with orders 
 </tr>
 </thead><tbody>
 </tbody></table>
-<h1 id='booking-service-api-39-s-v2-0'>Booking Service API&#39;s V2.0</h1><h2 id='create-an-order'>Create an order</h2><pre class="highlight rust tab-rust"><code><span class="p">{</span>
-  <span class="s">"id"</span><span class="p">:</span> <span class="s">"unique partner order number"</span><span class="p">,</span>
+<h1 id='booking-service-api-39-s-v2-0'>Booking Service API&#39;s V2.0</h1><h2 id='create-an-order'>Create an order</h2>
+<p>Example:
+```json
+{
+  &quot;id&quot;: &quot;unique partner order number&quot;,</p>
 
-  <span class="s">"metaData"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s">"clientRefId"</span><span class="p">:</span> <span class="s">"unique partner order number"</span><span class="p">,</span>
-    <span class="s">"serviceType"</span><span class="p">:</span> <span class="s">"4hour"</span><span class="p">,</span>
-  <span class="p">},</span>
-  <span class="s">"customData"</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s">"reference_1"</span><span class="p">:</span> <span class="s">"PartnerName"</span><span class="p">,</span>
-        <span class="s">"reference_2"</span><span class="p">:</span> <span class="s">"PartnerStore - Staples Corner”,
-        'reference_3"</span><span class="p">:</span> <span class="s">"4002”,
-        'citytrak-department"</span><span class="p">:</span> <span class="s">"unique partner order number”
+<p>&quot;metaData&quot;: {
+    &quot;clientRefId&quot;: &quot;unique partner order number&quot;,
+    &quot;serviceType&quot;: &quot;4hour&quot;,
+  },
+  &quot;customData&quot;: {
+        &quot;reference_1&quot;: &quot;PartnerName&quot;,
+        &quot;reference_2&quot;: &quot;PartnerStore - Staples Corner”,
+        &#39;reference_3&quot;: &quot;4002”,
+        &#39;citytrak-department&quot;: &quot;unique partner order number”
   },
   ...
-      "</span><span class="n">requires</span><span class="s">": [
-                "</span><span class="n">ageVerification</span><span class="s">",
-                "</span><span class="n">collectionSignOff</span><span class="s">",
-                "</span><span class="n">deliverySignOff</span><span class="s">"
+      &quot;requires&quot;: [
+                &quot;ageVerification&quot;,
+                &quot;collectionSignOff&quot;,
+                &quot;deliverySignOff&quot;
       ],
   ...
 }
-</span></code></pre>
+```</p>
+
 <p>Below you have specific examples for each of the order types you can create using our <code>booking service</code>.</p>
 
 <ul>
@@ -684,187 +685,15 @@ Sandbox seed data below allows developers to test their integration with orders 
 <td>Conflict</td>
 </tr>
 </tbody></table>
-
-<hr>
 <h2 id='get-it-now'>Get it now</h2>
 <aside class="success">
 The <code>code</code> panel exemplifies how to send an <code>Express/ASAP</code> request
 </aside>
 
 <blockquote>
-<p><code>POST</code>  URL<code>/v2/accounts/</code>myaccount`/orders</p>
+<p><code>POST</code>  <code>URL</code>/v2/accounts/<code>myaccount</code>/orders</p>
 </blockquote>
-<pre class="highlight plaintext"><code>curl -X POST \
-  'http://{{host}}/{{bookingService}}/v2/accounts/{{myaccount}}/orders' \
-  -H 'authorization: &lt;your_api_token&gt;' \
-  -H 'content-type: application/json' \
-  -H 'x-trace-id: 79b6b8b6-d0df-4e12-8f4d-4b435162f4e7' \
-  -d '
 
-{
-  "id": "myorder",
-  "metadata": {
-    "serviceType": "asap"
-  },
-  "jobs": [
-    {
-      "id": "job0",
-      "metadata": {
-        "journeyType": "delivery"
-      },
-      "items": [
-        {
-          "id": "itemgroup0:item0",
-          "quantity": 1
-        }
-      ],
-      "collection": {
-        "stopId": "stop0"
-      },
-      "delivery": {
-        "stopId": "stop1"
-      },
-      "timeslot": {
-        "collection": {
-          "from": "2019-01-02T13:30:00.000Z",
-          "to": "2019-01-02T14:30:00.000Z"
-        },
-        "delivery": {
-          "from": "2019-01-02T18:30:00.000Z",
-          "to": "2019-01-02T19:30:00.000Z"
-        }
-      }
-    }
-  ],
-  "stops": [
-    {
-      "id": "stop0",
-      "place": {
-        "address": {
-          "country": "GBR",
-          "town": "London",
-          "streets": [
-            "Royal Opera House",
-            "Bow Street"
-          ],
-          "postcode": "WC2E 9DD"
-        }
-      }
-    },
-    {
-      "id": "stop1",
-      "place": {
-        "address": {
-          "country": "GBR",
-          "town": "London",
-          "streets": [
-            "English National Opera",
-            "St Martin's Lane"
-          ],
-          "postcode": "WC2N 4ES"
-        }
-      }
-    }
-  ]
-}
-</code></pre>
-<blockquote>
-<p><strong><em>Note</em></strong> The above command returns the following JSON response.</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"myorder"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"vehicleType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bicycle"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"serviceType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"asap"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"trackingUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://trackmydriver-prod.lastmilelink.eu/myaccount::myorder?token=7%2FI9ZlUZ7rnNBUkKORI2fGrPdEIaMV%2BNkrYbLFSQQW4%3D"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"jobs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"job0"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"journeyType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"delivery"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"itemgroup0:item0"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="s2">"collection"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"stopId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stop0"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"delivery"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"stopId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stop1"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"timeslot"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"collection"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"from"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-02T13:30:00.000Z"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"to"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-02T14:30:00.000Z"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"delivery"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"from"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-02T18:30:00.000Z"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"to"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-02T19:30:00.000Z"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"progressStatus"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"created"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-02T13:30:00.048Z"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"stops"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stop0"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"place"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"position"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.1265741</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">51.5136986</span><span class="w">
-          </span><span class="p">}</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GBR"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"town"</span><span class="p">:</span><span class="w"> </span><span class="s2">"London"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"streets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-            </span><span class="s2">"Royal Opera House"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"Bow Street"</span><span class="w">
-          </span><span class="p">],</span><span class="w">
-          </span><span class="s2">"postcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WC2E 9DD"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stop1"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"place"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"place2"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"position"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.1288661</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">51.5098553</span><span class="w">
-          </span><span class="p">}</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GBR"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"town"</span><span class="p">:</span><span class="w"> </span><span class="s2">"London"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"streets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-            </span><span class="s2">"English National Opera"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"St Martin's Lane"</span><span class="w">
-          </span><span class="p">],</span><span class="w">
-          </span><span class="s2">"postcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WC2N 4ES"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"created"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-02T13:30:00.048Z"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-02T13:30:00.048Z"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-02T13:30:00.048Z"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
 <p><img src="images/OTD_H_GITN.png" alt="Express/ASAP" /></p>
 <h2 id='get-it-later'>Get it later</h2>
 <aside class="success">
@@ -1064,8 +893,11 @@ The request sample in the left <code>code pane</code> will create a return to de
 
 <p>Note <code>customData</code> uses incremental update.  All other fields are full-replacement update.</p>
 
-<p>** HTTP Request **
-<code>PUT /v2/accounts/{accountId}/orders/{orderId}/amend</code> </p>
+<blockquote>
+<p><code>PUT</code> /v2/accounts/<code>{accountId}</code>/orders/<code>{orderId}</code>/amend</p>
+</blockquote>
+
+<p><strong>HTTP Request &gt;&gt;&gt;&gt;&gt;</strong></p>
 
 <p><strong>Parameters</strong></p>
 
@@ -1133,14 +965,34 @@ The request sample in the left <code>code pane</code> will create a return to de
 <li>Job&#39;s stop and timing details cannot be amended after it has entered <code>allocated</code> state.</li>
 <li>Job&#39;s item details cannot be amended after it has entered <code>collected</code> state.</li>
 </ul>
-<h2 id='cancell-an-order'>Cancell an order</h2><pre class="highlight json tab-json"><code><span class="w">
-  </span><span class="err">code_sample</span><span class="w">
+<h2 id='cancell-an-order'>Cancell an order</h2>
+<blockquote>
+<p><strong>Request</strong>   <strong><code>PUT</code></strong></p>
 
+<details><summary>Expand for code</summary>
+<pre>
+  <code class="json">
+{
+  "code":"sample",
+  "code":"sample",
+  "code":"sample",
+  "code":"sample"
+}
+  </code>
+</pre>
+</details>
+</blockquote>
+<pre class="highlight go tab-go"><code><span class="p">{</span><span class="x">
+  </span><span class="s">"code"</span><span class="o">:</span><span class="s">"sample"</span><span class="p">,</span><span class="x">
+  </span><span class="s">"code"</span><span class="o">:</span><span class="s">"sample"</span><span class="p">,</span><span class="x">
+  </span><span class="s">"code"</span><span class="o">:</span><span class="s">"sample"</span><span class="p">,</span><span class="x">
+  </span><span class="s">"code"</span><span class="o">:</span><span class="s">"sample"</span><span class="x">
+</span><span class="p">}</span><span class="x">
 </span></code></pre>
 <hr>
 
 <ul>
-<li><code>PUT</code> /v2/accounts/{accountId}/orders/{orderId}/cancel</li>
+<li><code>PUT</code> /v2/accounts/<code>{accountId}</code>/orders/<code>{orderId}</code>/cancel</li>
 </ul>
 
 <hr>
@@ -1657,9 +1509,6 @@ presented to an end-user for selection.
 
       </div>
       <div class="dark-box">
-          <div class="lang-selector">
-                <a href="#" data-language-name="shell">shell</a>
-          </div>
       </div>
     </div>
   </body>
