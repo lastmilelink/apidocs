@@ -536,7 +536,7 @@ body {
         ////
         @extend %right-col;
         &>p {
-            margin: 0; // this adds a rounded bottom panel
+            margin: 1; // this adds a rounded bottom panel
         }
         a {
             color: $ancor-code-text;
@@ -609,8 +609,9 @@ body {
 .highlight .c,
 .highlight .cm,
 .highlight .c1,
+.highlight .s2,
 .highlight .cs {
-    color: red; //$code-highlight-text;
+    color: #66d9ef; //$code-highlight-text;
 }
 
 .highlight,

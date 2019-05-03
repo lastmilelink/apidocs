@@ -23,9 +23,9 @@ under the License.
 $nav-bg: #f7fafc!default; //linear-gradient(red 0%, orange 10% 30%, yellow 50% 70%, green 90% 100%);
 $examples-bg: white !default; //#2E3336 // This is the section between the code panes
 $code-bg: rgb(223, 223, 223) !default;
-$code-blockquote-bg:rgba(245, 245, 245, 0.5)!default; //This is the code background in the side panel section
+$code-blockquote-bg:#27295C!default; //This is the code background in the side panel section
 $code-highlight-bg:transparent;
-$blockquote-code-bg: rgb(157, 160, 167) !default;
+$blockquote-code-bg:#A5A9AB !default;
 $nav-active-bg: rgba(233, 159, 10, 0.3)!default; // active selection in Nav pane
 $nav-active-parent-bg: rgb(214, 215, 218) !default; // #h1 parent of the selected section
 $nav-subitem-bg: rgba(214, 215, 218, 0.1) !default; // #h2 subsection of Nav
@@ -55,10 +55,10 @@ $lang-select-pressed-text: #fff !default; // color of language tab text when mou
 
 $html-main-text: rgb(73, 73, 73) !default; // main content text color
 $main-text: #3a3a3c !default; // main content text color
-$code-text:black !default;
+$code-text:coral !default;
 $code-highlight-text:rgb(133, 6, 251) !default;
 $ancor-code-text: red !default;
-$blockquote-code-text: rgb(204, 253, 253)!default; // this appears as rounded Blockquotes on the code pane
+$blockquote-code-text: #EEEEF2!default; // this appears as rounded tiles blockquotes on the code pane
 $nav-text: #333 !default; // #fff;
 $nav-footer-text:#333 !default;
 $nav-active-text: Black !default;

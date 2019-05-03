@@ -23,6 +23,7 @@ search: true
 **Welcome to the On the dot Booking Service V2.0 API's Reference documentation.**
 
 > Samples of code language syntax highlight
+
 ```ruby
 require 'OTD_API_Token'
 
