@@ -4,9 +4,10 @@ title: OTD V2.0 Booking Service
 
 language_tabs: 
   - shell: cURL
+  - javascript: JS
   - ruby: Ruby
   - python: Python
-  - javascript: JS
+
 
 toc_footers:
    - <a href='https://onthedot-bookingdraft.apigee.io' target="_blank">Sign Up for a Developer Key</a>
@@ -21,6 +22,31 @@ search: true
 
 **Welcome to the On the dot Booking Service V2.0 API's Reference documentation.**
 
+> Samples of code language syntax highlight
+```ruby
+require 'OTD_API_Token'
+
+api = OTD_API_Token::APIClient.authorize!('meowmeowmeow')
+```
+
+```python
+import OTD_API_Token
+
+api = OTD_API_Token.authorize('meowmeowmeow')
+```
+
+```shell
+# With shell, you can just pass the correct header with each request
+curl "api_endpoint_here"
+  -H "Authorization: meowmeowmeow"
+```
+
+```javascript
+const OTD_API_Token = require('OTD_API_Token');
+
+let api = OTD_API_Token.authorize('meowmeowmeow');
+```
+
 This documentation is currently in `Beta` and will be updated over the next few months. Should you require further assistance using our API's, please contact our Partner team **partners@onthedot.com**.
 
 
@@ -28,7 +54,7 @@ This documentation is currently in `Beta` and will be updated over the next few 
 <div class="flex-container">
   <div><a href="#get-it-now" id="close-image"><img src="/images/OTD_GITN.png"></a></div>
   <div><a href="#get-it-later" id="close-image"><img src="/images/OTD_GITL.png"></a></div>
-  <div><a href="#return-to-depot" id="close-image"><img src="/images/OTD_RTD.png"></a></div>
+  <div><a href="#returns" id="close-image"><img src="/images/OTD_RTD.png"></a></div>
   <div><a href="#real-time-tracking" id="close-image"><img src="/images/OTD_RTTE.png"></a></div>
   <div><a href="#real-time-notifications" id="close-image"><img src="/images/OTD_RTN.png"></a></div>
 </div>
@@ -215,31 +241,6 @@ Example:
 
 ## Security
 **All APIs require an `Authorization` header.**
-
-
-```ruby
-require 'OTD_API_Token'
-
-api = OTD_API_Token::APIClient.authorize!('meowmeowmeow')
-```
-
-```python
-import OTD_API_Token
-
-api = OTD_API_Token.authorize('meowmeowmeow')
-```
-
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const OTD_API_Token = require('OTD_API_Token');
-
-let api = OTD_API_Token.authorize('meowmeowmeow');
-```
 
 * You will need to register [here](https://developer.onthedot.com/create) to obtain a token by creating an `app` and subscribing to our `Sandbox`.
 * The `token`  must be used in the request headers as `Authorization:{{Token}}` header. 
