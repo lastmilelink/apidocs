@@ -25,7 +25,7 @@ under the License.
 ////////////////////////////////////////////////////////////////////////////////
 html,
 body {
-    color: $main-text;
+    color: $html-main-text;
     padding: 0;
     margin: 0;
     -webkit-font-smoothing: antialiased;
@@ -42,7 +42,7 @@ body {
 ////////////////////////////////////////////////////////////////////////////////
 #toc>ul>li>a>span {
     float: right;
-    background-color: #2484FF;
+    background-color: cyan; //rgb(182, 183, 184);
     border-radius: 40px;
     width: 20px;
 }
@@ -71,8 +71,8 @@ body {
     // This is the logo at the top of the ToC
     .logo {
         display: block;
-        max-width: 100%;
-        padding: 15px 15px 15px 15px;
+        max-width: 30%; // Eduard - was 100%
+        padding: 30px 15px 15px 30px;
         margin-bottom: $logo-margin;
     }
     &>.search {
@@ -155,8 +155,18 @@ body {
         background-color: $nav-subitem-bg;
         font-weight: 500;
     }
+    // Eduard added sublist h3
+    .toc-list-h3 {
+        display: none;
+        background-color: $nav-subitem-bg;
+        font-weight: 400;
+    }
     .toc-h2 {
         padding-left: $nav-padding + $nav-indent;
+        font-size: 12px;
+    }
+    .toc-h3 {
+        padding-left: $nav-padding + $nav-indent +5px;
         font-size: 12px;
     }
     .toc-footer {
@@ -187,7 +197,7 @@ body {
     white-space: nowrap;
     text-overflow: ellipsis;
     text-decoration: none;
-    color: $nav-text;
+    color: $nav-footer-text;
     transition-property: background;
     transition-timing-function: linear;
     transition-duration: 130ms;
@@ -234,7 +244,7 @@ body {
 .flex-container {
     display: flex;
     flex-direction: row;
-    max-width: 70%;
+    max-width: 100%-$examples-width;
 }
 
 .flex-container>div {
@@ -447,8 +457,8 @@ body {
         max-width: 100%;
     }
     code {
-        background-color: rgba(211, 211, 211, 0.3);
-        color: rgb(244, 167, 3);
+        background-color: $code-bg;
+        color: $code-text;
         padding: 3px;
         border-radius: 3px;
         @extend %break-words;
@@ -456,23 +466,27 @@ body {
     }
     pre>code {
         background-color: transparent;
-        padding: 0;
+        padding: 0; //0
+        display: inline-block;
     }
     aside {
         padding-top: 1em;
         padding-bottom: 1em;
         margin-top: 1.5em;
         margin-bottom: 1.5em;
-        background: #b4e6fd85;
-        //$aside-notice-bg;
+        margin-right: 1.5em;
+        margin-left: 1.5em;
+        background: $aside-notice-bg;
         line-height: 1.6;
+        border-radius: 10px;
+        max-width: 100%-($examples-width+2%);
+        // display: flex;
+        // flex-direction: inherit;
         &.warning {
-            background-color: rgb(255, 225, 225);
-            //$aside-warning-bg;
+            background-color: $aside-warning-bg;
         }
         &.success {
-            background-color: rgba(234, 247, 252, 0.913);
-            //$aside-success-bg;
+            background-color: $aside-success-bg;
         }
     }
     aside:before {
@@ -505,19 +519,26 @@ body {
 .content {
     pre,
     blockquote {
-        background-color: $code-bg;
-        color: #fff;
-        margin: 0;
+        background-color: $code-blockquote-bg;
+        color: $code-text;
+        //margin: 0;
         width: $examples-width;
         float: right;
         clear: right;
         box-sizing: border-box;
+        /// Eduard
+        margin-right: 1em;
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+        border-radius: 10px;
+        max-width: $examples-width - 2%;
+        ////
         @extend %right-col;
         &>p {
-            margin: 0;
+            margin: 0; // this adds a rounded bottom panel
         }
         a {
-            color: #fff;
+            color: $ancor-code-text;
             text-decoration: none;
             border-bottom: dashed 1px #ccc;
         }
@@ -530,9 +551,10 @@ body {
     }
     blockquote {
         &>p {
-            background-color: $code-annotation-bg;
-            padding: $code-annotation-padding 2em;
-            color: #eee;
+            background-color: $blockquote-code-bg;
+            padding: $blockquote-code-padding 2em;
+            border-radius: 10px;
+            color: $blockquote-code-text;
         }
     }
 }
@@ -587,10 +609,10 @@ body {
 .highlight .cm,
 .highlight .c1,
 .highlight .cs {
-    color: #909090;
+    color: $code-highlight-text;
 }
 
 .highlight,
 .highlight .w {
-    background-color: $code-bg;
+    background-color: $code-highlight-bg;
 }

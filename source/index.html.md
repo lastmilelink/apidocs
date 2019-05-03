@@ -1,10 +1,8 @@
---- 
+---
 
 title: OTD V2.0 Booking Service 
 
 language_tabs: 
-
-- shell
 
 toc_footers:
    - <a href='https://onthedot-bookingdraft.apigee.io' target="_blank">Sign Up for a Developer Key</a>
@@ -60,8 +58,8 @@ Illustration below is a high level view of our API features and integration feat
 
           * Child
 
-<aside class="notice">
-Sandbox seed data below allows developers to test their integration with orders <code><strong>within</strong> configured SLA</code> and <code><strong>outside</strong> configured SLA</code>.
+<aside class="warning">
+Sandbox <code>seed data</code> below allows developers to test their integration with orders <code>within configured SLA</code> and <code>outside configured SLA</code>.
 </aside>
 
 **Account**
@@ -80,7 +78,7 @@ Sandbox seed data below allows developers to test their integration with orders 
 
 * Sandbox account `sbx-partner` had the following `services` configured:`timeslot`,`timewindow`,`asap`,`return`,`2hour`,`3hour`,`4hour`,`sameday`,`2hour-later`,`4hour-later`
 
-## Before You Start
+## Before you start
 
 Please contact OTD partners team at [partners@onthedot.com](mailto:partners@onthedot.com) to set up the following:
 
@@ -119,7 +117,7 @@ Both `order` and `job` have status.  They are updated with realtime events.
 
 >Status representing a job's execution state.
 
-```json
+```rust
 "status": {
   "progressStatus": {
     "status": "allocated",
@@ -158,7 +156,7 @@ Here is an example job status object.
 ### Progress Status
 
 Example:
-```json
+```
 "progressStatus": {
   "status": "allocated",
   "updatedAt": "2019-01-02T13:18:53.087Z"
@@ -225,7 +223,8 @@ Example:
 
 ## Create an order
 
-```rust
+Example:
+```json
 {
   "id": "unique partner order number",
 
@@ -283,189 +282,13 @@ If the caller sends only timeslot ID or place ID, then the relevant services wil
 | 401 | Unauthorized |
 | 409 | Conflict |
 
----
-
 ## Get it now
 
 <aside class="success">
 The <code>code</code> panel exemplifies how to send an <code>Express/ASAP</code> request
 </aside>
 
-
->`POST`  URL`/v2/accounts/`myaccount`/orders
-
-```curl
-curl -X POST \
-  'http://{{host}}/{{bookingService}}/v2/accounts/{{myaccount}}/orders' \
-  -H 'authorization: <your_api_token>' \
-  -H 'content-type: application/json' \
-  -H 'x-trace-id: 79b6b8b6-d0df-4e12-8f4d-4b435162f4e7' \
-  -d '
-
-{
-  "id": "myorder",
-  "metadata": {
-    "serviceType": "asap"
-  },
-  "jobs": [
-    {
-      "id": "job0",
-      "metadata": {
-        "journeyType": "delivery"
-      },
-      "items": [
-        {
-          "id": "itemgroup0:item0",
-          "quantity": 1
-        }
-      ],
-      "collection": {
-        "stopId": "stop0"
-      },
-      "delivery": {
-        "stopId": "stop1"
-      },
-      "timeslot": {
-        "collection": {
-          "from": "2019-01-02T13:30:00.000Z",
-          "to": "2019-01-02T14:30:00.000Z"
-        },
-        "delivery": {
-          "from": "2019-01-02T18:30:00.000Z",
-          "to": "2019-01-02T19:30:00.000Z"
-        }
-      }
-    }
-  ],
-  "stops": [
-    {
-      "id": "stop0",
-      "place": {
-        "address": {
-          "country": "GBR",
-          "town": "London",
-          "streets": [
-            "Royal Opera House",
-            "Bow Street"
-          ],
-          "postcode": "WC2E 9DD"
-        }
-      }
-    },
-    {
-      "id": "stop1",
-      "place": {
-        "address": {
-          "country": "GBR",
-          "town": "London",
-          "streets": [
-            "English National Opera",
-            "St Martin's Lane"
-          ],
-          "postcode": "WC2N 4ES"
-        }
-      }
-    }
-  ]
-}
-```
-> ***Note*** The above command returns the following JSON response.
-
-```json
-{
-  "id": "myorder",
-  "metadata": {
-    "vehicleType": "bicycle",
-    "serviceType": "asap",
-    "trackingUrl": "https://trackmydriver-prod.lastmilelink.eu/myaccount::myorder?token=7%2FI9ZlUZ7rnNBUkKORI2fGrPdEIaMV%2BNkrYbLFSQQW4%3D"
-  },
-  "jobs": [
-    {
-      "id": "job0",
-      "metadata": {
-        "journeyType": "delivery"
-      },
-      "items": [
-        {
-          "id": "itemgroup0:item0",
-          "quantity": 1
-        }
-      ],
-      "collection": {
-        "stopId": "stop0"
-      },
-      "delivery": {
-        "stopId": "stop1"
-      },
-      "timeslot": {
-        "collection": {
-          "from": "2019-01-02T13:30:00.000Z",
-          "to": "2019-01-02T14:30:00.000Z"
-        },
-        "delivery": {
-          "from": "2019-01-02T18:30:00.000Z",
-          "to": "2019-01-02T19:30:00.000Z"
-        }
-      },
-      "status": {
-        "progressStatus": {
-          "status": "created",
-          "updatedAt": "2019-01-02T13:30:00.048Z"
-        }
-      }
-    }
-  ],
-  "stops": [
-    {
-      "id": "stop0",
-      "place": {
-        "position": {
-          "coordinates": {
-            "longitude": -0.1265741,
-            "latitude": 51.5136986
-          }
-        },
-        "address": {
-          "country": "GBR",
-          "town": "London",
-          "streets": [
-            "Royal Opera House",
-            "Bow Street"
-          ],
-          "postcode": "WC2E 9DD"
-        }
-      }
-    },
-    {
-      "id": "stop1",
-      "place": {
-        "id": "place2",
-        "position": {
-          "coordinates": {
-            "longitude": -0.1288661,
-            "latitude": 51.5098553
-          }
-        },
-        "address": {
-          "country": "GBR",
-          "town": "London",
-          "streets": [
-            "English National Opera",
-            "St Martin's Lane"
-          ],
-          "postcode": "WC2N 4ES"
-        }
-      }
-    }
-  ],
-  "status": {
-    "status": "created",
-    "updatedAt": "2019-01-02T13:30:00.048Z"
-  },
-  "createdAt": "2019-01-02T13:30:00.048Z",
-  "updatedAt": "2019-01-02T13:30:00.048Z"
-}
-```
+>`POST`  `URL`/v2/accounts/`myaccount`/orders
 
 ![Express/ASAP](/images/OTD_H_GITN.png)
 
@@ -611,9 +434,9 @@ The following rules apply:
 
 Note `customData` uses incremental update.  All other fields are full-replacement update.
 
+>`PUT` /v2/accounts/`{accountId}`/orders/`{orderId}`/amend
 
-** HTTP Request **
-`PUT /v2/accounts/{accountId}/orders/{orderId}/amend` 
+**HTTP Request >>>>>**
 
 **Parameters**
 
@@ -639,15 +462,33 @@ Orders and jobs can be amended after they are created, subject to certain condit
 
 ## Cancell an order
 
-```json
+> **Request**   **`PUT`**
 
-  code_sample
+> <details><summary>Expand for code</summary>
+<pre>
+  <code class="json">
+{
+  "code":"sample",
+  "code":"sample",
+  "code":"sample",
+  "code":"sample"
+}
+  </code>
+</pre>
+</details>
 
+```go
+{
+  "code":"sample",
+  "code":"sample",
+  "code":"sample",
+  "code":"sample"
+}
 ```
 
 ---
 
-* `PUT` /v2/accounts/{accountId}/orders/{orderId}/cancel
+* `PUT` /v2/accounts/`{accountId}`/orders/`{orderId}`/cancel
 
 ---
 
