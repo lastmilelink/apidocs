@@ -42,7 +42,7 @@ body {
 ////////////////////////////////////////////////////////////////////////////////
 #toc>ul>li>a>span {
     float: right;
-    background-color: cyan; //rgb(182, 183, 184);
+    background-color: cyan; //Eduard rgb(182, 183, 184);
     border-radius: 40px;
     width: 20px;
 }
@@ -244,11 +244,11 @@ body {
 .flex-container {
     display: flex;
     flex-direction: row;
-    max-width: 100%-$examples-width;
+    max-width: 100% - $examples-width;
 }
 
 .flex-container>div {
-    //background-color: #f1f1f1;
+    background-color: trasparent;
     margin: 10px;
 }
 
@@ -361,6 +361,7 @@ body {
     h1 {
         @extend %header-font;
         font-size: 25px;
+        color: green;
         padding-top: 0.5em;
         padding-bottom: 0.5em;
         margin-bottom: $h1-margin-bottom;
@@ -609,7 +610,7 @@ body {
 .highlight .cm,
 .highlight .c1,
 .highlight .cs {
-    color: $code-highlight-text;
+    color: red; //$code-highlight-text;
 }
 
 .highlight,

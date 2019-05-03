@@ -3,6 +3,10 @@
 title: OTD V2.0 Booking Service 
 
 language_tabs: 
+  - shell: cURL
+  - ruby: Ruby
+  - python: Python
+  - javascript: JS
 
 toc_footers:
    - <a href='https://onthedot-bookingdraft.apigee.io' target="_blank">Sign Up for a Developer Key</a>
@@ -117,7 +121,7 @@ Both `order` and `job` have status.  They are updated with realtime events.
 
 >Status representing a job's execution state.
 
-```rust
+```json
 "status": {
   "progressStatus": {
     "status": "allocated",
@@ -198,7 +202,7 @@ Example:
 ### Courier Status
 
 Example:
-```json
+```
 "courierStatus": {
   "location": {
     "longitude": 0.1701,
@@ -212,6 +216,31 @@ Example:
 ## Security
 **All APIs require an `Authorization` header.**
 
+
+```ruby
+require 'OTD_API_Token'
+
+api = OTD_API_Token::APIClient.authorize!('meowmeowmeow')
+```
+
+```python
+import OTD_API_Token
+
+api = OTD_API_Token.authorize('meowmeowmeow')
+```
+
+```shell
+# With shell, you can just pass the correct header with each request
+curl "api_endpoint_here"
+  -H "Authorization: meowmeowmeow"
+```
+
+```javascript
+const OTD_API_Token = require('OTD_API_Token');
+
+let api = OTD_API_Token.authorize('meowmeowmeow');
+```
+
 * You will need to register [here](https://developer.onthedot.com/create) to obtain a token by creating an `app` and subscribing to our `Sandbox`.
 * The `token`  must be used in the request headers as `Authorization:{{Token}}` header. 
 
@@ -219,12 +248,14 @@ Example:
 |apiKey|*API Key*|
 |---|---| 
 
+
+
 # Booking Service API's V2.0
 
 ## Create an order
 
 Example:
-```json
+```
 {
   "id": "unique partner order number",
 
@@ -322,7 +353,7 @@ The request sample in the left <code>code pane</code> will create a return to de
 
 ## Search an order
 
-```json
+```
 
   code_sample
 
@@ -366,7 +397,7 @@ Paging is supported.  See request and response for details.
 
 ## Get an order
 
-```json
+```
 
 code_sample
 
@@ -403,7 +434,7 @@ code_sample
 
 ##Amend an order
 
-```json
+```
 code:sample
 ```
 
@@ -477,7 +508,7 @@ Orders and jobs can be amended after they are created, subject to certain condit
 </pre>
 </details>
 
-```go
+```
 {
   "code":"sample",
   "code":"sample",
@@ -528,7 +559,7 @@ Once an order is cancelled, it cannot be re-created or un-cancelled.  You will n
 
 ## Http Error Codes
 
-```json
+```
 Sample error code response:
 
 {
@@ -572,7 +603,7 @@ Below is a table with all `error codes` and `http` response code.
 
 ## Exceptions (Incidents)
 
-```json
+```
 "incidents": [
   {
     "id": "85ad3dd6-05d3-4023-b1e6-74042b7ff138",
@@ -643,7 +674,7 @@ Code|Description|Apply to stops
 
 ## Chronos
 
-```json
+```
 
 sample_code
 
@@ -683,7 +714,7 @@ presented to an end-user for selection.
 
 # Web-hooks
 
-```json
+```
 
 sample_code
 
