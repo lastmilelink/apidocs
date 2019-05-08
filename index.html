@@ -709,13 +709,13 @@ Sandbox <code>seed data</code> below allows developers to test their integration
 </tr>
 </tbody></table>
 <h2 id='get-it-now'>Get it now</h2>
-<aside class="success">
-The <code>code</code> panel exemplifies how to send an <code>Express/ASAP</code> request
-</aside>
-
 <blockquote>
 <p><code>POST</code>  <code>URL</code>/v2/accounts/<code>myaccount</code>/orders</p>
 </blockquote>
+
+<aside class="success">
+The <code>code</code> panel exemplifies how to send an <code>Express/ASAP</code> request
+</aside>
 
 <p><img src="images/OTD_H_GITN.png" alt="Express/ASAP" /></p>
 <h2 id='get-it-later'>Get it later</h2>
@@ -737,6 +737,9 @@ The request sample in the left <code>code pane</code> will create a return to de
 
 <p><img src="images/OTD_H_RTTE.png" alt="Real Time Notifications" /></p>
 <h2 id='real-time-notifications'>Real time notifications</h2>
+<p>indented code (4 spaces + 2 spaces for the list 
+      indentation, one blank line above, one below),</p>
+
 <aside class="notice">
   Real time notifications as `e-mail`, `sms` or `web-hooks` containing dynamic ETA's : <code><strong>ETC</strong> ( estimated time of collection )</code> and <code><strong>ETD</strong> ( estimated time of delivery )</code>, `courier name`, `proof of delivery and collection`, e.t.c.
 </aside>
@@ -996,7 +999,7 @@ code_sample
 <blockquote>
 <p><strong>Request</strong>   <strong><code>PUT</code></strong></p>
 
-<details><summary>Expand for code</summary>
+<details><summary class="highlight plaintext">Expand for code</summary>
 <pre>
   <code class="json">
 {
@@ -1093,13 +1096,13 @@ code_sample
 <td>Forbidden</td>
 </tr>
 </tbody></table>
-<h2 id='http-error-codes'>Http Error Codes</h2><pre class="highlight plaintext"><code>Sample error code response:
+<h2 id='http-error-codes'>Http Error Codes</h2><pre class="highlight javascript"><code><span class="c1">//Sample error code response:</span>
 
-{
-  "code": "booking:0203",
-  "description": "job not found",
-  "message": "more details"
-}
+<span class="p">{</span>
+  <span class="s2">"code"</span><span class="p">:</span> <span class="s2">"booking:0203"</span><span class="p">,</span>
+  <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"job not found"</span><span class="p">,</span>
+  <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"more details"</span>
+<span class="p">}</span>
 </code></pre>
 <p><code>All error messages have the following format.</code></p>
 
