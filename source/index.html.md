@@ -314,11 +314,11 @@ If the caller sends only timeslot ID or place ID, then the relevant services wil
 
 ## Get it now
 
+>`POST`  `URL`/v2/accounts/`myaccount`/orders
+
 <aside class="success">
 The <code>code</code> panel exemplifies how to send an <code>Express/ASAP</code> request
 </aside>
-
->`POST`  `URL`/v2/accounts/`myaccount`/orders
 
 ![Express/ASAP](/images/OTD_H_GITN.png)
 
@@ -348,6 +348,11 @@ The request sample in the left <code>code pane</code> will create a return to de
 ![Real Time Notifications](/images/OTD_H_RTTE.png)
 
 ## Real time notifications
+
+   
+      indented code (4 spaces + 2 spaces for the list 
+      indentation, one blank line above, one below),
+
 
 <aside class="notice">
   Real time notifications as `e-mail`, `sms` or `web-hooks` containing dynamic ETA's : <code><strong>ETC</strong> ( estimated time of collection )</code> and <code><strong>ETD</strong> ( estimated time of delivery )</code>, `courier name`, `proof of delivery and collection`, e.t.c.
@@ -499,7 +504,7 @@ Orders and jobs can be amended after they are created, subject to certain condit
 
 > **Request**   **`PUT`**
 
-> <details><summary>Expand for code</summary>
+> <details><summary class="highlight plaintext">Expand for code</summary>
 <pre>
   <code class="json">
 {
@@ -563,8 +568,8 @@ Once an order is cancelled, it cannot be re-created or un-cancelled.  You will n
 
 ## Http Error Codes
 
-```
-Sample error code response:
+```js
+//Sample error code response:
 
 {
   "code": "booking:0203",

@@ -23,9 +23,21 @@ under the License.
 ////////////////////////////////////////////////////////////////////////////////
 // GENERAL STUFF
 ////////////////////////////////////////////////////////////////////////////////
-html,
-body {
+html {
     color: $html-main-text;
+    padding: 0;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    @extend %default-font;
+    background-color: $main-bg;
+    height: 100%;
+    -webkit-text-size-adjust: none;
+    /* Never autoresize text */
+}
+
+body {
+    color: $body-main-text;
     padding: 0;
     margin: 0;
     -webkit-font-smoothing: antialiased;
@@ -467,6 +479,7 @@ body {
     }
     pre>code {
         background-color: transparent;
+        color: greenyellow;
         padding: 0; //0
         display: inline-block;
     }
@@ -527,8 +540,7 @@ body {
     pre,
     blockquote {
         background-color: $code-blockquote-bg;
-        color: $code-text;
-        //margin: 0;
+        margin: 4px;
         width: $examples-width;
         float: right;
         clear: right;
@@ -546,12 +558,14 @@ body {
         }
         a {
             color: $ancor-code-text;
-            text-decoration: none;
+            text-decoration: yellow underline overline wavy;
+            ;
             border-bottom: dashed 1px #ccc;
         }
     }
     pre {
         @extend %code-font;
+        color: lightpink; //$code-text;
         padding-top: 2em;
         padding-bottom: 2em;
         padding: 2em $main-padding;
@@ -618,6 +632,14 @@ body {
 .highlight .s2,
 .highlight .cs {
     color: #66d9ef; //$code-highlight-text;
+}
+
+.highlight .plaintext {
+    color: rgb(231, 20, 231); //$code-highlight-text;
+}
+
+.highlight .err {
+    color: rgb(212, 182, 212); //$code-highlight-text;
 }
 
 .highlight,

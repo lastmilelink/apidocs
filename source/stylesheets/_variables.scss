@@ -26,7 +26,7 @@ $code-bg: rgb(223, 223, 223) !default;
 $code-blockquote-bg:#27295C!default; //This is the code background in the side panel section
 $code-highlight-bg:transparent;
 $blockquote-code-bg:#A5A9AB !default;
-$nav-active-bg: rgba(233, 159, 10, 0.3)!default; // active selection in Nav pane
+$nav-active-bg: rgba(214, 215, 218, 0.5)!default; // active selection in Nav pane
 $nav-active-parent-bg: rgb(214, 215, 218) !default; // #h1 parent of the selected section
 $nav-subitem-bg: rgba(214, 215, 218, 0.1) !default; // #h2 subsection of Nav
 $lang-select-border: #000 !default;
@@ -56,7 +56,8 @@ $lang-select-pressed-text: #fff !default; // color of language tab text when mou
 
 */
 
-$html-main-text: rgb(73, 73, 73) !default; // main content text color
+$html-main-text: rgb(51, 215, 233) !default; // main content text color rgb(73, 73, 73) !default;
+$body-main-text: #3a3a3c!default; // main content body, middle section color
 $main-text: #3a3a3c !default; // main content text color
 $code-text:coral !default;
 $code-highlight-text:rgb(133, 6, 251) !default;
