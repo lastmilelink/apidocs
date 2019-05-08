@@ -628,14 +628,14 @@ body {
 
 .highlight .c,
 .highlight .cm,
-.highlight .c1,
 .highlight .s2,
 .highlight .cs {
     color: #66d9ef; //$code-highlight-text;
 }
 
+.highlight .c1,
 .highlight .plaintext {
-    color: rgb(231, 20, 231); //$code-highlight-text;
+    color: lightpink; //$code-highlight-text;
 }
 
 .highlight .err {

@@ -11,6 +11,7 @@ language_tabs:
 
 toc_footers:
    - <a href='https://onthedot-bookingdraft.apigee.io' target="_blank">Sign Up for a Developer Key</a>
+   - <p>&copy; 2019 ON THE DOT Technologies<p>
 
 includes: 
 
