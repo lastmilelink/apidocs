@@ -59,7 +59,8 @@ $lang-select-pressed-text: #fff !default; // color of language tab text when mou
 $html-main-text: rgb(51, 215, 233) !default; // main content text color rgb(73, 73, 73) !default;
 $body-main-text: #3a3a3c!default; // main content body, middle section color
 $main-text: #3a3a3c !default; // main content text color
-$code-text:#FF7780 !default;
+$code-text:#BD5F6C !default; // text within code tags
+$pre-code-text:#DF97A1 !default; // text within code tags within pre tags
 $code-highlight-text:rgb(133, 6, 251) !default;
 $ancor-code-text: #D66A78 !default;
 $blockquote-code-text: #EEEEF2!default; // this appears as rounded tiles blockquotes on the code pane

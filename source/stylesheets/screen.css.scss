@@ -493,7 +493,7 @@ a {
     }
     pre>code {
         background-color: transparent;
-        color: white; // James: was greenyellow
+        color: $pre-code-text; // James: was greenyellow
         padding: 0; //0
         display: inline-block;
     }
