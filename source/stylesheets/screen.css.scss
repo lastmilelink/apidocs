@@ -49,6 +49,10 @@ body {
     /* Never autoresize text */
 }
 
+a {
+    color: #00A86B; // James: added
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // TABLE OF CONTENTS
 ////////////////////////////////////////////////////////////////////////////////
@@ -184,10 +188,10 @@ body {
     .toc-footer {
         padding: 1em 0;
         margin-top: 1em;
-        border-top: 1px dashed $nav-footer-border-color;
+        border-top: 1px solid $nav-footer-border-color;    // James: removed dashed
         li,
         a {
-            color: $nav-text;
+            color: #00A86B; // James: was $nav-text
             text-decoration: none;
         }
         a:hover {
@@ -197,6 +201,10 @@ body {
             font-size: 0.8em;
             line-height: 1.7;
             text-decoration: none;
+        }
+        // James
+        p {
+            color: #C8C7C6;
         }
     }
 }
@@ -307,6 +315,7 @@ body {
         float: left;
         color: $lang-select-text;
         text-decoration: none;
+        font-weight: 400; // James: added
         padding: 0 10px;
         line-height: 30px;
         outline: 0;
@@ -373,23 +382,28 @@ body {
     h1 {
         @extend %header-font;
         font-size: 25px;
-        color: green;
-        padding-top: 0.5em;
-        padding-bottom: 0.5em;
+        color: #00A86B;
+        font-weight: 500; // James: added
+        padding-top: 2em;
+        padding-bottom: 1.5em;
         margin-bottom: $h1-margin-bottom;
         margin-top: 2em;
-        border-top: 1px solid #ccc;
-        border-bottom: 1px solid #ccc;
-        background-color: #fdfdfd;
+        border-top: 1px solid #E8E8E8; // James: was #ccc
+        border-bottom: 1px solid #E8E8E8; // James: was #ccc
+        background-color: none; // James: changed from #fdfdfd
     }
     h1:first-child,
     div:first-child+h1 {
         border-top-width: 0;
         margin-top: 0;
     }
+    h1:first-child {
+        padding-top: 77px;
+    }
     h2 {
         @extend %header-font;
         font-size: 19px;
+        font-weight: 500; // James: added
         margin-top: 4em;
         margin-bottom: 0;
         border-top: 1px solid #ccc;
@@ -479,7 +493,7 @@ body {
     }
     pre>code {
         background-color: transparent;
-        color: greenyellow;
+        color: white; // James: was greenyellow
         padding: 0; //0
         display: inline-block;
     }
@@ -492,7 +506,7 @@ body {
         margin-left: 1.5em;
         background: $aside-notice-bg;
         line-height: 1.6;
-        border-radius: 10px;
+        border-radius: 5px; // James: was 10px
         border-left: 4px solid $aside-notice-bord-left;
         max-width: 100%-($examples-width+2%);
         // display: flex;
@@ -549,7 +563,7 @@ body {
         margin-right: 1em;
         margin-top: 0.5em;
         margin-bottom: 0.5em;
-        border-radius: 10px;
+        border-radius: 7px; // James: was 10px
         max-width: $examples-width - 2%;
         ////
         @extend %right-col;
@@ -574,7 +588,7 @@ body {
         &>p {
             background-color: $blockquote-code-bg;
             padding: $blockquote-code-padding 2em;
-            border-radius: 10px;
+            border-radius: 7px 7px 0 0; // James: was 10px
             color: $blockquote-code-text;
         }
     }
@@ -630,7 +644,7 @@ body {
 .highlight .cm,
 .highlight .s2,
 .highlight .cs {
-    color: #66d9ef; //$code-highlight-text;
+    color: #82D3CE; //$code-highlight-text; // James: was #66d9ef
 }
 
 .highlight .c1,
@@ -645,4 +659,19 @@ body {
 .highlight,
 .highlight .w {
     background-color: $code-highlight-bg;
+}
+
+blockquote details summary {
+    padding-left: 13px;
+    margin-bottom: 15px;
+}
+
+details pre {
+    width: 95% !important;
+    max-width: 95% !important;
+    float: none !important;
+    padding: 0 !important;
+    margin-top: 0 !important;
+    margin-left: 0 !important;
+    max-height: 650px;
 }
