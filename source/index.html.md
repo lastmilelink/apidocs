@@ -62,10 +62,9 @@ This documentation is currently in `Beta` and will be updated over the next few 
 </body>
 
 > This is the Swagger Section for download
-
-> <details><summary class="highlight plaintext">Expand for Swagger</summary>
-  <pre>
-    <code class="highlight javascript">
+> <details><summary class="highlight">Expand for Swagger</summary>
+<pre class="highlight javascript">
+  <code>
 {
   "swagger": "2.0",
   "schemes": [
@@ -1859,8 +1858,9 @@ This documentation is currently in `Beta` and will be updated over the next few 
     }
   }
 }
-    </code>
-  </pre>
+  </code>
+</pre>
+
 </details>
 
 <aside class="success">

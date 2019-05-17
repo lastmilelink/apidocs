@@ -483,17 +483,17 @@ a {
     img {
         max-width: 100%;
     }
-    code {
-        background-color: $code-bg;
-        color: $code-text;
-        padding: 3px;
-        border-radius: 3px;
-        @extend %break-words;
-        @extend %code-font;
-    }
+    // code {
+    //     background-color: $code-bg;
+    //     color: $code-text;
+    //     padding: 3px;
+    //     border-radius: 3px;
+    //     @extend %break-words;
+    //     @extend %code-font;
+    // }
     pre>code {
         background-color: transparent;
-        color: $pre-code-text; // James: was greenyellow
+        //color: $pre-code-text; // James: was greenyellow
         padding: 0; //0
         display: inline-block;
     }

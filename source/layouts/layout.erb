@@ -42,6 +42,11 @@ under the License.
     <% else %>
       <%= javascript_include_tag  "all_nosearch" %>
     <% end %>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/json.min.js'></script>
+    <link rel='stylesheet'
+      href='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/monokai.min.css'>
+    <script>hljs.initHighlightingOnLoad();</script>
   </head>
 
   <body class="<%= page_classes %>" data-languages="<%=h language_tabs.map{ |lang| lang.is_a?(Hash) ? lang.keys.first : lang }.to_json %>">
