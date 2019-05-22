@@ -54,6 +54,13 @@ a {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+// Highlight.js Eduard
+////////////////////////////////////////////////////////////////////////////////
+.hljs {
+    // margin-left: 20px; // Eduard
+}
+
+////////////////////////////////////////////////////////////////////////////////
 // TABLE OF CONTENTS
 ////////////////////////////////////////////////////////////////////////////////
 #toc>ul>li>a>span {
@@ -188,7 +195,7 @@ a {
     .toc-footer {
         padding: 1em 0;
         margin-top: 1em;
-        border-top: 1px solid $nav-footer-border-color;    // James: removed dashed
+        border-top: 1px solid $nav-footer-border-color; // James: removed dashed
         li,
         a {
             color: #00A86B; // James: was $nav-text
@@ -259,7 +266,7 @@ a {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-// IMAGE TILES - Eduard 2019
+// IMAGE TILES CONTAINER - Eduard 2019
 ////////////////////////////////////////////////////////////////////////////////
 .flex-container {
     display: flex;
@@ -267,9 +274,18 @@ a {
     max-width: 100% - $examples-width;
 }
 
-.flex-container>div {
+.flex-container div {
     background-color: trasparent;
     margin: 10px;
+    display: flex;
+    flex-direction: column;
+    flex-basis: 25%;
+}
+
+.flex-container div strong {
+    min-height: 50px;
+    margin: 0 auto;
+    text-align: center;
 }
 
 .flex-container div a {
@@ -483,19 +499,45 @@ a {
     img {
         max-width: 100%;
     }
-    // code {
-    //     background-color: $code-bg;
-    //     color: $code-text;
-    //     padding: 3px;
-    //     border-radius: 3px;
-    //     @extend %break-words;
-    //     @extend %code-font;
-    // }
+    code {
+        background-color: $code-bg;
+        color: $code-text;
+        line-height: 1.5;
+        padding: 3px;
+        border-radius: 3px;
+        @extend %break-words;
+        @extend %code-font;
+    }
     pre>code {
         background-color: transparent;
-        //color: $pre-code-text; // James: was greenyellow
+        color: $pre-code-text; // James: was greenyellow
         padding: 0; //0
         display: inline-block;
+    }
+    .body-blockquote {
+        background-color: coral; // Eduard was $code-blockquote-bg;
+        margin: 4px;
+        //width: $examples-width;
+        //float: right;
+        //clear: right;
+        box-sizing: border-box;
+        /// Eduard
+        //margin-right: 1em; // Eduard removed it to give the code pannel some space arround
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+        border-radius: 7px; // James: was 10px
+        //max-width: $examples-width - 2%;
+        ////
+        @extend %right-col;
+        &>p {
+            margin: 1; // this adds a rounded bottom panel
+        }
+        a {
+            color: $ancor-code-text;
+            //text-decoration: yellow underline overline wavy; //Eduard
+            ;
+            border-bottom: dashed 1px #ccc;
+        }
     }
     aside {
         padding-top: 1em;
@@ -559,8 +601,7 @@ a {
         float: right;
         clear: right;
         box-sizing: border-box;
-        /// Eduard
-        margin-right: 1em;
+        //margin-right: 1em; // Eduard removed it to give the code pannel some space arround
         margin-top: 0.5em;
         margin-bottom: 0.5em;
         border-radius: 7px; // James: was 10px
@@ -568,12 +609,11 @@ a {
         ////
         @extend %right-col;
         &>p {
-            margin: 1; // this adds a rounded bottom panel
+            //margin: 1; // this adds a rounded bottom panel
         }
         a {
             color: $ancor-code-text;
-            text-decoration: yellow underline overline wavy;
-            ;
+            //text-decoration: yellow underline overline wavy; //Eduard;
             border-bottom: dashed 1px #ccc;
         }
     }
@@ -587,9 +627,10 @@ a {
     blockquote {
         &>p {
             background-color: $blockquote-code-bg;
-            padding: $blockquote-code-padding 2em;
+            padding: $blockquote-code-padding; // Eduard was an additional 2em
             border-radius: 7px 7px 0 0; // James: was 10px
             color: $blockquote-code-text;
+            display: block;
         }
     }
 }
@@ -634,6 +675,7 @@ a {
     %right-col {
         width: auto;
         float: none;
+        max-width: 100%;
     }
     %right-col+%left-col {
         margin-top: $main-padding;
@@ -664,14 +706,108 @@ a {
 blockquote details summary {
     padding-left: 13px;
     margin-bottom: 15px;
+    margin-top: 15px;
 }
 
 details pre {
     width: 95% !important;
-    max-width: 95% !important;
+    max-width: 90% !important;
     float: none !important;
     padding: 0 !important;
     margin-top: 0 !important;
-    margin-left: 0 !important;
+    margin-left: 20px !important;
     max-height: 650px;
+}
+
+// Eduard added HTTP verb buttons label
+.http-verb-label {
+    display: inline-block;
+    position: relative;
+    //top: -2px;
+    padding: 2px 3px;
+    //border-left: 4px solid;//border-left-color: #F1D32F;
+    margin-right: 4px;
+    text-align: center;
+    border-radius: 2px;
+    line-height: 1;
+    font-weight: 600;
+    font-size: 12px;
+    opacity: 0.8;
+    background-color: #999;
+    color: #fff;
+    user-select: none;
+    // box-shadow: 0 1px 4px -2px #fff, 0 1px 4px -2px #fff, 0 1px 2px -1px #fff;
+}
+
+// Eduard added HTTP response buttons label
+.http-resp-label {
+    display: inline-block;
+    position: relative;
+    top: -2px;
+    padding: 2px 3px;
+    margin-right: 4px;
+    text-align: center;
+    border-radius: 2px;
+    line-height: 1;
+    font-weight: 600;
+    font-size: 12px;
+    opacity: 0.8;
+    background-color: #999;
+    color: #fff;
+    user-select: none;
+    // box-shadow: 0 1px 4px -2px #fff, 0 1px 4px -2px #fff, 0 1px 2px -1px #fff;
+}
+
+.http-verbs-link {
+    color: #777;
+    display: inline-block;
+    border-bottom: 2px solid transparent;
+}
+
+.http-verbs-link.single {
+    display: none;
+}
+
+.http-verbs-link.current {
+    font-weight: 600;
+    color: #357edd;
+}
+
+.http-verbs-link.new:after {
+    content: "NEW";
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    color: #fff;
+    background-color: #357edd;
+    line-height: 14px;
+    padding: 0 4px;
+    border-radius: 3px;
+    margin-left: 5px;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+}
+
+.http-verbs-link {
+    color: #333;
+    font-weight: normal;
+}
+
+.http-verbs-link:hover {
+    color: #357edd;
+}
+
+.http-verbs-link.active {
+    font-weight: 600;
+    color: #357edd;
+}
+
+.code-block-no-wrap-header {
+    display: flex;
+    flex-direction: row;
+    padding: 13px 13px 0 13px;
+    background: #575759;
+    color: #EEEEF2;
+    border-radius: 5px;
 }
