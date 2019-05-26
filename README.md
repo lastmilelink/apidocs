@@ -1,7 +1,85 @@
+# Documentation Conventions and Templates
+
+
+## Aside strips
+
+Asides class can be : [notice, success, warning]
+
+**Example**
+
+<aside class="success">
+Our Sandbox is a self-service provisioning, no commitment required. All that is required is to register and obtain your developer `API Key.`AUP is observed basis to bootstrat your development with On the dot APIs. All transactional data is regularily purged. 
+Should you need further clarification, please contact OTD partners team at [partners@onthedot.com](mailto:partners@onthedot.com).
+</aside>
+
+**Middle Section code blocks**
+
+Code syntax highliting is supported via highlight.js and RedCarpet
+
+<code>
+function writeIt(){
+// creates new window to display page - SECTION A.3
+diswin = window.open();
+diswin.document.open();
+diswin.document.write(temp2);
+diswin.document.close()
+}
+</code>
+
+```Javascript
+function writeIt(){
+// creates new window to display page - SECTION A.3
+diswin = window.open();
+diswin.document.open();
+diswin.document.write(temp2);
+diswin.document.close()
+}
+```
+
+## Code samples include in the right pannel 
+### These code samples will be generated and injected into documentation via the pipeline or GitHub
+
+All code samples are inserted into the page via `Middleman` ruby with a partial include statement `<% partial 'includes/booboo.md.erb' %>`
+The files need to follow a naming convention in order to be overwritten by the pipeline:
+
+All code samples are wrapped in a collapsable panel , code shown below: Please `note` the first character `>` which is used to indicate a blockquote and send the code samples in the right dark pane of the page.
+
+
+```html
+<!-- URL right section -->
+><%= partial 'includes/http_verb.md.erb', locals: {verb:"DELETE", url: "http://lol.com/`{:param}`/`{:param}`",bg_colour:"#f93e3e"}  %>
+
+<!-- Expandable code sample: REQUEST -->
+><details><summary class="highlight plaintext">Expand for request</summary><pre><code><%= partial 'includes/booboo.md.erb' %></code></pre></details>
+
+<!-- HTTP codes : Responses -->
+><div class="code-block-no-wrap-header">Http reponse codes :<%= partial 'includes/http_resp.md.erb', locals: {resp:"201", resp_text: "",bg_colour:"#49cc90"} %><%= partial 'includes/http_resp.md.erb', locals: {resp:"4xx", resp_text: "",bg_colour:"red"} %></div>
+
+<!-- Expandable code sample: RESPONSE -->
+><details><summary class="highlight plaintext">Expand for response</summary><pre><code><%= partial 'includes/booboo.md.erb' %></code></pre></details>
+```
+
+### Code samples naming convention and location in Slate project.
+
+All code samples files will have Ruby partial names : _booboo.md.erb and the file structure is :
+
+```
+Slate root
+    |-source
+          |-`includes`
+                |- `_booboo.md.erb`
+                |- `_http_resp.md.erb` - 
+                |- `_http_verb.md.erb`
+                |- `...`
+```
+
+
+
+
 <p align="center">
-  <img src="https://raw.githubusercontent.com/lord/img/master/logo-slate.png" alt="Slate: API Documentation Generator" width="226">
+  <img src="https://lastmilelink.github.io/cosmo-api-v2-slate/images/logo.png" alt="On the dot: API Documentation" width="226">
   <br>
-  <a href="https://travis-ci.org/lord/slate"><img src="https://travis-ci.org/lord/slate.svg?branch=master" alt="Build Status"></a>
+  <!-- a href="https://travis-ci.org/lord/slate"><img src="https://travis-ci.org/lord/slate.svg?branch=master" alt="Build Status"></a -->
 </p>
 
 <p align="center">Slate helps you create beautiful, intelligent, responsive API documentation.</p>
