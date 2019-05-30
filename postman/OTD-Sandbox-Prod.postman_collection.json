@@ -1,0 +1,954 @@
+{
+	"info": {
+		"_postman_id": "04218afb-07dd-452f-96ca-780a88f3b457",
+		"name": "Sandbox-OTD-Prod",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get It Now",
+			"item": [
+				{
+					"name": "Create ASAP order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bac9c8a6-5a10-409b-9f9e-c31c33a58663",
+								"exec": [
+									"pm.test(\"Order Id validation\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    var id=jsonData.id;",
+									"    pm.environment.set(\"orderNo\", id);",
+									"     pm.environment.set(\"jobrefid\", \"acceptancetestpartner::\"+id+\"::1\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "18a2390b-a31f-4256-a3da-b488030c48ab",
+								"exec": [
+									"",
+									"var moment=require('moment')",
+									"",
+									"postman.setEnvironmentVariable(\"todayDate\", moment().format(\"YYYY-MM-DD\"));",
+									"",
+									"postman.setEnvironmentVariable('nextDay',moment().add(1,'day').format(\"YYYY-MM-DD\"));",
+									"",
+									"",
+									"postman.setEnvironmentVariable('readyAt',moment().add(1,'day').toISOString());"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{authorization}}"
+							},
+							{
+								"key": "x-trace-id",
+								"value": "{{$guid}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"{{$timestamp}}\",\n    \"metadata\": {\n    \t\"clientRefId\":\"CLIENT-REF-{{$timestamp}}\",\n        \"serviceType\": \"asap\"\n    },\n    \"customData\": {\n    \t\"caller\":\"Booking\",\n        \"reference_1\": \"kingsman@kingsman.com\",\n        \"reference_2\": \"Kingsman\"\n    },\n    \"contact\": {\n        \"name\": \"James Moriarty\",\n        \"mobile\": \"+447888888889\",\n        \"phone\": \"020812718278\",\n        \"email\": \"jm@gmail.com\"\n    },\n    \"notification\": {\n        \"emails\": [\n            {\n                \"email\": \"rbeemi@onthedot.com\",\n                \"statuses\": [\n                    \"created\",\n                    \"allocated\",\n                    \"arrived_at_collection\",\n                    \"collected\",\n                    \"arrived_at_delivery\",\n                    \"delivered\"\n                ]\n            }\n        ],\n        \"sms\": [\n            {\n                \"number\": \"+4477772888442\",\n                \"statuses\": [\n                    \"created\",\n                    \"allocated\",\n                    \"arrived_at_collection\",\n                    \"collected\",\n                    \"arrived_at_delivery\",\n                    \"delivered\"\n                ]\n            }\n        ],\n        \"webhooks\": [\n            {\n                \"endpoint\": \"https://enit24ti5gez.x.pipedream.net/\",\n                \"methodType\": \"POST\",\n                \"headers\": {\n                    \"authorization\": \"\",\n                    \"company\": \"\"\n                },\n                \"statuses\": [\n                    \"created\",\n                    \"allocated\",\n                    \"arrived_at_collection\",\n                    \"collected\",\n                    \"arrived_at_delivery\",\n                    \"delivered\"\n                ]\n            }\n        ]\n    },\n    \"jobs\": [\n        {\n            \"id\": \"1\",\n            \"metadata\": {\n                \"journeyType\": \"delivery\"\n            },\n            \"requires\": [\n                \"ageVerification\",\n                \"collectionSignOff\",\n                \"deliverySignOff\"\n            ],\n            \"items\": [\n                {\n                    \"id\": \"1\",\n                    \"description\": \"Book\",\n                    \"quantity\": 5,\n                    \"metrics\": {\n                        \"weight\": 4,\n                        \"dimension\": {\n                            \"width\": 10,\n                            \"height\": 5,\n                            \"length\": 20\n                        }\n                    }\n                },\n                {\n                    \"id\": \"2\",\n                    \"description\": \"Book marker\",\n                    \"quantity\": 4,\n                    \"metrics\": {\n                        \"weight\": 10,\n                        \"dimension\": {\n                            \"width\": 10,\n                            \"height\": 0.5,\n                            \"length\": 20\n                        }\n                    }\n                }\n            ],\n            \"timeslot\": {\n                \"collection\": {\n                    \"from\": \"{{nextDay}}T11:00:00.000Z\",\n                    \"to\": \"{{nextDay}}T12:00:00.000Z\"\n                },\n                \"delivery\": {\n                    \"from\": \"{{nextDay}}T13:00:00.000Z\",\n                    \"to\": \"{{nextDay}}T14:00:00.000Z\"\n                }\n            },\n            \"collection\": {\n                \"stopId\": \"1\",\n                \"instructions\": \"Collect Box From Main Garage\"\n            },\n            \"delivery\": {\n                \"stopId\": \"2\",\n                \"instructions\": \"Ring main Door Bell\"\n            }\n        }\n    ],\n    \"stops\": [\n        {\n            \"id\": \"1\",\n            \"contact\": {\n                \"name\": \"Sherlock Holmes\",\n                \"mobile\": \"+447777777777\",\n                \"phone\": \"02091212121212\",\n                \"email\": \"sh@gmail.com\"\n            },\n            \"place\": {\n                \"id\": \"{{storeId}}\"\n            },\n            \"instructions\": \"Park at Store back Door\"\n        },\n        {\n            \"id\": \"2\",\n            \"contact\": {\n                \"name\": \"John Watson\",\n                \"mobile\": \"+447777777778\",\n                \"email\": \"jw@gmail.com\"\n            },\n            \"place\": {\n                \"address\": {\n                    \"country\": \"GBR\",\n                    \"town\": \"London\",\n                    \"streets\": [\n                        \"FLAT 111\",\n                        \"ICON BUILDING\"\n                    ],\n                    \"postcode\": \"IG1 2FJ\",\n                    \"companyName\": \"SANDBOX-OTD-COMPANY\"\n                }\n            },\n            \"instructions\": \"You can park at Front Garden at my house\"\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{host}}/{{bookingService}}/v2/accounts/{{accountId}}/orders",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{bookingService}}",
+								"v2",
+								"accounts",
+								"{{accountId}}",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Amend Asap order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bac9c8a6-5a10-409b-9f9e-c31c33a58663",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "18a2390b-a31f-4256-a3da-b488030c48ab",
+								"exec": [
+									"var todaysDate = new Date();",
+									"",
+									"function convertDate(date) {",
+									"  var yyyy = date.getFullYear().toString();",
+									"  var mm = (date.getMonth()+1).toString();",
+									"  var dd  = date.getDate().toString();",
+									"  var mmChars = mm.split('');",
+									"  var ddChars = dd.split('');",
+									"  return yyyy + '-' + (mmChars[1]?mm:\"0\"+mmChars[0]) + '-' + (ddChars[1]?dd:\"0\"+ddChars[0]);",
+									"}",
+									"",
+									"//Today Date EX:2017-10-25",
+									"postman.setEnvironmentVariable(\"todayDate\", convertDate(todaysDate));",
+									"",
+									"//Next Day Date",
+									"var date = new Date();",
+									"date.setHours(date.getHours() + 24);",
+									"postman.setEnvironmentVariable('nextDay',convertDate(date));",
+									"",
+									"//packageReadyAt EX:2017-10-25T10:06:30.428Z",
+									"postman.setEnvironmentVariable('packageReadyAt',(new Date()).toISOString());"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{authorization}}"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "x-trace-id",
+								"value": "{{$guid}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"contact\": {\n        \"name\": \"Updated Name Moriarty\",\n        \"mobile\": \"+447888888889\",\n        \"phone\": \"020812718278\",\n        \"email\": \"jm@gmail.com\"\n    },\n    \"jobs\": [\n        {\n            \"id\": \"1\",\n            \"metadata\": {\n                \"journeyType\": \"delivery\"\n            },\n            \"requires\": [\n                \"ageVerification\",\n                \"collectionSignOff\",\n                \"deliverySignOff\"\n            ],\n            \"items\": [\n                {\n                    \"id\": \"10\",\n                    \"description\": \"Computer\",\n                    \"quantity\": 1,\n                    \"metrics\": {\n                        \"weight\": 400,\n                        \"dimension\": {\n                            \"width\": 10,\n                            \"height\": 5,\n                            \"length\": 20\n                        }\n                    }\n                },\n                {\n                    \"id\": \"2\",\n                    \"description\": \"Ipad\",\n                    \"quantity\": 1,\n                    \"metrics\": {\n                        \"weight\": 10,\n                        \"dimension\": {\n                            \"width\": 10,\n                            \"height\": 0.5,\n                            \"length\": 20\n                        }\n                    }\n                }\n            ],\n          \"timeslot\": {\n                \"collection\": {\n                    \"from\": \"{{nextDay}}T18:00:00.000Z\",\n                    \"to\": \"{{nextDay}}T19:00:00.000Z\"\n                },\n                \"delivery\": {\n                    \"from\": \"{{nextDay}}T20:00:00.000Z\",\n                    \"to\": \"{{nextDay}}T21:00:00.000Z\"\n                }\n            },\n            \"collection\": {\n                \"stopId\": \"1\",\n                \"instructions\": \"Handle with care\"\n            },\n            \"delivery\": {\n                \"stopId\": \"2\",\n                \"instructions\": \"Leave with reception\"\n            }\n        }\n    ],\n    \"stops\": [\n        {\n            \"id\": \"2\",\n            \"contact\": {\n                \"name\": \"John Watson\",\n                \"mobile\": \"+447777777778\",\n                \"email\": \"jw@gmail.com\"\n            },\n            \"place\": {\n                \"address\": {\n                    \"country\": \"GBR\",\n                    \"town\": \"London\",\n                    \"streets\": [\n                        \"FLAT 111\",\n                        \"ICON BUILDING\"\n                    ],\n                    \"postcode\": \"IG1 2FJ\",\n                    \"companyName\": \"On the Dot\"\n                }\n            },\n            \"instructions\": \"Amend Stop 2 instrcution\"\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{host}}/{{bookingService}}/v2/accounts/{{accountId}}/orders/{{orderNo}}/amend",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{bookingService}}",
+								"v2",
+								"accounts",
+								"{{accountId}}",
+								"orders",
+								"{{orderNo}}",
+								"amend"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get It Later",
+			"item": [
+				{
+					"name": "Generate Time Slots",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "edc0f215-e0e5-46b5-8e50-0d7c912b95ee",
+								"exec": [
+									"var todaysDate = new Date();",
+									"",
+									"function convertDate(date) {",
+									"  var yyyy = date.getFullYear().toString();",
+									"  var mm = (date.getMonth()+1).toString();",
+									"  var dd  = date.getDate().toString();",
+									"  var mmChars = mm.split('');",
+									"  var ddChars = dd.split('');",
+									"  return yyyy + '-' + (mmChars[1]?mm:\"0\"+mmChars[0]) + '-' + (ddChars[1]?dd:\"0\"+ddChars[0]);",
+									"}",
+									"",
+									"//Today Date EX:2017-10-25",
+									"postman.setEnvironmentVariable(\"todayDate\", convertDate(todaysDate));",
+									"",
+									"//Next Day Date",
+									"var date = new Date();",
+									"date.setHours(date.getHours() + 24);",
+									"postman.setEnvironmentVariable('nextDay',convertDate(date));",
+									"",
+									"//packageReadyAt EX:2017-10-25T10:06:30.428Z",
+									"postman.setEnvironmentVariable('packageReadyAt',(new Date()).toISOString());"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "529d202b-11e9-48a9-ba8f-688187fc438f",
+								"exec": [
+									"pm.test(\"Booking Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"timeslots validation\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    var dayResponse = jsonData.timeslots[environment.nextDay];",
+									"postman.setEnvironmentVariable(\"timeslotId\", dayResponse[0].id);",
+									"postman.setEnvironmentVariable(\"updatedtimeslotId\", dayResponse[1].id);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{authorization}}",
+								"description": "Authorization",
+								"type": "text"
+							},
+							{
+								"key": "X-Trace-Id",
+								"value": "{{$guid}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"partnerId\": \"{{accountId}}\",\n    \"serviceType\": \"4hour\",\n    \"vehicleType\":\"car\",\n    \"collection\": {\n        \"id\": \"{{storeId}}\"\n    },\n    \"delivery\": {\n        \"address\": {\n            \"streets\": [\n                \"FLAT 111\",\n                \"ICON BUILDING\"\n            ],\n            \"town\": \"LONDON\",\n            \"country\": \"GBR\",\n            \"postcode\": \"DE11 0AA\"\n        }\n    },\n    \"dates\": {\n        \"{{nextDay}}\": {}\n    },\n    \"packageReadyAt\": \"{{packageReadyAt}}\",\n    \"additionalNoOfDays\": 2\n}"
+						},
+						"url": {
+							"raw": "{{host}}/{{bookingService}}/v2/accounts/{{accountId}}/timeslots",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{bookingService}}",
+								"v2",
+								"accounts",
+								"{{accountId}}",
+								"timeslots"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generate Time Slots Next 7 Days",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "edc0f215-e0e5-46b5-8e50-0d7c912b95ee",
+								"exec": [
+									"var moment=require('moment')",
+									"",
+									"postman.setEnvironmentVariable(\"todayDate\", moment().format(\"YYYY-MM-DD\"));",
+									"",
+									"postman.setEnvironmentVariable('nextDay',moment().add(1,'day').format(\"YYYY-MM-DD\"));",
+									"",
+									"",
+									"postman.setEnvironmentVariable('readyAt',moment().add(1,'day').toISOString());"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "529d202b-11e9-48a9-ba8f-688187fc438f",
+								"exec": [
+									"pm.test(\"Booking Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Status code name has string\", function () {",
+									"    pm.response.to.have.status(\"OK\");",
+									"});",
+									"",
+									"pm.test(\"timeslots validation\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    var dayResponse = jsonData.timeslots[environment.nextDay];",
+									"postman.setEnvironmentVariable(\"timeslotId\", dayResponse[0].id);",
+									"postman.setEnvironmentVariable(\"updatedtimeslotId\", dayResponse[1].id);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"description": "Authorization",
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{authorization}}"
+							},
+							{
+								"key": "X-Trace-Id",
+								"value": "{{$guid}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"partnerId\": \"{{accountId}}\",\n    \"serviceType\": \"timeslot\",\n    \"collection\": {\n        \"id\": \"{{storeId}}\"\n    },\n    \"delivery\": {\n        \"address\": {\n            \"streets\": [\n                \"FLAT 111\",\n                \"ICON BUILDING\"\n            ],\n            \"town\": \"LONDON\",\n            \"country\": \"GBR\",\n            \"postcode\": \"IG1 2FJ\"\n        }\n    },\n    \"dates\": {\n        \"{{todayDate}}\": {}\n    },\n    \"packageReadyAt\": \"{{readyAt}}\",\n    \"additionalNoOfDays\": 7\n}"
+						},
+						"url": {
+							"raw": "{{host}}/{{bookingService}}/v2/accounts/{{accountId}}/timeslots",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{bookingService}}",
+								"v2",
+								"accounts",
+								"{{accountId}}",
+								"timeslots"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Slot Order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bac9c8a6-5a10-409b-9f9e-c31c33a58663",
+								"exec": [
+									"pm.test(\"Order Id validation\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    var id=jsonData.id;",
+									"    pm.environment.set(\"orderNo\", id);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "18a2390b-a31f-4256-a3da-b488030c48ab",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{authorization}}"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "x-trace-id",
+								"value": "{{$guid}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"{{$timestamp}}\",\n    \"metadata\": {\n        \"serviceType\": \"timeslot\"\n    },\n    \"customData\": {\n        \"reference_1\": \"kingsman@kingsman.com\",\n        \"reference_2\": \"Kingsman\"\n    },\n    \"contact\": {\n        \"name\": \"James Moriarty\",\n        \"mobile\": \"+447888888889\",\n        \"phone\": \"020812718278\",\n        \"email\": \"jm@gmail.com\"\n    },\n    \"notification\": {\n        \"emails\": [\n            {\n                \"email\": \"rbeemi@onthedot.com\",\n                \"statuses\": [\n                    \"created\",\n                    \"allocated\",\n                    \"arrived_at_collection\",\n                    \"collected\",\n                    \"arrived_at_delivery\",\n                    \"delivered\"\n                ]\n            }\n        ],\n        \"sms\": [\n            {\n                \"number\": \"+4477772888442\",\n                \"statuses\": [\n                    \"created\",\n                    \"allocated\",\n                    \"arrived_at_collection\",\n                    \"collected\",\n                    \"arrived_at_delivery\",\n                    \"delivered\"\n                ]\n            }\n        ],\n        \"webhooks\": [\n            {\n                \"endpoint\": \"https://enit24ti5gez.x.pipedream.net/\",\n                \"methodType\": \"POST\",\n                \"headers\": {\n                    \"authorization\": \"\",\n                    \"company\": \"\"\n                },\n                \"statuses\": [\n                    \"created\",\n                    \"allocated\",\n                    \"arrived_at_collection\",\n                    \"collected\",\n                    \"arrived_at_delivery\",\n                    \"delivered\"\n                ]\n            }\n        ]\n    },\n    \"jobs\": [\n        {\n            \"id\": \"1\",\n            \"metadata\": {\n                \"journeyType\": \"delivery\"\n            },\n            \"requires\": [\n                \"ageVerification\",\n                \"collectionSignOff\",\n                \"deliverySignOff\"\n            ],\n            \"items\": [\n                {\n                    \"id\": \"1\",\n                    \"description\": \"Book\",\n                    \"quantity\": 1,\n                    \"metrics\": {\n                        \"weight\": 400,\n                        \"dimension\": {\n                            \"width\": 10,\n                            \"height\": 5,\n                            \"length\": 20\n                        }\n                    }\n                },\n                {\n                    \"id\": \"2\",\n                    \"description\": \"Book marker\",\n                    \"quantity\": 1,\n                    \"metrics\": {\n                        \"weight\": 10,\n                        \"dimension\": {\n                            \"width\": 10,\n                            \"height\": 0.5,\n                            \"length\": 20\n                        }\n                    }\n                }\n            ],\n            \"timeslot\": {\n                \"id\": \"{{timeslotId}}\"\n            },\n            \"collection\": {\n                \"stopId\": \"1\",\n                \"instructions\": \"Handle with care\"\n            },\n            \"delivery\": {\n                \"stopId\": \"2\",\n                \"instructions\": \"Leave with reception\"\n            }\n        }\n    ],\n    \"stops\": [\n        {\n            \"id\": \"1\",\n            \"contact\": {\n                \"name\": \"Sherlock Holmes\",\n                \"mobile\": \"07777777777\",\n                \"phone\": \"02091212121212\",\n                \"email\": \"sh@gmail.com\"\n            },\n            \"place\": {\n                \"id\": \"{{storeId}}\"\n            },\n            \"instructions\": \"Park at the back door\"\n        },\n        {\n            \"id\": \"2\",\n            \"contact\": {\n                \"name\": \"John Watson\",\n                \"mobile\": \"+447777777778\",\n                \"email\": \"jw@gmail.com\"\n            },\n            \"place\": {\n                \"address\": {\n                    \"country\": \"GBR\",\n                    \"town\": \"London\",\n                    \"streets\": [\n                        \"FLAT 111\",\n                        \"ICON BUILDING\"\n                    ],\n                    \"postcode\": \"IG1 2FJ\",\n                    \"companyName\": \"On the Dot\"\n                }\n            },\n            \"instructions\": \"Park at the back door\"\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{host}}/{{bookingService}}/v2/accounts/{{accountId}}/orders",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{bookingService}}",
+								"v2",
+								"accounts",
+								"{{accountId}}",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Returns",
+			"item": [
+				{
+					"name": "Create Return to Store order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bac9c8a6-5a10-409b-9f9e-c31c33a58663",
+								"exec": [
+									"pm.test(\"Order Id validation\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    var id=jsonData.id;",
+									"    pm.environment.set(\"orderNo\", id);",
+									"     pm.environment.set(\"jobrefid\", \"acceptancetestpartner::\"+id+\"::1\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "18a2390b-a31f-4256-a3da-b488030c48ab",
+								"exec": [
+									"",
+									"var moment=require('moment')",
+									"",
+									"postman.setEnvironmentVariable(\"todayDate\", moment().format(\"YYYY-MM-DD\"));",
+									"",
+									"postman.setEnvironmentVariable('nextDay',moment().add(1,'day').format(\"YYYY-MM-DD\"));",
+									"",
+									"",
+									"postman.setEnvironmentVariable('readyAt',moment().add(1,'day').toISOString());"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{authorization}}"
+							},
+							{
+								"key": "x-trace-id",
+								"value": "{{$guid}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"{{$timestamp}}\",\n    \"metadata\": {\n    \t\"clientRefId\":\"CLIENT-REF-{{$timestamp}}\",\n        \"serviceType\": \"return\",\n        \"vehicleType\":\"car\"\n    },\n    \"customData\": {\n    \t\"caller\":\"Booking\",\n        \"reference_1\": \"kingsman@kingsman.com\",\n        \"reference_2\": \"Kingsman\"\n    },\n    \"contact\": {\n        \"name\": \"James Moriarty\",\n        \"mobile\": \"+447888888889\",\n        \"phone\": \"020812718278\",\n        \"email\": \"jm@gmail.com\"\n    },\n    \"notification\": {\n        \"emails\": [\n            {\n                \"email\": \"rbeemi@onthedot.com\",\n                \"statuses\": [\n                    \"created\",\n                    \"allocated\",\n                    \"arrived_at_collection\",\n                    \"collected\",\n                    \"arrived_at_delivery\",\n                    \"delivered\"\n                ]\n            }\n        ],\n        \"sms\": [\n            {\n                \"number\": \"+4477772888442\",\n                \"statuses\": [\n                    \"created\",\n                    \"allocated\",\n                    \"arrived_at_collection\",\n                    \"collected\",\n                    \"arrived_at_delivery\",\n                    \"delivered\"\n                ]\n            }\n        ],\n        \"webhooks\": [\n            {\n                \"endpoint\": \"https://enit24ti5gez.x.pipedream.net/\",\n                \"methodType\": \"POST\",\n                \"headers\": {\n                    \"authorization\": \"\",\n                    \"company\": \"\"\n                },\n                \"statuses\": [\n                    \"created\",\n                    \"allocated\",\n                    \"arrived_at_collection\",\n                    \"collected\",\n                    \"arrived_at_delivery\",\n                    \"delivered\"\n                ]\n            }\n        ]\n    },\n    \"jobs\": [\n        {\n            \"id\": \"1\",\n            \"metadata\": {\n                \"journeyType\": \"return\"\n            },\n            \"requires\": [\n                \"ageVerification\",\n                \"collectionSignOff\",\n                \"deliverySignOff\"\n            ],\n            \"items\": [\n                {\n                    \"id\": \"1\",\n                    \"description\": \"Book\",\n                    \"quantity\": 5,\n                    \"metrics\": {\n                        \"weight\": 4,\n                        \"dimension\": {\n                            \"width\": 10,\n                            \"height\": 5,\n                            \"length\": 20\n                        }\n                    }\n                },\n                {\n                    \"id\": \"2\",\n                    \"description\": \"Book marker\",\n                    \"quantity\": 4,\n                    \"metrics\": {\n                        \"weight\": 10,\n                        \"dimension\": {\n                            \"width\": 10,\n                            \"height\": 0.5,\n                            \"length\": 20\n                        }\n                    }\n                }\n            ],\n            \"timeslot\": {\n                \"collection\": {\n                    \"from\": \"{{nextDay}}T11:00:00.000Z\",\n                    \"to\": \"{{nextDay}}T13:00:00.000Z\"\n                },\n                \"delivery\": {\n                    \"from\": \"{{nextDay}}T13:00:00.000Z\",\n                    \"to\": \"{{nextDay}}T21:30:00.000Z\"\n                }\n            },\n            \"collection\": {\n                \"stopId\": \"2\",\n                \"instructions\": \"Collect Box From Main Garage\"\n            },\n            \"delivery\": {\n                \"stopId\": \"1\",\n                \"instructions\": \"Ring main Door Bell\"\n            }\n        }\n    ],\n    \"stops\": [\n        {\n            \"id\": \"1\",\n            \"contact\": {\n                \"name\": \"Sherlock Holmes\",\n                \"mobile\": \"+447777777777\",\n                \"phone\": \"02091212121212\",\n                \"email\": \"sh@gmail.com\"\n            },\n            \"place\": {\n                \"id\": \"{{storeId}}\"\n            },\n            \"instructions\": \"Park at Store back Door\"\n        },\n        {\n            \"id\": \"2\",\n            \"contact\": {\n                \"name\": \"John Watson\",\n                \"mobile\": \"+447777777778\",\n                \"email\": \"jw@gmail.com\"\n            },\n            \"place\": {\n                \"address\": {\n                    \"country\": \"GBR\",\n                    \"town\": \"London\",\n                    \"streets\": [\n                        \"FLAT 111\",\n                        \"ICON BUILDING\"\n                    ],\n                    \"postcode\": \"IG1 2FJ\",\n                    \"companyName\": \"SANDBOX-OTD-COMPANY\"\n                }\n            },\n            \"instructions\": \"You can park at Front Garden at my house\"\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{host}}/{{bookingService}}/v2/accounts/{{accountId}}/orders",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{bookingService}}",
+								"v2",
+								"accounts",
+								"{{accountId}}",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cancel order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bac9c8a6-5a10-409b-9f9e-c31c33a58663",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "18a2390b-a31f-4256-a3da-b488030c48ab",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "{{authorization}}"
+					},
+					{
+						"key": "content-type",
+						"value": "application/json"
+					},
+					{
+						"key": "x-trace-id",
+						"value": "{{$guid}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/{{bookingService}}/v2/accounts/{{accountId}}/orders/{{orderNo}}/cancel",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{bookingService}}",
+						"v2",
+						"accounts",
+						"{{accountId}}",
+						"orders",
+						"{{orderNo}}",
+						"cancel"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Order Details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bac9c8a6-5a10-409b-9f9e-c31c33a58663",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "18a2390b-a31f-4256-a3da-b488030c48ab",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "{{authorization}}"
+					},
+					{
+						"key": "connection",
+						"value": "close"
+					},
+					{
+						"key": "content-type",
+						"value": "application/json"
+					},
+					{
+						"key": "x-trace-id",
+						"value": "{{$guid}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/{{bookingService}}/v2/accounts/{{accountId}}/orders/{{orderNo}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{bookingService}}",
+						"v2",
+						"accounts",
+						"{{accountId}}",
+						"orders",
+						"{{orderNo}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Order Details with ETA",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bac9c8a6-5a10-409b-9f9e-c31c33a58663",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "18a2390b-a31f-4256-a3da-b488030c48ab",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "{{authorization}}"
+					},
+					{
+						"key": "connection",
+						"value": "close"
+					},
+					{
+						"key": "content-type",
+						"value": "application/json"
+					},
+					{
+						"key": "x-trace-id",
+						"value": "{{$guid}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/{{bookingService}}/v2/accounts/{{accountId}}/orders/{{orderNo}}?attributes=eta",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{bookingService}}",
+						"v2",
+						"accounts",
+						"{{accountId}}",
+						"orders",
+						"{{orderNo}}"
+					],
+					"query": [
+						{
+							"key": "attributes",
+							"value": "eta"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Serach Orders by account and clientRefId",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bac9c8a6-5a10-409b-9f9e-c31c33a58663",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "18a2390b-a31f-4256-a3da-b488030c48ab",
+						"exec": [
+							"var todaysDate = new Date();",
+							"",
+							"function convertDate(date) {",
+							"  var yyyy = date.getFullYear().toString();",
+							"  var mm = (date.getMonth()+1).toString();",
+							"  var dd  = date.getDate().toString();",
+							"  var mmChars = mm.split('');",
+							"  var ddChars = dd.split('');",
+							"  return yyyy + '-' + (mmChars[1]?mm:\"0\"+mmChars[0]) + '-' + (ddChars[1]?dd:\"0\"+ddChars[0]);",
+							"}",
+							"",
+							"//Today Date EX:2017-10-25",
+							"postman.setEnvironmentVariable(\"todayDate\", convertDate(todaysDate));",
+							"",
+							"//Next Day Date",
+							"var date = new Date();",
+							"date.setHours(date.getHours() + 24);",
+							"postman.setEnvironmentVariable('nextDay',convertDate(date));",
+							"",
+							"//packageReadyAt EX:2017-10-25T10:06:30.428Z",
+							"postman.setEnvironmentVariable('packageReadyAt',(new Date()).toISOString());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "{{authorization}}"
+					},
+					{
+						"key": "connection",
+						"value": "close"
+					},
+					{
+						"key": "content-type",
+						"value": "application/json"
+					},
+					{
+						"key": "x-trace-id",
+						"value": "{{$guid}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"clientRefId\": \n        \"CLIENT-REF-1559051924\",\n    \"sortDirection\": \"desc\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/{{bookingService}}/v2/accounts/{{accountId}}/orders/search",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{bookingService}}",
+						"v2",
+						"accounts",
+						"{{accountId}}",
+						"orders",
+						"search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Serach Orders by account and order Status",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bac9c8a6-5a10-409b-9f9e-c31c33a58663",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "18a2390b-a31f-4256-a3da-b488030c48ab",
+						"exec": [
+							"var todaysDate = new Date();",
+							"",
+							"function convertDate(date) {",
+							"  var yyyy = date.getFullYear().toString();",
+							"  var mm = (date.getMonth()+1).toString();",
+							"  var dd  = date.getDate().toString();",
+							"  var mmChars = mm.split('');",
+							"  var ddChars = dd.split('');",
+							"  return yyyy + '-' + (mmChars[1]?mm:\"0\"+mmChars[0]) + '-' + (ddChars[1]?dd:\"0\"+ddChars[0]);",
+							"}",
+							"",
+							"//Today Date EX:2017-10-25",
+							"postman.setEnvironmentVariable(\"todayDate\", convertDate(todaysDate));",
+							"",
+							"//Next Day Date",
+							"var date = new Date();",
+							"date.setHours(date.getHours() + 24);",
+							"postman.setEnvironmentVariable('nextDay',convertDate(date));",
+							"",
+							"//packageReadyAt EX:2017-10-25T10:06:30.428Z",
+							"postman.setEnvironmentVariable('packageReadyAt',(new Date()).toISOString());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "{{authorization}}"
+					},
+					{
+						"key": "connection",
+						"value": "close"
+					},
+					{
+						"key": "content-type",
+						"value": "application/json"
+					},
+					{
+						"key": "x-trace-id",
+						"value": "{{$guid}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"orderStatus\": [\n        \"cancelled\"\n    ],\n    \"sortDirection\": \"desc\",\n    \"length\": 10,\n    \"offset\": 0\n}"
+				},
+				"url": {
+					"raw": "{{host}}/{{bookingService}}/v2/accounts/{{accountId}}/orders/search",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{bookingService}}",
+						"v2",
+						"accounts",
+						"{{accountId}}",
+						"orders",
+						"search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Orders By Delivery Time",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "ead5e553-4bba-4f0f-8d65-2832742f5f64",
+						"exec": [
+							"var moment=require('moment')",
+							"postman.setEnvironmentVariable(\"todayDate\", moment().format(\"YYYY-MM-DD\"));",
+							"postman.setEnvironmentVariable('nextDay',moment().add(1,'day').format(\"YYYY-MM-DD\"));",
+							"postman.setEnvironmentVariable('readyAt',moment().add(1,'day').toISOString());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{authorization}}"
+					},
+					{
+						"key": "X-Trace-Id",
+						"value": "{{$guid}}"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"deliveredBy\": {\n        \"from\": \"{{todayDate}}T01:00:00.000Z\",\n        \"to\": \"{{nextDay}}T23:00:00.000Z\"\n    },\n    \"sortDirection\": \"desc\",\n    \"length\": 100\n}"
+				},
+				"url": {
+					"raw": "{{host}}/{{bookingService}}/v2/accounts/{{accountId}}/orders/search",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{bookingService}}",
+						"v2",
+						"accounts",
+						"{{accountId}}",
+						"orders",
+						"search"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

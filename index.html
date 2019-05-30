@@ -234,6 +234,29 @@
             <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
           </li>
           <li>
+            <a href="#api-guide" class="toc-h1 toc-link" data-title="API Guide">API Guide</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#resource-url" class="toc-h2 toc-link" data-title="Resource URL">Resource URL</a>
+                  </li>
+                  <li>
+                    <a href="#methods-supported" class="toc-h2 toc-link" data-title="Methods supported">Methods supported</a>
+                  </li>
+                  <li>
+                    <a href="#http-codes" class="toc-h2 toc-link" data-title="HTTP Codes">HTTP Codes</a>
+                  </li>
+                  <li>
+                    <a href="#request-format" class="toc-h2 toc-link" data-title="Request format">Request format</a>
+                  </li>
+                  <li>
+                    <a href="#security" class="toc-h2 toc-link" data-title="Security">Security</a>
+                  </li>
+                  <li>
+                    <a href="#date-and-time" class="toc-h2 toc-link" data-title="Date and time">Date and time</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#quick-start" class="toc-h1 toc-link" data-title="Quick Start">Quick Start</a>
               <ul class="toc-list-h2">
                   <li>
@@ -247,9 +270,6 @@
                   </li>
                   <li>
                     <a href="#before-you-start" class="toc-h2 toc-link" data-title="Before you start">Before you start</a>
-                  </li>
-                  <li>
-                    <a href="#security" class="toc-h2 toc-link" data-title="Security">Security</a>
                   </li>
               </ul>
           </li>
@@ -383,16 +403,2023 @@ Diagram below is a high level overview of our API features and integration patte
 
 <p><img src="images/OTD-API-HLV-slate.png" alt="HLV" /></p>
 
-<ul>
-<li><p><strong>Swagger 2.0 files</strong></p>
+<blockquote>
+<details><summary class="highlight plaintext">Expand for Lucid Charts UML Markup</summary><pre><code><p>note over Developer, &quot;Create Booking&quot;: Create booking without a &quot;timeslotId&quot;
+Developer -&gt; &quot;Create Booking&quot;: POST /v2/accounts/{{accountId}}/orders
+Developer &lt;-- &quot;Create Booking&quot;: 201 OK
+note over Developer, &quot;Create Booking&quot;: Creating a booking with a &quot;timeslotId&quot;
+Developer -&gt; Timeslot: POST /v2/accounts/{{accountId}}/timeslots
+Developer &lt;-- Timeslot: 201 OK
+Developer -&gt; &quot;Create Booking&quot;: POST /v2/accounts/{{accountId}}/orders
+Developer &lt;--&quot;Create Booking&quot;: 201 OK
+alt &quot;Amend Booking&quot;
+Developer -&gt; &quot;Amend Booking&quot;: PUT /v2/accounts/{{accountId}}/orders/{{orderNo}}/amend
+Developer&lt;-- &quot;Amend Booking&quot;: 200 OK
+else &quot;Cancel Booking&quot;
+Developer -&gt; &quot;Cancel Booking&quot;: PUT /v2/accounts/{{accountId}}/orders/{{orderNo}}/cancel
+Developer -&gt; &quot;Cancel Booking&quot;: 200 OK
+else &quot;Get Booking Details&quot;
+Developer -&gt; &quot;Get Booking&quot;: GET /v2/accounts/{{accountId}}/orders/{{orderNo}}
+Developer &lt;-- &quot;Get Booking&quot;: 200 OK
+else &quot;Search Booking(s)&quot;
+Developer -&gt; &quot;Search Booking&quot;: POST /v2/accounts/{{accountId}}/orders/search
+Developer &lt;-- &quot;Search Booking&quot;: 200 OK
+end
+Developer &lt;-- &quot;Cosmo Webhook&quot;:{event driven}</p>
+</code></pre></details>
+</blockquote>
+
+<aside class="notice">
+  <strong>High level sequence diagram</strong>
+</aside>
+
+<p><img src="images/API-Docs.png" alt="Sequence Diagram" /></p>
+
+<blockquote>
+<p>Swagger V2 OTD APIs in JSON format</p>
+
+<details><summary class="highlight plaintext">Expand for V2 JSON</summary><pre><code><p>{
+  &quot;swagger&quot;: &quot;2.0&quot;,
+  &quot;schemes&quot;: [
+    &quot;https&quot;
+  ],
+  &quot;host&quot;: &quot;sandbox.onthedot.com&quot;,
+  &quot;basePath&quot;: &quot;/V2&quot;,
+  &quot;x-apigee&quot;: {
+    &quot;rootRules&quot;: [
+      {
+        &quot;node&quot;: &quot;PostFlow&quot;,
+        &quot;attr&quot;: {
+          &quot;name&quot;: &quot;PostFlow&quot;
+        },
+        &quot;content&quot;: [
+          {
+            &quot;node&quot;: &quot;Request&quot;,
+            &quot;content&quot;: &quot;&quot;
+          },
+          {
+            &quot;node&quot;: &quot;Response&quot;,
+            &quot;content&quot;: &quot;&quot;
+          }
+        ]
+      },
+      {
+        &quot;node&quot;: &quot;PreFlow&quot;,
+        &quot;attr&quot;: {
+          &quot;name&quot;: &quot;PreFlow&quot;
+        },
+        &quot;content&quot;: [
+          {
+            &quot;node&quot;: &quot;Response&quot;,
+            &quot;content&quot;: &quot;&quot;
+          },
+          {
+            &quot;node&quot;: &quot;Request&quot;,
+            &quot;content&quot;: [
+              {
+                &quot;node&quot;: &quot;Step&quot;,
+                &quot;content&quot;: [
+                  {
+                    &quot;node&quot;: &quot;Name&quot;,
+                    &quot;content&quot;: &quot;rate-limiter&quot;
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        &quot;node&quot;: &quot;DefaultFaultRule&quot;,
+        &quot;attr&quot;: {
+          &quot;name&quot;: &quot;default-rule&quot;
+        },
+        &quot;content&quot;: [
+          {
+            &quot;node&quot;: &quot;Step&quot;,
+            &quot;content&quot;: [
+              {
+                &quot;node&quot;: &quot;Name&quot;,
+                &quot;content&quot;: &quot;add-cors&quot;
+              }
+            ]
+          },
+          {
+            &quot;node&quot;: &quot;AlwaysEnforce&quot;,
+            &quot;content&quot;: true
+          }
+        ]
+      },
+      {
+        &quot;node&quot;: &quot;HTTPProxyConnection&quot;,
+        &quot;content&quot;: [
+          {
+            &quot;node&quot;: &quot;BasePath&quot;,
+            &quot;content&quot;: &quot;/booking&quot;
+          },
+          {
+            &quot;node&quot;: &quot;Properties&quot;,
+            &quot;content&quot;: &quot;&quot;
+          },
+          {
+            &quot;node&quot;: &quot;VirtualHost&quot;,
+            &quot;content&quot;: &quot;secure&quot;
+          }
+        ]
+      },
+      {
+        &quot;node&quot;: &quot;RouteRule&quot;,
+        &quot;attr&quot;: {
+          &quot;name&quot;: &quot;no-route&quot;
+        },
+        &quot;content&quot;: [
+          {
+            &quot;node&quot;: &quot;Condition&quot;,
+            &quot;content&quot;: &quot;request.verb == \&quot;OPTIONS\&quot;&quot;
+          }
+        ]
+      },
+      {
+        &quot;node&quot;: &quot;RouteRule&quot;,
+        &quot;attr&quot;: {
+          &quot;name&quot;: &quot;default&quot;
+        },
+        &quot;content&quot;: [
+          {
+            &quot;node&quot;: &quot;TargetEndpoint&quot;,
+            &quot;content&quot;: &quot;default&quot;
+          }
+        ]
+      },
+      {
+        &quot;node&quot;: &quot;FaultRules&quot;,
+        &quot;content&quot;: &quot;&quot;
+      }
+    ],
+    &quot;additionalFlows&quot;: [
+      {
+        &quot;node&quot;: &quot;Flow&quot;,
+        &quot;attr&quot;: {
+          &quot;name&quot;: &quot;pre-flight&quot;
+        },
+        &quot;content&quot;: [
+          {
+            &quot;node&quot;: &quot;Request&quot;,
+            &quot;content&quot;: &quot;&quot;
+          },
+          {
+            &quot;node&quot;: &quot;Response&quot;,
+            &quot;content&quot;: [
+              {
+                &quot;node&quot;: &quot;Step&quot;,
+                &quot;content&quot;: [
+                  {
+                    &quot;node&quot;: &quot;Name&quot;,
+                    &quot;content&quot;: &quot;add-cors&quot;
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            &quot;node&quot;: &quot;Condition&quot;,
+            &quot;content&quot;: &quot;request.verb == \&quot;OPTIONS\&quot;&quot;
+          }
+        ]
+      },
+      {
+        &quot;node&quot;: &quot;Flow&quot;,
+        &quot;attr&quot;: {
+          &quot;name&quot;: &quot;private-by-default&quot;
+        },
+        &quot;content&quot;: [
+          {
+            &quot;node&quot;: &quot;Description&quot;,
+            &quot;content&quot;: &quot;Make any non-listed flow private&quot;
+          },
+          {
+            &quot;node&quot;: &quot;Response&quot;,
+            &quot;content&quot;: &quot;&quot;
+          },
+          {
+            &quot;node&quot;: &quot;Request&quot;,
+            &quot;content&quot;: [
+              {
+                &quot;node&quot;: &quot;Step&quot;,
+                &quot;content&quot;: [
+                  {
+                    &quot;node&quot;: &quot;Name&quot;,
+                    &quot;content&quot;: &quot;deny-external&quot;
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  &quot;info&quot;: {
+    &quot;description&quot;: &quot;<strong>Welcome to the On the dot Booking API Reference documentation.</strong>\n\nThis documentation is currently in Beta and will be updated over the next few months. For assistance with using the APIs, please contact our Partner team.\n\n*<em>All APIs require an <code>Authorization</code> header.</em><em>\n\nYou will need to register <a href="https://developer.onthedot.com/getting-started">here</a> to obtain a token which is used in the request headers.\n&quot;,
+    &quot;version&quot;: &quot;2.0.0.&quot;,
+    &quot;title&quot;: &quot;Booking Service V2.0&quot;,
+    &quot;termsOfService&quot;: &quot;https://www.onthedot.com/terms-and-conditions&quot;,
+    &quot;contact&quot;: {
+      &quot;email&quot;: &quot;partners@onthedot.co.uk&quot;
+    }
+  },
+  &quot;x-logo&quot;: {
+    &quot;url&quot;: &quot;https://otd-static-content-prod.lastmilelink.eu/logos/onthedot-new.png&quot;
+  },
+  &quot;externalDocs&quot;: {
+    &quot;description&quot;: &quot;Find out how to create Github repo for your OpenAPI spec.&quot;,
+    &quot;url&quot;: &quot;https://github.com/Rebilly/generator-openapi-repo&quot;
+  },
+  &quot;tags&quot;: [
+    {
+      &quot;name&quot;: &quot;Timeslot&quot;,
+      &quot;description&quot;: &quot;Everything about Timeslot&quot;
+    }
+  ],
+  &quot;x-tagGroups&quot;: [
+    {
+      &quot;name&quot;: &quot;Timeslot&quot;,
+      &quot;tags&quot;: [
+        &quot;Timeslot&quot;
+      ]
+    },
+    {
+      &quot;name&quot;: &quot;Order V2&quot;,
+      &quot;tags&quot;: [
+        &quot;orderV2&quot;
+      ]
+    }
+  ],
+  &quot;securityDefinitions&quot;: {
+    &quot;api_key&quot;: {
+      &quot;description&quot;: &quot;API calls must provide <code>Authorization</code> header.\n&quot;,
+      &quot;type&quot;: &quot;apiKey&quot;,
+      &quot;name&quot;: &quot;Authorization&quot;,
+      &quot;in&quot;: &quot;header&quot;
+    }
+  },
+  &quot;x-servers&quot;: [
+    {
+      &quot;url&quot;: &quot;/localhost:8181&quot;,
+      &quot;description&quot;: &quot;Default server&quot;
+    }
+  ],
+  &quot;paths&quot;: {
+    &quot;/v2/accounts/{accountId}/timeslots&quot;: {
+      &quot;post&quot;: {
+        &quot;tags&quot;: [
+          &quot;Timeslot&quot;
+        ],
+        &quot;summary&quot;: &quot;Get available timeslots for a booking&quot;,
+        &quot;description&quot;: &quot;This API returns a list of available timeslots. Allows the options to be \npresented to an end-user for selection.\n&quot;,
+        &quot;operationId&quot;: &quot;getTimeslotIDs&quot;,
+        &quot;consumes&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [
+          {
+            &quot;in&quot;: &quot;path&quot;,
+            &quot;name&quot;: &quot;accountId&quot;,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;maxLength&quot;: 140,
+            &quot;description&quot;: &quot;account ID&quot;,
+            &quot;required&quot;: true
+          },
+          {
+            &quot;in&quot;: &quot;body&quot;,
+            &quot;name&quot;: &quot;body&quot;,
+            &quot;description&quot;: &quot;Timeslot parameters&quot;,
+            &quot;required&quot;: true,
+            &quot;schema&quot;: {
+              &quot;$ref&quot;: &quot;#/definitions/TimeslotReq&quot;
+            }
+          }
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;OK&quot;,
+            &quot;schema&quot;: {
+              &quot;$ref&quot;: &quot;#/definitions/TimeslotRes&quot;
+            }
+          },
+          &quot;400&quot;: {
+            &quot;description&quot;: &quot;Bad request&quot;
+          },
+          &quot;401&quot;: {
+            &quot;description&quot;: &quot;Unauthorized&quot;
+          }
+        }
+      }
+    },
+    &quot;/v2/accounts/{accountId}/orders&quot;: {
+      &quot;post&quot;: {
+        &quot;tags&quot;: [
+          &quot;orderV2&quot;
+        ],
+        &quot;summary&quot;: &quot;Create order&quot;,
+        &quot;description&quot;: &quot;This API creates an order with the specified ID.\n\nThis API allows the caller to override all values (timeslots, stops) with their own values.\n\nIf the caller sends only timeslot ID or place ID, then the relevant services will be called to get the details.\n&quot;,
+        &quot;operationId&quot;: &quot;createOrderV2&quot;,
+        &quot;x-apigee&quot;: {
+          &quot;included&quot;: true,
+          &quot;rootRules&quot;: [
+            {
+              &quot;node&quot;: &quot;Request&quot;,
+              &quot;content&quot;: [
+                {
+                  &quot;node&quot;: &quot;Step&quot;,
+                  &quot;content&quot;: [
+                    {
+                      &quot;node&quot;: &quot;Name&quot;,
+                      &quot;content&quot;: &quot;platform-auth&quot;
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        &quot;consumes&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [
+          {
+            &quot;in&quot;: &quot;path&quot;,
+            &quot;name&quot;: &quot;accountId&quot;,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;maxLength&quot;: 140,
+            &quot;description&quot;: &quot;account ID&quot;,
+            &quot;required&quot;: true
+          },
+          {
+            &quot;in&quot;: &quot;body&quot;,
+            &quot;name&quot;: &quot;body&quot;,
+            &quot;description&quot;: &quot;Order object that needs to be created&quot;,
+            &quot;required&quot;: true,
+            &quot;schema&quot;: {
+              &quot;$ref&quot;: &quot;#/definitions/OrderV2&quot;
+            }
+          }
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;OK&quot;,
+            &quot;schema&quot;: {
+              &quot;$ref&quot;: &quot;#/definitions/OrderResV2&quot;
+            }
+          },
+          &quot;400&quot;: {
+            &quot;description&quot;: &quot;Bad request&quot;
+          },
+          &quot;401&quot;: {
+            &quot;description&quot;: &quot;Unauthorized&quot;
+          },
+          &quot;409&quot;: {
+            &quot;description&quot;: &quot;Conflict&quot;
+          }
+        }
+      }
+    },
+    &quot;/v2/accounts/{accountId}/orders/{orderId}&quot;: {
+      &quot;get&quot;: {
+        &quot;tags&quot;: [
+          &quot;orderV2&quot;
+        ],
+        &quot;summary&quot;: &quot;Get order&quot;,
+        &quot;description&quot;: &quot;This API gets order with account ID and order ID.\n&quot;,
+        &quot;operationId&quot;: &quot;getOrderV2&quot;,
+        &quot;consumes&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [
+          {
+            &quot;in&quot;: &quot;path&quot;,
+            &quot;name&quot;: &quot;accountId&quot;,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;maxLength&quot;: 140,
+            &quot;description&quot;: &quot;account ID&quot;,
+            &quot;required&quot;: true
+          },
+          {
+            &quot;in&quot;: &quot;path&quot;,
+            &quot;name&quot;: &quot;orderId&quot;,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;maxLength&quot;: 140,
+            &quot;description&quot;: &quot;order ID&quot;,
+            &quot;required&quot;: true
+          }
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;OK&quot;,
+            &quot;schema&quot;: {
+              &quot;$ref&quot;: &quot;#/definitions/OrderResV2&quot;
+            }
+          },
+          &quot;400&quot;: {
+            &quot;description&quot;: &quot;Bad request&quot;
+          },
+          &quot;401&quot;: {
+            &quot;description&quot;: &quot;Unauthorized&quot;
+          },
+          &quot;404&quot;: {
+            &quot;description&quot;: &quot;Not found&quot;
+          }
+        }
+      }
+    },
+    &quot;/v2/accounts/{accountId}/orders/search&quot;: {
+      &quot;post&quot;: {
+        &quot;tags&quot;: [
+          &quot;orderV2&quot;
+        ],
+        &quot;summary&quot;: &quot;Search order&quot;,
+        &quot;description&quot;: &quot;This API returns a list of orders based on the provided search criteria.\n\n<code>createdAt</code>, <code>collectedBy</code> and <code>deliveredBy</code> are time ranges.  If there are multiple jobs in the order, then any job satisfying these will cause the order to be returned.\n\n<code>coordinates</code> can be any point on Earth.\n\nPaging is supported.  See request and response for details.\n&quot;,
+        &quot;operationId&quot;: &quot;searchOrderV2&quot;,
+        &quot;consumes&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [
+          {
+            &quot;in&quot;: &quot;path&quot;,
+            &quot;name&quot;: &quot;accountId&quot;,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;maxLength&quot;: 140,
+            &quot;description&quot;: &quot;account ID&quot;,
+            &quot;required&quot;: true
+          },
+          {
+            &quot;in&quot;: &quot;body&quot;,
+            &quot;name&quot;: &quot;body&quot;,
+            &quot;description&quot;: &quot;The search order parameters&quot;,
+            &quot;required&quot;: true,
+            &quot;schema&quot;: {
+              &quot;$ref&quot;: &quot;#/definitions/SearchOrderV2&quot;
+            }
+          }
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;OK&quot;,
+            &quot;schema&quot;: {
+              &quot;$ref&quot;: &quot;#/definitions/SearchOrderResV2&quot;
+            }
+          },
+          &quot;400&quot;: {
+            &quot;description&quot;: &quot;Bad request&quot;
+          },
+          &quot;401&quot;: {
+            &quot;description&quot;: &quot;Unauthorized&quot;
+          }
+        }
+      }
+    },
+    &quot;/v2/accounts/{accountId}/orders/{orderId}/cancel&quot;: {
+      &quot;put&quot;: {
+        &quot;tags&quot;: [
+          &quot;orderV2&quot;
+        ],
+        &quot;summary&quot;: &quot;Cancel order&quot;,
+        &quot;description&quot;: &quot;This API can be used to cancel an order, under the following conditions:\n\n1. The order exists.\n\n2. None of the jobs of the order have the status <code>collected</code> yet.\n\nOnce an order is cancelled, it cannot be re-created or un-cancelled.  You will need to create a new order in this case.\n&quot;,
+        &quot;operationId&quot;: &quot;cancelOrderV2&quot;,
+        &quot;consumes&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [
+          {
+            &quot;in&quot;: &quot;path&quot;,
+            &quot;name&quot;: &quot;accountId&quot;,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;maxLength&quot;: 140,
+            &quot;description&quot;: &quot;account ID&quot;,
+            &quot;required&quot;: true
+          },
+          {
+            &quot;in&quot;: &quot;path&quot;,
+            &quot;name&quot;: &quot;orderId&quot;,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;maxLength&quot;: 140,
+            &quot;description&quot;: &quot;order ID&quot;,
+            &quot;required&quot;: true
+          }
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;OK&quot;,
+            &quot;schema&quot;: {
+              &quot;$ref&quot;: &quot;#/definitions/OrderResV2&quot;
+            }
+          },
+          &quot;400&quot;: {
+            &quot;description&quot;: &quot;Bad request&quot;
+          },
+          &quot;401&quot;: {
+            &quot;description&quot;: &quot;Unauthorized&quot;
+          },
+          &quot;403&quot;: {
+            &quot;description&quot;: &quot;Forbidden&quot;
+          }
+        }
+      }
+    },
+    &quot;/v2/accounts/{accountId}/orders/{orderId}/amend&quot;: {
+      &quot;put&quot;: {
+        &quot;tags&quot;: [
+          &quot;orderV2&quot;
+        ],
+        &quot;summary&quot;: &quot;Amend order&quot;,
+        &quot;description&quot;: &quot;This API amends an order and updates the corresponding jobs in COSMO.\n\nThe following rules apply:\n\n1. The order must already exist.\n\n2. For each job of the order:\n\n1) If only <code>items</code> is updated, then the job&#39;s progress status must be one of <code>created</code>, <code>allocated</code>, <code>arrived_at_collection</code> (i.e., amending is not allowed after collection).\n\n2) If any other field is changed (including <code>timeslot</code>, <code>metadata</code>), then the job&#39;s progress status must be <code>created</code> (i.e., amending is not allowed after allocation).\n\n3) Collection and delivery stop IDs cannot be changed.\n\n4) If stops corresponding to the job are changed, then rule 2) applies.\n\n&gt; Note <code>customData</code> uses incremental update.  All other fields are full-replacement update.\n&quot;,
+        &quot;operationId&quot;: &quot;amendOrderV2&quot;,
+        &quot;consumes&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [
+          {
+            &quot;in&quot;: &quot;path&quot;,
+            &quot;name&quot;: &quot;accountId&quot;,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;maxLength&quot;: 140,
+            &quot;description&quot;: &quot;account ID&quot;,
+            &quot;required&quot;: true
+          },
+          {
+            &quot;in&quot;: &quot;path&quot;,
+            &quot;name&quot;: &quot;orderId&quot;,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;maxLength&quot;: 140,
+            &quot;description&quot;: &quot;order ID&quot;,
+            &quot;required&quot;: true
+          },
+          {
+            &quot;in&quot;: &quot;body&quot;,
+            &quot;name&quot;: &quot;body&quot;,
+            &quot;description&quot;: &quot;The cancel order parameters&quot;,
+            &quot;required&quot;: true,
+            &quot;schema&quot;: {
+              &quot;$ref&quot;: &quot;#/definitions/AmendOrderV2&quot;
+            }
+          }
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;OK&quot;,
+            &quot;schema&quot;: {
+              &quot;$ref&quot;: &quot;#/definitions/OrderResV2&quot;
+            }
+          },
+          &quot;400&quot;: {
+            &quot;description&quot;: &quot;Bad request&quot;
+          },
+          &quot;401&quot;: {
+            &quot;description&quot;: &quot;Unauthorized&quot;
+          },
+          &quot;422&quot;: {
+            &quot;description&quot;: &quot;Unprocessable Entity&quot;
+          }
+        }
+      }
+    }
+  },
+  &quot;definitions&quot;: {
+    &quot;TimeslotReq&quot;: {
+      &quot;description&quot;: &quot;Timeslot request&quot;,
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;serviceType&quot;,
+        &quot;collection&quot;,
+        &quot;delivery&quot;,
+        &quot;packageReadyAt&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;serviceType&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/ServiceType&quot;
+        },
+        &quot;collection&quot;: {
+          &quot;description&quot;: &quot;The collection place ID or address.\n&quot;,
+          &quot;$ref&quot;: &quot;#/definitions/TimeslotPlace&quot;
+        },
+        &quot;delivery&quot;: {
+          &quot;description&quot;: &quot;The delivery place ID or address.\n&quot;,
+          &quot;$ref&quot;: &quot;#/definitions/TimeslotPlace&quot;
+        },
+        &quot;packageReadyAt&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/PackageReadyAt&quot;
+        },
+        &quot;dates&quot;: {
+          &quot;description&quot;: &quot;Used to override the opening/closing time of store for special dates.\n\nFormat:\n<code>\n{\n  \&quot;&lt;date&gt;\&quot;: {\n    \&quot;openTime\&quot;: \&quot;&lt;time&gt;\&quot;,\n    \&quot;closeTime\&quot;: \&quot;&lt;time&gt;\&quot;\n  },\n  ...\n}\n</code>\nwhere\n\n</em> <code>&lt;date&gt;</code> must have format <code>yyyy-MM-dd</code>, e.g., <code>2017-04-21</code>\n* <code>&lt;time&gt;</code> must have format <code>HH:mm</code>, e.g., <code>22:32</code>\n&quot;,
+          &quot;example&quot;: {
+            &quot;2018-08-09&quot;: {
+              &quot;openTime&quot;: &quot;12:00&quot;,
+              &quot;closeTime&quot;: &quot;17:00&quot;
+            },
+            &quot;2018-08-10&quot;: {
+              &quot;openTime&quot;: &quot;12:00&quot;,
+              &quot;closeTime&quot;: &quot;16:00&quot;
+            }
+          }
+        }
+      }
+    },
+    &quot;TimeslotPlace&quot;: {
+      &quot;description&quot;: &quot;Place details in Timeslot request.  Must set one of <code>id</code> and <code>address</code>, but not both.\n&quot;,
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;properties&quot;: {
+        &quot;id&quot;: {
+          &quot;description&quot;: &quot;If you pass a Place ID it must be already configured by On the dot.\n&quot;,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;myplaceID&quot;
+        },
+        &quot;address&quot;: {
+          &quot;description&quot;: &quot;Address of the place.\n&quot;,
+          &quot;$ref&quot;: &quot;#/definitions/Address&quot;
+        }
+      }
+    },
+    &quot;TimeslotRes&quot;: {
+      &quot;description&quot;: &quot;Timeslots response.\n&quot;,
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;properties&quot;: {
+        &quot;timeslots&quot;: {
+          &quot;description&quot;: &quot;&#39;Timeslots&#39; details.\n\n\nFormat:\n\n<code>\n\&quot;timeslots\&quot;: {\n    {\n      \&quot;&lt;date&gt;\&quot;: [\n        {\n          \&quot;id\&quot;: \&quot;&lt;timeslot_id&gt;\&quot;,\n          \&quot;collectionSlot\&quot;: {\n            \&quot;collectFrom\&quot;: \&quot;&lt;timestamp&gt;\&quot;,\n            \&quot;collectBy\&quot;: \&quot;&lt;timestamp&gt;\&quot;\n          },\n          \&quot;deliverySlot\&quot;: {\n            \&quot;deliverFrom\&quot;: \&quot;&lt;timestamp&gt;\&quot;,\n            \&quot;deliverBy\&quot;: \&quot;&lt;timestamp&gt;\&quot;\n          },\n          \&quot;slotExpiresAt\&quot;: \&quot;&lt;timestamp&gt;\&quot;\n        },\n        ...\n      ],\n      ...\n    }\n}\n</code>\n\nwhere\n\n\n* <code>&lt;date&gt;</code> has format <code>yyyy-MM-dd</code>, e.g., <code>2017-04-21</code>\n\n* <code>&lt;timestamp&gt;</code> has format <code>2006-01-02T15:04:05.999Z</code> in Zulu timezone\nonly\n\n* <code>&lt;timeslot_id&gt;</code> is a string that should be used when creating orders\n&quot;,
+          &quot;type&quot;: &quot;object&quot;
+        }
+      },
+      &quot;example&quot;: {
+        &quot;timeslots&quot;: {
+          &quot;2018-01-11&quot;: [
+            {
+              &quot;id&quot;: &quot;NWZmNDZiNjMtMjg5NS00ZjYwLThiMDktNThjNzA5YzNhNTBifkxwNGQ1ZFd6Y1B3Tnd2R1NtMWQxUDFGYVl3WW1ZTH5FQzJBKzRQSH5XQzJOKzRFU34xNTE1NjkzODk5fjE1MTU2OTQ1MDB+MH4wfjQuMzAyMzAw&quot;,
+              &quot;collectionSlot&quot;: {
+                &quot;collectFrom&quot;: &quot;2018-01-11T18:35:00.000Z&quot;,
+                &quot;collectBy&quot;: &quot;2018-01-11T18:35:00.000Z&quot;
+              },
+              &quot;deliverySlot&quot;: {
+                &quot;deliverFrom&quot;: &quot;2018-01-11T18:45:00.000Z&quot;,
+                &quot;deliverBy&quot;: &quot;2018-01-11T18:45:00.000Z&quot;
+              },
+              &quot;slotExpiresAt&quot;: &quot;2018-01-11T18:15:00.000Z&quot;
+            },
+            {
+              &quot;id&quot;: &quot;NWZmNDZiNjMtMjg5NS00ZjYwLThiMDktNThjNzA5YzNhNTBiflY5R2V5ZUF6aHhCQUJ3b0Y1N3c1MVpoOWRFOTNhTH5FQzJBKzRQSH5XQzJOKzRFU34xNTE1NjkzODk5fjE1MTU2OTQ1MDB+MH4wfjQuMzAyMzAw&quot;,
+              &quot;collectionSlot&quot;: {
+                &quot;collectFrom&quot;: &quot;2018-01-11T18:40:00.000Z&quot;,
+                &quot;collectBy&quot;: &quot;2018-01-11T18:40:00.000Z&quot;
+              },
+              &quot;deliverySlot&quot;: {
+                &quot;deliverFrom&quot;: &quot;2018-01-11T18:50:00.000Z&quot;,
+                &quot;deliverBy&quot;: &quot;2018-01-11T18:50:00.000Z&quot;
+              },
+              &quot;slotExpiresAt&quot;: &quot;2018-01-11T18:15:00.000Z&quot;
+            },
+            {
+              &quot;id&quot;: &quot;NWZmNDZiNjMtMjg5NS00ZjYwLThiMDktNThjNzA5YzNhNTBifmtKYXAzcEpwSWJyd3JRcmZLZzVLbkJDeVlSeU1PTH5FQzJBKzRQSH5XQzJOKzRFU34xNTE1NjkzODk5fjE1MTU2OTQ1MDB+MH4wfjQuMzAyMzAw&quot;,
+              &quot;collectionSlot&quot;: {
+                &quot;collectFrom&quot;: &quot;2018-01-11T18:45:00.000Z&quot;,
+                &quot;collectBy&quot;: &quot;2018-01-11T18:45:00.000Z&quot;
+              },
+              &quot;deliverySlot&quot;: {
+                &quot;deliverFrom&quot;: &quot;2018-01-11T18:55:00.000Z&quot;,
+                &quot;deliverBy&quot;: &quot;2018-01-11T18:55:00.000Z&quot;
+              },
+              &quot;slotExpiresAt&quot;: &quot;2018-01-11T18:15:00.000Z&quot;
+            }
+          ]
+        }
+      }
+    },
+    &quot;OrderV2&quot;: {
+      &quot;description&quot;: &quot;An order object&quot;,
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;id&quot;,
+        &quot;metadata&quot;,
+        &quot;jobs&quot;,
+        &quot;stops&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;id&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/OrderId&quot;
+        },
+        &quot;metadata&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/OrderMetadataV2&quot;
+        },
+        &quot;customData&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/CustomData&quot;
+        },
+        &quot;contact&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Contact&quot;
+        },
+        &quot;notification&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Notification&quot;
+        },
+        &quot;jobs&quot;: {
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;$ref&quot;: &quot;#/definitions/JobV2&quot;
+          }
+        },
+        &quot;stops&quot;: {
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;$ref&quot;: &quot;#/definitions/Stop&quot;
+          }
+        },
+        &quot;instructions&quot;: {
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;maxLength&quot;: 500,
+          &quot;example&quot;: &quot;Fragile items, be careful&quot;
+        }
+      }
+    },
+    &quot;OrderResV2&quot;: {
+      &quot;description&quot;: &quot;An order object&quot;,
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;id&quot;,
+        &quot;metadata&quot;,
+        &quot;jobs&quot;,
+        &quot;stops&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;id&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/OrderId&quot;
+        },
+        &quot;accountId&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/AccountId&quot;
+        },
+        &quot;metadata&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/OrderMetadataResV2&quot;
+        },
+        &quot;customData&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/CustomData&quot;
+        },
+        &quot;contact&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Contact&quot;
+        },
+        &quot;notification&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Notification&quot;
+        },
+        &quot;jobs&quot;: {
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;$ref&quot;: &quot;#/definitions/JobResV2&quot;
+          }
+        },
+        &quot;stops&quot;: {
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;$ref&quot;: &quot;#/definitions/Stop&quot;
+          }
+        },
+        &quot;instructions&quot;: {
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;Fragile items, be careful&quot;
+        },
+        &quot;status&quot;: {
+          &quot;type&quot;: &quot;object&quot;,
+          &quot;properties&quot;: {
+            &quot;status&quot;: {
+              &quot;$ref&quot;: &quot;#/definitions/OrderStatusV2&quot;
+            },
+            &quot;updatedAt&quot;: {
+              &quot;$ref&quot;: &quot;#/definitions/Timestamp&quot;
+            }
+          }
+        },
+        &quot;createdAt&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Timestamp&quot;
+        },
+        &quot;updatedAt&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Timestamp&quot;
+        }
+      }
+    },
+    &quot;SearchOrderV2&quot;: {
+      &quot;description&quot;: &quot;All fields are optional, except <code>sortDirection</code>.\n\nThe different criteria are joined by \&quot;and\&quot; logic except in <code>places</code> where the condition can be explicitely specified (AND/OR).\n&quot;,
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;sortDirection&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;clientRefId&quot;: {
+          &quot;description&quot;: &quot;Search by client ref ID.  If this parameter is set, then only the following parameters can be set:\n\n* <code>orderStatus</code>\n* <code>JobStatus</code>\n* <code>sortDirection</code>\n&quot;,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;myclientrefid1&quot;
+        },
+        &quot;createdAt&quot;: {
+          &quot;description&quot;: &quot;The time when the order was created.\n&quot;,
+          &quot;$ref&quot;: &quot;#/definitions/SearchParamTimeRange&quot;
+        },
+        &quot;collectedBy&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/SearchParamTimeRange&quot;
+        },
+        &quot;deliveredBy&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/SearchParamTimeRange&quot;
+        },
+        &quot;orderStatus&quot;: {
+          &quot;description&quot;: &quot;Order status&quot;,
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;maxLength&quot;: 140,
+            &quot;example&quot;: &quot;completed&quot;
+          }
+        },
+        &quot;jobStatus&quot;: {
+          &quot;description&quot;: &quot;Job status&quot;,
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;maxLength&quot;: 140,
+            &quot;example&quot;: &quot;delivered&quot;
+          }
+        },
+        &quot;sortDirection&quot;: {
+          &quot;description&quot;: &quot;Results are sorted by <code>createdAt</code>.\n\nThis field controls whether the results are sorted in ascending or descending order.\n&quot;,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;enum&quot;: [
+            &quot;asc&quot;,
+            &quot;desc&quot;
+          ],
+          &quot;example&quot;: &quot;asc&quot;
+        },
+        &quot;offset&quot;: {
+          &quot;description&quot;: &quot;The offset for paging.\n\nShould use the value in the previous response.\n&quot;,
+          &quot;type&quot;: &quot;integer&quot;,
+          &quot;format&quot;: &quot;int64&quot;,
+          &quot;example&quot;: 100
+        },
+        &quot;length&quot;: {
+          &quot;description&quot;: &quot;The number of orders to return.\n\nMust be between 1 and 1000.\n\nDefault to 1000.\n&quot;,
+          &quot;type&quot;: &quot;integer&quot;,
+          &quot;format&quot;: &quot;int64&quot;,
+          &quot;example&quot;: 100
+        }
+      }
+    },
+    &quot;SearchOrderResV2&quot;: {
+      &quot;description&quot;: &quot;Search response object&quot;,
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;offset&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;orders&quot;: {
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;$ref&quot;: &quot;#/definitions/OrderResV2&quot;
+          }
+        },
+        &quot;failures&quot;: {
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;type&quot;: &quot;string&quot;
+          },
+          &quot;example&quot;: [
+            &quot;Failed to find order0&quot;,
+            &quot;Failed to find order1&quot;
+          ]
+        },
+        &quot;offset&quot;: {
+          &quot;type&quot;: &quot;integer&quot;,
+          &quot;format&quot;: &quot;int64&quot;,
+          &quot;example&quot;: 5
+        }
+      }
+    },
+    &quot;AmendOrderV2&quot;: {
+      &quot;description&quot;: &quot;An amend order object&quot;,
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;id&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;customData&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/CustomData&quot;
+        },
+        &quot;contact&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Contact&quot;
+        },
+        &quot;notification&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Notification&quot;
+        },
+        &quot;jobs&quot;: {
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;$ref&quot;: &quot;#/definitions/AmendJobV2&quot;
+          }
+        },
+        &quot;stops&quot;: {
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;$ref&quot;: &quot;#/definitions/AmendStopV2&quot;
+          }
+        },
+        &quot;instructions&quot;: {
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;maxLength&quot;: 500,
+          &quot;example&quot;: &quot;Fragile items, be careful&quot;
+        }
+      }
+    },
+    &quot;AmendJobV2&quot;: {
+      &quot;description&quot;: &quot;An amend job object&quot;,
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;id&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;id&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/JobId&quot;
+        },
+        &quot;items&quot;: {
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;$ref&quot;: &quot;#/definitions/Item&quot;
+          }
+        },
+        &quot;timeslot&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/TimeslotV2&quot;
+        }
+      }
+    },
+    &quot;AmendStopV2&quot;: {
+      &quot;description&quot;: &quot;An amend stop object&quot;,
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;id&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;id&quot;: {
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;maxLength&quot;: 140,
+          &quot;example&quot;: &quot;mystop&quot;
+        },
+        &quot;contact&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Contact&quot;
+        },
+        &quot;place&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/AmendPlaceV2&quot;
+        }
+      }
+    },
+    &quot;AmendPlaceV2&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;description&quot;: &quot;An amend place object&quot;,
+      &quot;required&quot;: [
+        &quot;address&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;address&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Address&quot;
+        }
+      }
+    },
+    &quot;OrderStatusV2&quot;: {
+      &quot;description&quot;: &quot;Order&#39;s status.\n\nNote this is different from job status, though they&#39;re related.  See beginning of doc for details.\n&quot;,
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;enum&quot;: [
+        &quot;incomplete&quot;,
+        &quot;created&quot;,
+        &quot;completed&quot;
+      ]
+    },
+    &quot;OrderMetadataV2&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;serviceType&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;clientRefId&quot;: {
+          &quot;description&quot;: &quot;Client reference ID.  This field can be reused for multiple orders.\n\nThis field is searchable.  This field is not amendable.\n&quot;,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;myclientrefid&quot;
+        },
+        &quot;serviceType&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/ServiceType&quot;
+        },
+        &quot;isTest&quot;: {
+          &quot;description&quot;: &quot;Mark the order as a test order.\n\nThe default value is dependent on the account state.\n\n| Account State | <code>isTest</code> |\n| ------------- | -------- |\n| <code>live</code> | <code>false</code> |\n| <code>onboarding |</code>true<code>|\n|</code>test<code>|</code>true<code>|\n\nNote setting this field to</code>false<code>is the same as setting to</code>null<code>.\n&quot;,
+          &quot;type&quot;: &quot;boolean&quot;,
+          &quot;example&quot;: true
+        }
+      }
+    },
+    &quot;OrderMetadataResV2&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;serviceType&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;sector&quot;: {
+          &quot;description&quot;: &quot;The sector of the order.\n&quot;,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;Local&quot;
+        },
+        &quot;clientRefId&quot;: {
+          &quot;description&quot;: &quot;Client reference ID.  This field can be reused for multiple orders.\n\nThis field is searchable.  This field is not amendable.\n&quot;,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;myclientrefid&quot;
+        },
+        &quot;serviceType&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/ServiceType&quot;
+        },
+        &quot;isTest&quot;: {
+          &quot;description&quot;: &quot;Mark the order as a test order.\n\nThe default value is dependent on the account state.\n\n| Account State |</code>isTest<code>|\n| ------------- | -------- |\n|</code>live<code>|</code>false<code>|\n|</code>onboarding | <code>true</code> |\n| <code>test</code> | <code>true</code> |\n&quot;,
+          &quot;type&quot;: &quot;boolean&quot;,
+          &quot;example&quot;: true
+        },
+        &quot;trackingUrl&quot;: {
+          &quot;description&quot;: &quot;User can track an order once after parcels collected and before\ndelivery.\n&quot;,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;https://trackservice/myorder&quot;
+        }
+      }
+    },
+    &quot;JobV2&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;id&quot;,
+        &quot;metadata&quot;,
+        &quot;items&quot;,
+        &quot;timeslot&quot;,
+        &quot;collection&quot;,
+        &quot;delivery&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;id&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/JobId&quot;
+        },
+        &quot;metadata&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/JobMetadata&quot;
+        },
+        &quot;requires&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Requires&quot;
+        },
+        &quot;items&quot;: {
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;$ref&quot;: &quot;#/definitions/Item&quot;
+          }
+        },
+        &quot;timeslot&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/TimeslotV2&quot;
+        },
+        &quot;collection&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/JobStop&quot;
+        },
+        &quot;delivery&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/JobStop&quot;
+        }
+      }
+    },
+    &quot;JobResV2&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;id&quot;,
+        &quot;metadata&quot;,
+        &quot;items&quot;,
+        &quot;timeslot&quot;,
+        &quot;collection&quot;,
+        &quot;delivery&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;id&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/JobId&quot;
+        },
+        &quot;metadata&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/JobMetadata&quot;
+        },
+        &quot;requires&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Requires&quot;
+        },
+        &quot;items&quot;: {
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;$ref&quot;: &quot;#/definitions/Item&quot;
+          }
+        },
+        &quot;timeslot&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/TimeslotV2&quot;
+        },
+        &quot;collection&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/JobStop&quot;
+        },
+        &quot;delivery&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/JobStop&quot;
+        },
+        &quot;status&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/JobStatus&quot;
+        },
+        &quot;eta&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Eta&quot;
+        }
+      }
+    },
+    &quot;JobStop&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;stopId&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;stopId&quot;: {
+          &quot;type&quot;: &quot;string&quot;
+        },
+        &quot;instructions&quot;: {
+          &quot;type&quot;: &quot;string&quot;
+        }
+      }
+    },
+    &quot;JobMetadata&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;journeyType&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;journeyType&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/JourneyType&quot;
+        }
+      }
+    },
+    &quot;TimeslotV2&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;description&quot;: &quot;Must specify either <code>id</code> or <code>collection</code> + <code>delivery</code>, but not both.\n&quot;,
+      &quot;properties&quot;: {
+        &quot;id&quot;: {
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;NWZmNDZiNjMtMjg5NS00ZjYwLThiMDktNThjNzA5YzNhNTBifmtKYXAzcEpwSWJyd3JRcmZLZzVLbkJDeVlSeU1PTH5FQzJBKzRQSH5XQzJOKzRFU34xNTE1NjkzODk5fjE1MTU2OTQ1MDB+MH4wfjQuMzAyMzAw&quot;
+        },
+        &quot;collection&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/TimeRange&quot;
+        },
+        &quot;delivery&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/TimeRange&quot;
+        }
+      }
+    },
+    &quot;TimeRange&quot;: {
+      &quot;description&quot;: &quot;A time range with from and to time.\n&quot;,
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;from&quot;,
+        &quot;to&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;from&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Timestamp&quot;
+        },
+        &quot;to&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Timestamp&quot;
+        }
+      }
+    },
+    &quot;JobStatus&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;description&quot;: &quot;This contains the following status:\n\n* Job&#39;s progress status\n* Courier&#39;s status\n* Incident status\n&quot;,
+      &quot;properties&quot;: {
+        &quot;progressStatus&quot;: {
+          &quot;description&quot;: &quot;Job&#39;s progress status\n&quot;,
+          &quot;type&quot;: &quot;object&quot;,
+          &quot;properties&quot;: {
+            &quot;status&quot;: {
+              &quot;$ref&quot;: &quot;#/definitions/JobProgressStatus&quot;
+            },
+            &quot;updatedAt&quot;: {
+              &quot;$ref&quot;: &quot;#/definitions/Timestamp&quot;
+            }
+          }
+        },
+        &quot;courierStatus&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/CourierLocationStatus&quot;
+        },
+        &quot;incidents&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Incidents&quot;
+        }
+      }
+    },
+    &quot;CancelOrderV2&quot;: {
+      &quot;description&quot;: &quot;Cancel order parameters&quot;,
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;id&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;id&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/OrderId&quot;
+        }
+      }
+    },
+    &quot;OrderId&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;maxLength&quot;: 140,
+      &quot;example&quot;: &quot;myorder&quot;
+    },
+    &quot;AccountId&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;maxLength&quot;: 140,
+      &quot;example&quot;: &quot;myotdaccount&quot;
+    },
+    &quot;JobId&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;maxLength&quot;: 140,
+      &quot;example&quot;: &quot;myjob&quot;
+    },
+    &quot;ServiceType&quot;: {
+      &quot;description&quot;: &quot;The service type required of an order. It must conform to service types agreed with On the dot.\n\n*<em>Service type is mandatory only in the create delivery order API call.  For other types of create order call, this parameter is ignored.</em><em>\n&quot;,
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;enum&quot;: [
+        &quot;timeslot&quot;,
+        &quot;asap&quot;,
+        &quot;return&quot;,
+        &quot;2hour&quot;,
+        &quot;3hour&quot;,
+        &quot;4hour&quot;,
+        &quot;sameday&quot;,
+        &quot;2hour-later&quot;,
+        &quot;4hour-later&quot;
+      ],
+      &quot;example&quot;: &quot;asap&quot;
+    },
+    &quot;JourneyType&quot;: {
+      &quot;description&quot;: &quot;Whether the order journey is for a delivery (store to home) or a return (home to store)\n&quot;,
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;enum&quot;: [
+        &quot;delivery&quot;,
+        &quot;return&quot;
+      ],
+      &quot;example&quot;: &quot;delivery&quot;
+    },
+    &quot;PackageReadyAt&quot;: {
+      &quot;description&quot;: &quot;The time when the items are ready to be collected.\n\n## For create order APIs\n\nOnly used for asap order API.  Other create order API will ignore this field, because package ready time is encoded in the Timeslot ID.\n\nThe time when the items will be ready.\n\nIf not set, then downstream services will assume system time, and the response will not have this field set either.\n\nFormat <code>2006-01-02T15:04:05.999Z</code> in Zulu timezone only\n&quot;,
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;example&quot;: &quot;2018-08-09T12:15:00.000Z&quot;
+    },
+    &quot;RequireTag&quot;: {
+      &quot;description&quot;: &quot;Constraints on the booking.\n&quot;,
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;enum&quot;: [
+        &quot;ageVerification&quot;,
+        &quot;collectionSignOff&quot;,
+        &quot;deliverySignOff&quot;
+      ],
+      &quot;example&quot;: &quot;ageVerification&quot;
+    },
+    &quot;Requires&quot;: {
+      &quot;type&quot;: &quot;array&quot;,
+      &quot;items&quot;: {
+        &quot;$ref&quot;: &quot;#/definitions/RequireTag&quot;
+      }
+    },
+    &quot;CustomData&quot;: {
+      &quot;description&quot;: &quot;Arbitrary key:value pairs.  Value must be string.\n&quot;,
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;example&quot;: {
+        &quot;mykey1&quot;: &quot;myvalue1&quot;,
+        &quot;mykey2&quot;: &quot;myvalue2&quot;
+      }
+    },
+    &quot;Contact&quot;: {
+      &quot;description&quot;: &quot;This is where all order notifications are sent.\n&quot;,
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;properties&quot;: {
+        &quot;name&quot;: {
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;John Smith&quot;
+        },
+        &quot;mobile&quot;: {
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;+447777777777&quot;
+        },
+        &quot;phone&quot;: {
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;02077777777&quot;
+        },
+        &quot;email&quot;: {
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;john.smith@gmail.com&quot;
+        }
+      }
+    },
+    &quot;Timestamp&quot;: {
+      &quot;description&quot;: &quot;Format <code>2006-01-02T15:04:05.999Z</code> in Zulu timezone only\n&quot;,
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;format&quot;: &quot;date-time&quot;,
+      &quot;example&quot;: &quot;2018-08-09T12:15:00.000Z&quot;
+    },
+    &quot;Coordinates&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;longitude&quot;,
+        &quot;latitude&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;longitude&quot;: {
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;example&quot;: -0.1265741
+        },
+        &quot;latitude&quot;: {
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;example&quot;: 51.5136986
+        }
+      }
+    },
+    &quot;Postcode&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;example&quot;: &quot;WC2E 9DD&quot;
+    },
+    &quot;Position&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;coordinates&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;coordinates&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Coordinates&quot;
+        }
+      }
+    },
+    &quot;Address&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;country&quot;,
+        &quot;town&quot;,
+        &quot;streets&quot;,
+        &quot;postcode&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;country&quot;: {
+          &quot;description&quot;: &quot;ISO 3166-1 alpha-3 country code&quot;,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;minLength&quot;: 3,
+          &quot;maxLength&quot;: 3,
+          &quot;example&quot;: &quot;GBR&quot;
+        },
+        &quot;town&quot;: {
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;London&quot;
+        },
+        &quot;streets&quot;: {
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;type&quot;: &quot;string&quot;
+          },
+          &quot;example&quot;: [
+            &quot;Royal Opera House&quot;,
+            &quot;Bow Street&quot;
+          ]
+        },
+        &quot;postcode&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Postcode&quot;
+        }
+      }
+    },
+    &quot;Stop&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;id&quot;,
+        &quot;place&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;id&quot;: {
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;mystop&quot;
+        },
+        &quot;contact&quot;: {
+          &quot;description&quot;: &quot;If set to null, then\n\n\n</em> if order.metadata.journeyType = <code>delivery</code> and this is a collection stop, then the place&#39;s contact details configured in Place Service will be used.\n\n* if order.metadata.journeyType = <code>return</code> and this is a delivery stop, then the place&#39;s contact details configured in Place Service will be use.\n&quot;,
+          &quot;$ref&quot;: &quot;#/definitions/Contact&quot;
+        },
+        &quot;place&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Place&quot;
+        },
+        &quot;instructions&quot;: {
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;Please park in the courtyard&quot;
+        }
+      }
+    },
+    &quot;Place&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;description&quot;: &quot;The following description applies to request body only (not response).\n\nWe define a <code>store stop</code> to be:\n\n* If <code>order.metadata.journeyType</code> is <code>delivery</code>, then for each item group, the collection stop is a \&quot;store stop\&quot;\n\n* If <code>order.metadata.journeyType</code> is <code>return</code>, then for each item group, the delivery stop is a \&quot;store stop\&quot;\n\n<code>store stop</code> must only have <code>place.id</code> and not <code>place.address</code> or <code>place.position</code>.\n\nThis means the place must have been created in place service.\n\nFor the other non-store stops, must set either <code>place.id</code> or <code>place.address</code>, but not both.\n\nIf <code>place.position</code> is set, then it is used for the coordinates information of <code>place.address</code>.\n&quot;,
+      &quot;properties&quot;: {
+        &quot;id&quot;: {
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;myplace&quot;
+        },
+        &quot;position&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Position&quot;
+        },
+        &quot;addresss&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Address&quot;
+        }
+      }
+    },
+    &quot;SimplePlace&quot;: {
+      &quot;description&quot;: &quot;In create order request, you must specify one of <code>id</code> or <code>address</code> or both.\n\nIf <code>address</code> is not supplied, then booking service will call place service with <code>id</code> to find the address and position.\n\nIf both <code>id</code> and <code>address</code> are supplied, then <code>address</code> will override the address from place service.\n\nIf <code>position</code> is not supplied, then booking service will get position from place service if <code>id</code> is present, otherwise booking service calls geocode service to find the position of <code>address</code>.\n\nIf <code>position</code> is supplied, it overrides.\n\nIn a word, values in the request have the highest priority.\n&quot;,
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;properties&quot;: {
+        &quot;id&quot;: {
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;myplace&quot;
+        },
+        &quot;position&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Position&quot;
+        },
+        &quot;addresss&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Address&quot;
+        },
+        &quot;instructions&quot;: {
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;Please beware of foxes&quot;
+        }
+      }
+    },
+    &quot;OrderStatus&quot;: {
+      &quot;description&quot;: &quot;Order&#39;s status.\n\nNote this is different from item groups status, though they&#39;re related.\n&quot;,
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;enum&quot;: [
+        &quot;incomplete&quot;,
+        &quot;created&quot;,
+        &quot;completed&quot;
+      ]
+    },
+    &quot;JobProgressStatus&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;enum&quot;: [
+        &quot;created&quot;,
+        &quot;cancelled&quot;,
+        &quot;offline&quot;,
+        &quot;allocated&quot;,
+        &quot;arrived_at_collection&quot;,
+        &quot;collected&quot;,
+        &quot;arrived_at_delivery&quot;,
+        &quot;delivered&quot;
+      ],
+      &quot;example&quot;: &quot;allocated&quot;
+    },
+    &quot;CourierStatus&quot;: {
+      &quot;description&quot;: &quot;The courier&#39;s status.\n&quot;,
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;enum&quot;: [
+        &quot;idle&quot;,
+        &quot;busy&quot;
+      ],
+      &quot;example&quot;: &quot;busy&quot;
+    },
+    &quot;Currency&quot;: {
+      &quot;description&quot;: &quot;Must be ISO 4217 code\n&quot;,
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;example&quot;: &quot;GBP&quot;
+    },
+    &quot;Dimension&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;width&quot;,
+        &quot;height&quot;,
+        &quot;length&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;width&quot;: {
+          &quot;description&quot;: &quot;Unit must be centimeters.\n&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;example&quot;: 10
+        },
+        &quot;height&quot;: {
+          &quot;description&quot;: &quot;Unit must be centimeters.\n&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;example&quot;: 1
+        },
+        &quot;length&quot;: {
+          &quot;description&quot;: &quot;Unit must be centimeters.\n&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;example&quot;: 20
+        }
+      }
+    },
+    &quot;Webhook&quot;: {
+      &quot;description&quot;: &quot;Webhook URL to send notifications to.\n&quot;,
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;endpoint&quot;,
+        &quot;methodType&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;endpoint&quot;: {
+          &quot;description&quot;: &quot;URL you want to receive status update about your booking&quot;,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;https://my-notification/notification&quot;
+        },
+        &quot;methodType&quot;: {
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;enum&quot;: [
+            &quot;POST&quot;,
+            &quot;PUT&quot;
+          ],
+          &quot;example&quot;: &quot;POST&quot;
+        },
+        &quot;headers&quot;: {
+          &quot;description&quot;: &quot;Arbitrary key:value pairs. key and value must be string.\n&quot;,
+          &quot;type&quot;: &quot;object&quot;,
+          &quot;example&quot;: {
+            &quot;authorization&quot;: &quot;mykey&quot;,
+            &quot;company&quot;: &quot;onthedot&quot;
+          }
+        }
+      }
+    },
+    &quot;Incidents&quot;: {
+      &quot;description&quot;: &quot;A list of incidents, sorted by <code>createdAt</code> in ascending order.\n&quot;,
+      &quot;type&quot;: &quot;array&quot;,
+      &quot;items&quot;: {
+        &quot;$ref&quot;: &quot;#/definitions/Incident&quot;
+      }
+    },
+    &quot;Incident&quot;: {
+      &quot;description&quot;: &quot;Incident details.\n&quot;,
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;id&quot;,
+        &quot;status&quot;,
+        &quot;createdAt&quot;,
+        &quot;updatedAt&quot;,
+        &quot;impact&quot;,
+        &quot;reason&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;id&quot;: {
+          &quot;description&quot;: &quot;The incident&#39;s ID.\n&quot;,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;9d0a8318-d16d-4893-bffa-cb6b5cb7cd4c&quot;
+        },
+        &quot;status&quot;: {
+          &quot;description&quot;: &quot;The incident&#39;s status.  See incident status description section for details.\n&quot;,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;enum&quot;: [
+            &quot;created&quot;,
+            &quot;deleted&quot;
+          ],
+          &quot;example&quot;: &quot;created&quot;
+        },
+        &quot;createdAt&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Timestamp&quot;
+        },
+        &quot;updatedAt&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Timestamp&quot;
+        },
+        &quot;reason&quot;: {
+          &quot;description&quot;: &quot;The reason of the incident.\n&quot;,
+          &quot;type&quot;: &quot;object&quot;,
+          &quot;properties&quot;: {
+            &quot;code&quot;: {
+              &quot;description&quot;: &quot;An incident code.\n&quot;,
+              &quot;type&quot;: &quot;string&quot;,
+              &quot;example&quot;: &quot;9A&quot;
+            },
+            &quot;description&quot;: {
+              &quot;description&quot;: &quot;An incident description.\n&quot;,
+              &quot;type&quot;: &quot;string&quot;,
+              &quot;example&quot;: &quot;Partner Cancellation&quot;
+            }
+          }
+        },
+        &quot;impact&quot;: {
+          &quot;description&quot;: &quot;The impact of the incident.\n&quot;,
+          &quot;type&quot;: &quot;object&quot;,
+          &quot;properties&quot;: {
+            &quot;code&quot;: {
+              &quot;description&quot;: &quot;An impact code.\n&quot;,
+              &quot;type&quot;: &quot;string&quot;,
+              &quot;example&quot;: &quot;7H&quot;
+            },
+            &quot;description&quot;: {
+              &quot;description&quot;: &quot;An impact description.\n&quot;,
+              &quot;type&quot;: &quot;string&quot;,
+              &quot;example&quot;: &quot;Unable to Fulfil Order&quot;
+            }
+          }
+        }
+      }
+    },
+    &quot;Notification&quot;: {
+      &quot;description&quot;: &quot;Notification endpoints where notifications will be sent to, together with the job status type to send.\n&quot;,
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;properties&quot;: {
+        &quot;emails&quot;: {
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;$ref&quot;: &quot;#/definitions/NotificationEmail&quot;
+          }
+        },
+        &quot;sms&quot;: {
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;$ref&quot;: &quot;#/definitions/NotificationSms&quot;
+          }
+        },
+        &quot;webhooks&quot;: {
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;$ref&quot;: &quot;#/definitions/NotificationWebhook&quot;
+          }
+        }
+      }
+    },
+    &quot;NotificationEmail&quot;: {
+      &quot;description&quot;: &quot;Email for notification, together with the job status type to send.\n&quot;,
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;properties&quot;: {
+        &quot;email&quot;: {
+          &quot;description&quot;: &quot;The email address to send notification to.\n&quot;,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;john.smith@gmail.com&quot;
+        },
+        &quot;statuses&quot;: {
+          &quot;description&quot;: &quot;The list of job status to send.\n&quot;,
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;$ref&quot;: &quot;#/definitions/JobStatus&quot;
+          }
+        }
+      }
+    },
+    &quot;NotificationSms&quot;: {
+      &quot;description&quot;: &quot;SMS for notification, together with the job status type to send.\n&quot;,
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;properties&quot;: {
+        &quot;number&quot;: {
+          &quot;description&quot;: &quot;The number to send notification to.\n&quot;,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;+447777777777&quot;
+        },
+        &quot;statuses&quot;: {
+          &quot;description&quot;: &quot;The list of job status to send.\n&quot;,
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;$ref&quot;: &quot;#/definitions/JobStatus&quot;
+          }
+        }
+      }
+    },
+    &quot;NotificationWebhook&quot;: {
+      &quot;description&quot;: &quot;Webhook for notification, together with the job status type to send.\n&quot;,
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;endpoint&quot;,
+        &quot;methodType&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;endpoint&quot;: {
+          &quot;description&quot;: &quot;URL you want to receive status update about your booking.\n&quot;,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;https://my-notification/notification&quot;
+        },
+        &quot;methodType&quot;: {
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;enum&quot;: [
+            &quot;POST&quot;,
+            &quot;PUT&quot;
+          ],
+          &quot;example&quot;: &quot;POST&quot;
+        },
+        &quot;headers&quot;: {
+          &quot;description&quot;: &quot;Arbitrary key:value pairs. key and value must be string.\n&quot;,
+          &quot;type&quot;: &quot;object&quot;,
+          &quot;example&quot;: {
+            &quot;authorization&quot;: &quot;mykey&quot;,
+            &quot;company&quot;: &quot;onthedot&quot;
+          }
+        },
+        &quot;statuses&quot;: {
+          &quot;description&quot;: &quot;The list of job status to send.\n&quot;,
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;$ref&quot;: &quot;#/definitions/JobStatus&quot;
+          }
+        }
+      }
+    },
+    &quot;Item&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;id&quot;,
+        &quot;quantity&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;id&quot;: {
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;maxLength&quot;: 140,
+          &quot;example&quot;: &quot;myitem&quot;
+        },
+        &quot;descriptions&quot;: {
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;maxLength&quot;: 500,
+          &quot;example&quot;: &quot;Some awesome items&quot;
+        },
+        &quot;quantity&quot;: {
+          &quot;type&quot;: &quot;integer&quot;,
+          &quot;format&quot;: &quot;int64&quot;,
+          &quot;example&quot;: 2
+        },
+        &quot;metrics&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/ItemMetrics&quot;
+        }
+      }
+    },
+    &quot;ItemMetrics&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;properties&quot;: {
+        &quot;weight&quot;: {
+          &quot;description&quot;: &quot;Unit must be grams.\n&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;example&quot;: 500
+        },
+        &quot;dimension&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Dimension&quot;
+        }
+      }
+    },
+    &quot;CourierLocationStatus&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;properties&quot;: {
+        &quot;location&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Coordinates&quot;
+        },
+        &quot;updatedAt&quot;: {
+          &quot;description&quot;: &quot;The time when the courier&#39;s location was updated.\n\nFormat <code>2006-01-02T15:04:05.999Z</code> in Zulu timezone only\n&quot;,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;2018-08-09T12:15:15.123Z&quot;
+        }
+      }
+    },
+    &quot;SearchParamTimeRange&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;properties&quot;: {
+        &quot;from&quot;: {
+          &quot;description&quot;: &quot;The start of the time range.\n\nFormat <code>2006-01-02T15:04:05.999Z</code> in Zulu timezone only\n&quot;,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;2018-08-08T12:13:14.123Z&quot;
+        },
+        &quot;to&quot;: {
+          &quot;description&quot;: &quot;The end of the time range.\n\nFormat <code>2006-01-02T15:04:05.999Z</code> in Zulu timezone only\n&quot;,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;2018-08-09T12:13:14.123Z&quot;
+        }
+      }
+    },
+    &quot;Eta&quot;: {
+      &quot;description&quot;: &quot;ETA for collection and/or delivery.\n&quot;,
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;properties&quot;: {
+        &quot;collection&quot;: {
+          &quot;description&quot;: &quot;Collection ETA\n&quot;,
+          &quot;type&quot;: &quot;object&quot;,
+          &quot;properties&quot;: {
+            &quot;courierId&quot;: {
+              &quot;description&quot;: &quot;The courier unique identifier.\n&quot;,
+              &quot;type&quot;: &quot;string&quot;,
+              &quot;example&quot;: &quot;mycourier&quot;
+            },
+            &quot;time&quot;: {
+              &quot;$ref&quot;: &quot;#/definitions/Timestamp&quot;
+            },
+            &quot;message&quot;: {
+              &quot;type&quot;: &quot;string&quot;,
+              &quot;example&quot;: &quot;unavailable&quot;
+            }
+          }
+        },
+        &quot;delivery&quot;: {
+          &quot;description&quot;: &quot;Delivery ETA\n&quot;,
+          &quot;type&quot;: &quot;object&quot;,
+          &quot;properties&quot;: {
+            &quot;courierId&quot;: {
+              &quot;description&quot;: &quot;The courier unique identifier.\n&quot;,
+              &quot;type&quot;: &quot;string&quot;,
+              &quot;example&quot;: &quot;mycourier&quot;
+            },
+            &quot;time&quot;: {
+              &quot;$ref&quot;: &quot;#/definitions/Timestamp&quot;
+            },
+            &quot;message&quot;: {
+              &quot;type&quot;: &quot;string&quot;,
+              &quot;example&quot;: &quot;unavailable&quot;
+            }
+          }
+        }
+      }
+    }
+  }
+}</p>
+</code></pre></details>
+</blockquote>
+
+<aside class="notice">
+**Swagger 2.0 files**
+</aside>
+
+<p>The best way to view the API Swagger specification is to copy the content of any of the 2 files below or by expanding the right hand pane, copy then paste it into the free: <a href='https://editor.swagger.io/' target="_blank"><code>Swagger Editor by Smartbear</code></a>.</p>
 
 <ul>
 <li>Click <a href="swagger/v2_otd_public.yaml">here</a> to download the <code>v2_otd_public.yaml</code> file.</li>
-<li><p>Click <a href="swagger/v2_otd_public.json">here</a> to download the <code>v2_otd_public.json</code> file.</p>
-
-<p>* <code>OAS3.0 coming soon</code></p></li>
-</ul></li>
+<li>Click <a href="swagger/v2_otd_public.json">here</a> to download the <code>v2_otd_public.json</code> file.</li>
+<li><code>N.B.</code> OAS3.0 coming soon`</li>
 </ul>
+
+<p><img src="images/Swagger_Editor.png" alt="Swagger Editor" /></p>
+<h1 id='api-guide'>API Guide</h1><h2 id='resource-url'>Resource URL</h2>
+<p>Currently, all the APIs are JSON-based APIs. They support standard HTTP verbs, for example, GET, POST, PUT, PATCH and DELETE.</p>
+<h3 id='resource-url-format'>Resource URL Format</h3>
+<p>{URL}/version/resource_type/[sub-resource|identifiers]/?query_string
+* Example <code>**POST** /v2/accounts/{{accountId}}/orders</code></p>
+<h2 id='methods-supported'>Methods supported</h2>
+<table><thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>GET</td>
+<td>Retrieve booking or collection of bookings</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>Creating new booking</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td>Update the existing booking</td>
+</tr>
+<tr>
+<td></td>
+<td>Cancel a booking</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>Delete the record</td>
+</tr>
+</tbody></table>
+<h2 id='http-codes'>HTTP Codes</h2>
+<p>All the APIs return HTTP code in response to various error scenarios:</p>
+
+<table><thead>
+<tr>
+<th>HTTP Codes</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>Success</td>
+<td>Request completed as expected</td>
+</tr>
+<tr>
+<td>201</td>
+<td>Created</td>
+<td>Entity created</td>
+</tr>
+<tr>
+<td>301</td>
+<td>Moved permanently</td>
+<td>Service permanently redirected</td>
+</tr>
+<tr>
+<td>304</td>
+<td>Not modified</td>
+<td>If request is cached and not updated</td>
+</tr>
+<tr>
+<td>400</td>
+<td>Bad request</td>
+<td>Request payload is not as per specification, i.e. argument or parameter is missing</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized</td>
+<td>Authorization token unavailable or not valid</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden</td>
+<td>Server understood the request but refusing to fulfil the request.</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><em>Example: Access not allowed based on Access Control List, tier restriction, etc.</em></td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not found</td>
+<td>Not found anything matching the Request-URI (Uniform Resource Identifier)</td>
+</tr>
+<tr>
+<td>405</td>
+<td>Method not allowed</td>
+<td>Method is not supported or not allowed</td>
+</tr>
+<tr>
+<td>406</td>
+<td>Not Accepted</td>
+<td>The Accept header in the request asking for format which is not supported</td>
+</tr>
+<tr>
+<td>409</td>
+<td>Conflict</td>
+<td>Concurrent update to the same entity</td>
+</tr>
+<tr>
+<td>413</td>
+<td>Request entity too large</td>
+<td>Over the allowed limit</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal server error</td>
+<td>Server encountered an unexpected error</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Service unavailable</td>
+<td>Service is unable to handle the request due to temporary overloading or maintenance of the server</td>
+</tr>
+</tbody></table>
+<h2 id='request-format'>Request format</h2>
+<p>Currently, API supports only JSON-based requests. The API-key is mandatory for all the requests as part of header.</p>
+<h3 id='header-definition'>Header definition</h3>
+<p>Definition of the request headers is as follows:</p>
+
+<p><code>Note: (M)andatory, (O)ptional</code></p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Valid</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Accept</td>
+<td>String</td>
+<td>O</td>
+<td>JSON</td>
+<td>Currently, our API only supports JSON and <code>does not support any other formats i.e. XML</code></td>
+</tr>
+<tr>
+<td>Content-type</td>
+<td>string</td>
+<td>M</td>
+<td>application/json</td>
+<td>Currently, our API only supports JSON and <code>does not support any other formats i.e. XML</code></td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>String</td>
+<td>M</td>
+<td>API Bearer Token</td>
+<td>Accepts the valid API-key in the provided format that was created during the user subscription process</td>
+</tr>
+<tr>
+<td>x-trace-id</td>
+<td>String</td>
+<td>M</td>
+<td></td>
+<td><code>Unique identifier for each request</code>, can be a $guid, passed by client application. Used to track the internal application flow</td>
+</tr>
+</tbody></table>
+<h2 id='security'>Security</h2>
+<p><strong>All APIs require an <code>Authorization</code> header.</strong></p>
+
+<ul>
+<li>You will need to register <a href="https://developer.onthedot.com/create">here</a> to obtain a token by creating an <code>app</code> and subscribing to our <code>Sandbox</code>.</li>
+<li>The <code>API Bearer token</code>  must be used in the request headers .</li>
+</ul>
+<h2 id='date-and-time'>Date and time</h2>
+<p>The date and time object used in the request or response supports ISO8601 format and will be reported in UTC time for example, <code>2019-05-10T10:04:02.000Z</code>.</p>
 <h1 id='quick-start'>Quick Start</h1><h2 id='signup-to-otd-sandbox'>Signup to OTD Sandbox</h2>
 <aside class="notice">
 Our Sandbox is a self-service provisioning, no commitment required. All that is required is to register and obtain your developer `API Key.`AUP policy is enforced with On the dot APIs.
@@ -401,7 +2428,7 @@ Our Sandbox is a self-service provisioning, no commitment required. All that is 
 <p><img src="images/OTD_H_DEV.png" alt="Dev" /></p>
 
 <aside class="warning">
-All transactional data is regularily purged, every 14 days.
+All transactional data is regularily purged, please don't get alarmed if your sandbox booking data disapered. Create a new one and continue.
 </aside>
 
 <p><code>N.B.</code> - Should you need further clarification, please contact OTD partners team at <a href="mailto:partners@onthedot.com">partners@onthedot.com</a>.</p>
@@ -413,7 +2440,7 @@ All transactional data is regularily purged, every 14 days.
 <li>Create an app and subcribe to the <code>Sandbox</code> API product to obtain your <code>API Token</code>
 
 <ul>
-<li>Download and configure the tailored Postman collections to testdrive our APIs without commitment.</li>
+<li>Download and configure the tailored Postman collections and enviroment below to testdrive our APIs without any commitment.</li>
 </ul></li>
 </ul></li>
 </ul>
@@ -421,8 +2448,8 @@ All transactional data is regularily purged, every 14 days.
 <p><strong><code>Postman</code></strong> has two files: <em>collection</em> and <em>enviroment</em>. A collection is available for each booking type. <code>Enviroment</code> is the same for all collections and is pre-set for the <code>sandbox</code> account with the seed data described <a href="#sandbox-seed-data">below.</a></p>
 
 <ul>
-<li>Click on <a href="#"><img src="images/PostmanCollection.png" alt="Postman" /></a> to download our Postman API Collection.</li>
-<li>Click on <a href="#"><img src="images/PostmanEnv.png" alt="Postman" /></a> to download our Postman sandbox enviroment
+<li>Click on <a href="postman/OTD-Sandbox-Prod.postman_collection.json"><img src="images/PostmanCollection.png" alt="Postman" /></a> to download our Postman API Collection.</li>
+<li>Click on <a href="postman/OTD-Sandbox-Prod.postman_environment.json"><img src="images/PostmanEnv.png" alt="Postman" /></a> to download our Postman sandbox enviroment
 
 <ul>
 <li>N.B. Postman enviroment requires your own <code>API Key</code> which can be obtained by following the steps <a href="#signup-to-otd-sandbox">above.</a></li>
@@ -443,32 +2470,101 @@ Sandbox <code>seed data</code> below allows developers to test their integration
 
 <p><strong>Places</strong></p>
 
-<ul>
-<li><p>Sandbox has 1 place configured: <strong><code>&quot;placeId&quot;: &quot;sandbox-store&quot;</code></strong></p>
+<blockquote>
+<details><summary class="highlight plaintext">Expand for `sandbox-store` details:</summary><pre><code><p>{
+    &quot;partnerId&quot;: &quot;sandbox&quot;,
+    &quot;placeId&quot;: &quot;sandbox-store&quot;,
+    &quot;postcode&quot;: &quot;EC2A 4PH&quot;,
+    &quot;coordinates&quot;: {
+        &quot;latitude&quot;: 51.523317,
+        &quot;longitude&quot;: -0.080965
+    },
+    &quot;address&quot;: {
+        &quot;street&quot;: [&quot;CitySprint - London Central Service Centre&quot;, &quot;58-62 Scrutton St&quot;],
+        &quot;town&quot;: &quot;Hackney&quot;,
+        &quot;state&quot;: &quot;London&quot;,
+        &quot;country&quot;: &quot;United Kingdom&quot;
+    },
+    &quot;region&quot;: &quot;M25&quot;,
+    &quot;openTime&quot;: {
+        &quot;days&quot;: {
+            &quot;Friday&quot;: {
+                &quot;openTime&quot;: &quot;00:01&quot;,
+                &quot;closeTime&quot;: &quot;23:59&quot;
+            },
+            &quot;Monday&quot;: {
+                &quot;openTime&quot;: &quot;00:01&quot;,
+                &quot;closeTime&quot;: &quot;23:59&quot;
+            },
+            &quot;Saturday&quot;: {
+                &quot;openTime&quot;: &quot;00:01&quot;,
+                &quot;closeTime&quot;: &quot;23:59&quot;
+            },
+            &quot;Sunday&quot;: {
+                &quot;openTime&quot;: &quot;00:01&quot;,
+                &quot;closeTime&quot;: &quot;23:59&quot;
+            },
+            &quot;Thursday&quot;: {
+                &quot;openTime&quot;: &quot;00:01&quot;,
+                &quot;closeTime&quot;: &quot;23:59&quot;
+            },
+            &quot;Tuesday&quot;: {
+                &quot;openTime&quot;: &quot;00:01&quot;,
+                &quot;closeTime&quot;: &quot;23:59&quot;
+            },
+            &quot;Wednesday&quot;: {
+                &quot;openTime&quot;: &quot;00:01&quot;,
+                &quot;closeTime&quot;: &quot;23:59&quot;
+            }
+        }
+    },
+    &quot;contact&quot;: {
+        &quot;name&quot;: &quot;ON THE DOT&quot;,
+        &quot;mobile&quot;: &quot;62737283728&quot;,
+        &quot;phone&quot;: &quot;7232372783&quot;,
+        &quot;email&quot;: &quot;test121@test.com&quot;
+    },
+    &quot;timezone&quot;: &quot;Europe/London&quot;
+}</p>
+</code></pre></details>
+</blockquote>
 
 <ul>
-<li>Maxim allowed distance for <code>sandbox-store</code> can be configured by service and vehicle type, currently set to : <strong><code>4 miles</code></strong> to enable testing of API behaviour should delivery be in or out of set maxim routed distance.</li>
+<li><p>Sandbox has 1 place configured: <code>&quot;placeId&quot;: &quot;sandbox-store&quot;</code></p>
+
+<ul>
+<li>Postcode and Coordinates:
+<code>&quot;postcode&quot;: &quot;EC2A 4PH&quot;,
+&quot;coordinates&quot;: {
+    &quot;latitude&quot;: 51.523317,
+    &quot;longitude&quot;: -0.080965}
+</code></li>
 </ul></li>
 </ul>
+<h3 id='comming-soon'><code>Comming Soon</code>:</h3>
+<p>*  Maxim allowed distance for <code>sandbox-store</code> can be configured by service and vehicle type, currently set to : <strong><code>4 miles</code></strong> to enable testing of API behaviour should delivery be in or out of the account configured maxim routed distance.</p>
 
 <p><strong>SLAs</strong></p>
 
 <ul>
-<li>Sandbox account <code>sandbox</code> had the following <code>services</code> configured in 2 zones: <code>M25</code> and <code>National</code>
-
-<ul>
-<li><strong>M25</strong>:
-
-<ul>
-<li><code>sameday</code>, <code>asap</code> and <code>timeslot</code></li>
-</ul></li>
-<li><strong>National</strong>:
-
-<ul>
-<li><code>timeslot</code>,<code>timewindow</code>,<code>asap</code>,<code>return</code>,<code>2hour</code>,<code>3hour</code>,<code>4hour</code>,<code>sameday</code>,<code>2hour-later</code>,<code>4hour-later</code></li>
-</ul></li>
-</ul></li>
+<li>Sandbox account <code>sandbox</code> had the following <code>services</code> configured in 2 zones: <code>M25</code> and <code>National</code></li>
 </ul>
+
+<table><thead>
+<tr>
+<th>Region</th>
+<th>Service</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>M25</strong></td>
+<td><code>sameday</code>, <code>asap</code>,<code>4hour</code> and <code>timeslot</code></td>
+</tr>
+<tr>
+<td><strong>National</strong>:</td>
+<td><code>timeslot</code>,<code>timewindow</code>,<code>asap</code>,<code>return</code>,<code>2hour</code>,<code>3hour</code>,<code>sameday</code>,<code>2hour-later</code>,<code>4hour-later</code></td>
+</tr>
+</tbody></table>
 <h2 id='before-you-start'>Before you start</h2><h3 id='job-journey-type'>Job Journey Type</h3>
 <p>Each job must have a <code>&lt;order&gt;.&lt;job&gt;.metadata.journeyType</code> defined.  The valid values are:</p>
 
@@ -494,7 +2590,10 @@ Sandbox <code>seed data</code> below allows developers to test their integration
 <h3 id='service-type'>Service Type</h3>
 <p>A service type defines a set of pre-agreed constraints for orders.  A new user must have the service type set up before they can create orders.</p>
 
-<p>Currently supported service types: <code>timeslot</code>, <code>asap</code>, <code>return</code>, <code>2hour</code>, <code>3hour</code>, <code>4hour</code>, <code>sameday</code>, <code>2hour-later</code>, <code>4hour-later</code>.</p>
+<ul>
+<li><p>Currently all supported service types: <code>sameday</code>, <code>asap</code>,<code>4hour</code>,<code>timeslot</code>,<code>timewindow</code>,<code>asap</code>,<code>return</code>,<code>2hour</code>,<code>3hour</code>,<code>sameday</code>,<code>2hour-later</code>,<code>4hour-later</code></p></li>
+<li><p>Sandbox service types are described in <a href="#sandbox-seed-data">seed data above</a>.</p></li>
+</ul>
 <h3 id='place'>Place</h3>
 <p>Each stop must contain a valid place(address), which represents a physical location.</p>
 
@@ -502,39 +2601,44 @@ Sandbox <code>seed data</code> below allows developers to test their integration
 <h3 id='status'>Status</h3>
 <p>Both <code>order</code> and <code>job</code> have status.  They are updated with realtime events.</p>
 <h3 id='job-status'>Job Status</h3>
+<ul>
+<li><strong><code>Near by</code></strong> is a new status trigger when a courier is xx metres from a stop.</li>
+</ul>
+
 <blockquote>
-<p>Status representing a job execution state.</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-  </span><span class="s2">"progressStatus"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"allocated"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-02T13:18:53.087Z"</span><span class="w">
+<p>Status representing a job execution state.
+<details><summary class="highlight plaintext">Expand for job state</summary><pre><code><pre class="highlight json tab-json"><code><span class="s2">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="s2">&quot;progressStatus&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;allocated&quot;</span><span class="p">,</span><span class="w">
+    </span><span class="s2">&quot;updatedAt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019-01-02T13:18:53.087Z&quot;</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"courierStatus"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"location"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1701</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">51.5701</span><span class="w">
+  </span><span class="s2">&quot;courierStatus&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">&quot;location&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">&quot;longitude&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1701</span><span class="p">,</span><span class="w">
+      </span><span class="s2">&quot;latitude&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">51.5701</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-02T13:18:53.087Z"</span><span class="w">
+    </span><span class="s2">&quot;updatedAt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019-01-02T13:18:53.087Z&quot;</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"incidents"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="s2">&quot;incidents&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"85ad3dd6-05d3-4023-b1e6-74042b7ff138"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"created"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"reason"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1B"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Partner Cancellation"</span><span class="w">
+      </span><span class="s2">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;85ad3dd6-05d3-4023-b1e6-74042b7ff138&quot;</span><span class="p">,</span><span class="w">
+      </span><span class="s2">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;created&quot;</span><span class="p">,</span><span class="w">
+      </span><span class="s2">&quot;reason&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1B&quot;</span><span class="p">,</span><span class="w">
+        </span><span class="s2">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Partner Cancellation&quot;</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"impact"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7H"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unable to Fulfil Order"</span><span class="w">
+      </span><span class="s2">&quot;impact&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;7H&quot;</span><span class="p">,</span><span class="w">
+        </span><span class="s2">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Unable to Fulfil Order&quot;</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-02T13:18:53.087Z"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-02T13:18:53.087Z"</span><span class="w">
+      </span><span class="s2">&quot;createdAt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019-01-02T13:18:53.087Z&quot;</span><span class="p">,</span><span class="w">
+      </span><span class="s2">&quot;updatedAt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019-01-02T13:18:53.087Z&quot;</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
+</span></code></pre></code></pre></details></p>
+</blockquote>
+
 <p>Here is an example job status object.</p>
 
 <ul>
@@ -549,51 +2653,88 @@ Sandbox <code>seed data</code> below allows developers to test their integration
 }
 </code></p>
 
-<blockquote>
-<p><code>Nearby</code> is a new status trigger when a courier is xx metres from a stop.</p>
-</blockquote>
+<p>Our platform has the following standard event codes which can be sent via webhooks <code>as is</code> or be replaced with <code>custom status</code> which can be consumed by the integrating party. The configuration will be specific to the partner. Sandbox is configured to send out the <code>custom status</code>
+* <code>N.B.</code>: Within all booking request, you will always need to use the <code>OTD Status</code></p>
 
 <table><thead>
 <tr>
-<th>Status</th>
+<th>OTD Status</th>
 <th>Meaning</th>
+<th>Custom Status</th>
+<th>Sent via Webhooks</th>
 </tr>
 </thead><tbody>
 <tr>
 <td><code>created</code></td>
 <td>The job was created.</td>
+<td>Booked</td>
+<td>√</td>
 </tr>
 <tr>
 <td><code>allocated</code></td>
 <td>A courier has accepted the job.</td>
+<td>Allocated to Driver</td>
+<td>√</td>
+</tr>
+<tr>
+<td><code>autoarrivedat-collection</code></td>
+<td>Courier nearby collection</td>
+<td>Near By Collection</td>
+<td>√</td>
 </tr>
 <tr>
 <td><code>arrived_at_collection</code></td>
 <td>Courier has arrived at the collection address.</td>
+<td>Driver at the Store</td>
+<td>√</td>
 </tr>
 <tr>
 <td><code>collected</code></td>
 <td>Courier has collected the item.</td>
+<td>Parcells Collected</td>
+<td>√</td>
+</tr>
+<tr>
+<td><code>autoarrivedat-delivery</code></td>
+<td>Courier nearby delivery</td>
+<td>Near By Delivery</td>
+<td>√</td>
 </tr>
 <tr>
 <td><code>arrived_at_delivery</code></td>
 <td>Courier has arrived at the delivery address.</td>
+<td>Driver at the Delivery</td>
+<td>√</td>
 </tr>
 <tr>
 <td><code>delivered</code></td>
 <td>Courier has delivered the item.</td>
+<td>Delivered</td>
+<td>√</td>
 </tr>
 <tr>
 <td><code>cancelled</code></td>
 <td>The job has been cancelled (this means the whole order has been cancelled too).</td>
+<td>Cancelled</td>
+<td>√</td>
+</tr>
+<tr>
+<td><code>amended</code></td>
+<td>Boooking was amended</td>
+<td>Amended</td>
+<td>√</td>
 </tr>
 <tr>
 <td><code>returned_to_depot</code></td>
 <td>Courier failed to deliver the item and it has been returned to depot.</td>
+<td>-</td>
+<td>-</td>
 </tr>
 <tr>
 <td><code>offline</code></td>
 <td>The job is offline (this means an internal error, please contact OTD support).</td>
+<td>-</td>
+<td>-</td>
 </tr>
 </tbody></table>
 <h3 id='order-status'>Order Status</h3>
@@ -671,60 +2812,420 @@ Sandbox <code>seed data</code> below allows developers to test their integration
 }
 </code>
 * This gives the realtime courier location data.</p>
-<h2 id='security'>Security</h2>
-<p><strong>All APIs require an <code>Authorization</code> header.</strong></p>
-
-<ul>
-<li>You will need to register <a href="https://developer.onthedot.com/create">here</a> to obtain a token by creating an <code>app</code> and subscribing to our <code>Sandbox</code>.</li>
-<li>The <code>token</code>  must be used in the request headers as <code>Authorization:{{Token}}</code> header.</li>
-</ul>
-<h3 id='authentication'>Authentication</h3>
-<table><thead>
-<tr>
-<th>apiKey</th>
-<th><em>API Key</em></th>
-</tr>
-</thead><tbody>
-</tbody></table>
 <h1 id='booking-service-apis-v2-0'>Booking Service APIs V2.0</h1><h2 id='create-an-order'>Create an order</h2>
-<p>Example:
-```
-{
-  &quot;id&quot;: &quot;unique partner order number&quot;,</p>
+<blockquote>
+<p><span class="http-verb-label" style="top: -1px; width: 55px; background-color: #49cc90; border: 0.1em solid;"">
+POST
+</span>
+{{host}}/{{bookingService}}/v2/accounts/{{accountId}}/orders</p>
 
-<p>&quot;metaData&quot;: {
-    &quot;clientRefId&quot;: &quot;unique partner order number&quot;,
-    &quot;serviceType&quot;: &quot;4hour&quot;,
-  },
-  &quot;customData&quot;: {
-        &quot;reference_1&quot;: &quot;PartnerName&quot;,
-        &quot;reference_2&quot;: &quot;PartnerStore - Staples Corner”,
-        &#39;reference_3&quot;: &quot;4002”,
-        &#39;citytrak-department&quot;: &quot;unique partner order number”
-  },
-  ...
-      &quot;requires&quot;: [
+<details><summary class="highlight plaintext">Expand for request</summary><pre><code><p>curl -X POST \
+  https://public-api-prod.onthedot.com/booking/v2/accounts/sandbox/orders \
+  -H &#39;Content-Type: application/json&#39; \
+  -H &#39;authorization: <code>&lt;Your Own API Bearer Taoken&gt;</code>&#39; \
+  -H &#39;cache-control: no-cache&#39; \
+  -H &#39;x-trace-id: ad095cc0-6c52-491a-a2cf-a3408c801a55&#39; \
+  -d &#39;{
+    &quot;id&quot;: &quot;1559209422&quot;,
+    &quot;metadata&quot;: {
+        &quot;clientRefId&quot;:&quot;CLIENT-REF-1559209422&quot;,
+        &quot;serviceType&quot;: &quot;asap&quot;,
+        &quot;isTest&quot;:True
+    },
+    &quot;customData&quot;: {
+      &quot;caller&quot;:&quot;API&quot;,
+      &quot;Customer&quot;:&quot;<code>CustomerName</code>&quot;
+        &quot;reference_1&quot;: &quot;kingsman@kingsman.com&quot;,
+        &quot;reference_2&quot;: &quot;Kingsman&quot;,
+        <code>&quot;citytrak-department&quot;: &quot;&lt;CoopOrderReference&gt;”</code>
+    },
+    &quot;contact&quot;: {
+        &quot;name&quot;: &quot;James Moriarty&quot;,
+        &quot;mobile&quot;: &quot;+447888888889&quot;,
+        &quot;phone&quot;: &quot;020812718278&quot;,
+        &quot;email&quot;: &quot;jm@gmail.com&quot;
+    },
+    &quot;notification&quot;: {
+        &quot;emails&quot;: [
+            {
+                &quot;email&quot;: &quot;rbeemi@onthedot.com&quot;,
+                &quot;statuses&quot;: [
+                    &quot;created&quot;,
+                    &quot;allocated&quot;,
+                    &quot;arrived_at_collection&quot;,
+                    &quot;collected&quot;,
+                    &quot;arrived_at_delivery&quot;,
+                    &quot;delivered&quot;
+                ]
+            }
+        ],
+        &quot;sms&quot;: [
+            {
+                &quot;number&quot;: &quot;+4477772888442&quot;,
+                &quot;statuses&quot;: [
+                    &quot;created&quot;,
+                    &quot;allocated&quot;,
+                    &quot;arrived_at_collection&quot;,
+                    &quot;collected&quot;,
+                    &quot;arrived_at_delivery&quot;,
+                    &quot;delivered&quot;
+                ]
+            }
+        ],
+        &quot;webhooks&quot;: [
+            {
+                &quot;endpoint&quot;: &quot;https://enit24ti5gez.x.pipedream.net/&quot;,
+                &quot;methodType&quot;: &quot;POST&quot;,
+                &quot;headers&quot;: {
+                    &quot;authorization&quot;: &quot;&quot;,
+                    &quot;company&quot;: &quot;&quot;
+                },
+                &quot;statuses&quot;: [
+                    &quot;created&quot;,
+                    &quot;allocated&quot;,
+                    &quot;arrived_at_collection&quot;,
+                    &quot;collected&quot;,
+                    &quot;arrived_at_delivery&quot;,
+                    &quot;delivered&quot;
+                ]
+            }
+        ]
+    },
+    &quot;jobs&quot;: [
+        {
+            &quot;id&quot;: &quot;1&quot;,
+            &quot;metadata&quot;: {
+                &quot;journeyType&quot;: &quot;delivery&quot;
+            },
+            &quot;requires&quot;: [
                 &quot;ageVerification&quot;,
                 &quot;collectionSignOff&quot;,
                 &quot;deliverySignOff&quot;
-      ],
-  ...
-}
-```</p>
+            ],
+            &quot;items&quot;: [
+                {
+                    &quot;id&quot;: &quot;1&quot;,
+                    &quot;description&quot;: &quot;Book&quot;,
+                    &quot;quantity&quot;: 5,
+                    &quot;metrics&quot;: {
+                        &quot;weight&quot;: 4,
+                        &quot;dimension&quot;: {
+                            &quot;width&quot;: 10,
+                            &quot;height&quot;: 5,
+                            &quot;length&quot;: 20
+                        }
+                    }
+                },
+                {
+                    &quot;id&quot;: &quot;2&quot;,
+                    &quot;description&quot;: &quot;Book marker&quot;,
+                    &quot;quantity&quot;: 4,
+                    &quot;metrics&quot;: {
+                        &quot;weight&quot;: 10,
+                        &quot;dimension&quot;: {
+                            &quot;width&quot;: 10,
+                            &quot;height&quot;: 0.5,
+                            &quot;length&quot;: 20
+                        }
+                    }
+                }
+            ],
+            &quot;timeslot&quot;: {
+                &quot;collection&quot;: {
+                    &quot;from&quot;: &quot;2019-05-30T11:00:00.000Z&quot;,
+                    &quot;to&quot;: &quot;2019-05-30T12:00:00.000Z&quot;
+                },
+                &quot;delivery&quot;: {
+                    &quot;from&quot;: &quot;2019-05-30T13:00:00.000Z&quot;,
+                    &quot;to&quot;: &quot;2019-05-30T14:00:00.000Z&quot;
+                }
+            },
+            &quot;collection&quot;: {
+                &quot;stopId&quot;: &quot;1&quot;,
+                &quot;instructions&quot;: &quot;Collect Box From Main Garage&quot;
+            },
+            &quot;delivery&quot;: {
+                &quot;stopId&quot;: &quot;2&quot;,
+                &quot;instructions&quot;: &quot;Ring main Door Bell&quot;
+            }
+        }
+    ],
+    &quot;stops&quot;: [
+        {
+            &quot;id&quot;: &quot;1&quot;,
+            &quot;contact&quot;: {
+                &quot;name&quot;: &quot;Sherlock Holmes&quot;,
+                &quot;mobile&quot;: &quot;+447777777777&quot;,
+                &quot;phone&quot;: &quot;02091212121212&quot;,
+                &quot;email&quot;: &quot;sh@gmail.com&quot;
+            },
+            &quot;place&quot;: {
+                &quot;id&quot;: &quot;sandbox-store&quot;
+            },
+            &quot;instructions&quot;: &quot;Park at Store back Door&quot;
+        },
+        {
+            &quot;id&quot;: &quot;2&quot;,
+            &quot;contact&quot;: {
+                &quot;name&quot;: &quot;John Watson&quot;,
+                &quot;mobile&quot;: &quot;+447777777778&quot;,
+                &quot;email&quot;: &quot;jw@gmail.com&quot;
+            },
+            &quot;place&quot;: {
+                &quot;address&quot;: {
+                    &quot;country&quot;: &quot;GBR&quot;,
+                    &quot;town&quot;: &quot;London&quot;,
+                    &quot;streets&quot;: [
+                        &quot;FLAT 111&quot;,
+                        &quot;ICON BUILDING&quot;
+                    ],
+                    &quot;postcode&quot;: &quot;IG1 2FJ&quot;,
+                    &quot;companyName&quot;: &quot;SANDBOX-OTD-COMPANY&quot;
+                }
+            },
+            &quot;instructions&quot;: &quot;You can park at Front Garden at my house&quot;
+        }
+    ]
+}&#39;</p>
+</code></pre></details>
+
+<div class="code-block-no-wrap-header">Http reponse codes :<p><span class="http-resp-label" style="top: -1px; width: 30px; background-color: #49cc90; border: 0.1em solid;">201</span></p>
+<p><span class="http-resp-label" style="top: -1px; width: 30px; background-color: red; border: 0.1em solid;">4xx</span></p>
+<p><span class="http-resp-label" style="top: -1px; width: 30px; background-color: red; border: 0.1em solid;">5xx</span></p>
+</div>
+
+<details><summary class="highlight plaintext">Expand for response</summary><pre><code><p>{
+    &quot;id&quot;: &quot;1559211073&quot;,
+    &quot;metadata&quot;: {
+        &quot;externalAccountId&quot;: &quot;W99969&quot;,
+        &quot;clientRefId&quot;: &quot;CLIENT-REF-1559211073&quot;,
+        &quot;sector&quot;: &quot;Ent Retail&quot;,
+        &quot;vehicleType&quot;: &quot;car&quot;,
+        &quot;serviceType&quot;: &quot;asap&quot;,
+        &quot;trackingUrl&quot;: &quot;https://trackmydriver.lastmilelink.eu/sandbox::1559211073?token=93uQp9OZgBoW6%2FgYQd2%2FfADCzpdmHbYtwCQ0PouEWUE%3D&quot;,
+        &quot;isTest&quot;: true
+    },
+    &quot;customData&quot;: {
+        &quot;caller&quot;: &quot;Booking&quot;,
+        &quot;reference_1&quot;: &quot;kingsman@kingsman.com&quot;,
+        &quot;reference_2&quot;: &quot;Kingsman&quot;
+    },
+    &quot;contact&quot;: {
+        &quot;name&quot;: &quot;James Moriarty&quot;,
+        &quot;mobile&quot;: &quot;+447888888889&quot;,
+        &quot;phone&quot;: &quot;020812718278&quot;,
+        &quot;email&quot;: &quot;jm@gmail.com&quot;
+    },
+    &quot;notification&quot;: {
+        &quot;emails&quot;: [
+            {
+                &quot;email&quot;: &quot;rbeemi@onthedot.com&quot;,
+                &quot;statuses&quot;: [
+                    &quot;created&quot;,
+                    &quot;allocated&quot;,
+                    &quot;arrived_at_collection&quot;,
+                    &quot;collected&quot;,
+                    &quot;arrived_at_delivery&quot;,
+                    &quot;delivered&quot;
+                ]
+            }
+        ],
+        &quot;sms&quot;: [
+            {
+                &quot;number&quot;: &quot;+4477772888442&quot;,
+                &quot;statuses&quot;: [
+                    &quot;created&quot;,
+                    &quot;allocated&quot;,
+                    &quot;arrived_at_collection&quot;,
+                    &quot;collected&quot;,
+                    &quot;arrived_at_delivery&quot;,
+                    &quot;delivered&quot;
+                ]
+            }
+        ],
+        &quot;webhooks&quot;: [
+            {
+                &quot;endpoint&quot;: &quot;https://enit24ti5gez.x.pipedream.net/&quot;,
+                &quot;methodType&quot;: &quot;POST&quot;,
+                &quot;headers&quot;: {
+                    &quot;authorization&quot;: &quot;&quot;,
+                    &quot;company&quot;: &quot;&quot;
+                },
+                &quot;statuses&quot;: [
+                    &quot;created&quot;,
+                    &quot;allocated&quot;,
+                    &quot;arrived_at_collection&quot;,
+                    &quot;collected&quot;,
+                    &quot;arrived_at_delivery&quot;,
+                    &quot;delivered&quot;
+                ]
+            }
+        ]
+    },
+    &quot;jobs&quot;: [
+        {
+            &quot;id&quot;: &quot;1&quot;,
+            &quot;metadata&quot;: {
+                &quot;journeyType&quot;: &quot;delivery&quot;
+            },
+            &quot;items&quot;: [
+                {
+                    &quot;id&quot;: &quot;1&quot;,
+                    &quot;description&quot;: &quot;Book&quot;,
+                    &quot;quantity&quot;: 5,
+                    &quot;metrics&quot;: {
+                        &quot;weight&quot;: 4,
+                        &quot;dimension&quot;: {
+                            &quot;width&quot;: 10,
+                            &quot;height&quot;: 5,
+                            &quot;length&quot;: 20
+                        }
+                    }
+                },
+                {
+                    &quot;id&quot;: &quot;2&quot;,
+                    &quot;description&quot;: &quot;Book marker&quot;,
+                    &quot;quantity&quot;: 4,
+                    &quot;metrics&quot;: {
+                        &quot;weight&quot;: 10,
+                        &quot;dimension&quot;: {
+                            &quot;width&quot;: 10,
+                            &quot;height&quot;: 0.5,
+                            &quot;length&quot;: 20
+                        }
+                    }
+                }
+            ],
+            &quot;collection&quot;: {
+                &quot;stopId&quot;: &quot;1&quot;,
+                &quot;instructions&quot;: &quot;Collect Box From Main Garage&quot;
+            },
+            &quot;delivery&quot;: {
+                &quot;stopId&quot;: &quot;2&quot;,
+                &quot;instructions&quot;: &quot;Ring main Door Bell&quot;
+            },
+            &quot;timeslot&quot;: {
+                &quot;id&quot;: &quot;&quot;,
+                &quot;collection&quot;: {
+                    &quot;from&quot;: &quot;2019-05-31T11:00:00.000Z&quot;,
+                    &quot;to&quot;: &quot;2019-05-31T12:00:00.000Z&quot;
+                },
+                &quot;delivery&quot;: {
+                    &quot;from&quot;: &quot;2019-05-31T13:00:00.000Z&quot;,
+                    &quot;to&quot;: &quot;2019-05-31T14:00:00.000Z&quot;
+                }
+            },
+            &quot;requires&quot;: [
+                &quot;ageVerification&quot;,
+                &quot;collectionSignOff&quot;,
+                &quot;deliverySignOff&quot;
+            ],
+            &quot;status&quot;: {
+                &quot;progressStatus&quot;: {
+                    &quot;status&quot;: &quot;created&quot;,
+                    &quot;updatedAt&quot;: &quot;2019-05-30T10:11:13.420Z&quot;
+                },
+                &quot;courierStatus&quot;: null
+            }
+        }
+    ],
+    &quot;stops&quot;: [
+        {
+            &quot;id&quot;: &quot;2&quot;,
+            &quot;contact&quot;: {
+                &quot;name&quot;: &quot;John Watson&quot;,
+                &quot;mobile&quot;: &quot;+447777777778&quot;,
+                &quot;email&quot;: &quot;jw@gmail.com&quot;
+            },
+            &quot;place&quot;: {
+                &quot;position&quot;: {
+                    &quot;coordinates&quot;: {
+                        &quot;latitude&quot;: 51.557963,
+                        &quot;longitude&quot;: 0.067261
+                    }
+                },
+                &quot;address&quot;: {
+                    &quot;country&quot;: &quot;GBR&quot;,
+                    &quot;town&quot;: &quot;London&quot;,
+                    &quot;streets&quot;: [
+                        &quot;FLAT 111&quot;,
+                        &quot;ICON BUILDING&quot;
+                    ],
+                    &quot;postcode&quot;: &quot;IG1 2FJ&quot;,
+                    &quot;companyName&quot;: &quot;SANDBOX-OTD-COMPANY&quot;
+                },
+                &quot;ulez&quot;: false
+            },
+            &quot;instructions&quot;: &quot;You can park at Front Garden at my house&quot;
+        },
+        {
+            &quot;id&quot;: &quot;1&quot;,
+            &quot;contact&quot;: {
+                &quot;name&quot;: &quot;Sherlock Holmes&quot;,
+                &quot;mobile&quot;: &quot;+447777777777&quot;,
+                &quot;phone&quot;: &quot;02091212121212&quot;,
+                &quot;email&quot;: &quot;sh@gmail.com&quot;
+            },
+            &quot;place&quot;: {
+                &quot;id&quot;: &quot;sandbox-store&quot;,
+                &quot;position&quot;: {
+                    &quot;coordinates&quot;: {
+                        &quot;latitude&quot;: 51.523317,
+                        &quot;longitude&quot;: -0.080965
+                    }
+                },
+                &quot;address&quot;: {
+                    &quot;country&quot;: &quot;United Kingdom&quot;,
+                    &quot;town&quot;: &quot;Hackney&quot;,
+                    &quot;streets&quot;: [
+                        &quot;CitySprint - London Central Service Centre&quot;,
+                        &quot;58-62 Scrutton St&quot;
+                    ],
+                    &quot;postcode&quot;: &quot;EC2A 4PH&quot;
+                },
+                &quot;ulez&quot;: true
+            },
+            &quot;instructions&quot;: &quot;Park at Store back Door&quot;
+        }
+    ],
+    &quot;status&quot;: {
+        &quot;status&quot;: &quot;created&quot;,
+        &quot;updatedAt&quot;: &quot;2019-05-30T10:11:13.420Z&quot;
+    },
+    &quot;createdAt&quot;: &quot;2019-05-30T10:11:13.420Z&quot;,
+    &quot;updatedAt&quot;: &quot;2019-05-30T10:11:13.420Z&quot;
+}</p>
+</code></pre></details>
+</blockquote>
 
 <p>Below you have specific examples for each of the order types you can create using our <code>booking service</code>.</p>
 
 <ul>
 <li>Consideration must be given to the following attributes shown left in <code>metaData</code>, <code>customData</code> and <code>requires</code> sections of request body depending on the agreed operations flow with us.</li>
 </ul>
-
-<hr>
-
+<h3 id='requires-section'>Requires section</h3>
 <ul>
-<li><code>POST</code> /V2/ACCOUNTS/{ACCOUNTID}/ORDERS</li>
+<li>Depending on the agreed flow , the requires section  of the booking request can contain the following <code>optional</code> values. Passing any of those will ahve an impact on the job flow and which actions must happen at stops:</li>
 </ul>
 
-<hr>
+<p><code>
+      &quot;requires&quot;: [
+                &quot;ageVerification&quot;,
+                &quot;collectionSignOff&quot;,
+                &quot;deliverySignOff&quot;
+      ],
+</code></p>
+
+<ul>
+<li><code>N.B.</code>: &quot;ageVerification&quot; is required if your order has items requiring us perform age validation, commonly reffered as &quot;Think25&quot; or &quot;Challenge25&quot;.</li>
+</ul>
+<h3 id='instructios'>Instructios</h3>
+<p>Our platform can courier instructions at various levels:</p>
+
+<ol>
+<li>Job within an Order: <code>job.collection.instructions</code> and <code>job.delivery.instructions</code>.</li>
+<li>Stops within a Job</li>
+</ol>
 
 <aside class="notice">
   <strong>Summary:</strong> Create order
@@ -789,7 +3290,388 @@ Sandbox <code>seed data</code> below allows developers to test their integration
 </tbody></table>
 <h2 id='get-it-now'>Get it now</h2>
 <blockquote>
-<p><code>POST</code>  <code>URL</code>/v2/accounts/<code>myaccount</code>/orders</p>
+<p><span class="http-verb-label" style="top: -1px; width: 55px; background-color: #49cc90; border: 0.1em solid;"">
+POST
+</span>
+{{host}}/{{bookingService}}/v2/accounts/{{accountId}}/orders</p>
+
+<details><summary class="highlight plaintext">Expand for request</summary><pre><code><p>curl -X POST \
+  https://public-api-prod.onthedot.com/booking/v2/accounts/sandbox/orders \
+  -H &#39;Content-Type: application/json&#39; \
+  -H &#39;authorization: <code>&lt;Your Own API Bearer Taoken&gt;</code>&#39; \
+  -H &#39;cache-control: no-cache&#39; \
+  -H &#39;x-trace-id: ad095cc0-6c52-491a-a2cf-a3408c801a55&#39; \
+  -d &#39;{
+    &quot;id&quot;: &quot;1559209422&quot;,
+    &quot;metadata&quot;: {
+        &quot;clientRefId&quot;:&quot;CLIENT-REF-1559209422&quot;,
+        &quot;serviceType&quot;: &quot;asap&quot;,
+        &quot;isTest&quot;:True
+    },
+    &quot;customData&quot;: {
+      &quot;caller&quot;:&quot;API&quot;,
+      &quot;Customer&quot;:&quot;<code>CustomerName</code>&quot;
+        &quot;reference_1&quot;: &quot;kingsman@kingsman.com&quot;,
+        &quot;reference_2&quot;: &quot;Kingsman&quot;,
+        <code>&quot;citytrak-department&quot;: &quot;&lt;CoopOrderReference&gt;”</code>
+    },
+    &quot;contact&quot;: {
+        &quot;name&quot;: &quot;James Moriarty&quot;,
+        &quot;mobile&quot;: &quot;+447888888889&quot;,
+        &quot;phone&quot;: &quot;020812718278&quot;,
+        &quot;email&quot;: &quot;jm@gmail.com&quot;
+    },
+    &quot;notification&quot;: {
+        &quot;emails&quot;: [
+            {
+                &quot;email&quot;: &quot;rbeemi@onthedot.com&quot;,
+                &quot;statuses&quot;: [
+                    &quot;created&quot;,
+                    &quot;allocated&quot;,
+                    &quot;arrived_at_collection&quot;,
+                    &quot;collected&quot;,
+                    &quot;arrived_at_delivery&quot;,
+                    &quot;delivered&quot;
+                ]
+            }
+        ],
+        &quot;sms&quot;: [
+            {
+                &quot;number&quot;: &quot;+4477772888442&quot;,
+                &quot;statuses&quot;: [
+                    &quot;created&quot;,
+                    &quot;allocated&quot;,
+                    &quot;arrived_at_collection&quot;,
+                    &quot;collected&quot;,
+                    &quot;arrived_at_delivery&quot;,
+                    &quot;delivered&quot;
+                ]
+            }
+        ],
+        &quot;webhooks&quot;: [
+            {
+                &quot;endpoint&quot;: &quot;https://enit24ti5gez.x.pipedream.net/&quot;,
+                &quot;methodType&quot;: &quot;POST&quot;,
+                &quot;headers&quot;: {
+                    &quot;authorization&quot;: &quot;&quot;,
+                    &quot;company&quot;: &quot;&quot;
+                },
+                &quot;statuses&quot;: [
+                    &quot;created&quot;,
+                    &quot;allocated&quot;,
+                    &quot;arrived_at_collection&quot;,
+                    &quot;collected&quot;,
+                    &quot;arrived_at_delivery&quot;,
+                    &quot;delivered&quot;
+                ]
+            }
+        ]
+    },
+    &quot;jobs&quot;: [
+        {
+            &quot;id&quot;: &quot;1&quot;,
+            &quot;metadata&quot;: {
+                &quot;journeyType&quot;: &quot;delivery&quot;
+            },
+            &quot;requires&quot;: [
+                &quot;ageVerification&quot;,
+                &quot;collectionSignOff&quot;,
+                &quot;deliverySignOff&quot;
+            ],
+            &quot;items&quot;: [
+                {
+                    &quot;id&quot;: &quot;1&quot;,
+                    &quot;description&quot;: &quot;Book&quot;,
+                    &quot;quantity&quot;: 5,
+                    &quot;metrics&quot;: {
+                        &quot;weight&quot;: 4,
+                        &quot;dimension&quot;: {
+                            &quot;width&quot;: 10,
+                            &quot;height&quot;: 5,
+                            &quot;length&quot;: 20
+                        }
+                    }
+                },
+                {
+                    &quot;id&quot;: &quot;2&quot;,
+                    &quot;description&quot;: &quot;Book marker&quot;,
+                    &quot;quantity&quot;: 4,
+                    &quot;metrics&quot;: {
+                        &quot;weight&quot;: 10,
+                        &quot;dimension&quot;: {
+                            &quot;width&quot;: 10,
+                            &quot;height&quot;: 0.5,
+                            &quot;length&quot;: 20
+                        }
+                    }
+                }
+            ],
+            &quot;timeslot&quot;: {
+                &quot;collection&quot;: {
+                    &quot;from&quot;: &quot;2019-05-30T11:00:00.000Z&quot;,
+                    &quot;to&quot;: &quot;2019-05-30T12:00:00.000Z&quot;
+                },
+                &quot;delivery&quot;: {
+                    &quot;from&quot;: &quot;2019-05-30T13:00:00.000Z&quot;,
+                    &quot;to&quot;: &quot;2019-05-30T14:00:00.000Z&quot;
+                }
+            },
+            &quot;collection&quot;: {
+                &quot;stopId&quot;: &quot;1&quot;,
+                &quot;instructions&quot;: &quot;Collect Box From Main Garage&quot;
+            },
+            &quot;delivery&quot;: {
+                &quot;stopId&quot;: &quot;2&quot;,
+                &quot;instructions&quot;: &quot;Ring main Door Bell&quot;
+            }
+        }
+    ],
+    &quot;stops&quot;: [
+        {
+            &quot;id&quot;: &quot;1&quot;,
+            &quot;contact&quot;: {
+                &quot;name&quot;: &quot;Sherlock Holmes&quot;,
+                &quot;mobile&quot;: &quot;+447777777777&quot;,
+                &quot;phone&quot;: &quot;02091212121212&quot;,
+                &quot;email&quot;: &quot;sh@gmail.com&quot;
+            },
+            &quot;place&quot;: {
+                &quot;id&quot;: &quot;sandbox-store&quot;
+            },
+            &quot;instructions&quot;: &quot;Park at Store back Door&quot;
+        },
+        {
+            &quot;id&quot;: &quot;2&quot;,
+            &quot;contact&quot;: {
+                &quot;name&quot;: &quot;John Watson&quot;,
+                &quot;mobile&quot;: &quot;+447777777778&quot;,
+                &quot;email&quot;: &quot;jw@gmail.com&quot;
+            },
+            &quot;place&quot;: {
+                &quot;address&quot;: {
+                    &quot;country&quot;: &quot;GBR&quot;,
+                    &quot;town&quot;: &quot;London&quot;,
+                    &quot;streets&quot;: [
+                        &quot;FLAT 111&quot;,
+                        &quot;ICON BUILDING&quot;
+                    ],
+                    &quot;postcode&quot;: &quot;IG1 2FJ&quot;,
+                    &quot;companyName&quot;: &quot;SANDBOX-OTD-COMPANY&quot;
+                }
+            },
+            &quot;instructions&quot;: &quot;You can park at Front Garden at my house&quot;
+        }
+    ]
+}&#39;</p>
+</code></pre></details>
+
+<div class="code-block-no-wrap-header">Http reponse codes :<p><span class="http-resp-label" style="top: -1px; width: 30px; background-color: #49cc90; border: 0.1em solid;">201</span></p>
+<p><span class="http-resp-label" style="top: -1px; width: 30px; background-color: red; border: 0.1em solid;">4xx</span></p>
+<p><span class="http-resp-label" style="top: -1px; width: 30px; background-color: red; border: 0.1em solid;">5xx</span></p>
+</div>
+
+<details><summary class="highlight plaintext">Expand for response</summary><pre><code><p>{
+    &quot;id&quot;: &quot;1559211073&quot;,
+    &quot;metadata&quot;: {
+        &quot;externalAccountId&quot;: &quot;W99969&quot;,
+        &quot;clientRefId&quot;: &quot;CLIENT-REF-1559211073&quot;,
+        &quot;sector&quot;: &quot;Ent Retail&quot;,
+        &quot;vehicleType&quot;: &quot;car&quot;,
+        &quot;serviceType&quot;: &quot;asap&quot;,
+        &quot;trackingUrl&quot;: &quot;https://trackmydriver.lastmilelink.eu/sandbox::1559211073?token=93uQp9OZgBoW6%2FgYQd2%2FfADCzpdmHbYtwCQ0PouEWUE%3D&quot;,
+        &quot;isTest&quot;: true
+    },
+    &quot;customData&quot;: {
+        &quot;caller&quot;: &quot;Booking&quot;,
+        &quot;reference_1&quot;: &quot;kingsman@kingsman.com&quot;,
+        &quot;reference_2&quot;: &quot;Kingsman&quot;
+    },
+    &quot;contact&quot;: {
+        &quot;name&quot;: &quot;James Moriarty&quot;,
+        &quot;mobile&quot;: &quot;+447888888889&quot;,
+        &quot;phone&quot;: &quot;020812718278&quot;,
+        &quot;email&quot;: &quot;jm@gmail.com&quot;
+    },
+    &quot;notification&quot;: {
+        &quot;emails&quot;: [
+            {
+                &quot;email&quot;: &quot;rbeemi@onthedot.com&quot;,
+                &quot;statuses&quot;: [
+                    &quot;created&quot;,
+                    &quot;allocated&quot;,
+                    &quot;arrived_at_collection&quot;,
+                    &quot;collected&quot;,
+                    &quot;arrived_at_delivery&quot;,
+                    &quot;delivered&quot;
+                ]
+            }
+        ],
+        &quot;sms&quot;: [
+            {
+                &quot;number&quot;: &quot;+4477772888442&quot;,
+                &quot;statuses&quot;: [
+                    &quot;created&quot;,
+                    &quot;allocated&quot;,
+                    &quot;arrived_at_collection&quot;,
+                    &quot;collected&quot;,
+                    &quot;arrived_at_delivery&quot;,
+                    &quot;delivered&quot;
+                ]
+            }
+        ],
+        &quot;webhooks&quot;: [
+            {
+                &quot;endpoint&quot;: &quot;https://enit24ti5gez.x.pipedream.net/&quot;,
+                &quot;methodType&quot;: &quot;POST&quot;,
+                &quot;headers&quot;: {
+                    &quot;authorization&quot;: &quot;&quot;,
+                    &quot;company&quot;: &quot;&quot;
+                },
+                &quot;statuses&quot;: [
+                    &quot;created&quot;,
+                    &quot;allocated&quot;,
+                    &quot;arrived_at_collection&quot;,
+                    &quot;collected&quot;,
+                    &quot;arrived_at_delivery&quot;,
+                    &quot;delivered&quot;
+                ]
+            }
+        ]
+    },
+    &quot;jobs&quot;: [
+        {
+            &quot;id&quot;: &quot;1&quot;,
+            &quot;metadata&quot;: {
+                &quot;journeyType&quot;: &quot;delivery&quot;
+            },
+            &quot;items&quot;: [
+                {
+                    &quot;id&quot;: &quot;1&quot;,
+                    &quot;description&quot;: &quot;Book&quot;,
+                    &quot;quantity&quot;: 5,
+                    &quot;metrics&quot;: {
+                        &quot;weight&quot;: 4,
+                        &quot;dimension&quot;: {
+                            &quot;width&quot;: 10,
+                            &quot;height&quot;: 5,
+                            &quot;length&quot;: 20
+                        }
+                    }
+                },
+                {
+                    &quot;id&quot;: &quot;2&quot;,
+                    &quot;description&quot;: &quot;Book marker&quot;,
+                    &quot;quantity&quot;: 4,
+                    &quot;metrics&quot;: {
+                        &quot;weight&quot;: 10,
+                        &quot;dimension&quot;: {
+                            &quot;width&quot;: 10,
+                            &quot;height&quot;: 0.5,
+                            &quot;length&quot;: 20
+                        }
+                    }
+                }
+            ],
+            &quot;collection&quot;: {
+                &quot;stopId&quot;: &quot;1&quot;,
+                &quot;instructions&quot;: &quot;Collect Box From Main Garage&quot;
+            },
+            &quot;delivery&quot;: {
+                &quot;stopId&quot;: &quot;2&quot;,
+                &quot;instructions&quot;: &quot;Ring main Door Bell&quot;
+            },
+            &quot;timeslot&quot;: {
+                &quot;id&quot;: &quot;&quot;,
+                &quot;collection&quot;: {
+                    &quot;from&quot;: &quot;2019-05-31T11:00:00.000Z&quot;,
+                    &quot;to&quot;: &quot;2019-05-31T12:00:00.000Z&quot;
+                },
+                &quot;delivery&quot;: {
+                    &quot;from&quot;: &quot;2019-05-31T13:00:00.000Z&quot;,
+                    &quot;to&quot;: &quot;2019-05-31T14:00:00.000Z&quot;
+                }
+            },
+            &quot;requires&quot;: [
+                &quot;ageVerification&quot;,
+                &quot;collectionSignOff&quot;,
+                &quot;deliverySignOff&quot;
+            ],
+            &quot;status&quot;: {
+                &quot;progressStatus&quot;: {
+                    &quot;status&quot;: &quot;created&quot;,
+                    &quot;updatedAt&quot;: &quot;2019-05-30T10:11:13.420Z&quot;
+                },
+                &quot;courierStatus&quot;: null
+            }
+        }
+    ],
+    &quot;stops&quot;: [
+        {
+            &quot;id&quot;: &quot;2&quot;,
+            &quot;contact&quot;: {
+                &quot;name&quot;: &quot;John Watson&quot;,
+                &quot;mobile&quot;: &quot;+447777777778&quot;,
+                &quot;email&quot;: &quot;jw@gmail.com&quot;
+            },
+            &quot;place&quot;: {
+                &quot;position&quot;: {
+                    &quot;coordinates&quot;: {
+                        &quot;latitude&quot;: 51.557963,
+                        &quot;longitude&quot;: 0.067261
+                    }
+                },
+                &quot;address&quot;: {
+                    &quot;country&quot;: &quot;GBR&quot;,
+                    &quot;town&quot;: &quot;London&quot;,
+                    &quot;streets&quot;: [
+                        &quot;FLAT 111&quot;,
+                        &quot;ICON BUILDING&quot;
+                    ],
+                    &quot;postcode&quot;: &quot;IG1 2FJ&quot;,
+                    &quot;companyName&quot;: &quot;SANDBOX-OTD-COMPANY&quot;
+                },
+                &quot;ulez&quot;: false
+            },
+            &quot;instructions&quot;: &quot;You can park at Front Garden at my house&quot;
+        },
+        {
+            &quot;id&quot;: &quot;1&quot;,
+            &quot;contact&quot;: {
+                &quot;name&quot;: &quot;Sherlock Holmes&quot;,
+                &quot;mobile&quot;: &quot;+447777777777&quot;,
+                &quot;phone&quot;: &quot;02091212121212&quot;,
+                &quot;email&quot;: &quot;sh@gmail.com&quot;
+            },
+            &quot;place&quot;: {
+                &quot;id&quot;: &quot;sandbox-store&quot;,
+                &quot;position&quot;: {
+                    &quot;coordinates&quot;: {
+                        &quot;latitude&quot;: 51.523317,
+                        &quot;longitude&quot;: -0.080965
+                    }
+                },
+                &quot;address&quot;: {
+                    &quot;country&quot;: &quot;United Kingdom&quot;,
+                    &quot;town&quot;: &quot;Hackney&quot;,
+                    &quot;streets&quot;: [
+                        &quot;CitySprint - London Central Service Centre&quot;,
+                        &quot;58-62 Scrutton St&quot;
+                    ],
+                    &quot;postcode&quot;: &quot;EC2A 4PH&quot;
+                },
+                &quot;ulez&quot;: true
+            },
+            &quot;instructions&quot;: &quot;Park at Store back Door&quot;
+        }
+    ],
+    &quot;status&quot;: {
+        &quot;status&quot;: &quot;created&quot;,
+        &quot;updatedAt&quot;: &quot;2019-05-30T10:11:13.420Z&quot;
+    },
+    &quot;createdAt&quot;: &quot;2019-05-30T10:11:13.420Z&quot;,
+    &quot;updatedAt&quot;: &quot;2019-05-30T10:11:13.420Z&quot;
+}</p>
+</code></pre></details>
 </blockquote>
 
 <aside class="notice">
@@ -798,23 +3680,828 @@ The <code>code</code> panel exemplifies how to send an <code>Express/ASAP</code>
 
 <p><img src="images/OTD_H_GITN.png" alt="Express/ASAP" /></p>
 
-<h5>Create booking requests for an Express/ASAP delivery for same day or in the future</h5>
+<p>Create booking requests for an Express/ASAP delivery for same day or in the future.</p>
 <h2 id='get-it-later'>Get it later</h2>
+<blockquote>
+<p><span class="http-verb-label" style="top: -1px; width: 55px; background-color: #49cc90; border: 0.1em solid;"">
+POST
+</span>
+{{host}}/{{bookingService}}/v2/accounts/{{accountId}}/timeslots</p>
+
+<details><summary class="highlight plaintext">Expand for Timeslot request</summary><pre><code><p>curl -X POST \
+  https://public-api-prod.onthedot.com/booking/v2/accounts/sandbox/timeslots \
+  -H &#39;Accept: application/json&#39; \
+  -H &#39;Authorization: <code>&lt;Your API Bearer Token&gt;</code>&#39; \
+  -H &#39;Content-Type: application/json&#39; \
+  -H &#39;X-Trace-Id: 812100a5-36f5-44b2-8ee6-aded527f1e8a&#39; \
+  -H &#39;cache-control: no-cache&#39; \
+  -d &#39;{
+    &quot;partnerId&quot;: &quot;sandbox&quot;,
+    &quot;serviceType&quot;: &quot;1hour&quot;,
+    &quot;vehicleType&quot;:&quot;car&quot;,
+    &quot;collection&quot;: {
+        &quot;id&quot;: &quot;sandbox-store&quot;
+    },
+    &quot;delivery&quot;: {
+        &quot;address&quot;: {
+            &quot;streets&quot;: [
+                &quot;FLAT 111&quot;,
+                &quot;ICON BUILDING&quot;
+            ],
+            &quot;town&quot;: &quot;LONDON&quot;,
+            &quot;country&quot;: &quot;GBR&quot;,
+            &quot;postcode&quot;: &quot;DE11 0AA&quot;
+        }
+    },
+    &quot;dates&quot;: {
+        &quot;2019-05-31&quot;: {}
+    },
+    &quot;packageReadyAt&quot;: &quot;2019-05-29T13:57:59.267Z&quot;,
+    &quot;additionalNoOfDays&quot;: 0
+}&#39;</p>
+</code></pre></details>
+
+<p><span class="http-verb-label" style="top: -1px; width: 55px; background-color: #49cc90; border: 0.1em solid;"">
+POST
+</span>
+{{host}}/{{bookingService}}/v2/accounts/{{accountId}}/orders</p>
+
+<details><summary class="highlight plaintext">Expand for Booking request</summary><pre><code><p>curl -X POST \
+  https://public-api-prod.onthedot.com/booking/v2/accounts/sandbox/orders \
+  -H &#39;authorization: <code>&lt;Your API Bearer Token&gt;</code>&#39; \
+  -H &#39;cache-control: no-cache&#39; \
+  -H &#39;content-type: application/json&#39; \
+  -H &#39;x-trace-id: aefa143f-47c9-4c65-97c3-c3c3e9c653ef&#39; \
+  -d &#39;{
+    &quot;id&quot;: &quot;1559212263&quot;,
+    &quot;metadata&quot;: {
+        &quot;serviceType&quot;: &quot;timeslot&quot;
+    },
+    &quot;customData&quot;: {
+        &quot;reference_1&quot;: &quot;kingsman@kingsman.com&quot;,
+        &quot;reference_2&quot;: &quot;Kingsman&quot;
+    },
+    &quot;contact&quot;: {
+        &quot;name&quot;: &quot;James Moriarty&quot;,
+        &quot;mobile&quot;: &quot;+447888888889&quot;,
+        &quot;phone&quot;: &quot;020812718278&quot;,
+        &quot;email&quot;: &quot;jm@gmail.com&quot;
+    },
+    &quot;notification&quot;: {
+        &quot;emails&quot;: [
+            {
+                &quot;email&quot;: &quot;rbeemi@onthedot.com&quot;,
+                &quot;statuses&quot;: [
+                    &quot;created&quot;,
+                    &quot;allocated&quot;,
+                    &quot;arrived_at_collection&quot;,
+                    &quot;collected&quot;,
+                    &quot;arrived_at_delivery&quot;,
+                    &quot;delivered&quot;
+                ]
+            }
+        ],
+        &quot;sms&quot;: [
+            {
+                &quot;number&quot;: &quot;+4477772888442&quot;,
+                &quot;statuses&quot;: [
+                    &quot;created&quot;,
+                    &quot;allocated&quot;,
+                    &quot;arrived_at_collection&quot;,
+                    &quot;collected&quot;,
+                    &quot;arrived_at_delivery&quot;,
+                    &quot;delivered&quot;
+                ]
+            }
+        ],
+        &quot;webhooks&quot;: [
+            {
+                &quot;endpoint&quot;: &quot;https://enit24ti5gez.x.pipedream.net/&quot;,
+                &quot;methodType&quot;: &quot;POST&quot;,
+                &quot;headers&quot;: {
+                    &quot;authorization&quot;: &quot;&quot;,
+                    &quot;company&quot;: &quot;&quot;
+                },
+                &quot;statuses&quot;: [
+                    &quot;created&quot;,
+                    &quot;allocated&quot;,
+                    &quot;arrived_at_collection&quot;,
+                    &quot;collected&quot;,
+                    &quot;arrived_at_delivery&quot;,
+                    &quot;delivered&quot;
+                ]
+            }
+        ]
+    },
+    &quot;jobs&quot;: [
+        {
+            &quot;id&quot;: &quot;1&quot;,
+            &quot;metadata&quot;: {
+                &quot;journeyType&quot;: &quot;delivery&quot;
+            },
+            &quot;requires&quot;: [
+                &quot;ageVerification&quot;,
+                &quot;collectionSignOff&quot;,
+                &quot;deliverySignOff&quot;
+            ],
+            &quot;items&quot;: [
+                {
+                    &quot;id&quot;: &quot;1&quot;,
+                    &quot;description&quot;: &quot;Book&quot;,
+                    &quot;quantity&quot;: 1,
+                    &quot;metrics&quot;: {
+                        &quot;weight&quot;: 400,
+                        &quot;dimension&quot;: {
+                            &quot;width&quot;: 10,
+                            &quot;height&quot;: 5,
+                            &quot;length&quot;: 20
+                        }
+                    }
+                },
+                {
+                    &quot;id&quot;: &quot;2&quot;,
+                    &quot;description&quot;: &quot;Book marker&quot;,
+                    &quot;quantity&quot;: 1,
+                    &quot;metrics&quot;: {
+                        &quot;weight&quot;: 10,
+                        &quot;dimension&quot;: {
+                            &quot;width&quot;: 10,
+                            &quot;height&quot;: 0.5,
+                            &quot;length&quot;: 20
+                        }
+                    }
+                }
+            ],
+            &quot;timeslot&quot;: {
+                &quot;id&quot;: &quot;NGM1M2E5OTYtYWJmYS00MDAyLWFjMzctNzBlZThiOWIxM2E3fnpQVzZvWVhQaXdsOEJ5RHVrWjRQVjZITEJqcEdHcX5FQzJBKzRQSH5ERTExKzBBQX4xNTU5MTM4Mjc5fjE1NTkxMzg4MjB+MTIwfjkwfjE5Mi4xMzYwMDB+YXNhcH5mYWxzZX5mYWxzZQ==&quot;
+            },
+            &quot;collection&quot;: {
+                &quot;stopId&quot;: &quot;1&quot;,
+                &quot;instructions&quot;: &quot;Handle with care&quot;
+            },
+            &quot;delivery&quot;: {
+                &quot;stopId&quot;: &quot;2&quot;,
+                &quot;instructions&quot;: &quot;Leave with reception&quot;
+            }
+        }
+    ],
+    &quot;stops&quot;: [
+        {
+            &quot;id&quot;: &quot;1&quot;,
+            &quot;contact&quot;: {
+                &quot;name&quot;: &quot;Sherlock Holmes&quot;,
+                &quot;mobile&quot;: &quot;07777777777&quot;,
+                &quot;phone&quot;: &quot;02091212121212&quot;,
+                &quot;email&quot;: &quot;sh@gmail.com&quot;
+            },
+            &quot;place&quot;: {
+                &quot;id&quot;: &quot;sandbox-store&quot;
+            },
+            &quot;instructions&quot;: &quot;Park at the back door&quot;
+        },
+        {
+            &quot;id&quot;: &quot;2&quot;,
+            &quot;contact&quot;: {
+                &quot;name&quot;: &quot;John Watson&quot;,
+                &quot;mobile&quot;: &quot;+447777777778&quot;,
+                &quot;email&quot;: &quot;jw@gmail.com&quot;
+            },
+            &quot;place&quot;: {
+                &quot;address&quot;: {
+                    &quot;country&quot;: &quot;GBR&quot;,
+                    &quot;town&quot;: &quot;London&quot;,
+                    &quot;streets&quot;: [
+                        &quot;FLAT 111&quot;,
+                        &quot;ICON BUILDING&quot;
+                    ],
+                    &quot;postcode&quot;: &quot;IG1 2FJ&quot;,
+                    &quot;companyName&quot;: &quot;On the Dot&quot;
+                }
+            },
+            &quot;instructions&quot;: &quot;Park at the back door&quot;
+        }
+    ]
+}&#39;</p>
+</code></pre></details>
+
+<div class="code-block-no-wrap-header">Http reponse codes :<p><span class="http-resp-label" style="top: -1px; width: 30px; background-color: #49cc90; border: 0.1em solid;">201</span></p>
+<p><span class="http-resp-label" style="top: -1px; width: 30px; background-color: red; border: 0.1em solid;">4xx</span></p>
+<p><span class="http-resp-label" style="top: -1px; width: 30px; background-color: red; border: 0.1em solid;">5xx</span></p>
+</div>
+
+<details><summary class="highlight plaintext">Expand for response</summary><pre><code><p>{
+    &quot;id&quot;: &quot;1559212481&quot;,
+    &quot;metadata&quot;: {
+        &quot;externalAccountId&quot;: &quot;W99969&quot;,
+        &quot;sector&quot;: &quot;Ent Retail&quot;,
+        &quot;vehicleType&quot;: &quot;small-van&quot;,
+        &quot;serviceType&quot;: &quot;timeslot&quot;,
+        &quot;trackingUrl&quot;: &quot;https://trackmydriver.lastmilelink.eu/sandbox::1559212481?token=NnJjoE98574sSFKDOcqi%2BCpj1IHmyU%2BAZSe41zQPP6I%3D&quot;,
+        &quot;isTest&quot;: true
+    },
+    &quot;customData&quot;: {
+        &quot;reference_1&quot;: &quot;kingsman@kingsman.com&quot;,
+        &quot;reference_2&quot;: &quot;Kingsman&quot;
+    },
+    &quot;contact&quot;: {
+        &quot;name&quot;: &quot;James Moriarty&quot;,
+        &quot;mobile&quot;: &quot;+447888888889&quot;,
+        &quot;phone&quot;: &quot;020812718278&quot;,
+        &quot;email&quot;: &quot;jm@gmail.com&quot;
+    },
+    &quot;notification&quot;: {
+        &quot;emails&quot;: [
+            {
+                &quot;email&quot;: &quot;rbeemi@onthedot.com&quot;,
+                &quot;statuses&quot;: [
+                    &quot;created&quot;,
+                    &quot;allocated&quot;,
+                    &quot;arrived_at_collection&quot;,
+                    &quot;collected&quot;,
+                    &quot;arrived_at_delivery&quot;,
+                    &quot;delivered&quot;
+                ]
+            }
+        ],
+        &quot;sms&quot;: [
+            {
+                &quot;number&quot;: &quot;+4477772888442&quot;,
+                &quot;statuses&quot;: [
+                    &quot;created&quot;,
+                    &quot;allocated&quot;,
+                    &quot;arrived_at_collection&quot;,
+                    &quot;collected&quot;,
+                    &quot;arrived_at_delivery&quot;,
+                    &quot;delivered&quot;
+                ]
+            }
+        ],
+        &quot;webhooks&quot;: [
+            {
+                &quot;endpoint&quot;: &quot;https://enit24ti5gez.x.pipedream.net/&quot;,
+                &quot;methodType&quot;: &quot;POST&quot;,
+                &quot;headers&quot;: {
+                    &quot;authorization&quot;: &quot;&quot;,
+                    &quot;company&quot;: &quot;&quot;
+                },
+                &quot;statuses&quot;: [
+                    &quot;created&quot;,
+                    &quot;allocated&quot;,
+                    &quot;arrived_at_collection&quot;,
+                    &quot;collected&quot;,
+                    &quot;arrived_at_delivery&quot;,
+                    &quot;delivered&quot;
+                ]
+            }
+        ]
+    },
+    &quot;jobs&quot;: [
+        {
+            &quot;id&quot;: &quot;1&quot;,
+            &quot;metadata&quot;: {
+                &quot;journeyType&quot;: &quot;delivery&quot;
+            },
+            &quot;items&quot;: [
+                {
+                    &quot;id&quot;: &quot;1&quot;,
+                    &quot;description&quot;: &quot;Book&quot;,
+                    &quot;quantity&quot;: 1,
+                    &quot;metrics&quot;: {
+                        &quot;weight&quot;: 400,
+                        &quot;dimension&quot;: {
+                            &quot;width&quot;: 10,
+                            &quot;height&quot;: 5,
+                            &quot;length&quot;: 20
+                        }
+                    }
+                },
+                {
+                    &quot;id&quot;: &quot;2&quot;,
+                    &quot;description&quot;: &quot;Book marker&quot;,
+                    &quot;quantity&quot;: 1,
+                    &quot;metrics&quot;: {
+                        &quot;weight&quot;: 10,
+                        &quot;dimension&quot;: {
+                            &quot;width&quot;: 10,
+                            &quot;height&quot;: 0.5,
+                            &quot;length&quot;: 20
+                        }
+                    }
+                }
+            ],
+            &quot;collection&quot;: {
+                &quot;stopId&quot;: &quot;1&quot;,
+                &quot;instructions&quot;: &quot;Handle with care&quot;
+            },
+            &quot;delivery&quot;: {
+                &quot;stopId&quot;: &quot;2&quot;,
+                &quot;instructions&quot;: &quot;Leave with reception&quot;
+            },
+            &quot;timeslot&quot;: {
+                &quot;id&quot;: &quot;NGM1M2E5OTYtYWJmYS00MDAyLWFjMzctNzBlZThiOWIxM2E3fnpQVzZvWVhQaXdsOEJ5RHVrWjRQVjZITEJqcEdHcX5FQzJBKzRQSH5ERTExKzBBQX4xNTU5MTM4Mjc5fjE1NTkxMzg4MjB+MTIwfjkwfjE5Mi4xMzYwMDB+YXNhcH5mYWxzZX5mYWxzZQ==&quot;,
+                &quot;collection&quot;: {
+                    &quot;from&quot;: &quot;2019-05-29T23:05:00.000Z&quot;,
+                    &quot;to&quot;: &quot;2019-05-30T01:05:00.000Z&quot;
+                },
+                &quot;delivery&quot;: {
+                    &quot;from&quot;: &quot;2019-05-30T02:00:00.000Z&quot;,
+                    &quot;to&quot;: &quot;2019-05-30T03:30:00.000Z&quot;
+                }
+            },
+            &quot;requires&quot;: [
+                &quot;ageVerification&quot;,
+                &quot;collectionSignOff&quot;,
+                &quot;deliverySignOff&quot;
+            ],
+            &quot;status&quot;: {
+                &quot;progressStatus&quot;: {
+                    &quot;status&quot;: &quot;created&quot;,
+                    &quot;updatedAt&quot;: &quot;2019-05-30T10:34:41.806Z&quot;
+                },
+                &quot;courierStatus&quot;: null
+            }
+        }
+    ],
+    &quot;stops&quot;: [
+        {
+            &quot;id&quot;: &quot;2&quot;,
+            &quot;contact&quot;: {
+                &quot;name&quot;: &quot;John Watson&quot;,
+                &quot;mobile&quot;: &quot;+447777777778&quot;,
+                &quot;email&quot;: &quot;jw@gmail.com&quot;
+            },
+            &quot;place&quot;: {
+                &quot;position&quot;: {
+                    &quot;coordinates&quot;: {
+                        &quot;latitude&quot;: 51.557963,
+                        &quot;longitude&quot;: 0.067261
+                    }
+                },
+                &quot;address&quot;: {
+                    &quot;country&quot;: &quot;GBR&quot;,
+                    &quot;town&quot;: &quot;London&quot;,
+                    &quot;streets&quot;: [
+                        &quot;FLAT 111&quot;,
+                        &quot;ICON BUILDING&quot;
+                    ],
+                    &quot;postcode&quot;: &quot;IG1 2FJ&quot;,
+                    &quot;companyName&quot;: &quot;On the Dot&quot;
+                },
+                &quot;ulez&quot;: false
+            },
+            &quot;instructions&quot;: &quot;Park at the back door&quot;
+        },
+        {
+            &quot;id&quot;: &quot;1&quot;,
+            &quot;contact&quot;: {
+                &quot;name&quot;: &quot;Sherlock Holmes&quot;,
+                &quot;mobile&quot;: &quot;07777777777&quot;,
+                &quot;phone&quot;: &quot;02091212121212&quot;,
+                &quot;email&quot;: &quot;sh@gmail.com&quot;
+            },
+            &quot;place&quot;: {
+                &quot;id&quot;: &quot;sandbox-store&quot;,
+                &quot;position&quot;: {
+                    &quot;coordinates&quot;: {
+                        &quot;latitude&quot;: 51.523317,
+                        &quot;longitude&quot;: -0.080965
+                    }
+                },
+                &quot;address&quot;: {
+                    &quot;country&quot;: &quot;United Kingdom&quot;,
+                    &quot;town&quot;: &quot;Hackney&quot;,
+                    &quot;streets&quot;: [
+                        &quot;CitySprint - London Central Service Centre&quot;,
+                        &quot;58-62 Scrutton St&quot;
+                    ],
+                    &quot;postcode&quot;: &quot;EC2A 4PH&quot;
+                },
+                &quot;ulez&quot;: true
+            },
+            &quot;instructions&quot;: &quot;Park at the back door&quot;
+        }
+    ],
+    &quot;status&quot;: {
+        &quot;status&quot;: &quot;created&quot;,
+        &quot;updatedAt&quot;: &quot;2019-05-30T10:34:41.806Z&quot;
+    },
+    &quot;createdAt&quot;: &quot;2019-05-30T10:34:41.806Z&quot;,
+    &quot;updatedAt&quot;: &quot;2019-05-30T10:34:41.806Z&quot;
+}</p>
+</code></pre></details>
+</blockquote>
+
 <aside class="notice">
-The request in the <code>code pane</code> will create an order scheduled for later same day or another day in the future.
+The request in the <code>code pane</code> will create an order scheduled for later same day. You can create order for a future date.
 </aside>
 
 <p><img src="images/OTD_H_GITL.png" alt="Scheduled" /></p>
 
-<h5>Create booking requests for scheduled collection, delivery or all in windows same day or in the future</h5>
+<p>Create booking requests for scheduled collection, delivery or all in windows same day or in the future.</p>
+
+<ol>
+<li><p>First you will have to call the <code>timeslot</code> service to get a range of slots based on the SLA configured for the given service.</p></li>
+<li><p>Select a suitable slot and use it within the booking request timeslot object: <code>&quot;timeslot&quot;: {
+&quot;id&quot;: &quot;NGM1M2E5OTYtYWJmYS00MDAyLWFjMzctNzBlZThiOWIxM2E3fnpQVzZvWVhQaXdsOEJ5RHVrWjRQVjZITEJqcEdHcX5FQzJBKzRQSH5ERTExKzBBQX4xNTU5MTM4Mjc5fjE1NTkxMzg4MjB+MTIwfjkwfjE5Mi4xMzYwMDB+YXNhcH5mYWxzZX5mYWxzZQ==&quot;
+}</code></p></li>
+</ol>
 <h2 id='returns'>Returns</h2>
+<blockquote>
+<p><span class="http-verb-label" style="top: -1px; width: 55px; background-color: #49cc90; border: 0.1em solid;"">
+POST
+</span>
+{{host}}/{{bookingService}}/v2/accounts/{{accountId}}/orders</p>
+
+<details><summary class="highlight plaintext">Expand for request</summary><pre><code><p>curl -X POST \
+  https://public-api-prod.onthedot.com/booking/v2/accounts/sandbox/orders \
+  -H &#39;Content-Type: application/json&#39; \
+  -H &#39;authorization: <code>&lt;Your API Bearer Token &gt;</code>&#39; \
+  -H &#39;cache-control: no-cache&#39; \
+  -H &#39;x-trace-id: ae7adc98-82e2-41ec-b215-79717cf722ac&#39; \
+  -d &#39;{
+    &quot;id&quot;: &quot;1559213330&quot;,
+    &quot;metadata&quot;: {
+        &quot;clientRefId&quot;:&quot;CLIENT-REF-1559213330&quot;,
+        &quot;serviceType&quot;: &quot;return&quot;,
+        &quot;vehicleType&quot;:&quot;car&quot;
+    },
+    &quot;customData&quot;: {
+        &quot;caller&quot;:&quot;Booking&quot;,
+        &quot;reference_1&quot;: &quot;kingsman@kingsman.com&quot;,
+        &quot;reference_2&quot;: &quot;Kingsman&quot;
+    },
+    &quot;contact&quot;: {
+        &quot;name&quot;: &quot;James Moriarty&quot;,
+        &quot;mobile&quot;: &quot;+447888888889&quot;,
+        &quot;phone&quot;: &quot;020812718278&quot;,
+        &quot;email&quot;: &quot;jm@gmail.com&quot;
+    },
+    &quot;notification&quot;: {
+        &quot;emails&quot;: [
+            {
+                &quot;email&quot;: &quot;rbeemi@onthedot.com&quot;,
+                &quot;statuses&quot;: [
+                    &quot;created&quot;,
+                    &quot;allocated&quot;,
+                    &quot;arrived_at_collection&quot;,
+                    &quot;collected&quot;,
+                    &quot;arrived_at_delivery&quot;,
+                    &quot;delivered&quot;
+                ]
+            }
+        ],
+        &quot;sms&quot;: [
+            {
+                &quot;number&quot;: &quot;+4477772888442&quot;,
+                &quot;statuses&quot;: [
+                    &quot;created&quot;,
+                    &quot;allocated&quot;,
+                    &quot;arrived_at_collection&quot;,
+                    &quot;collected&quot;,
+                    &quot;arrived_at_delivery&quot;,
+                    &quot;delivered&quot;
+                ]
+            }
+        ],
+        &quot;webhooks&quot;: [
+            {
+                &quot;endpoint&quot;: &quot;https://enit24ti5gez.x.pipedream.net/&quot;,
+                &quot;methodType&quot;: &quot;POST&quot;,
+                &quot;headers&quot;: {
+                    &quot;authorization&quot;: &quot;&quot;,
+                    &quot;company&quot;: &quot;&quot;
+                },
+                &quot;statuses&quot;: [
+                    &quot;created&quot;,
+                    &quot;allocated&quot;,
+                    &quot;arrived_at_collection&quot;,
+                    &quot;collected&quot;,
+                    &quot;arrived_at_delivery&quot;,
+                    &quot;delivered&quot;
+                ]
+            }
+        ]
+    },
+    &quot;jobs&quot;: [
+        {
+            &quot;id&quot;: &quot;1&quot;,
+            &quot;metadata&quot;: {
+                &quot;journeyType&quot;: &quot;return&quot;
+            },
+            &quot;requires&quot;: [
+                &quot;ageVerification&quot;,
+                &quot;collectionSignOff&quot;,
+                &quot;deliverySignOff&quot;
+            ],
+            &quot;items&quot;: [
+                {
+                    &quot;id&quot;: &quot;1&quot;,
+                    &quot;description&quot;: &quot;Book&quot;,
+                    &quot;quantity&quot;: 5,
+                    &quot;metrics&quot;: {
+                        &quot;weight&quot;: 4,
+                        &quot;dimension&quot;: {
+                            &quot;width&quot;: 10,
+                            &quot;height&quot;: 5,
+                            &quot;length&quot;: 20
+                        }
+                    }
+                },
+                {
+                    &quot;id&quot;: &quot;2&quot;,
+                    &quot;description&quot;: &quot;Book marker&quot;,
+                    &quot;quantity&quot;: 4,
+                    &quot;metrics&quot;: {
+                        &quot;weight&quot;: 10,
+                        &quot;dimension&quot;: {
+                            &quot;width&quot;: 10,
+                            &quot;height&quot;: 0.5,
+                            &quot;length&quot;: 20
+                        }
+                    }
+                }
+            ],
+            &quot;timeslot&quot;: {
+                &quot;collection&quot;: {
+                    &quot;from&quot;: &quot;2019-05-31T11:00:00.000Z&quot;,
+                    &quot;to&quot;: &quot;2019-05-31T13:00:00.000Z&quot;
+                },
+                &quot;delivery&quot;: {
+                    &quot;from&quot;: &quot;2019-05-31T13:00:00.000Z&quot;,
+                    &quot;to&quot;: &quot;2019-05-31T21:30:00.000Z&quot;
+                }
+            },
+            &quot;collection&quot;: {
+                &quot;stopId&quot;: &quot;2&quot;,
+                &quot;instructions&quot;: &quot;Collect Box From Main Garage&quot;
+            },
+            &quot;delivery&quot;: {
+                &quot;stopId&quot;: &quot;1&quot;,
+                &quot;instructions&quot;: &quot;Ring main Door Bell&quot;
+            }
+        }
+    ],
+    &quot;stops&quot;: [
+        {
+            &quot;id&quot;: &quot;1&quot;,
+            &quot;contact&quot;: {
+                &quot;name&quot;: &quot;Sherlock Holmes&quot;,
+                &quot;mobile&quot;: &quot;+447777777777&quot;,
+                &quot;phone&quot;: &quot;02091212121212&quot;,
+                &quot;email&quot;: &quot;sh@gmail.com&quot;
+            },
+            &quot;place&quot;: {
+                &quot;id&quot;: &quot;sandbox-store&quot;
+            },
+            &quot;instructions&quot;: &quot;Park at Store back Door&quot;
+        },
+        {
+            &quot;id&quot;: &quot;2&quot;,
+            &quot;contact&quot;: {
+                &quot;name&quot;: &quot;John Watson&quot;,
+                &quot;mobile&quot;: &quot;+447777777778&quot;,
+                &quot;email&quot;: &quot;jw@gmail.com&quot;
+            },
+            &quot;place&quot;: {
+                &quot;address&quot;: {
+                    &quot;country&quot;: &quot;GBR&quot;,
+                    &quot;town&quot;: &quot;London&quot;,
+                    &quot;streets&quot;: [
+                        &quot;FLAT 111&quot;,
+                        &quot;ICON BUILDING&quot;
+                    ],
+                    &quot;postcode&quot;: &quot;IG1 2FJ&quot;,
+                    &quot;companyName&quot;: &quot;SANDBOX-OTD-COMPANY&quot;
+                }
+            },
+            &quot;instructions&quot;: &quot;You can park at Front Garden at my house&quot;
+        }
+    ]
+}&#39;</p>
+</code></pre></details>
+
+<div class="code-block-no-wrap-header">Http reponse codes :<p><span class="http-resp-label" style="top: -1px; width: 30px; background-color: #49cc90; border: 0.1em solid;">201</span></p>
+<p><span class="http-resp-label" style="top: -1px; width: 30px; background-color: red; border: 0.1em solid;">4xx</span></p>
+<p><span class="http-resp-label" style="top: -1px; width: 30px; background-color: red; border: 0.1em solid;">5xx</span></p>
+</div>
+
+<details><summary class="highlight plaintext">Expand for response</summary><pre><code><p>{
+    &quot;id&quot;: &quot;1559213451&quot;,
+    &quot;metadata&quot;: {
+        &quot;externalAccountId&quot;: &quot;CS023671&quot;,
+        &quot;clientRefId&quot;: &quot;CLIENT-REF-1559213451&quot;,
+        &quot;sector&quot;: &quot;Ent Retail&quot;,
+        &quot;vehicleType&quot;: &quot;car&quot;,
+        &quot;serviceType&quot;: &quot;return&quot;,
+        &quot;trackingUrl&quot;: &quot;https://trackmydriver.lastmilelink.eu/sandbox::1559213451?token=fiitzb44JosWvQSH8bd0EGbnHptj1rniPJBNLo0vLXw%3D&quot;,
+        &quot;isTest&quot;: true
+    },
+    &quot;customData&quot;: {
+        &quot;caller&quot;: &quot;Booking&quot;,
+        &quot;reference_1&quot;: &quot;kingsman@kingsman.com&quot;,
+        &quot;reference_2&quot;: &quot;Kingsman&quot;
+    },
+    &quot;contact&quot;: {
+        &quot;name&quot;: &quot;James Moriarty&quot;,
+        &quot;mobile&quot;: &quot;+447888888889&quot;,
+        &quot;phone&quot;: &quot;020812718278&quot;,
+        &quot;email&quot;: &quot;jm@gmail.com&quot;
+    },
+    &quot;notification&quot;: {
+        &quot;emails&quot;: [
+            {
+                &quot;email&quot;: &quot;rbeemi@onthedot.com&quot;,
+                &quot;statuses&quot;: [
+                    &quot;created&quot;,
+                    &quot;allocated&quot;,
+                    &quot;arrived_at_collection&quot;,
+                    &quot;collected&quot;,
+                    &quot;arrived_at_delivery&quot;,
+                    &quot;delivered&quot;
+                ]
+            }
+        ],
+        &quot;sms&quot;: [
+            {
+                &quot;number&quot;: &quot;+4477772888442&quot;,
+                &quot;statuses&quot;: [
+                    &quot;created&quot;,
+                    &quot;allocated&quot;,
+                    &quot;arrived_at_collection&quot;,
+                    &quot;collected&quot;,
+                    &quot;arrived_at_delivery&quot;,
+                    &quot;delivered&quot;
+                ]
+            }
+        ],
+        &quot;webhooks&quot;: [
+            {
+                &quot;endpoint&quot;: &quot;https://enit24ti5gez.x.pipedream.net/&quot;,
+                &quot;methodType&quot;: &quot;POST&quot;,
+                &quot;headers&quot;: {
+                    &quot;authorization&quot;: &quot;&quot;,
+                    &quot;company&quot;: &quot;&quot;
+                },
+                &quot;statuses&quot;: [
+                    &quot;created&quot;,
+                    &quot;allocated&quot;,
+                    &quot;arrived_at_collection&quot;,
+                    &quot;collected&quot;,
+                    &quot;arrived_at_delivery&quot;,
+                    &quot;delivered&quot;
+                ]
+            }
+        ]
+    },
+    &quot;jobs&quot;: [
+        {
+            &quot;id&quot;: &quot;1&quot;,
+            &quot;metadata&quot;: {
+                &quot;journeyType&quot;: &quot;return&quot;
+            },
+            &quot;items&quot;: [
+                {
+                    &quot;id&quot;: &quot;1&quot;,
+                    &quot;description&quot;: &quot;Book&quot;,
+                    &quot;quantity&quot;: 5,
+                    &quot;metrics&quot;: {
+                        &quot;weight&quot;: 4,
+                        &quot;dimension&quot;: {
+                            &quot;width&quot;: 10,
+                            &quot;height&quot;: 5,
+                            &quot;length&quot;: 20
+                        }
+                    }
+                },
+                {
+                    &quot;id&quot;: &quot;2&quot;,
+                    &quot;description&quot;: &quot;Book marker&quot;,
+                    &quot;quantity&quot;: 4,
+                    &quot;metrics&quot;: {
+                        &quot;weight&quot;: 10,
+                        &quot;dimension&quot;: {
+                            &quot;width&quot;: 10,
+                            &quot;height&quot;: 0.5,
+                            &quot;length&quot;: 20
+                        }
+                    }
+                }
+            ],
+            &quot;collection&quot;: {
+                &quot;stopId&quot;: &quot;2&quot;,
+                &quot;instructions&quot;: &quot;Collect Box From Main Garage&quot;
+            },
+            &quot;delivery&quot;: {
+                &quot;stopId&quot;: &quot;1&quot;,
+                &quot;instructions&quot;: &quot;Ring main Door Bell&quot;
+            },
+            &quot;timeslot&quot;: {
+                &quot;id&quot;: &quot;&quot;,
+                &quot;collection&quot;: {
+                    &quot;from&quot;: &quot;2019-05-31T11:00:00.000Z&quot;,
+                    &quot;to&quot;: &quot;2019-05-31T13:00:00.000Z&quot;
+                },
+                &quot;delivery&quot;: {
+                    &quot;from&quot;: &quot;2019-05-31T13:00:00.000Z&quot;,
+                    &quot;to&quot;: &quot;2019-05-31T21:30:00.000Z&quot;
+                }
+            },
+            &quot;requires&quot;: [
+                &quot;ageVerification&quot;,
+                &quot;collectionSignOff&quot;,
+                &quot;deliverySignOff&quot;
+            ],
+            &quot;status&quot;: {
+                &quot;progressStatus&quot;: {
+                    &quot;status&quot;: &quot;created&quot;,
+                    &quot;updatedAt&quot;: &quot;2019-05-30T10:50:51.737Z&quot;
+                },
+                &quot;courierStatus&quot;: null
+            }
+        }
+    ],
+    &quot;stops&quot;: [
+        {
+            &quot;id&quot;: &quot;1&quot;,
+            &quot;contact&quot;: {
+                &quot;name&quot;: &quot;Sherlock Holmes&quot;,
+                &quot;mobile&quot;: &quot;+447777777777&quot;,
+                &quot;phone&quot;: &quot;02091212121212&quot;,
+                &quot;email&quot;: &quot;sh@gmail.com&quot;
+            },
+            &quot;place&quot;: {
+                &quot;id&quot;: &quot;sandbox-store&quot;,
+                &quot;position&quot;: {
+                    &quot;coordinates&quot;: {
+                        &quot;latitude&quot;: 51.523317,
+                        &quot;longitude&quot;: -0.080965
+                    }
+                },
+                &quot;address&quot;: {
+                    &quot;country&quot;: &quot;United Kingdom&quot;,
+                    &quot;town&quot;: &quot;Hackney&quot;,
+                    &quot;streets&quot;: [
+                        &quot;CitySprint - London Central Service Centre&quot;,
+                        &quot;58-62 Scrutton St&quot;
+                    ],
+                    &quot;postcode&quot;: &quot;EC2A 4PH&quot;
+                },
+                &quot;ulez&quot;: true
+            },
+            &quot;instructions&quot;: &quot;Park at Store back Door&quot;
+        },
+        {
+            &quot;id&quot;: &quot;2&quot;,
+            &quot;contact&quot;: {
+                &quot;name&quot;: &quot;John Watson&quot;,
+                &quot;mobile&quot;: &quot;+447777777778&quot;,
+                &quot;email&quot;: &quot;jw@gmail.com&quot;
+            },
+            &quot;place&quot;: {
+                &quot;position&quot;: {
+                    &quot;coordinates&quot;: {
+                        &quot;latitude&quot;: 51.557963,
+                        &quot;longitude&quot;: 0.067261
+                    }
+                },
+                &quot;address&quot;: {
+                    &quot;country&quot;: &quot;GBR&quot;,
+                    &quot;town&quot;: &quot;London&quot;,
+                    &quot;streets&quot;: [
+                        &quot;FLAT 111&quot;,
+                        &quot;ICON BUILDING&quot;
+                    ],
+                    &quot;postcode&quot;: &quot;IG1 2FJ&quot;,
+                    &quot;companyName&quot;: &quot;SANDBOX-OTD-COMPANY&quot;
+                },
+                &quot;ulez&quot;: false
+            },
+            &quot;instructions&quot;: &quot;You can park at Front Garden at my house&quot;
+        }
+    ],
+    &quot;status&quot;: {
+        &quot;status&quot;: &quot;created&quot;,
+        &quot;updatedAt&quot;: &quot;2019-05-30T10:50:51.737Z&quot;
+    },
+    &quot;createdAt&quot;: &quot;2019-05-30T10:50:51.737Z&quot;,
+    &quot;updatedAt&quot;: &quot;2019-05-30T10:50:51.737Z&quot;
+}</p>
+</code></pre></details>
+</blockquote>
+
 <aside class="notice">
 The request sample in the left <code>code pane</code> will create a return to depot order.
 </aside>
 
 <p><img src="images/OTD_H_RTD.png" alt="Returns to Depot/Origin" /></p>
 
-<h5>Create a return to origin or to an alternative location booking request for same day or scheduled in the future</h5>
+<p>Create a return to origin or to an alternative location booking request for same day or scheduled in the future</p>
+<h3 id='wait-and-return'>Wait and Return</h3>
+<p>A particular case of a return is <code>Wait and Return</code> where courier are required to return special packaging or a number of items from that delivery.</p>
+
+<ul>
+<li>The booking request will have a <code>wait and return</code> service and contain 2 jobs within the same Booking request.</li>
+</ul>
 <h2 id='real-time-tracking'>Real time tracking</h2>
 <aside class="notice">
   Real time tracking and dynamic ETA : <code><strong>ETC</strong> ( estimated time of collection )</code> and <code><strong>ETD</strong> ( estimated time of delivery )</code>
@@ -822,7 +4509,7 @@ The request sample in the left <code>code pane</code> will create a return to de
 
 <p><img src="images/OTD_H_RTTE.png" alt="Real Time Notifications" /></p>
 
-<h5>On demand, flexible real time tracking events with dynamic ETAs</h5>
+<p>On demand, flexible real time tracking events with dynamic ETAs. Our webhooks contain the</p>
 <h2 id='real-time-notifications'>Real time notifications</h2>
 <aside class="notice">
   Real time notifications as `e-mail`, `sms` or `web-hooks` containing dynamic ETA : <code><strong>ETC</strong> ( estimated time of collection )</code> and <code><strong>ETD</strong> ( estimated time of delivery )</code>, `courier name`, `proof of delivery and collection`, e.t.c.
