@@ -1,14 +1,29 @@
-# Documentation Conventions and Templates
 
+<p align="center">
+  <img src="https://lastmilelink.github.io/cosmo-api-v2-slate/images/logo.png" alt="On the dot: API Documentation" width="226">
+  <br>
+  <!-- a href="https://travis-ci.org/lord/slate"><img src="https://travis-ci.org/lord/slate.svg?branch=master" alt="Build Status"></a -->
+</p>
+
+<p align="center">Slate helps us create a beautiful, intelligent and responsive API documentation.</p>
+
+<p align="center"><img src="https://lastmilelink.github.io/cosmo-api-v2-slate/images/otd-docs.png" width=700 alt="Screenshot of On the dot Documentation created with Slate"></p>
+
+<p align="center"><em>Check it out at <a href="https://lastmilelink.github.io/cosmo-api-v2-slate">https://lastmilelink.github.io/cosmo-api-v2-slate</a>.</em></p>
+
+# On the dot APIs Documentation Conventions and Templates
+* **Clean, intuitive design** — Created with [Slate](https://github.com/lord/slate), the description of our APIs is on the left side of documentation, and all the code examples are on the right side. Inspired by [Stripe's](https://stripe.com/docs/api) and [PayPal's](https://developer.paypal.com/webapps/developer/docs/api/) API docs. Slate is responsive, so it looks great on tablets, phones, and even in print.
+
+* **Everything on a single page** — Slate puts the entire documentation on a single page. We haven't sacrificed linkability, though. As you scroll, your browser's hash will update to the nearest header, so linking to a particular point in the documentation is still natural and easy.
 
 ## Aside strips
 
-Asides class can be : [notice, success, warning]
+Asides CSS class can be : [notice, success, warning]
 
-**Example**
+**Examples**
 
 <aside class="success">
-Our Sandbox is a self-service provisioning, no commitment required. All that is required is to register and obtain your developer `API Key.`AUP is observed basis to bootstrat your development with On the dot APIs. All transactional data is regularily purged. 
+Our Sandbox provisioning is self-service with no commitment required with AUP policy enforced.. All that is required is to register and obtain your developer `API Key.` Bootstrat your development with On the dot APIs. All transactional data is regularily purged. 
 Should you need further clarification, please contact OTD partners team at [partners@onthedot.com](mailto:partners@onthedot.com).
 </aside>
 
@@ -39,17 +54,46 @@ diswin.document.close()
 ## Code samples include in the right pannel 
 ### These code samples will be generated and injected into documentation via the pipeline or GitHub
 
-All code samples are inserted into the page via `Middleman` ruby with a partial include statement `<% partial 'includes/booboo.md.erb' %>`
-The files need to follow a naming convention in order to be overwritten by the pipeline:
+* All code samples are inserted via Ruby `partial include` statement: `<% partial 'includes/booboo.md.erb' %>`
+The files need to follow a naming convention in order to be updated by OTD pipeline.
 
-All code samples are wrapped in a collapsable panel , code shown below: Please `note` the first character `>` which is used to indicate a blockquote and send the code samples in the right dark pane of the page.
+### Code samples naming convention and location in Slate project.
 
+* All code samples files naming convention follows Ruby partials pattern : `_booboo.md.erb` with the follwoing file structure:
 
+```
+Slate root
+    |-source
+          |-`includes`
+                |- `_booboo.md.erb`
+                |- `_http_resp.md.erb` - 
+                |- `_http_verb.md.erb`
+          |- `...`
+```
+
+* **Out-of-the-box syntax highlighting** for [over 100 languages](https://github.com/jneen/rouge/wiki/List-of-supported-languages-and-lexers), no configuration required.
+
+* Code samples are wrapped in a collapsable panel , code shown below: Please `note` the first character `>` which is used to indicate a blockquote and send the code samples in the right dark pane of the page.
 ```html
+
+<!-- Full Code sample block -->
+**Cancel an order**
+
+><%= partial 'includes/http_verb.md.erb', locals: {verb:"POST", url: "http://lol.com/`{:param}`/`{:param}`",bg_colour:"#49cc90"}  %>
+><%= partial 'includes/http_verb.md.erb', locals: {verb:"PUT", url: "http://lol.com/`{:param}`/`{:param}`",bg_colour:"#fca130"}  %>
+><%= partial 'includes/http_verb.md.erb', locals: {verb:"PATCH", url: "http://lol.com/`{:param}`/`{:param}`",bg_colour:"#50e3c2"}  %>
+><%= partial 'includes/http_verb.md.erb', locals: {verb:"GET", url: "http://lol.com/`{:param}`/`{:param}`",bg_colour:"#61affe"}  %>
+><%= partial 'includes/http_verb.md.erb', locals: {verb:"DELETE", url: "http://lol.com/`{:param}`/`{:param}`",bg_colour:"#f93e3e"}  %>
+><details><summary class="highlight plaintext">Expand for request</summary><pre><code><%= partial 'includes/booboo.md.erb' %></code></pre></details>
+
+><div class="code-block-no-wrap-header">Http reponse codes :<%= partial 'includes/http_resp.md.erb', locals: {resp:"201", resp_text: "",bg_colour:"#49cc90"} %><%= partial 'includes/http_resp.md.erb', locals: {resp:"4xx", resp_text: "",bg_colour:"red"} %></div>
+><details><summary class="highlight plaintext">Expand for response</summary><pre><code><%= partial 'includes/booboo.md.erb' %></code></pre></details>
+
 <!-- URL right section -->
 ><%= partial 'includes/http_verb.md.erb', locals: {verb:"DELETE", url: "http://lol.com/`{:param}`/`{:param}`",bg_colour:"#f93e3e"}  %>
 
 <!-- Expandable code sample: REQUEST -->
+
 ><details><summary class="highlight plaintext">Expand for request</summary><pre><code><%= partial 'includes/booboo.md.erb' %></code></pre></details>
 
 <!-- HTTP codes : Responses -->
@@ -59,55 +103,16 @@ All code samples are wrapped in a collapsable panel , code shown below: Please `
 ><details><summary class="highlight plaintext">Expand for response</summary><pre><code><%= partial 'includes/booboo.md.erb' %></code></pre></details>
 ```
 
-### Code samples naming convention and location in Slate project.
-
-All code samples files will have Ruby partial names : _booboo.md.erb and the file structure is :
-
-```
-Slate root
-    |-source
-          |-`includes`
-                |- `_booboo.md.erb`
-                |- `_http_resp.md.erb` - 
-                |- `_http_verb.md.erb`
-                |- `...`
-```
-
-
-
-
-<p align="center">
-  <img src="https://lastmilelink.github.io/cosmo-api-v2-slate/images/logo.png" alt="On the dot: API Documentation" width="226">
-  <br>
-  <!-- a href="https://travis-ci.org/lord/slate"><img src="https://travis-ci.org/lord/slate.svg?branch=master" alt="Build Status"></a -->
-</p>
-
-<p align="center">Slate helps you create beautiful, intelligent, responsive API documentation.</p>
-
-<p align="center"><img src="https://raw.githubusercontent.com/lord/img/master/screenshot-slate.png" width=700 alt="Screenshot of Example Documentation created with Slate"></p>
-
-<p align="center"><em>The example above was created with Slate. Check it out at <a href="https://lord.github.io/slate">lord.github.io/slate</a>.</em></p>
-
-Features
+Slate Features
 ------------
 
-* **Clean, intuitive design** — With Slate, the description of your API is on the left side of your documentation, and all the code examples are on the right side. Inspired by [Stripe's](https://stripe.com/docs/api) and [PayPal's](https://developer.paypal.com/webapps/developer/docs/api/) API docs. Slate is responsive, so it looks great on tablets, phones, and even in print.
-
-* **Everything on a single page** — Gone are the days when your users had to search through a million pages to find what they wanted. Slate puts the entire documentation on a single page. We haven't sacrificed linkability, though. As you scroll, your browser's hash will update to the nearest header, so linking to a particular point in the documentation is still natural and easy.
-
 * **Slate is just Markdown** — When you write docs with Slate, you're just writing Markdown, which makes it simple to edit and understand. Everything is written in Markdown — even the code samples are just Markdown code blocks.
-
-* **Write code samples in multiple languages** — If your API has bindings in multiple programming languages, you can easily put in tabs to switch between them. In your document, you'll distinguish different languages by specifying the language name at the top of each code block, just like with GitHub Flavored Markdown.
-
-* **Out-of-the-box syntax highlighting** for [over 100 languages](https://github.com/jneen/rouge/wiki/List-of-supported-languages-and-lexers), no configuration required.
 
 * **Automatic, smoothly scrolling table of contents** on the far left of the page. As you scroll, it displays your current position in the document. It's fast, too. We're using Slate at TripIt to build documentation for our new API, where our table of contents has over 180 entries. We've made sure that the performance remains excellent, even for larger documents.
 
 * **Let your users update your documentation for you** — By default, your Slate-generated documentation is hosted in a public GitHub repository. Not only does this mean you get free hosting for your docs with GitHub Pages, but it also makes it simple for other developers to make pull requests to your docs if they find typos or other problems. Of course, if you don't want to use GitHub, you're also welcome to host your docs elsewhere.
 
 * **RTL Support** Full right-to-left layout for RTL languages such as Arabic, Persian (Farsi), Hebrew etc.
-
-Getting started with Slate is super easy! Simply fork this repository and follow the instructions below. Or, if you'd like to check out what Slate is capable of, take a look at the [sample docs](http://lord.github.io/slate).
 
 Getting Started with Slate
 ------------------------------
@@ -120,7 +125,7 @@ You're going to need:
  - **Ruby, version 2.3.1 or newer**
  - **Bundler** — If Ruby is already installed, but the `bundle` command doesn't work, just run `gem install bundler` in a terminal.
 
-### Getting Set Up
+### Getting Slate Set Up
 
 1. Fork this repository on GitHub.
 2. Clone *your forked repository* (not our original one) to your hard drive with `git clone https://github.com/YOURUSERNAME/slate.git`
@@ -162,13 +167,6 @@ Companies Using Slate
 * [Scale](https://docs.scaleapi.com/)
 
 You can view more in [the list on the wiki](https://github.com/lord/slate/wiki/Slate-in-the-Wild).
-
-Questions? Need Help? Found a bug?
---------------------
-
-If you've got questions about setup, deploying, special feature implementation in your fork, or just want to chat with the developer, please feel free to [start a thread in our Spectrum community](https://spectrum.chat/slate)!
-
-Found a bug with upstream Slate? Go ahead and [submit an issue](https://github.com/lord/slate/issues). And, of course, feel free to submit pull requests with bug fixes or changes to the `dev` branch.
 
 Contributors
 --------------------
