@@ -240,10 +240,7 @@
                     <a href="#resource-url" class="toc-h2 toc-link" data-title="Resource URL">Resource URL</a>
                   </li>
                   <li>
-                    <a href="#methods-supported" class="toc-h2 toc-link" data-title="Methods supported">Methods supported</a>
-                  </li>
-                  <li>
-                    <a href="#http-codes" class="toc-h2 toc-link" data-title="HTTP Codes">HTTP Codes</a>
+                    <a href="#methods-supported-for-published-booking-apis" class="toc-h2 toc-link" data-title="Methods supported for published Booking APIs">Methods supported for published Booking APIs</a>
                   </li>
                   <li>
                     <a href="#request-format" class="toc-h2 toc-link" data-title="Request format">Request format</a>
@@ -254,6 +251,9 @@
                   <li>
                     <a href="#date-and-time" class="toc-h2 toc-link" data-title="Date and time">Date and time</a>
                   </li>
+                  <li>
+                    <a href="#http-codes" class="toc-h2 toc-link" data-title="HTTP Codes">HTTP Codes</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -263,7 +263,7 @@
                     <a href="#signup-to-otd-sandbox" class="toc-h2 toc-link" data-title="Signup to OTD Sandbox">Signup to OTD Sandbox</a>
                   </li>
                   <li>
-                    <a href="#postman" class="toc-h2 toc-link" data-title="POSTMAN">POSTMAN</a>
+                    <a href="#api-tools-3rd-partys" class="toc-h2 toc-link" data-title="API Tools (3rd Partys)">API Tools (3rd Partys)</a>
                   </li>
                   <li>
                     <a href="#sandbox-seed-data" class="toc-h2 toc-link" data-title="Sandbox Seed Data">Sandbox Seed Data</a>
@@ -335,7 +335,14 @@
         <h1 id='introduction'>Introduction</h1>
 <p><strong>Welcome to the On the dot Booking Service V2.0 APIs Reference documentation.</strong></p>
 
-<p>This documentation is currently in <code>Beta</code> and will be updated over the next few months. Should you require further assistance using our APIs, please contact our Partner team <strong>partners@onthedot.com</strong>. The following bookings types can be made using our APIs:</p>
+<p>This documentation is currently in <code>Beta</code> and will be updated over the next few months. Should you require further assistance using our APIs, please contact our Partner team <strong>partners@onthedot.com</strong>.</p>
+
+<aside class="notice">
+<strong>Please note:</strong>
+  <p>The <code>Booking Service</code> is used to create <code>orders</code> in On the dot platform. One <code>order</code> can have one or more <code>jobs</code> whithin and at least 2 <code>stops</code>, one <code>collection</code> and one <code>delivery</code>.</p>
+</aside>
+
+<p><strong>The following order types can be made using our APIs:</strong></p>
 
 <p><body>
   <div class="flex-container">
@@ -346,7 +353,7 @@
           </span>
           <span style="text-align: center; padding: 4px;">
               <p>
-              <h5>Express / ASAP</h5>
+              <h5>Express / ASAP orders</h5>
               </p>
           </span>
       </div>
@@ -357,7 +364,7 @@
           </span>
           <span style="text-align: center; padding: 4px;">
               <p>
-                  <h5>Schedule</h5>
+                  <h5>Scheduled orders</h5>
               </p>
           </span>
       </div>
@@ -379,7 +386,7 @@
           </span>
           <span style="text-align: center; padding: 4px;">
               <p>
-                  <h5> In Real-Time</h5>
+                  <h5>In Real-Time</h5>
               </p>
           </span>
       </div>
@@ -398,7 +405,7 @@
 </body></p>
 
 <aside class="notice">
-Diagram below is a high level overview of our API features and integration patterns. Swagger files are downloadable from the corresponding section below
+Diagram below is a high level overview of our Booking API features and integration patterns. Swagger files are downloadable from the corresponding section below along with a Postman Collection and Enviroment to bootstrat your development.
 </aside>
 
 <p><img src="images/OTD-API-HLV-slate.png" alt="HLV" /></p>
@@ -434,11 +441,308 @@ Developer &lt;-- &quot;Cosmo Webhook&quot;:{event driven}</p>
 </aside>
 
 <p><img src="images/API-Docs.png" alt="Sequence Diagram" /></p>
+<h1 id='api-guide'>API Guide</h1><h2 id='resource-url'>Resource URL</h2>
+<p>Currently, all the APIs are JSON-based APIs. They support standard HTTP verbs for the public version of Booking API, for example, GET, POST and PUT.</p>
+<h3 id='resource-url-format'>Resource URL Format</h3>
+<blockquote>
+<p><code>&lt;host&gt;</code>/<service>/version/<code>resource_type</code>/<code>[sub-resource|identifiers]</code>/resource/?query_string</p>
+</blockquote>
 
+<ul>
+<li>PATH: <code>{{host}}/{{bookingService}}/v2/accounts/{{accountId}}/orders</code></li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Path element</th>
+<th>Resource</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>host</code></td>
+<td>{{host}}</td>
+<td>https://public-api-prod.onthedot.com</td>
+</tr>
+<tr>
+<td><code>service</code></td>
+<td>{{bookingService}}</td>
+<td>booking</td>
+</tr>
+<tr>
+<td><code>version</code></td>
+<td>Service version</td>
+<td>V2</td>
+</tr>
+<tr>
+<td><code>resource_type</code></td>
+<td>accounts</td>
+<td>accounts</td>
+</tr>
+<tr>
+<td><code>sub-resource/identifiers</code></td>
+<td>accountId</td>
+<td>sandbox</td>
+</tr>
+<tr>
+<td><code>resource</code></td>
+<td>resource</td>
+<td>orders</td>
+</tr>
+<tr>
+<td><code>/?query_string</code></td>
+<td>/?...</td>
+<td>/?...</td>
+</tr>
+</tbody></table>
+
+<ul>
+<li>e.g.: <code>https://public-api-prod.onthedot.com/booking/v2/accounts/sandbox/orders</code></li>
+</ul>
+<h2 id='methods-supported-for-published-booking-apis'>Methods supported for published Booking APIs</h2>
+<table><thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>GET</td>
+<td>Retrieve booking or collection of bookings</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>Creating new booking</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td>Update the existing booking</td>
+</tr>
+<tr>
+<td></td>
+<td>Cancel a booking</td>
+</tr>
+</tbody></table>
+<h2 id='request-format'>Request format</h2>
+<p>Currently, Booking API supports only JSON-based requests. The API Bearer Token is mandatory for all the requests as part of header.</p>
+<h3 id='header-definition'>Header definition</h3>
+<p>Definition of the request headers is as follows:</p>
+
+<p><code>Note: (M)andatory, (O)ptional</code></p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Valid</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Accept</td>
+<td>String</td>
+<td>O</td>
+<td>JSON</td>
+<td>Currently, our API only supports JSON and <code>does not support any other formats i.e. XML</code></td>
+</tr>
+<tr>
+<td>Content-type</td>
+<td>string</td>
+<td>M</td>
+<td>application/json</td>
+<td>Currently, our API only supports JSON and <code>does not support any other formats i.e. XML</code></td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>String</td>
+<td>M</td>
+<td>API Bearer Token</td>
+<td>Accepts the valid API-key in the provided format that was created during the user subscription process</td>
+</tr>
+<tr>
+<td>x-trace-id</td>
+<td>String</td>
+<td>M</td>
+<td></td>
+<td><code>Unique identifier for each request</code>, can be a $guid, passed by client application. Used to track the internal application flow</td>
+</tr>
+</tbody></table>
+<h2 id='security'>Security</h2>
+<p><strong>All APIs require an <code>Authorization</code> header.</strong></p>
+
+<ul>
+<li><p>You will need to register <a href="https://developer.onthedot.com/create">here</a> to obtain a token by creating an <code>app</code> and subscribing to our <code>Sandbox</code> API.</p></li>
+<li><p>The <code>API Bearer token</code>  must be used in the request headers .</p></li>
+</ul>
+<h2 id='date-and-time'>Date and time</h2>
+<p>The date and time object used in the request or response supports ISO8601 format and will be reported in UTC time Zulu only. Example, <code>2019-05-10T10:04:02.000Z</code>.</p>
+
+<table><thead>
+<tr>
+<th><strong>Caveat:</strong></th>
+<th>Local Time</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1.</td>
+<td><code>Opening</code> and <code>Closing</code> times are always in <code>local time</code> if you have places setup under your account on our platform.</td>
+</tr>
+<tr>
+<td>2.</td>
+<td><code>Opening</code> and <code>Closing</code> times also feature in the timeslot request , where they are used to overide the master configuration for a place if configure on our platform.</td>
+</tr>
+</tbody></table>
+
+<p><code>&lt;p&gt;curl -X POST \
+  https://public-api-prod.onthedot.com/booking/v2/accounts/sandbox/timeslots \
+  -H &amp;#39;Accept: application/json&amp;#39; \
+  -H &amp;#39;Authorization: &lt;code&gt;&amp;lt;Your API Bearer Token&amp;gt;&lt;/code&gt;&amp;#39; \
+  -H &amp;#39;Content-Type: application/json&amp;#39; \
+  -H &amp;#39;X-Trace-Id: 812100a5-36f5-44b2-8ee6-aded527f1e8a&amp;#39; \
+  -H &amp;#39;cache-control: no-cache&amp;#39; \
+  -d &amp;#39;{
+    &amp;quot;partnerId&amp;quot;: &amp;quot;sandbox&amp;quot;,
+    &amp;quot;serviceType&amp;quot;: &amp;quot;1hour&amp;quot;,
+    &amp;quot;vehicleType&amp;quot;:&amp;quot;car&amp;quot;,
+    &amp;quot;collection&amp;quot;: {
+        &amp;quot;id&amp;quot;: &amp;quot;sandbox-store&amp;quot;
+    },
+    &amp;quot;delivery&amp;quot;: {
+        &amp;quot;address&amp;quot;: {
+            &amp;quot;streets&amp;quot;: [
+                &amp;quot;FLAT 111&amp;quot;,
+                &amp;quot;ICON BUILDING&amp;quot;
+            ],
+            &amp;quot;town&amp;quot;: &amp;quot;LONDON&amp;quot;,
+            &amp;quot;country&amp;quot;: &amp;quot;GBR&amp;quot;,
+            &amp;quot;postcode&amp;quot;: &amp;quot;DE11 0AA&amp;quot;
+        }
+    },
+    &amp;quot;dates&amp;quot;: {
+        &amp;quot;2019-05-31&amp;quot;: {}
+    },
+    &amp;quot;packageReadyAt&amp;quot;: &amp;quot;2019-05-29T13:57:59.267Z&amp;quot;,
+    &amp;quot;additionalNoOfDays&amp;quot;: 0
+}&amp;#39;&lt;/p&gt;
+&lt;/div&gt;</code></p>
+<h2 id='http-codes'>HTTP Codes</h2>
+<p>All the APIs return HTTP code in response to various error scenarios:</p>
+
+<table><thead>
+<tr>
+<th>HTTP Codes</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>Success</td>
+<td>Request completed as expected</td>
+</tr>
+<tr>
+<td>201</td>
+<td>Created</td>
+<td>Entity created</td>
+</tr>
+<tr>
+<td>301</td>
+<td>Moved permanently</td>
+<td>Service permanently redirected</td>
+</tr>
+<tr>
+<td>304</td>
+<td>Not modified</td>
+<td>If request is cached and not updated</td>
+</tr>
+<tr>
+<td>400</td>
+<td>Bad request</td>
+<td>Request payload is not as per specification, i.e. argument or parameter is missing</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized</td>
+<td>Authorization token unavailable or not valid</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden</td>
+<td>Server understood the request but refusing to fulfil the request.</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><em>Example: Access not allowed based on Access Control List, tier restriction, etc.</em></td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not found</td>
+<td>Not found anything matching the Request-URI (Uniform Resource Identifier)</td>
+</tr>
+<tr>
+<td>405</td>
+<td>Method not allowed</td>
+<td>Method is not supported or not allowed</td>
+</tr>
+<tr>
+<td>406</td>
+<td>Not Accepted</td>
+<td>The Accept header in the request asking for format which is not supported</td>
+</tr>
+<tr>
+<td>409</td>
+<td>Conflict</td>
+<td>Concurrent update to the same entity</td>
+</tr>
+<tr>
+<td>413</td>
+<td>Request entity too large</td>
+<td>Over the allowed limit</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal server error</td>
+<td>Server encountered an unexpected error</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Service unavailable</td>
+<td>Service is unable to handle the request due to temporary overloading or maintenance of the server</td>
+</tr>
+</tbody></table>
+<h1 id='quick-start'>Quick Start</h1><h2 id='signup-to-otd-sandbox'>Signup to OTD Sandbox</h2>
+<aside class="notice">
+Our Sandbox is a self-service provisioning, no commitment required. All that is required is to register and obtain your developer `API Key.`AUP policy is enforced with On the dot APIs.
+</aside>
+
+<p><img src="images/OTD_H_DEV.png" alt="Dev" /></p>
+
+<aside class="warning">
+All transactional data is regularily purged, please don't get alarmed if your sandbox booking data disapered. Create a new booking and continue.
+</aside>
+
+<p><code>N.B.</code> - Should you need further clarification, please contact OTD partners team at <a href="mailto:partners@onthedot.com">partners@onthedot.com</a>.</p>
+
+<ul>
+<li>Signup to get access to our Sandbox <a href="https://developer.onthedot.com/create">here</a>.
+
+<ul>
+<li>Create an app and subcribe to the <code>Sandbox</code> API product to obtain your <code>API Token</code>
+
+<ul>
+<li>Download and configure the tailored Postman collections and enviroment below to testdrive our APIs without any commitment.</li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id='api-tools-3rd-partys'>API Tools (3rd Partys)</h2>
 <blockquote>
 <p>Swagger V2 OTD APIs in JSON format</p>
+</blockquote>
 
-<details><summary class="highlight plaintext">Expand for V2 JSON</summary><pre><code><p>{
+<blockquote>
+<details><summary class=highlight plaintext>Expand for side pane</summary><pre><code><p>{
   &quot;swagger&quot;: &quot;2.0&quot;,
   &quot;schemes&quot;: [
     &quot;https&quot;
@@ -2234,8 +2538,1803 @@ Developer &lt;-- &quot;Cosmo Webhook&quot;:{event driven}</p>
 </code></pre></details>
 </blockquote>
 
-<aside class="notice">
-**Swagger 2.0 files**
+<details open style="margin: 10px; padding-left: 20px; float: left; width: 60%; max-width: 60% !important;"><summary class=xxx style="margin-bottom: 5px;">zxxzxzxzx</summary><pre class="highlight" style="background-color: #fff; style="margin: 10px; padding-left: 20px; display:flex; clear: left;""><code><p>{
+  &quot;swagger&quot;: &quot;2.0&quot;,
+  &quot;schemes&quot;: [
+    &quot;https&quot;
+  ],
+  &quot;host&quot;: &quot;sandbox.onthedot.com&quot;,
+  &quot;basePath&quot;: &quot;/V2&quot;,
+  &quot;x-apigee&quot;: {
+    &quot;rootRules&quot;: [
+      {
+        &quot;node&quot;: &quot;PostFlow&quot;,
+        &quot;attr&quot;: {
+          &quot;name&quot;: &quot;PostFlow&quot;
+        },
+        &quot;content&quot;: [
+          {
+            &quot;node&quot;: &quot;Request&quot;,
+            &quot;content&quot;: &quot;&quot;
+          },
+          {
+            &quot;node&quot;: &quot;Response&quot;,
+            &quot;content&quot;: &quot;&quot;
+          }
+        ]
+      },
+      {
+        &quot;node&quot;: &quot;PreFlow&quot;,
+        &quot;attr&quot;: {
+          &quot;name&quot;: &quot;PreFlow&quot;
+        },
+        &quot;content&quot;: [
+          {
+            &quot;node&quot;: &quot;Response&quot;,
+            &quot;content&quot;: &quot;&quot;
+          },
+          {
+            &quot;node&quot;: &quot;Request&quot;,
+            &quot;content&quot;: [
+              {
+                &quot;node&quot;: &quot;Step&quot;,
+                &quot;content&quot;: [
+                  {
+                    &quot;node&quot;: &quot;Name&quot;,
+                    &quot;content&quot;: &quot;rate-limiter&quot;
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        &quot;node&quot;: &quot;DefaultFaultRule&quot;,
+        &quot;attr&quot;: {
+          &quot;name&quot;: &quot;default-rule&quot;
+        },
+        &quot;content&quot;: [
+          {
+            &quot;node&quot;: &quot;Step&quot;,
+            &quot;content&quot;: [
+              {
+                &quot;node&quot;: &quot;Name&quot;,
+                &quot;content&quot;: &quot;add-cors&quot;
+              }
+            ]
+          },
+          {
+            &quot;node&quot;: &quot;AlwaysEnforce&quot;,
+            &quot;content&quot;: true
+          }
+        ]
+      },
+      {
+        &quot;node&quot;: &quot;HTTPProxyConnection&quot;,
+        &quot;content&quot;: [
+          {
+            &quot;node&quot;: &quot;BasePath&quot;,
+            &quot;content&quot;: &quot;/booking&quot;
+          },
+          {
+            &quot;node&quot;: &quot;Properties&quot;,
+            &quot;content&quot;: &quot;&quot;
+          },
+          {
+            &quot;node&quot;: &quot;VirtualHost&quot;,
+            &quot;content&quot;: &quot;secure&quot;
+          }
+        ]
+      },
+      {
+        &quot;node&quot;: &quot;RouteRule&quot;,
+        &quot;attr&quot;: {
+          &quot;name&quot;: &quot;no-route&quot;
+        },
+        &quot;content&quot;: [
+          {
+            &quot;node&quot;: &quot;Condition&quot;,
+            &quot;content&quot;: &quot;request.verb == \&quot;OPTIONS\&quot;&quot;
+          }
+        ]
+      },
+      {
+        &quot;node&quot;: &quot;RouteRule&quot;,
+        &quot;attr&quot;: {
+          &quot;name&quot;: &quot;default&quot;
+        },
+        &quot;content&quot;: [
+          {
+            &quot;node&quot;: &quot;TargetEndpoint&quot;,
+            &quot;content&quot;: &quot;default&quot;
+          }
+        ]
+      },
+      {
+        &quot;node&quot;: &quot;FaultRules&quot;,
+        &quot;content&quot;: &quot;&quot;
+      }
+    ],
+    &quot;additionalFlows&quot;: [
+      {
+        &quot;node&quot;: &quot;Flow&quot;,
+        &quot;attr&quot;: {
+          &quot;name&quot;: &quot;pre-flight&quot;
+        },
+        &quot;content&quot;: [
+          {
+            &quot;node&quot;: &quot;Request&quot;,
+            &quot;content&quot;: &quot;&quot;
+          },
+          {
+            &quot;node&quot;: &quot;Response&quot;,
+            &quot;content&quot;: [
+              {
+                &quot;node&quot;: &quot;Step&quot;,
+                &quot;content&quot;: [
+                  {
+                    &quot;node&quot;: &quot;Name&quot;,
+                    &quot;content&quot;: &quot;add-cors&quot;
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            &quot;node&quot;: &quot;Condition&quot;,
+            &quot;content&quot;: &quot;request.verb == \&quot;OPTIONS\&quot;&quot;
+          }
+        ]
+      },
+      {
+        &quot;node&quot;: &quot;Flow&quot;,
+        &quot;attr&quot;: {
+          &quot;name&quot;: &quot;private-by-default&quot;
+        },
+        &quot;content&quot;: [
+          {
+            &quot;node&quot;: &quot;Description&quot;,
+            &quot;content&quot;: &quot;Make any non-listed flow private&quot;
+          },
+          {
+            &quot;node&quot;: &quot;Response&quot;,
+            &quot;content&quot;: &quot;&quot;
+          },
+          {
+            &quot;node&quot;: &quot;Request&quot;,
+            &quot;content&quot;: [
+              {
+                &quot;node&quot;: &quot;Step&quot;,
+                &quot;content&quot;: [
+                  {
+                    &quot;node&quot;: &quot;Name&quot;,
+                    &quot;content&quot;: &quot;deny-external&quot;
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  &quot;info&quot;: {
+    &quot;description&quot;: &quot;<strong>Welcome to the On the dot Booking API Reference documentation.</strong>\n\nThis documentation is currently in Beta and will be updated over the next few months. For assistance with using the APIs, please contact our Partner team.\n\n*<em>All APIs require an <code>Authorization</code> header.</em><em>\n\nYou will need to register <a href="https://developer.onthedot.com/getting-started">here</a> to obtain a token which is used in the request headers.\n&quot;,
+    &quot;version&quot;: &quot;2.0.0.&quot;,
+    &quot;title&quot;: &quot;Booking Service V2.0&quot;,
+    &quot;termsOfService&quot;: &quot;https://www.onthedot.com/terms-and-conditions&quot;,
+    &quot;contact&quot;: {
+      &quot;email&quot;: &quot;partners@onthedot.co.uk&quot;
+    }
+  },
+  &quot;x-logo&quot;: {
+    &quot;url&quot;: &quot;https://otd-static-content-prod.lastmilelink.eu/logos/onthedot-new.png&quot;
+  },
+  &quot;externalDocs&quot;: {
+    &quot;description&quot;: &quot;Find out how to create Github repo for your OpenAPI spec.&quot;,
+    &quot;url&quot;: &quot;https://github.com/Rebilly/generator-openapi-repo&quot;
+  },
+  &quot;tags&quot;: [
+    {
+      &quot;name&quot;: &quot;Timeslot&quot;,
+      &quot;description&quot;: &quot;Everything about Timeslot&quot;
+    }
+  ],
+  &quot;x-tagGroups&quot;: [
+    {
+      &quot;name&quot;: &quot;Timeslot&quot;,
+      &quot;tags&quot;: [
+        &quot;Timeslot&quot;
+      ]
+    },
+    {
+      &quot;name&quot;: &quot;Order V2&quot;,
+      &quot;tags&quot;: [
+        &quot;orderV2&quot;
+      ]
+    }
+  ],
+  &quot;securityDefinitions&quot;: {
+    &quot;api_key&quot;: {
+      &quot;description&quot;: &quot;API calls must provide <code>Authorization</code> header.\n&quot;,
+      &quot;type&quot;: &quot;apiKey&quot;,
+      &quot;name&quot;: &quot;Authorization&quot;,
+      &quot;in&quot;: &quot;header&quot;
+    }
+  },
+  &quot;x-servers&quot;: [
+    {
+      &quot;url&quot;: &quot;/localhost:8181&quot;,
+      &quot;description&quot;: &quot;Default server&quot;
+    }
+  ],
+  &quot;paths&quot;: {
+    &quot;/v2/accounts/{accountId}/timeslots&quot;: {
+      &quot;post&quot;: {
+        &quot;tags&quot;: [
+          &quot;Timeslot&quot;
+        ],
+        &quot;summary&quot;: &quot;Get available timeslots for a booking&quot;,
+        &quot;description&quot;: &quot;This API returns a list of available timeslots. Allows the options to be \npresented to an end-user for selection.\n&quot;,
+        &quot;operationId&quot;: &quot;getTimeslotIDs&quot;,
+        &quot;consumes&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [
+          {
+            &quot;in&quot;: &quot;path&quot;,
+            &quot;name&quot;: &quot;accountId&quot;,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;maxLength&quot;: 140,
+            &quot;description&quot;: &quot;account ID&quot;,
+            &quot;required&quot;: true
+          },
+          {
+            &quot;in&quot;: &quot;body&quot;,
+            &quot;name&quot;: &quot;body&quot;,
+            &quot;description&quot;: &quot;Timeslot parameters&quot;,
+            &quot;required&quot;: true,
+            &quot;schema&quot;: {
+              &quot;$ref&quot;: &quot;#/definitions/TimeslotReq&quot;
+            }
+          }
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;OK&quot;,
+            &quot;schema&quot;: {
+              &quot;$ref&quot;: &quot;#/definitions/TimeslotRes&quot;
+            }
+          },
+          &quot;400&quot;: {
+            &quot;description&quot;: &quot;Bad request&quot;
+          },
+          &quot;401&quot;: {
+            &quot;description&quot;: &quot;Unauthorized&quot;
+          }
+        }
+      }
+    },
+    &quot;/v2/accounts/{accountId}/orders&quot;: {
+      &quot;post&quot;: {
+        &quot;tags&quot;: [
+          &quot;orderV2&quot;
+        ],
+        &quot;summary&quot;: &quot;Create order&quot;,
+        &quot;description&quot;: &quot;This API creates an order with the specified ID.\n\nThis API allows the caller to override all values (timeslots, stops) with their own values.\n\nIf the caller sends only timeslot ID or place ID, then the relevant services will be called to get the details.\n&quot;,
+        &quot;operationId&quot;: &quot;createOrderV2&quot;,
+        &quot;x-apigee&quot;: {
+          &quot;included&quot;: true,
+          &quot;rootRules&quot;: [
+            {
+              &quot;node&quot;: &quot;Request&quot;,
+              &quot;content&quot;: [
+                {
+                  &quot;node&quot;: &quot;Step&quot;,
+                  &quot;content&quot;: [
+                    {
+                      &quot;node&quot;: &quot;Name&quot;,
+                      &quot;content&quot;: &quot;platform-auth&quot;
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        &quot;consumes&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [
+          {
+            &quot;in&quot;: &quot;path&quot;,
+            &quot;name&quot;: &quot;accountId&quot;,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;maxLength&quot;: 140,
+            &quot;description&quot;: &quot;account ID&quot;,
+            &quot;required&quot;: true
+          },
+          {
+            &quot;in&quot;: &quot;body&quot;,
+            &quot;name&quot;: &quot;body&quot;,
+            &quot;description&quot;: &quot;Order object that needs to be created&quot;,
+            &quot;required&quot;: true,
+            &quot;schema&quot;: {
+              &quot;$ref&quot;: &quot;#/definitions/OrderV2&quot;
+            }
+          }
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;OK&quot;,
+            &quot;schema&quot;: {
+              &quot;$ref&quot;: &quot;#/definitions/OrderResV2&quot;
+            }
+          },
+          &quot;400&quot;: {
+            &quot;description&quot;: &quot;Bad request&quot;
+          },
+          &quot;401&quot;: {
+            &quot;description&quot;: &quot;Unauthorized&quot;
+          },
+          &quot;409&quot;: {
+            &quot;description&quot;: &quot;Conflict&quot;
+          }
+        }
+      }
+    },
+    &quot;/v2/accounts/{accountId}/orders/{orderId}&quot;: {
+      &quot;get&quot;: {
+        &quot;tags&quot;: [
+          &quot;orderV2&quot;
+        ],
+        &quot;summary&quot;: &quot;Get order&quot;,
+        &quot;description&quot;: &quot;This API gets order with account ID and order ID.\n&quot;,
+        &quot;operationId&quot;: &quot;getOrderV2&quot;,
+        &quot;consumes&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [
+          {
+            &quot;in&quot;: &quot;path&quot;,
+            &quot;name&quot;: &quot;accountId&quot;,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;maxLength&quot;: 140,
+            &quot;description&quot;: &quot;account ID&quot;,
+            &quot;required&quot;: true
+          },
+          {
+            &quot;in&quot;: &quot;path&quot;,
+            &quot;name&quot;: &quot;orderId&quot;,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;maxLength&quot;: 140,
+            &quot;description&quot;: &quot;order ID&quot;,
+            &quot;required&quot;: true
+          }
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;OK&quot;,
+            &quot;schema&quot;: {
+              &quot;$ref&quot;: &quot;#/definitions/OrderResV2&quot;
+            }
+          },
+          &quot;400&quot;: {
+            &quot;description&quot;: &quot;Bad request&quot;
+          },
+          &quot;401&quot;: {
+            &quot;description&quot;: &quot;Unauthorized&quot;
+          },
+          &quot;404&quot;: {
+            &quot;description&quot;: &quot;Not found&quot;
+          }
+        }
+      }
+    },
+    &quot;/v2/accounts/{accountId}/orders/search&quot;: {
+      &quot;post&quot;: {
+        &quot;tags&quot;: [
+          &quot;orderV2&quot;
+        ],
+        &quot;summary&quot;: &quot;Search order&quot;,
+        &quot;description&quot;: &quot;This API returns a list of orders based on the provided search criteria.\n\n<code>createdAt</code>, <code>collectedBy</code> and <code>deliveredBy</code> are time ranges.  If there are multiple jobs in the order, then any job satisfying these will cause the order to be returned.\n\n<code>coordinates</code> can be any point on Earth.\n\nPaging is supported.  See request and response for details.\n&quot;,
+        &quot;operationId&quot;: &quot;searchOrderV2&quot;,
+        &quot;consumes&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [
+          {
+            &quot;in&quot;: &quot;path&quot;,
+            &quot;name&quot;: &quot;accountId&quot;,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;maxLength&quot;: 140,
+            &quot;description&quot;: &quot;account ID&quot;,
+            &quot;required&quot;: true
+          },
+          {
+            &quot;in&quot;: &quot;body&quot;,
+            &quot;name&quot;: &quot;body&quot;,
+            &quot;description&quot;: &quot;The search order parameters&quot;,
+            &quot;required&quot;: true,
+            &quot;schema&quot;: {
+              &quot;$ref&quot;: &quot;#/definitions/SearchOrderV2&quot;
+            }
+          }
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;OK&quot;,
+            &quot;schema&quot;: {
+              &quot;$ref&quot;: &quot;#/definitions/SearchOrderResV2&quot;
+            }
+          },
+          &quot;400&quot;: {
+            &quot;description&quot;: &quot;Bad request&quot;
+          },
+          &quot;401&quot;: {
+            &quot;description&quot;: &quot;Unauthorized&quot;
+          }
+        }
+      }
+    },
+    &quot;/v2/accounts/{accountId}/orders/{orderId}/cancel&quot;: {
+      &quot;put&quot;: {
+        &quot;tags&quot;: [
+          &quot;orderV2&quot;
+        ],
+        &quot;summary&quot;: &quot;Cancel order&quot;,
+        &quot;description&quot;: &quot;This API can be used to cancel an order, under the following conditions:\n\n1. The order exists.\n\n2. None of the jobs of the order have the status <code>collected</code> yet.\n\nOnce an order is cancelled, it cannot be re-created or un-cancelled.  You will need to create a new order in this case.\n&quot;,
+        &quot;operationId&quot;: &quot;cancelOrderV2&quot;,
+        &quot;consumes&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [
+          {
+            &quot;in&quot;: &quot;path&quot;,
+            &quot;name&quot;: &quot;accountId&quot;,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;maxLength&quot;: 140,
+            &quot;description&quot;: &quot;account ID&quot;,
+            &quot;required&quot;: true
+          },
+          {
+            &quot;in&quot;: &quot;path&quot;,
+            &quot;name&quot;: &quot;orderId&quot;,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;maxLength&quot;: 140,
+            &quot;description&quot;: &quot;order ID&quot;,
+            &quot;required&quot;: true
+          }
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;OK&quot;,
+            &quot;schema&quot;: {
+              &quot;$ref&quot;: &quot;#/definitions/OrderResV2&quot;
+            }
+          },
+          &quot;400&quot;: {
+            &quot;description&quot;: &quot;Bad request&quot;
+          },
+          &quot;401&quot;: {
+            &quot;description&quot;: &quot;Unauthorized&quot;
+          },
+          &quot;403&quot;: {
+            &quot;description&quot;: &quot;Forbidden&quot;
+          }
+        }
+      }
+    },
+    &quot;/v2/accounts/{accountId}/orders/{orderId}/amend&quot;: {
+      &quot;put&quot;: {
+        &quot;tags&quot;: [
+          &quot;orderV2&quot;
+        ],
+        &quot;summary&quot;: &quot;Amend order&quot;,
+        &quot;description&quot;: &quot;This API amends an order and updates the corresponding jobs in COSMO.\n\nThe following rules apply:\n\n1. The order must already exist.\n\n2. For each job of the order:\n\n1) If only <code>items</code> is updated, then the job&#39;s progress status must be one of <code>created</code>, <code>allocated</code>, <code>arrived_at_collection</code> (i.e., amending is not allowed after collection).\n\n2) If any other field is changed (including <code>timeslot</code>, <code>metadata</code>), then the job&#39;s progress status must be <code>created</code> (i.e., amending is not allowed after allocation).\n\n3) Collection and delivery stop IDs cannot be changed.\n\n4) If stops corresponding to the job are changed, then rule 2) applies.\n\n&gt; Note <code>customData</code> uses incremental update.  All other fields are full-replacement update.\n&quot;,
+        &quot;operationId&quot;: &quot;amendOrderV2&quot;,
+        &quot;consumes&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [
+          {
+            &quot;in&quot;: &quot;path&quot;,
+            &quot;name&quot;: &quot;accountId&quot;,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;maxLength&quot;: 140,
+            &quot;description&quot;: &quot;account ID&quot;,
+            &quot;required&quot;: true
+          },
+          {
+            &quot;in&quot;: &quot;path&quot;,
+            &quot;name&quot;: &quot;orderId&quot;,
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;maxLength&quot;: 140,
+            &quot;description&quot;: &quot;order ID&quot;,
+            &quot;required&quot;: true
+          },
+          {
+            &quot;in&quot;: &quot;body&quot;,
+            &quot;name&quot;: &quot;body&quot;,
+            &quot;description&quot;: &quot;The cancel order parameters&quot;,
+            &quot;required&quot;: true,
+            &quot;schema&quot;: {
+              &quot;$ref&quot;: &quot;#/definitions/AmendOrderV2&quot;
+            }
+          }
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;OK&quot;,
+            &quot;schema&quot;: {
+              &quot;$ref&quot;: &quot;#/definitions/OrderResV2&quot;
+            }
+          },
+          &quot;400&quot;: {
+            &quot;description&quot;: &quot;Bad request&quot;
+          },
+          &quot;401&quot;: {
+            &quot;description&quot;: &quot;Unauthorized&quot;
+          },
+          &quot;422&quot;: {
+            &quot;description&quot;: &quot;Unprocessable Entity&quot;
+          }
+        }
+      }
+    }
+  },
+  &quot;definitions&quot;: {
+    &quot;TimeslotReq&quot;: {
+      &quot;description&quot;: &quot;Timeslot request&quot;,
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;serviceType&quot;,
+        &quot;collection&quot;,
+        &quot;delivery&quot;,
+        &quot;packageReadyAt&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;serviceType&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/ServiceType&quot;
+        },
+        &quot;collection&quot;: {
+          &quot;description&quot;: &quot;The collection place ID or address.\n&quot;,
+          &quot;$ref&quot;: &quot;#/definitions/TimeslotPlace&quot;
+        },
+        &quot;delivery&quot;: {
+          &quot;description&quot;: &quot;The delivery place ID or address.\n&quot;,
+          &quot;$ref&quot;: &quot;#/definitions/TimeslotPlace&quot;
+        },
+        &quot;packageReadyAt&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/PackageReadyAt&quot;
+        },
+        &quot;dates&quot;: {
+          &quot;description&quot;: &quot;Used to override the opening/closing time of store for special dates.\n\nFormat:\n<code>\n{\n  \&quot;&lt;date&gt;\&quot;: {\n    \&quot;openTime\&quot;: \&quot;&lt;time&gt;\&quot;,\n    \&quot;closeTime\&quot;: \&quot;&lt;time&gt;\&quot;\n  },\n  ...\n}\n</code>\nwhere\n\n</em> <code>&lt;date&gt;</code> must have format <code>yyyy-MM-dd</code>, e.g., <code>2017-04-21</code>\n* <code>&lt;time&gt;</code> must have format <code>HH:mm</code>, e.g., <code>22:32</code>\n&quot;,
+          &quot;example&quot;: {
+            &quot;2018-08-09&quot;: {
+              &quot;openTime&quot;: &quot;12:00&quot;,
+              &quot;closeTime&quot;: &quot;17:00&quot;
+            },
+            &quot;2018-08-10&quot;: {
+              &quot;openTime&quot;: &quot;12:00&quot;,
+              &quot;closeTime&quot;: &quot;16:00&quot;
+            }
+          }
+        }
+      }
+    },
+    &quot;TimeslotPlace&quot;: {
+      &quot;description&quot;: &quot;Place details in Timeslot request.  Must set one of <code>id</code> and <code>address</code>, but not both.\n&quot;,
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;properties&quot;: {
+        &quot;id&quot;: {
+          &quot;description&quot;: &quot;If you pass a Place ID it must be already configured by On the dot.\n&quot;,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;myplaceID&quot;
+        },
+        &quot;address&quot;: {
+          &quot;description&quot;: &quot;Address of the place.\n&quot;,
+          &quot;$ref&quot;: &quot;#/definitions/Address&quot;
+        }
+      }
+    },
+    &quot;TimeslotRes&quot;: {
+      &quot;description&quot;: &quot;Timeslots response.\n&quot;,
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;properties&quot;: {
+        &quot;timeslots&quot;: {
+          &quot;description&quot;: &quot;&#39;Timeslots&#39; details.\n\n\nFormat:\n\n<code>\n\&quot;timeslots\&quot;: {\n    {\n      \&quot;&lt;date&gt;\&quot;: [\n        {\n          \&quot;id\&quot;: \&quot;&lt;timeslot_id&gt;\&quot;,\n          \&quot;collectionSlot\&quot;: {\n            \&quot;collectFrom\&quot;: \&quot;&lt;timestamp&gt;\&quot;,\n            \&quot;collectBy\&quot;: \&quot;&lt;timestamp&gt;\&quot;\n          },\n          \&quot;deliverySlot\&quot;: {\n            \&quot;deliverFrom\&quot;: \&quot;&lt;timestamp&gt;\&quot;,\n            \&quot;deliverBy\&quot;: \&quot;&lt;timestamp&gt;\&quot;\n          },\n          \&quot;slotExpiresAt\&quot;: \&quot;&lt;timestamp&gt;\&quot;\n        },\n        ...\n      ],\n      ...\n    }\n}\n</code>\n\nwhere\n\n\n* <code>&lt;date&gt;</code> has format <code>yyyy-MM-dd</code>, e.g., <code>2017-04-21</code>\n\n* <code>&lt;timestamp&gt;</code> has format <code>2006-01-02T15:04:05.999Z</code> in Zulu timezone\nonly\n\n* <code>&lt;timeslot_id&gt;</code> is a string that should be used when creating orders\n&quot;,
+          &quot;type&quot;: &quot;object&quot;
+        }
+      },
+      &quot;example&quot;: {
+        &quot;timeslots&quot;: {
+          &quot;2018-01-11&quot;: [
+            {
+              &quot;id&quot;: &quot;NWZmNDZiNjMtMjg5NS00ZjYwLThiMDktNThjNzA5YzNhNTBifkxwNGQ1ZFd6Y1B3Tnd2R1NtMWQxUDFGYVl3WW1ZTH5FQzJBKzRQSH5XQzJOKzRFU34xNTE1NjkzODk5fjE1MTU2OTQ1MDB+MH4wfjQuMzAyMzAw&quot;,
+              &quot;collectionSlot&quot;: {
+                &quot;collectFrom&quot;: &quot;2018-01-11T18:35:00.000Z&quot;,
+                &quot;collectBy&quot;: &quot;2018-01-11T18:35:00.000Z&quot;
+              },
+              &quot;deliverySlot&quot;: {
+                &quot;deliverFrom&quot;: &quot;2018-01-11T18:45:00.000Z&quot;,
+                &quot;deliverBy&quot;: &quot;2018-01-11T18:45:00.000Z&quot;
+              },
+              &quot;slotExpiresAt&quot;: &quot;2018-01-11T18:15:00.000Z&quot;
+            },
+            {
+              &quot;id&quot;: &quot;NWZmNDZiNjMtMjg5NS00ZjYwLThiMDktNThjNzA5YzNhNTBiflY5R2V5ZUF6aHhCQUJ3b0Y1N3c1MVpoOWRFOTNhTH5FQzJBKzRQSH5XQzJOKzRFU34xNTE1NjkzODk5fjE1MTU2OTQ1MDB+MH4wfjQuMzAyMzAw&quot;,
+              &quot;collectionSlot&quot;: {
+                &quot;collectFrom&quot;: &quot;2018-01-11T18:40:00.000Z&quot;,
+                &quot;collectBy&quot;: &quot;2018-01-11T18:40:00.000Z&quot;
+              },
+              &quot;deliverySlot&quot;: {
+                &quot;deliverFrom&quot;: &quot;2018-01-11T18:50:00.000Z&quot;,
+                &quot;deliverBy&quot;: &quot;2018-01-11T18:50:00.000Z&quot;
+              },
+              &quot;slotExpiresAt&quot;: &quot;2018-01-11T18:15:00.000Z&quot;
+            },
+            {
+              &quot;id&quot;: &quot;NWZmNDZiNjMtMjg5NS00ZjYwLThiMDktNThjNzA5YzNhNTBifmtKYXAzcEpwSWJyd3JRcmZLZzVLbkJDeVlSeU1PTH5FQzJBKzRQSH5XQzJOKzRFU34xNTE1NjkzODk5fjE1MTU2OTQ1MDB+MH4wfjQuMzAyMzAw&quot;,
+              &quot;collectionSlot&quot;: {
+                &quot;collectFrom&quot;: &quot;2018-01-11T18:45:00.000Z&quot;,
+                &quot;collectBy&quot;: &quot;2018-01-11T18:45:00.000Z&quot;
+              },
+              &quot;deliverySlot&quot;: {
+                &quot;deliverFrom&quot;: &quot;2018-01-11T18:55:00.000Z&quot;,
+                &quot;deliverBy&quot;: &quot;2018-01-11T18:55:00.000Z&quot;
+              },
+              &quot;slotExpiresAt&quot;: &quot;2018-01-11T18:15:00.000Z&quot;
+            }
+          ]
+        }
+      }
+    },
+    &quot;OrderV2&quot;: {
+      &quot;description&quot;: &quot;An order object&quot;,
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;id&quot;,
+        &quot;metadata&quot;,
+        &quot;jobs&quot;,
+        &quot;stops&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;id&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/OrderId&quot;
+        },
+        &quot;metadata&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/OrderMetadataV2&quot;
+        },
+        &quot;customData&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/CustomData&quot;
+        },
+        &quot;contact&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Contact&quot;
+        },
+        &quot;notification&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Notification&quot;
+        },
+        &quot;jobs&quot;: {
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;$ref&quot;: &quot;#/definitions/JobV2&quot;
+          }
+        },
+        &quot;stops&quot;: {
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;$ref&quot;: &quot;#/definitions/Stop&quot;
+          }
+        },
+        &quot;instructions&quot;: {
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;maxLength&quot;: 500,
+          &quot;example&quot;: &quot;Fragile items, be careful&quot;
+        }
+      }
+    },
+    &quot;OrderResV2&quot;: {
+      &quot;description&quot;: &quot;An order object&quot;,
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;id&quot;,
+        &quot;metadata&quot;,
+        &quot;jobs&quot;,
+        &quot;stops&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;id&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/OrderId&quot;
+        },
+        &quot;accountId&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/AccountId&quot;
+        },
+        &quot;metadata&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/OrderMetadataResV2&quot;
+        },
+        &quot;customData&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/CustomData&quot;
+        },
+        &quot;contact&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Contact&quot;
+        },
+        &quot;notification&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Notification&quot;
+        },
+        &quot;jobs&quot;: {
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;$ref&quot;: &quot;#/definitions/JobResV2&quot;
+          }
+        },
+        &quot;stops&quot;: {
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;$ref&quot;: &quot;#/definitions/Stop&quot;
+          }
+        },
+        &quot;instructions&quot;: {
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;Fragile items, be careful&quot;
+        },
+        &quot;status&quot;: {
+          &quot;type&quot;: &quot;object&quot;,
+          &quot;properties&quot;: {
+            &quot;status&quot;: {
+              &quot;$ref&quot;: &quot;#/definitions/OrderStatusV2&quot;
+            },
+            &quot;updatedAt&quot;: {
+              &quot;$ref&quot;: &quot;#/definitions/Timestamp&quot;
+            }
+          }
+        },
+        &quot;createdAt&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Timestamp&quot;
+        },
+        &quot;updatedAt&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Timestamp&quot;
+        }
+      }
+    },
+    &quot;SearchOrderV2&quot;: {
+      &quot;description&quot;: &quot;All fields are optional, except <code>sortDirection</code>.\n\nThe different criteria are joined by \&quot;and\&quot; logic except in <code>places</code> where the condition can be explicitely specified (AND/OR).\n&quot;,
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;sortDirection&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;clientRefId&quot;: {
+          &quot;description&quot;: &quot;Search by client ref ID.  If this parameter is set, then only the following parameters can be set:\n\n* <code>orderStatus</code>\n* <code>JobStatus</code>\n* <code>sortDirection</code>\n&quot;,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;myclientrefid1&quot;
+        },
+        &quot;createdAt&quot;: {
+          &quot;description&quot;: &quot;The time when the order was created.\n&quot;,
+          &quot;$ref&quot;: &quot;#/definitions/SearchParamTimeRange&quot;
+        },
+        &quot;collectedBy&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/SearchParamTimeRange&quot;
+        },
+        &quot;deliveredBy&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/SearchParamTimeRange&quot;
+        },
+        &quot;orderStatus&quot;: {
+          &quot;description&quot;: &quot;Order status&quot;,
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;maxLength&quot;: 140,
+            &quot;example&quot;: &quot;completed&quot;
+          }
+        },
+        &quot;jobStatus&quot;: {
+          &quot;description&quot;: &quot;Job status&quot;,
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;maxLength&quot;: 140,
+            &quot;example&quot;: &quot;delivered&quot;
+          }
+        },
+        &quot;sortDirection&quot;: {
+          &quot;description&quot;: &quot;Results are sorted by <code>createdAt</code>.\n\nThis field controls whether the results are sorted in ascending or descending order.\n&quot;,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;enum&quot;: [
+            &quot;asc&quot;,
+            &quot;desc&quot;
+          ],
+          &quot;example&quot;: &quot;asc&quot;
+        },
+        &quot;offset&quot;: {
+          &quot;description&quot;: &quot;The offset for paging.\n\nShould use the value in the previous response.\n&quot;,
+          &quot;type&quot;: &quot;integer&quot;,
+          &quot;format&quot;: &quot;int64&quot;,
+          &quot;example&quot;: 100
+        },
+        &quot;length&quot;: {
+          &quot;description&quot;: &quot;The number of orders to return.\n\nMust be between 1 and 1000.\n\nDefault to 1000.\n&quot;,
+          &quot;type&quot;: &quot;integer&quot;,
+          &quot;format&quot;: &quot;int64&quot;,
+          &quot;example&quot;: 100
+        }
+      }
+    },
+    &quot;SearchOrderResV2&quot;: {
+      &quot;description&quot;: &quot;Search response object&quot;,
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;offset&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;orders&quot;: {
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;$ref&quot;: &quot;#/definitions/OrderResV2&quot;
+          }
+        },
+        &quot;failures&quot;: {
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;type&quot;: &quot;string&quot;
+          },
+          &quot;example&quot;: [
+            &quot;Failed to find order0&quot;,
+            &quot;Failed to find order1&quot;
+          ]
+        },
+        &quot;offset&quot;: {
+          &quot;type&quot;: &quot;integer&quot;,
+          &quot;format&quot;: &quot;int64&quot;,
+          &quot;example&quot;: 5
+        }
+      }
+    },
+    &quot;AmendOrderV2&quot;: {
+      &quot;description&quot;: &quot;An amend order object&quot;,
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;id&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;customData&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/CustomData&quot;
+        },
+        &quot;contact&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Contact&quot;
+        },
+        &quot;notification&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Notification&quot;
+        },
+        &quot;jobs&quot;: {
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;$ref&quot;: &quot;#/definitions/AmendJobV2&quot;
+          }
+        },
+        &quot;stops&quot;: {
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;$ref&quot;: &quot;#/definitions/AmendStopV2&quot;
+          }
+        },
+        &quot;instructions&quot;: {
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;maxLength&quot;: 500,
+          &quot;example&quot;: &quot;Fragile items, be careful&quot;
+        }
+      }
+    },
+    &quot;AmendJobV2&quot;: {
+      &quot;description&quot;: &quot;An amend job object&quot;,
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;id&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;id&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/JobId&quot;
+        },
+        &quot;items&quot;: {
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;$ref&quot;: &quot;#/definitions/Item&quot;
+          }
+        },
+        &quot;timeslot&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/TimeslotV2&quot;
+        }
+      }
+    },
+    &quot;AmendStopV2&quot;: {
+      &quot;description&quot;: &quot;An amend stop object&quot;,
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;id&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;id&quot;: {
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;maxLength&quot;: 140,
+          &quot;example&quot;: &quot;mystop&quot;
+        },
+        &quot;contact&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Contact&quot;
+        },
+        &quot;place&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/AmendPlaceV2&quot;
+        }
+      }
+    },
+    &quot;AmendPlaceV2&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;description&quot;: &quot;An amend place object&quot;,
+      &quot;required&quot;: [
+        &quot;address&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;address&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Address&quot;
+        }
+      }
+    },
+    &quot;OrderStatusV2&quot;: {
+      &quot;description&quot;: &quot;Order&#39;s status.\n\nNote this is different from job status, though they&#39;re related.  See beginning of doc for details.\n&quot;,
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;enum&quot;: [
+        &quot;incomplete&quot;,
+        &quot;created&quot;,
+        &quot;completed&quot;
+      ]
+    },
+    &quot;OrderMetadataV2&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;serviceType&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;clientRefId&quot;: {
+          &quot;description&quot;: &quot;Client reference ID.  This field can be reused for multiple orders.\n\nThis field is searchable.  This field is not amendable.\n&quot;,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;myclientrefid&quot;
+        },
+        &quot;serviceType&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/ServiceType&quot;
+        },
+        &quot;isTest&quot;: {
+          &quot;description&quot;: &quot;Mark the order as a test order.\n\nThe default value is dependent on the account state.\n\n| Account State | <code>isTest</code> |\n| ------------- | -------- |\n| <code>live</code> | <code>false</code> |\n| <code>onboarding |</code>true<code>|\n|</code>test<code>|</code>true<code>|\n\nNote setting this field to</code>false<code>is the same as setting to</code>null<code>.\n&quot;,
+          &quot;type&quot;: &quot;boolean&quot;,
+          &quot;example&quot;: true
+        }
+      }
+    },
+    &quot;OrderMetadataResV2&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;serviceType&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;sector&quot;: {
+          &quot;description&quot;: &quot;The sector of the order.\n&quot;,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;Local&quot;
+        },
+        &quot;clientRefId&quot;: {
+          &quot;description&quot;: &quot;Client reference ID.  This field can be reused for multiple orders.\n\nThis field is searchable.  This field is not amendable.\n&quot;,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;myclientrefid&quot;
+        },
+        &quot;serviceType&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/ServiceType&quot;
+        },
+        &quot;isTest&quot;: {
+          &quot;description&quot;: &quot;Mark the order as a test order.\n\nThe default value is dependent on the account state.\n\n| Account State |</code>isTest<code>|\n| ------------- | -------- |\n|</code>live<code>|</code>false<code>|\n|</code>onboarding | <code>true</code> |\n| <code>test</code> | <code>true</code> |\n&quot;,
+          &quot;type&quot;: &quot;boolean&quot;,
+          &quot;example&quot;: true
+        },
+        &quot;trackingUrl&quot;: {
+          &quot;description&quot;: &quot;User can track an order once after parcels collected and before\ndelivery.\n&quot;,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;https://trackservice/myorder&quot;
+        }
+      }
+    },
+    &quot;JobV2&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;id&quot;,
+        &quot;metadata&quot;,
+        &quot;items&quot;,
+        &quot;timeslot&quot;,
+        &quot;collection&quot;,
+        &quot;delivery&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;id&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/JobId&quot;
+        },
+        &quot;metadata&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/JobMetadata&quot;
+        },
+        &quot;requires&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Requires&quot;
+        },
+        &quot;items&quot;: {
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;$ref&quot;: &quot;#/definitions/Item&quot;
+          }
+        },
+        &quot;timeslot&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/TimeslotV2&quot;
+        },
+        &quot;collection&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/JobStop&quot;
+        },
+        &quot;delivery&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/JobStop&quot;
+        }
+      }
+    },
+    &quot;JobResV2&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;id&quot;,
+        &quot;metadata&quot;,
+        &quot;items&quot;,
+        &quot;timeslot&quot;,
+        &quot;collection&quot;,
+        &quot;delivery&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;id&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/JobId&quot;
+        },
+        &quot;metadata&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/JobMetadata&quot;
+        },
+        &quot;requires&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Requires&quot;
+        },
+        &quot;items&quot;: {
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;$ref&quot;: &quot;#/definitions/Item&quot;
+          }
+        },
+        &quot;timeslot&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/TimeslotV2&quot;
+        },
+        &quot;collection&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/JobStop&quot;
+        },
+        &quot;delivery&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/JobStop&quot;
+        },
+        &quot;status&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/JobStatus&quot;
+        },
+        &quot;eta&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Eta&quot;
+        }
+      }
+    },
+    &quot;JobStop&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;stopId&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;stopId&quot;: {
+          &quot;type&quot;: &quot;string&quot;
+        },
+        &quot;instructions&quot;: {
+          &quot;type&quot;: &quot;string&quot;
+        }
+      }
+    },
+    &quot;JobMetadata&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;journeyType&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;journeyType&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/JourneyType&quot;
+        }
+      }
+    },
+    &quot;TimeslotV2&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;description&quot;: &quot;Must specify either <code>id</code> or <code>collection</code> + <code>delivery</code>, but not both.\n&quot;,
+      &quot;properties&quot;: {
+        &quot;id&quot;: {
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;NWZmNDZiNjMtMjg5NS00ZjYwLThiMDktNThjNzA5YzNhNTBifmtKYXAzcEpwSWJyd3JRcmZLZzVLbkJDeVlSeU1PTH5FQzJBKzRQSH5XQzJOKzRFU34xNTE1NjkzODk5fjE1MTU2OTQ1MDB+MH4wfjQuMzAyMzAw&quot;
+        },
+        &quot;collection&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/TimeRange&quot;
+        },
+        &quot;delivery&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/TimeRange&quot;
+        }
+      }
+    },
+    &quot;TimeRange&quot;: {
+      &quot;description&quot;: &quot;A time range with from and to time.\n&quot;,
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;from&quot;,
+        &quot;to&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;from&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Timestamp&quot;
+        },
+        &quot;to&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Timestamp&quot;
+        }
+      }
+    },
+    &quot;JobStatus&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;description&quot;: &quot;This contains the following status:\n\n* Job&#39;s progress status\n* Courier&#39;s status\n* Incident status\n&quot;,
+      &quot;properties&quot;: {
+        &quot;progressStatus&quot;: {
+          &quot;description&quot;: &quot;Job&#39;s progress status\n&quot;,
+          &quot;type&quot;: &quot;object&quot;,
+          &quot;properties&quot;: {
+            &quot;status&quot;: {
+              &quot;$ref&quot;: &quot;#/definitions/JobProgressStatus&quot;
+            },
+            &quot;updatedAt&quot;: {
+              &quot;$ref&quot;: &quot;#/definitions/Timestamp&quot;
+            }
+          }
+        },
+        &quot;courierStatus&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/CourierLocationStatus&quot;
+        },
+        &quot;incidents&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Incidents&quot;
+        }
+      }
+    },
+    &quot;CancelOrderV2&quot;: {
+      &quot;description&quot;: &quot;Cancel order parameters&quot;,
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;id&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;id&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/OrderId&quot;
+        }
+      }
+    },
+    &quot;OrderId&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;maxLength&quot;: 140,
+      &quot;example&quot;: &quot;myorder&quot;
+    },
+    &quot;AccountId&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;maxLength&quot;: 140,
+      &quot;example&quot;: &quot;myotdaccount&quot;
+    },
+    &quot;JobId&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;maxLength&quot;: 140,
+      &quot;example&quot;: &quot;myjob&quot;
+    },
+    &quot;ServiceType&quot;: {
+      &quot;description&quot;: &quot;The service type required of an order. It must conform to service types agreed with On the dot.\n\n*<em>Service type is mandatory only in the create delivery order API call.  For other types of create order call, this parameter is ignored.</em><em>\n&quot;,
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;enum&quot;: [
+        &quot;timeslot&quot;,
+        &quot;asap&quot;,
+        &quot;return&quot;,
+        &quot;2hour&quot;,
+        &quot;3hour&quot;,
+        &quot;4hour&quot;,
+        &quot;sameday&quot;,
+        &quot;2hour-later&quot;,
+        &quot;4hour-later&quot;
+      ],
+      &quot;example&quot;: &quot;asap&quot;
+    },
+    &quot;JourneyType&quot;: {
+      &quot;description&quot;: &quot;Whether the order journey is for a delivery (store to home) or a return (home to store)\n&quot;,
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;enum&quot;: [
+        &quot;delivery&quot;,
+        &quot;return&quot;
+      ],
+      &quot;example&quot;: &quot;delivery&quot;
+    },
+    &quot;PackageReadyAt&quot;: {
+      &quot;description&quot;: &quot;The time when the items are ready to be collected.\n\n## For create order APIs\n\nOnly used for asap order API.  Other create order API will ignore this field, because package ready time is encoded in the Timeslot ID.\n\nThe time when the items will be ready.\n\nIf not set, then downstream services will assume system time, and the response will not have this field set either.\n\nFormat <code>2006-01-02T15:04:05.999Z</code> in Zulu timezone only\n&quot;,
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;example&quot;: &quot;2018-08-09T12:15:00.000Z&quot;
+    },
+    &quot;RequireTag&quot;: {
+      &quot;description&quot;: &quot;Constraints on the booking.\n&quot;,
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;enum&quot;: [
+        &quot;ageVerification&quot;,
+        &quot;collectionSignOff&quot;,
+        &quot;deliverySignOff&quot;
+      ],
+      &quot;example&quot;: &quot;ageVerification&quot;
+    },
+    &quot;Requires&quot;: {
+      &quot;type&quot;: &quot;array&quot;,
+      &quot;items&quot;: {
+        &quot;$ref&quot;: &quot;#/definitions/RequireTag&quot;
+      }
+    },
+    &quot;CustomData&quot;: {
+      &quot;description&quot;: &quot;Arbitrary key:value pairs.  Value must be string.\n&quot;,
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;example&quot;: {
+        &quot;mykey1&quot;: &quot;myvalue1&quot;,
+        &quot;mykey2&quot;: &quot;myvalue2&quot;
+      }
+    },
+    &quot;Contact&quot;: {
+      &quot;description&quot;: &quot;This is where all order notifications are sent.\n&quot;,
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;properties&quot;: {
+        &quot;name&quot;: {
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;John Smith&quot;
+        },
+        &quot;mobile&quot;: {
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;+447777777777&quot;
+        },
+        &quot;phone&quot;: {
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;02077777777&quot;
+        },
+        &quot;email&quot;: {
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;john.smith@gmail.com&quot;
+        }
+      }
+    },
+    &quot;Timestamp&quot;: {
+      &quot;description&quot;: &quot;Format <code>2006-01-02T15:04:05.999Z</code> in Zulu timezone only\n&quot;,
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;format&quot;: &quot;date-time&quot;,
+      &quot;example&quot;: &quot;2018-08-09T12:15:00.000Z&quot;
+    },
+    &quot;Coordinates&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;longitude&quot;,
+        &quot;latitude&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;longitude&quot;: {
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;example&quot;: -0.1265741
+        },
+        &quot;latitude&quot;: {
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;example&quot;: 51.5136986
+        }
+      }
+    },
+    &quot;Postcode&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;example&quot;: &quot;WC2E 9DD&quot;
+    },
+    &quot;Position&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;coordinates&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;coordinates&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Coordinates&quot;
+        }
+      }
+    },
+    &quot;Address&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;country&quot;,
+        &quot;town&quot;,
+        &quot;streets&quot;,
+        &quot;postcode&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;country&quot;: {
+          &quot;description&quot;: &quot;ISO 3166-1 alpha-3 country code&quot;,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;minLength&quot;: 3,
+          &quot;maxLength&quot;: 3,
+          &quot;example&quot;: &quot;GBR&quot;
+        },
+        &quot;town&quot;: {
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;London&quot;
+        },
+        &quot;streets&quot;: {
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;type&quot;: &quot;string&quot;
+          },
+          &quot;example&quot;: [
+            &quot;Royal Opera House&quot;,
+            &quot;Bow Street&quot;
+          ]
+        },
+        &quot;postcode&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Postcode&quot;
+        }
+      }
+    },
+    &quot;Stop&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;id&quot;,
+        &quot;place&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;id&quot;: {
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;mystop&quot;
+        },
+        &quot;contact&quot;: {
+          &quot;description&quot;: &quot;If set to null, then\n\n\n</em> if order.metadata.journeyType = <code>delivery</code> and this is a collection stop, then the place&#39;s contact details configured in Place Service will be used.\n\n* if order.metadata.journeyType = <code>return</code> and this is a delivery stop, then the place&#39;s contact details configured in Place Service will be use.\n&quot;,
+          &quot;$ref&quot;: &quot;#/definitions/Contact&quot;
+        },
+        &quot;place&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Place&quot;
+        },
+        &quot;instructions&quot;: {
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;Please park in the courtyard&quot;
+        }
+      }
+    },
+    &quot;Place&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;description&quot;: &quot;The following description applies to request body only (not response).\n\nWe define a <code>store stop</code> to be:\n\n* If <code>order.metadata.journeyType</code> is <code>delivery</code>, then for each item group, the collection stop is a \&quot;store stop\&quot;\n\n* If <code>order.metadata.journeyType</code> is <code>return</code>, then for each item group, the delivery stop is a \&quot;store stop\&quot;\n\n<code>store stop</code> must only have <code>place.id</code> and not <code>place.address</code> or <code>place.position</code>.\n\nThis means the place must have been created in place service.\n\nFor the other non-store stops, must set either <code>place.id</code> or <code>place.address</code>, but not both.\n\nIf <code>place.position</code> is set, then it is used for the coordinates information of <code>place.address</code>.\n&quot;,
+      &quot;properties&quot;: {
+        &quot;id&quot;: {
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;myplace&quot;
+        },
+        &quot;position&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Position&quot;
+        },
+        &quot;addresss&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Address&quot;
+        }
+      }
+    },
+    &quot;SimplePlace&quot;: {
+      &quot;description&quot;: &quot;In create order request, you must specify one of <code>id</code> or <code>address</code> or both.\n\nIf <code>address</code> is not supplied, then booking service will call place service with <code>id</code> to find the address and position.\n\nIf both <code>id</code> and <code>address</code> are supplied, then <code>address</code> will override the address from place service.\n\nIf <code>position</code> is not supplied, then booking service will get position from place service if <code>id</code> is present, otherwise booking service calls geocode service to find the position of <code>address</code>.\n\nIf <code>position</code> is supplied, it overrides.\n\nIn a word, values in the request have the highest priority.\n&quot;,
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;properties&quot;: {
+        &quot;id&quot;: {
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;myplace&quot;
+        },
+        &quot;position&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Position&quot;
+        },
+        &quot;addresss&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Address&quot;
+        },
+        &quot;instructions&quot;: {
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;Please beware of foxes&quot;
+        }
+      }
+    },
+    &quot;OrderStatus&quot;: {
+      &quot;description&quot;: &quot;Order&#39;s status.\n\nNote this is different from item groups status, though they&#39;re related.\n&quot;,
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;enum&quot;: [
+        &quot;incomplete&quot;,
+        &quot;created&quot;,
+        &quot;completed&quot;
+      ]
+    },
+    &quot;JobProgressStatus&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;enum&quot;: [
+        &quot;created&quot;,
+        &quot;cancelled&quot;,
+        &quot;offline&quot;,
+        &quot;allocated&quot;,
+        &quot;arrived_at_collection&quot;,
+        &quot;collected&quot;,
+        &quot;arrived_at_delivery&quot;,
+        &quot;delivered&quot;
+      ],
+      &quot;example&quot;: &quot;allocated&quot;
+    },
+    &quot;CourierStatus&quot;: {
+      &quot;description&quot;: &quot;The courier&#39;s status.\n&quot;,
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;enum&quot;: [
+        &quot;idle&quot;,
+        &quot;busy&quot;
+      ],
+      &quot;example&quot;: &quot;busy&quot;
+    },
+    &quot;Currency&quot;: {
+      &quot;description&quot;: &quot;Must be ISO 4217 code\n&quot;,
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;example&quot;: &quot;GBP&quot;
+    },
+    &quot;Dimension&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;width&quot;,
+        &quot;height&quot;,
+        &quot;length&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;width&quot;: {
+          &quot;description&quot;: &quot;Unit must be centimeters.\n&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;example&quot;: 10
+        },
+        &quot;height&quot;: {
+          &quot;description&quot;: &quot;Unit must be centimeters.\n&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;example&quot;: 1
+        },
+        &quot;length&quot;: {
+          &quot;description&quot;: &quot;Unit must be centimeters.\n&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;example&quot;: 20
+        }
+      }
+    },
+    &quot;Webhook&quot;: {
+      &quot;description&quot;: &quot;Webhook URL to send notifications to.\n&quot;,
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;endpoint&quot;,
+        &quot;methodType&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;endpoint&quot;: {
+          &quot;description&quot;: &quot;URL you want to receive status update about your booking&quot;,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;https://my-notification/notification&quot;
+        },
+        &quot;methodType&quot;: {
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;enum&quot;: [
+            &quot;POST&quot;,
+            &quot;PUT&quot;
+          ],
+          &quot;example&quot;: &quot;POST&quot;
+        },
+        &quot;headers&quot;: {
+          &quot;description&quot;: &quot;Arbitrary key:value pairs. key and value must be string.\n&quot;,
+          &quot;type&quot;: &quot;object&quot;,
+          &quot;example&quot;: {
+            &quot;authorization&quot;: &quot;mykey&quot;,
+            &quot;company&quot;: &quot;onthedot&quot;
+          }
+        }
+      }
+    },
+    &quot;Incidents&quot;: {
+      &quot;description&quot;: &quot;A list of incidents, sorted by <code>createdAt</code> in ascending order.\n&quot;,
+      &quot;type&quot;: &quot;array&quot;,
+      &quot;items&quot;: {
+        &quot;$ref&quot;: &quot;#/definitions/Incident&quot;
+      }
+    },
+    &quot;Incident&quot;: {
+      &quot;description&quot;: &quot;Incident details.\n&quot;,
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;id&quot;,
+        &quot;status&quot;,
+        &quot;createdAt&quot;,
+        &quot;updatedAt&quot;,
+        &quot;impact&quot;,
+        &quot;reason&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;id&quot;: {
+          &quot;description&quot;: &quot;The incident&#39;s ID.\n&quot;,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;9d0a8318-d16d-4893-bffa-cb6b5cb7cd4c&quot;
+        },
+        &quot;status&quot;: {
+          &quot;description&quot;: &quot;The incident&#39;s status.  See incident status description section for details.\n&quot;,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;enum&quot;: [
+            &quot;created&quot;,
+            &quot;deleted&quot;
+          ],
+          &quot;example&quot;: &quot;created&quot;
+        },
+        &quot;createdAt&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Timestamp&quot;
+        },
+        &quot;updatedAt&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Timestamp&quot;
+        },
+        &quot;reason&quot;: {
+          &quot;description&quot;: &quot;The reason of the incident.\n&quot;,
+          &quot;type&quot;: &quot;object&quot;,
+          &quot;properties&quot;: {
+            &quot;code&quot;: {
+              &quot;description&quot;: &quot;An incident code.\n&quot;,
+              &quot;type&quot;: &quot;string&quot;,
+              &quot;example&quot;: &quot;9A&quot;
+            },
+            &quot;description&quot;: {
+              &quot;description&quot;: &quot;An incident description.\n&quot;,
+              &quot;type&quot;: &quot;string&quot;,
+              &quot;example&quot;: &quot;Partner Cancellation&quot;
+            }
+          }
+        },
+        &quot;impact&quot;: {
+          &quot;description&quot;: &quot;The impact of the incident.\n&quot;,
+          &quot;type&quot;: &quot;object&quot;,
+          &quot;properties&quot;: {
+            &quot;code&quot;: {
+              &quot;description&quot;: &quot;An impact code.\n&quot;,
+              &quot;type&quot;: &quot;string&quot;,
+              &quot;example&quot;: &quot;7H&quot;
+            },
+            &quot;description&quot;: {
+              &quot;description&quot;: &quot;An impact description.\n&quot;,
+              &quot;type&quot;: &quot;string&quot;,
+              &quot;example&quot;: &quot;Unable to Fulfil Order&quot;
+            }
+          }
+        }
+      }
+    },
+    &quot;Notification&quot;: {
+      &quot;description&quot;: &quot;Notification endpoints where notifications will be sent to, together with the job status type to send.\n&quot;,
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;properties&quot;: {
+        &quot;emails&quot;: {
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;$ref&quot;: &quot;#/definitions/NotificationEmail&quot;
+          }
+        },
+        &quot;sms&quot;: {
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;$ref&quot;: &quot;#/definitions/NotificationSms&quot;
+          }
+        },
+        &quot;webhooks&quot;: {
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;$ref&quot;: &quot;#/definitions/NotificationWebhook&quot;
+          }
+        }
+      }
+    },
+    &quot;NotificationEmail&quot;: {
+      &quot;description&quot;: &quot;Email for notification, together with the job status type to send.\n&quot;,
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;properties&quot;: {
+        &quot;email&quot;: {
+          &quot;description&quot;: &quot;The email address to send notification to.\n&quot;,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;john.smith@gmail.com&quot;
+        },
+        &quot;statuses&quot;: {
+          &quot;description&quot;: &quot;The list of job status to send.\n&quot;,
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;$ref&quot;: &quot;#/definitions/JobStatus&quot;
+          }
+        }
+      }
+    },
+    &quot;NotificationSms&quot;: {
+      &quot;description&quot;: &quot;SMS for notification, together with the job status type to send.\n&quot;,
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;properties&quot;: {
+        &quot;number&quot;: {
+          &quot;description&quot;: &quot;The number to send notification to.\n&quot;,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;+447777777777&quot;
+        },
+        &quot;statuses&quot;: {
+          &quot;description&quot;: &quot;The list of job status to send.\n&quot;,
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;$ref&quot;: &quot;#/definitions/JobStatus&quot;
+          }
+        }
+      }
+    },
+    &quot;NotificationWebhook&quot;: {
+      &quot;description&quot;: &quot;Webhook for notification, together with the job status type to send.\n&quot;,
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;endpoint&quot;,
+        &quot;methodType&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;endpoint&quot;: {
+          &quot;description&quot;: &quot;URL you want to receive status update about your booking.\n&quot;,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;https://my-notification/notification&quot;
+        },
+        &quot;methodType&quot;: {
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;enum&quot;: [
+            &quot;POST&quot;,
+            &quot;PUT&quot;
+          ],
+          &quot;example&quot;: &quot;POST&quot;
+        },
+        &quot;headers&quot;: {
+          &quot;description&quot;: &quot;Arbitrary key:value pairs. key and value must be string.\n&quot;,
+          &quot;type&quot;: &quot;object&quot;,
+          &quot;example&quot;: {
+            &quot;authorization&quot;: &quot;mykey&quot;,
+            &quot;company&quot;: &quot;onthedot&quot;
+          }
+        },
+        &quot;statuses&quot;: {
+          &quot;description&quot;: &quot;The list of job status to send.\n&quot;,
+          &quot;type&quot;: &quot;array&quot;,
+          &quot;items&quot;: {
+            &quot;$ref&quot;: &quot;#/definitions/JobStatus&quot;
+          }
+        }
+      }
+    },
+    &quot;Item&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;required&quot;: [
+        &quot;id&quot;,
+        &quot;quantity&quot;
+      ],
+      &quot;properties&quot;: {
+        &quot;id&quot;: {
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;maxLength&quot;: 140,
+          &quot;example&quot;: &quot;myitem&quot;
+        },
+        &quot;descriptions&quot;: {
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;maxLength&quot;: 500,
+          &quot;example&quot;: &quot;Some awesome items&quot;
+        },
+        &quot;quantity&quot;: {
+          &quot;type&quot;: &quot;integer&quot;,
+          &quot;format&quot;: &quot;int64&quot;,
+          &quot;example&quot;: 2
+        },
+        &quot;metrics&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/ItemMetrics&quot;
+        }
+      }
+    },
+    &quot;ItemMetrics&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;properties&quot;: {
+        &quot;weight&quot;: {
+          &quot;description&quot;: &quot;Unit must be grams.\n&quot;,
+          &quot;type&quot;: &quot;number&quot;,
+          &quot;example&quot;: 500
+        },
+        &quot;dimension&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Dimension&quot;
+        }
+      }
+    },
+    &quot;CourierLocationStatus&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;properties&quot;: {
+        &quot;location&quot;: {
+          &quot;$ref&quot;: &quot;#/definitions/Coordinates&quot;
+        },
+        &quot;updatedAt&quot;: {
+          &quot;description&quot;: &quot;The time when the courier&#39;s location was updated.\n\nFormat <code>2006-01-02T15:04:05.999Z</code> in Zulu timezone only\n&quot;,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;2018-08-09T12:15:15.123Z&quot;
+        }
+      }
+    },
+    &quot;SearchParamTimeRange&quot;: {
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;properties&quot;: {
+        &quot;from&quot;: {
+          &quot;description&quot;: &quot;The start of the time range.\n\nFormat <code>2006-01-02T15:04:05.999Z</code> in Zulu timezone only\n&quot;,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;2018-08-08T12:13:14.123Z&quot;
+        },
+        &quot;to&quot;: {
+          &quot;description&quot;: &quot;The end of the time range.\n\nFormat <code>2006-01-02T15:04:05.999Z</code> in Zulu timezone only\n&quot;,
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;example&quot;: &quot;2018-08-09T12:13:14.123Z&quot;
+        }
+      }
+    },
+    &quot;Eta&quot;: {
+      &quot;description&quot;: &quot;ETA for collection and/or delivery.\n&quot;,
+      &quot;type&quot;: &quot;object&quot;,
+      &quot;properties&quot;: {
+        &quot;collection&quot;: {
+          &quot;description&quot;: &quot;Collection ETA\n&quot;,
+          &quot;type&quot;: &quot;object&quot;,
+          &quot;properties&quot;: {
+            &quot;courierId&quot;: {
+              &quot;description&quot;: &quot;The courier unique identifier.\n&quot;,
+              &quot;type&quot;: &quot;string&quot;,
+              &quot;example&quot;: &quot;mycourier&quot;
+            },
+            &quot;time&quot;: {
+              &quot;$ref&quot;: &quot;#/definitions/Timestamp&quot;
+            },
+            &quot;message&quot;: {
+              &quot;type&quot;: &quot;string&quot;,
+              &quot;example&quot;: &quot;unavailable&quot;
+            }
+          }
+        },
+        &quot;delivery&quot;: {
+          &quot;description&quot;: &quot;Delivery ETA\n&quot;,
+          &quot;type&quot;: &quot;object&quot;,
+          &quot;properties&quot;: {
+            &quot;courierId&quot;: {
+              &quot;description&quot;: &quot;The courier unique identifier.\n&quot;,
+              &quot;type&quot;: &quot;string&quot;,
+              &quot;example&quot;: &quot;mycourier&quot;
+            },
+            &quot;time&quot;: {
+              &quot;$ref&quot;: &quot;#/definitions/Timestamp&quot;
+            },
+            &quot;message&quot;: {
+              &quot;type&quot;: &quot;string&quot;,
+              &quot;example&quot;: &quot;unavailable&quot;
+            }
+          }
+        }
+      }
+    }
+  }
+}</p>
+</code></pre></details>
+
+<aside class="notice" style="clear: both">
+SWAGGER
 </aside>
 
 <p>The best way to view the API Swagger specification is to copy the content of any of the 2 files below or by expanding the right hand pane, copy then paste it into the free: <a href='https://editor.swagger.io/' target="_blank"><code>Swagger Editor by Smartbear</code></a>.</p>
@@ -2247,204 +4346,11 @@ Developer &lt;-- &quot;Cosmo Webhook&quot;:{event driven}</p>
 </ul>
 
 <p><img src="images/Swagger_Editor.png" alt="Swagger Editor" /></p>
-<h1 id='api-guide'>API Guide</h1><h2 id='resource-url'>Resource URL</h2>
-<p>Currently, all the APIs are JSON-based APIs. They support standard HTTP verbs, for example, GET, POST, PUT, PATCH and DELETE.</p>
-<h3 id='resource-url-format'>Resource URL Format</h3>
-<p>{URL}/version/resource_type/[sub-resource|identifiers]/?query_string
-* Example <code>**POST** /v2/accounts/{{accountId}}/orders</code></p>
-<h2 id='methods-supported'>Methods supported</h2>
-<table><thead>
-<tr>
-<th>Method</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>GET</td>
-<td>Retrieve booking or collection of bookings</td>
-</tr>
-<tr>
-<td>POST</td>
-<td>Creating new booking</td>
-</tr>
-<tr>
-<td>PUT</td>
-<td>Update the existing booking</td>
-</tr>
-<tr>
-<td></td>
-<td>Cancel a booking</td>
-</tr>
-<tr>
-<td>DELETE</td>
-<td>Delete the record</td>
-</tr>
-</tbody></table>
-<h2 id='http-codes'>HTTP Codes</h2>
-<p>All the APIs return HTTP code in response to various error scenarios:</p>
 
-<table><thead>
-<tr>
-<th>HTTP Codes</th>
-<th>Status</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>200</td>
-<td>Success</td>
-<td>Request completed as expected</td>
-</tr>
-<tr>
-<td>201</td>
-<td>Created</td>
-<td>Entity created</td>
-</tr>
-<tr>
-<td>301</td>
-<td>Moved permanently</td>
-<td>Service permanently redirected</td>
-</tr>
-<tr>
-<td>304</td>
-<td>Not modified</td>
-<td>If request is cached and not updated</td>
-</tr>
-<tr>
-<td>400</td>
-<td>Bad request</td>
-<td>Request payload is not as per specification, i.e. argument or parameter is missing</td>
-</tr>
-<tr>
-<td>401</td>
-<td>Unauthorized</td>
-<td>Authorization token unavailable or not valid</td>
-</tr>
-<tr>
-<td>403</td>
-<td>Forbidden</td>
-<td>Server understood the request but refusing to fulfil the request.</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td><em>Example: Access not allowed based on Access Control List, tier restriction, etc.</em></td>
-</tr>
-<tr>
-<td>404</td>
-<td>Not found</td>
-<td>Not found anything matching the Request-URI (Uniform Resource Identifier)</td>
-</tr>
-<tr>
-<td>405</td>
-<td>Method not allowed</td>
-<td>Method is not supported or not allowed</td>
-</tr>
-<tr>
-<td>406</td>
-<td>Not Accepted</td>
-<td>The Accept header in the request asking for format which is not supported</td>
-</tr>
-<tr>
-<td>409</td>
-<td>Conflict</td>
-<td>Concurrent update to the same entity</td>
-</tr>
-<tr>
-<td>413</td>
-<td>Request entity too large</td>
-<td>Over the allowed limit</td>
-</tr>
-<tr>
-<td>500</td>
-<td>Internal server error</td>
-<td>Server encountered an unexpected error</td>
-</tr>
-<tr>
-<td>503</td>
-<td>Service unavailable</td>
-<td>Service is unable to handle the request due to temporary overloading or maintenance of the server</td>
-</tr>
-</tbody></table>
-<h2 id='request-format'>Request format</h2>
-<p>Currently, API supports only JSON-based requests. The API-key is mandatory for all the requests as part of header.</p>
-<h3 id='header-definition'>Header definition</h3>
-<p>Definition of the request headers is as follows:</p>
-
-<p><code>Note: (M)andatory, (O)ptional</code></p>
-
-<table><thead>
-<tr>
-<th>Field</th>
-<th>Type</th>
-<th>Required</th>
-<th>Valid</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>Accept</td>
-<td>String</td>
-<td>O</td>
-<td>JSON</td>
-<td>Currently, our API only supports JSON and <code>does not support any other formats i.e. XML</code></td>
-</tr>
-<tr>
-<td>Content-type</td>
-<td>string</td>
-<td>M</td>
-<td>application/json</td>
-<td>Currently, our API only supports JSON and <code>does not support any other formats i.e. XML</code></td>
-</tr>
-<tr>
-<td>Authorization</td>
-<td>String</td>
-<td>M</td>
-<td>API Bearer Token</td>
-<td>Accepts the valid API-key in the provided format that was created during the user subscription process</td>
-</tr>
-<tr>
-<td>x-trace-id</td>
-<td>String</td>
-<td>M</td>
-<td></td>
-<td><code>Unique identifier for each request</code>, can be a $guid, passed by client application. Used to track the internal application flow</td>
-</tr>
-</tbody></table>
-<h2 id='security'>Security</h2>
-<p><strong>All APIs require an <code>Authorization</code> header.</strong></p>
-
-<ul>
-<li>You will need to register <a href="https://developer.onthedot.com/create">here</a> to obtain a token by creating an <code>app</code> and subscribing to our <code>Sandbox</code>.</li>
-<li>The <code>API Bearer token</code>  must be used in the request headers .</li>
-</ul>
-<h2 id='date-and-time'>Date and time</h2>
-<p>The date and time object used in the request or response supports ISO8601 format and will be reported in UTC time for example, <code>2019-05-10T10:04:02.000Z</code>.</p>
-<h1 id='quick-start'>Quick Start</h1><h2 id='signup-to-otd-sandbox'>Signup to OTD Sandbox</h2>
 <aside class="notice">
-Our Sandbox is a self-service provisioning, no commitment required. All that is required is to register and obtain your developer `API Key.`AUP policy is enforced with On the dot APIs.
+**POSTMAN**
 </aside>
 
-<p><img src="images/OTD_H_DEV.png" alt="Dev" /></p>
-
-<aside class="warning">
-All transactional data is regularily purged, please don't get alarmed if your sandbox booking data disapered. Create a new one and continue.
-</aside>
-
-<p><code>N.B.</code> - Should you need further clarification, please contact OTD partners team at <a href="mailto:partners@onthedot.com">partners@onthedot.com</a>.</p>
-
-<ul>
-<li>Signup to get access to our Sandbox <a href="https://developer.onthedot.com/create">here</a>.
-
-<ul>
-<li>Create an app and subcribe to the <code>Sandbox</code> API product to obtain your <code>API Token</code>
-
-<ul>
-<li>Download and configure the tailored Postman collections and enviroment below to testdrive our APIs without any commitment.</li>
-</ul></li>
-</ul></li>
-</ul>
-<h2 id='postman'>POSTMAN</h2>
 <p><strong><code>Postman</code></strong> has two files: <em>collection</em> and <em>enviroment</em>. A collection is available for each booking type. <code>Enviroment</code> is the same for all collections and is pre-set for the <code>sandbox</code> account with the seed data described <a href="#sandbox-seed-data">below.</a></p>
 
 <ul>
@@ -2814,11 +4720,6 @@ Sandbox <code>seed data</code> below allows developers to test their integration
 * This gives the realtime courier location data.</p>
 <h1 id='booking-service-apis-v2-0'>Booking Service APIs V2.0</h1><h2 id='create-an-order'>Create an order</h2>
 <blockquote>
-<p><span class="http-verb-label" style="top: -1px; width: 55px; background-color: #49cc90; border: 0.1em solid;"">
-POST
-</span>
-{{host}}/{{bookingService}}/v2/accounts/{{accountId}}/orders</p>
-
 <details><summary class="highlight plaintext">Expand for request</summary><pre><code><p>curl -X POST \
   https://public-api-prod.onthedot.com/booking/v2/accounts/sandbox/orders \
   -H &#39;Content-Type: application/json&#39; \
@@ -3198,6 +5099,14 @@ POST
 </code></pre></details>
 </blockquote>
 
+<aside class="path">
+  <strong>Path:</strong><p><span class="http-verb-label" style="top: -1px; width: 55px; background-color: #49cc90; border: 0.1em solid;"">
+POST
+</span>
+{{host}}/<code>{{bookingService}}/v2/accounts/{{accountId}}/orders</code></p>
+
+</aside>
+
 <p>Below you have specific examples for each of the order types you can create using our <code>booking service</code>.</p>
 
 <ul>
@@ -3219,18 +5128,14 @@ POST
 <ul>
 <li><code>N.B.</code>: &quot;ageVerification&quot; is required if your order has items requiring us perform age validation, commonly reffered as &quot;Think25&quot; or &quot;Challenge25&quot;.</li>
 </ul>
-<h3 id='instructios'>Instructios</h3>
+<h3 id='booking-instructions'>Booking Instructions</h3>
 <p>Our platform can courier instructions at various levels:</p>
 
 <ol>
+<li>Booking instructions</li>
 <li>Job within an Order: <code>job.collection.instructions</code> and <code>job.delivery.instructions</code>.</li>
 <li>Stops within a Job</li>
 </ol>
-
-<aside class="notice">
-  <strong>Summary:</strong> Create order
-  <strong>Description</strong> This API creates an order with the specified ID.
-</aside>
 
 <p>This API allows the caller to set all the job, stops, notifcations, timeslots, stops, items... with their own values.</p>
 
@@ -5383,6 +7288,178 @@ presented to an end-user for selection.
 <!-- JavaScript -->
 
 <blockquote>
+<details><summary class=>Expand for </summary><pre><code><p>curl -X POST \
+  https://public-api-prod.onthedot.com/booking/v2/accounts/sandbox/orders \
+  -H &#39;Content-Type: application/json&#39; \
+  -H &#39;authorization: <code>&lt;Your Own API Bearer Taoken&gt;</code>&#39; \
+  -H &#39;cache-control: no-cache&#39; \
+  -H &#39;x-trace-id: ad095cc0-6c52-491a-a2cf-a3408c801a55&#39; \
+  -d &#39;{
+    &quot;id&quot;: &quot;1559209422&quot;,
+    &quot;metadata&quot;: {
+        &quot;clientRefId&quot;:&quot;CLIENT-REF-1559209422&quot;,
+        &quot;serviceType&quot;: &quot;asap&quot;,
+        &quot;isTest&quot;:True
+    },
+    &quot;customData&quot;: {
+      &quot;caller&quot;:&quot;API&quot;,
+      &quot;Customer&quot;:&quot;<code>CustomerName</code>&quot;
+        &quot;reference_1&quot;: &quot;kingsman@kingsman.com&quot;,
+        &quot;reference_2&quot;: &quot;Kingsman&quot;,
+        <code>&quot;citytrak-department&quot;: &quot;&lt;CoopOrderReference&gt;”</code>
+    },
+    &quot;contact&quot;: {
+        &quot;name&quot;: &quot;James Moriarty&quot;,
+        &quot;mobile&quot;: &quot;+447888888889&quot;,
+        &quot;phone&quot;: &quot;020812718278&quot;,
+        &quot;email&quot;: &quot;jm@gmail.com&quot;
+    },
+    &quot;notification&quot;: {
+        &quot;emails&quot;: [
+            {
+                &quot;email&quot;: &quot;rbeemi@onthedot.com&quot;,
+                &quot;statuses&quot;: [
+                    &quot;created&quot;,
+                    &quot;allocated&quot;,
+                    &quot;arrived_at_collection&quot;,
+                    &quot;collected&quot;,
+                    &quot;arrived_at_delivery&quot;,
+                    &quot;delivered&quot;
+                ]
+            }
+        ],
+        &quot;sms&quot;: [
+            {
+                &quot;number&quot;: &quot;+4477772888442&quot;,
+                &quot;statuses&quot;: [
+                    &quot;created&quot;,
+                    &quot;allocated&quot;,
+                    &quot;arrived_at_collection&quot;,
+                    &quot;collected&quot;,
+                    &quot;arrived_at_delivery&quot;,
+                    &quot;delivered&quot;
+                ]
+            }
+        ],
+        &quot;webhooks&quot;: [
+            {
+                &quot;endpoint&quot;: &quot;https://enit24ti5gez.x.pipedream.net/&quot;,
+                &quot;methodType&quot;: &quot;POST&quot;,
+                &quot;headers&quot;: {
+                    &quot;authorization&quot;: &quot;&quot;,
+                    &quot;company&quot;: &quot;&quot;
+                },
+                &quot;statuses&quot;: [
+                    &quot;created&quot;,
+                    &quot;allocated&quot;,
+                    &quot;arrived_at_collection&quot;,
+                    &quot;collected&quot;,
+                    &quot;arrived_at_delivery&quot;,
+                    &quot;delivered&quot;
+                ]
+            }
+        ]
+    },
+    &quot;jobs&quot;: [
+        {
+            &quot;id&quot;: &quot;1&quot;,
+            &quot;metadata&quot;: {
+                &quot;journeyType&quot;: &quot;delivery&quot;
+            },
+            &quot;requires&quot;: [
+                &quot;ageVerification&quot;,
+                &quot;collectionSignOff&quot;,
+                &quot;deliverySignOff&quot;
+            ],
+            &quot;items&quot;: [
+                {
+                    &quot;id&quot;: &quot;1&quot;,
+                    &quot;description&quot;: &quot;Book&quot;,
+                    &quot;quantity&quot;: 5,
+                    &quot;metrics&quot;: {
+                        &quot;weight&quot;: 4,
+                        &quot;dimension&quot;: {
+                            &quot;width&quot;: 10,
+                            &quot;height&quot;: 5,
+                            &quot;length&quot;: 20
+                        }
+                    }
+                },
+                {
+                    &quot;id&quot;: &quot;2&quot;,
+                    &quot;description&quot;: &quot;Book marker&quot;,
+                    &quot;quantity&quot;: 4,
+                    &quot;metrics&quot;: {
+                        &quot;weight&quot;: 10,
+                        &quot;dimension&quot;: {
+                            &quot;width&quot;: 10,
+                            &quot;height&quot;: 0.5,
+                            &quot;length&quot;: 20
+                        }
+                    }
+                }
+            ],
+            &quot;timeslot&quot;: {
+                &quot;collection&quot;: {
+                    &quot;from&quot;: &quot;2019-05-30T11:00:00.000Z&quot;,
+                    &quot;to&quot;: &quot;2019-05-30T12:00:00.000Z&quot;
+                },
+                &quot;delivery&quot;: {
+                    &quot;from&quot;: &quot;2019-05-30T13:00:00.000Z&quot;,
+                    &quot;to&quot;: &quot;2019-05-30T14:00:00.000Z&quot;
+                }
+            },
+            &quot;collection&quot;: {
+                &quot;stopId&quot;: &quot;1&quot;,
+                &quot;instructions&quot;: &quot;Collect Box From Main Garage&quot;
+            },
+            &quot;delivery&quot;: {
+                &quot;stopId&quot;: &quot;2&quot;,
+                &quot;instructions&quot;: &quot;Ring main Door Bell&quot;
+            }
+        }
+    ],
+    &quot;stops&quot;: [
+        {
+            &quot;id&quot;: &quot;1&quot;,
+            &quot;contact&quot;: {
+                &quot;name&quot;: &quot;Sherlock Holmes&quot;,
+                &quot;mobile&quot;: &quot;+447777777777&quot;,
+                &quot;phone&quot;: &quot;02091212121212&quot;,
+                &quot;email&quot;: &quot;sh@gmail.com&quot;
+            },
+            &quot;place&quot;: {
+                &quot;id&quot;: &quot;sandbox-store&quot;
+            },
+            &quot;instructions&quot;: &quot;Park at Store back Door&quot;
+        },
+        {
+            &quot;id&quot;: &quot;2&quot;,
+            &quot;contact&quot;: {
+                &quot;name&quot;: &quot;John Watson&quot;,
+                &quot;mobile&quot;: &quot;+447777777778&quot;,
+                &quot;email&quot;: &quot;jw@gmail.com&quot;
+            },
+            &quot;place&quot;: {
+                &quot;address&quot;: {
+                    &quot;country&quot;: &quot;GBR&quot;,
+                    &quot;town&quot;: &quot;London&quot;,
+                    &quot;streets&quot;: [
+                        &quot;FLAT 111&quot;,
+                        &quot;ICON BUILDING&quot;
+                    ],
+                    &quot;postcode&quot;: &quot;IG1 2FJ&quot;,
+                    &quot;companyName&quot;: &quot;SANDBOX-OTD-COMPANY&quot;
+                }
+            },
+            &quot;instructions&quot;: &quot;You can park at Front Garden at my house&quot;
+        }
+    ]
+}&#39;</p>
+</code></pre></details>
+</blockquote>
+<h4 id='jkhgkhgkh'>jkhgkhgkh</h4>
+<blockquote>
 <p><span class="http-verb-label" style="top: -1px; width: 55px; background-color: #61affe; border: 0.1em solid;"">
 GET
 </span>
@@ -5414,33 +7491,7 @@ http://lol.com</p>
     return 0;
 }
 </code></pre>
-<!-- Pascal -->
-
 <blockquote>
-<p><span class="http-verb-label" style="top: -1px; width: 55px; background-color: #50e3c2; border: 0.1em solid;"">
-PATCH
-</span>
-http://lol.com</p>
-</blockquote>
-<pre class="highlight plaintext"><code>  program HelloWorld;
-  begin
-    WriteLn('Hello, world!');
-  end.
-</code></pre>
-<blockquote>
-<p><span class="http-verb-label" style="top: -1px; width: 55px; background-color: #f93e3e; border: 0.1em solid;"">
-DELETE
-</span>
-http://lol.com</p>
-</blockquote>
-<pre class="highlight ruby tab-ruby"><code><span class="nb">print</span><span class="p">(</span><span class="s1">'Hello, world!'</span><span class="p">)</span>
-</code></pre>
-<blockquote>
-<p><span class="http-verb-label" style="top: -1px; width: 55px; background-color: #f93e3e; border: 0.1em solid;"">
-DELETE
-</span>
-http://lol.com</p>
-
 <div class="code-block-no-wrap-header">Response http codes :<p><span class="http-resp-label" style="top: -1px; width: 30px; background-color: #49cc90; border: 0.1em solid;">201</span></p>
 <p><span class="http-resp-label" style="top: -1px; width: 30px; background-color: red; border: 0.1em solid;">4xx</span></p>
 </div>
