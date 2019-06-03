@@ -561,6 +561,10 @@ a {
             background-color: $aside-success-bg;
             border-left: 4px solid $aside-success-bord-left;
         }
+        &.path {
+            background-color: $aside-path-bg;
+            border-left: 4px solid $aside-path-bord-left;
+        }
     }
     aside:before {
         vertical-align: middle;
