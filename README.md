@@ -96,6 +96,11 @@ Slate root
 
 ><details><summary class="highlight plaintext">Expand for request</summary><pre><code><%= partial 'includes/booboo.md.erb' %></code></pre></details>
 
+**OR**
+
+<%= partial 'includes/code_exp_middle.md.erb', locals: {lang:"ruby", text_style:"xxx", summary:"zxxzxzxzx", file:"v2otdpublic.md.erb"} %>
+
+
 <!-- HTTP codes : Responses -->
 ><div class="code-block-no-wrap-header">Http reponse codes :<%= partial 'includes/http_resp.md.erb', locals: {resp:"201", resp_text: "",bg_colour:"#49cc90"} %><%= partial 'includes/http_resp.md.erb', locals: {resp:"4xx", resp_text: "",bg_colour:"red"} %></div>
 

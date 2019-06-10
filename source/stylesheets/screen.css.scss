@@ -695,11 +695,11 @@ a {
 
 .highlight .c1,
 .highlight .plaintext {
-    color: lightpink; //$code-highlight-text;
+    color: $code-highlight-text;
 }
 
 .highlight .err {
-    color: rgb(212, 182, 212); //$code-highlight-text;
+    color: pink; //$code-highlight-error;
 }
 
 .highlight,
@@ -741,6 +741,18 @@ details pre {
     color: #fff;
     user-select: none;
     // box-shadow: 0 1px 4px -2px #fff, 0 1px 4px -2px #fff, 0 1px 2px -1px #fff;
+    &#get {
+        background: #61affe;
+    }
+    &#post {
+        background: #49cc90;
+    }
+    &#put {
+        background: #fca130;
+    }
+    &#delete {
+        background: #f93e3e;
+    }
 }
 
 // Eduard added HTTP response buttons label
@@ -760,6 +772,21 @@ details pre {
     color: #fff;
     user-select: none;
     // box-shadow: 0 1px 4px -2px #fff, 0 1px 4px -2px #fff, 0 1px 2px -1px #fff;
+    &#get {
+        background: #61affe;
+    }
+    &#twox {
+        background: #49cc90;
+    }
+    &#twox {
+        background: #49cc90;
+    }
+    &#fourx {
+        background: #f93e3e;
+    }
+    &#fivex {
+        background: #f93e3e;
+    }
 }
 
 .http-verbs-link {
