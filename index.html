@@ -204,12 +204,14 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/json.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/ruby.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/bash.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js'></script>
 
     <link rel='stylesheet'
-      href='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/monokai.min.css'>
+      href='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/xcode.min.css'>
     <script>hljs.initHighlightingOnLoad();</script>
   </head>
 
@@ -436,6 +438,32 @@ Developer &lt;-- &quot;Cosmo Webhook&quot;:{event driven}</p>
 </code></pre></details>
 </blockquote>
 
+<blockquote>
+<details><summary class=highlight plaintext>Expand for Lucid Charts UML Markup</summary><pre><code><p>note over Developer, &quot;Create Booking&quot;: Create booking without a &quot;timeslotId&quot;
+Developer -&gt; &quot;Create Booking&quot;: POST /v2/accounts/{{accountId}}/orders
+Developer &lt;-- &quot;Create Booking&quot;: 201 OK
+note over Developer, &quot;Create Booking&quot;: Creating a booking with a &quot;timeslotId&quot;
+Developer -&gt; Timeslot: POST /v2/accounts/{{accountId}}/timeslots
+Developer &lt;-- Timeslot: 201 OK
+Developer -&gt; &quot;Create Booking&quot;: POST /v2/accounts/{{accountId}}/orders
+Developer &lt;--&quot;Create Booking&quot;: 201 OK
+alt &quot;Amend Booking&quot;
+Developer -&gt; &quot;Amend Booking&quot;: PUT /v2/accounts/{{accountId}}/orders/{{orderNo}}/amend
+Developer&lt;-- &quot;Amend Booking&quot;: 200 OK
+else &quot;Cancel Booking&quot;
+Developer -&gt; &quot;Cancel Booking&quot;: PUT /v2/accounts/{{accountId}}/orders/{{orderNo}}/cancel
+Developer -&gt; &quot;Cancel Booking&quot;: 200 OK
+else &quot;Get Booking Details&quot;
+Developer -&gt; &quot;Get Booking&quot;: GET /v2/accounts/{{accountId}}/orders/{{orderNo}}
+Developer &lt;-- &quot;Get Booking&quot;: 200 OK
+else &quot;Search Booking(s)&quot;
+Developer -&gt; &quot;Search Booking&quot;: POST /v2/accounts/{{accountId}}/orders/search
+Developer &lt;-- &quot;Search Booking&quot;: 200 OK
+end
+Developer &lt;-- &quot;Cosmo Webhook&quot;:{event driven}</p>
+</code></pre></details>
+</blockquote>
+
 <aside class="notice">
   <strong>High level sequence diagram</strong>
 </aside>
@@ -576,7 +604,9 @@ Developer &lt;-- &quot;Cosmo Webhook&quot;:{event driven}</p>
 <li><p>The <code>API Bearer token</code>  must be used in the request headers .</p></li>
 </ul>
 <h2 id='date-and-time'>Date and time</h2>
-<p>The date and time object used in the request or response supports ISO8601 format and will be reported in UTC time Zulu only. Example, <code>2019-05-10T10:04:02.000Z</code>.</p>
+<aside class="notice">
+The date and time object used in the request or response supports ISO8601 format and will be reported in UTC time Zulu only. Example, <code>2019-05-10T10:04:02.000Z</code>.
+</aside>
 
 <table><thead>
 <tr>
@@ -594,38 +624,73 @@ Developer &lt;-- &quot;Cosmo Webhook&quot;:{event driven}</p>
 </tr>
 </tbody></table>
 
-<p><code>&lt;p&gt;curl -X POST \
+<details open style="width:60%; margin: 10px; padding-left: 20px; float: left;"><summary class=xxx style="margin-bottom: 5px;">Scheduled Timeslot</summary><pre style="background: none; margin: 0px; padding-left: 20px;"><code class=python style="width: 100% !important;"><p>curl -X POST \
   https://public-api-prod.onthedot.com/booking/v2/accounts/sandbox/timeslots \
-  -H &amp;#39;Accept: application/json&amp;#39; \
-  -H &amp;#39;Authorization: &lt;code&gt;&amp;lt;Your API Bearer Token&amp;gt;&lt;/code&gt;&amp;#39; \
-  -H &amp;#39;Content-Type: application/json&amp;#39; \
-  -H &amp;#39;X-Trace-Id: 812100a5-36f5-44b2-8ee6-aded527f1e8a&amp;#39; \
-  -H &amp;#39;cache-control: no-cache&amp;#39; \
-  -d &amp;#39;{
-    &amp;quot;partnerId&amp;quot;: &amp;quot;sandbox&amp;quot;,
-    &amp;quot;serviceType&amp;quot;: &amp;quot;1hour&amp;quot;,
-    &amp;quot;vehicleType&amp;quot;:&amp;quot;car&amp;quot;,
-    &amp;quot;collection&amp;quot;: {
-        &amp;quot;id&amp;quot;: &amp;quot;sandbox-store&amp;quot;
+  -H &#39;Accept: application/json&#39; \
+  -H &#39;Authorization: <code>&lt;Your API Bearer Token&gt;</code>&#39; \
+  -H &#39;Content-Type: application/json&#39; \
+  -H &#39;X-Trace-Id: 812100a5-36f5-44b2-8ee6-aded527f1e8a&#39; \
+  -H &#39;cache-control: no-cache&#39; \
+  -d &#39;{
+    &quot;partnerId&quot;: &quot;sandbox&quot;,
+    &quot;serviceType&quot;: &quot;1hour&quot;,
+    &quot;vehicleType&quot;:&quot;car&quot;,
+    &quot;collection&quot;: {
+        &quot;id&quot;: &quot;sandbox-store&quot;
     },
-    &amp;quot;delivery&amp;quot;: {
-        &amp;quot;address&amp;quot;: {
-            &amp;quot;streets&amp;quot;: [
-                &amp;quot;FLAT 111&amp;quot;,
-                &amp;quot;ICON BUILDING&amp;quot;
+    &quot;delivery&quot;: {
+        &quot;address&quot;: {
+            &quot;streets&quot;: [
+                &quot;FLAT 111&quot;,
+                &quot;ICON BUILDING&quot;
             ],
-            &amp;quot;town&amp;quot;: &amp;quot;LONDON&amp;quot;,
-            &amp;quot;country&amp;quot;: &amp;quot;GBR&amp;quot;,
-            &amp;quot;postcode&amp;quot;: &amp;quot;DE11 0AA&amp;quot;
+            &quot;town&quot;: &quot;LONDON&quot;,
+            &quot;country&quot;: &quot;GBR&quot;,
+            &quot;postcode&quot;: &quot;DE11 0AA&quot;
         }
     },
-    &amp;quot;dates&amp;quot;: {
-        &amp;quot;2019-05-31&amp;quot;: {}
+    &quot;dates&quot;: {
+        &quot;2019-05-31&quot;: {}
     },
-    &amp;quot;packageReadyAt&amp;quot;: &amp;quot;2019-05-29T13:57:59.267Z&amp;quot;,
-    &amp;quot;additionalNoOfDays&amp;quot;: 0
-}&amp;#39;&lt;/p&gt;
-&lt;/div&gt;</code></p>
+    &quot;packageReadyAt&quot;: &quot;2019-05-29T13:57:59.267Z&quot;,
+    &quot;additionalNoOfDays&quot;: 0
+}&#39;</p>
+</code></pre></details>
+
+<blockquote>
+<details><summary class=highlight plaintext>Expand for Scheduled Timeslot</summary><pre><code><p>curl -X POST \
+  https://public-api-prod.onthedot.com/booking/v2/accounts/sandbox/timeslots \
+  -H &#39;Accept: application/json&#39; \
+  -H &#39;Authorization: <code>&lt;Your API Bearer Token&gt;</code>&#39; \
+  -H &#39;Content-Type: application/json&#39; \
+  -H &#39;X-Trace-Id: 812100a5-36f5-44b2-8ee6-aded527f1e8a&#39; \
+  -H &#39;cache-control: no-cache&#39; \
+  -d &#39;{
+    &quot;partnerId&quot;: &quot;sandbox&quot;,
+    &quot;serviceType&quot;: &quot;1hour&quot;,
+    &quot;vehicleType&quot;:&quot;car&quot;,
+    &quot;collection&quot;: {
+        &quot;id&quot;: &quot;sandbox-store&quot;
+    },
+    &quot;delivery&quot;: {
+        &quot;address&quot;: {
+            &quot;streets&quot;: [
+                &quot;FLAT 111&quot;,
+                &quot;ICON BUILDING&quot;
+            ],
+            &quot;town&quot;: &quot;LONDON&quot;,
+            &quot;country&quot;: &quot;GBR&quot;,
+            &quot;postcode&quot;: &quot;DE11 0AA&quot;
+        }
+    },
+    &quot;dates&quot;: {
+        &quot;2019-05-31&quot;: {}
+    },
+    &quot;packageReadyAt&quot;: &quot;2019-05-29T13:57:59.267Z&quot;,
+    &quot;additionalNoOfDays&quot;: 0
+}&#39;</p>
+</code></pre></details>
+</blockquote>
 <h2 id='http-codes'>HTTP Codes</h2>
 <p>All the APIs return HTTP code in response to various error scenarios:</p>
 
@@ -2538,7 +2603,19 @@ All transactional data is regularily purged, please don't get alarmed if your sa
 </code></pre></details>
 </blockquote>
 
-<details open style="margin: 10px; padding-left: 20px; float: left; width: 60%; max-width: 60% !important;"><summary class=xxx style="margin-bottom: 5px;">zxxzxzxzx</summary><pre class="highlight" style="background-color: #fff; style="margin: 10px; padding-left: 20px; display:flex; clear: left;""><code><p>{
+<aside class="notice" style="clear: both">
+SWAGGER The best way to view the API Swagger specification is to copy the content of any of the 2 files below or by expanding the right hand pane, copy then paste it into the free: <a href='https://editor.swagger.io/' target="_blank">`Swagger Editor by Smartbear`</a>.
+</aside>
+
+<ul>
+<li>Click <a href="swagger/v2_otd_public.yaml">here</a> to download the <code>v2_otd_public.yaml</code> file.</li>
+<li>Click <a href="swagger/v2_otd_public.json">here</a> to download the <code>v2_otd_public.json</code> file.</li>
+<li><code>N.B.</code> OAS3.0 coming soon`</li>
+</ul>
+
+<p><img src="images/Swagger_Editor.png" alt="Swagger Editor" /></p>
+
+<details open style="width:60%; margin: 10px; padding-left: 20px; float: left;"><summary class=xxx style="margin-bottom: 5px;">zxxzxzxzx</summary><pre style="background: none; margin: 0px; padding-left: 20px;"><code class= style="width: 100% !important;"><p>{
   &quot;swagger&quot;: &quot;2.0&quot;,
   &quot;schemes&quot;: [
     &quot;https&quot;
@@ -4333,20 +4410,6 @@ All transactional data is regularily purged, please don't get alarmed if your sa
 }</p>
 </code></pre></details>
 
-<aside class="notice" style="clear: both">
-SWAGGER
-</aside>
-
-<p>The best way to view the API Swagger specification is to copy the content of any of the 2 files below or by expanding the right hand pane, copy then paste it into the free: <a href='https://editor.swagger.io/' target="_blank"><code>Swagger Editor by Smartbear</code></a>.</p>
-
-<ul>
-<li>Click <a href="swagger/v2_otd_public.yaml">here</a> to download the <code>v2_otd_public.yaml</code> file.</li>
-<li>Click <a href="swagger/v2_otd_public.json">here</a> to download the <code>v2_otd_public.json</code> file.</li>
-<li><code>N.B.</code> OAS3.0 coming soon`</li>
-</ul>
-
-<p><img src="images/Swagger_Editor.png" alt="Swagger Editor" /></p>
-
 <aside class="notice">
 **POSTMAN**
 </aside>
@@ -4890,9 +4953,9 @@ Sandbox <code>seed data</code> below allows developers to test their integration
 }&#39;</p>
 </code></pre></details>
 
-<div class="code-block-no-wrap-header">Http reponse codes :<p><span class="http-resp-label" style="top: -1px; width: 30px; background-color: #49cc90; border: 0.1em solid;">201</span></p>
-<p><span class="http-resp-label" style="top: -1px; width: 30px; background-color: red; border: 0.1em solid;">4xx</span></p>
-<p><span class="http-resp-label" style="top: -1px; width: 30px; background-color: red; border: 0.1em solid;">5xx</span></p>
+<div class="code-block-no-wrap-header">Http reponse codes :<p><span class="http-resp-label" id= style="top: -1px; width: 30px; border: 0.1em solid;">201</span></p>
+<p><span class="http-resp-label" id= style="top: -1px; width: 30px; border: 0.1em solid;">4xx</span></p>
+<p><span class="http-resp-label" id= style="top: -1px; width: 30px; border: 0.1em solid;">5xx</span></p>
 </div>
 
 <details><summary class="highlight plaintext">Expand for response</summary><pre><code><p>{
@@ -5100,7 +5163,7 @@ Sandbox <code>seed data</code> below allows developers to test their integration
 </blockquote>
 
 <aside class="path">
-  <strong>Path:</strong><p><span class="http-verb-label" style="top: -1px; width: 55px; background-color: #49cc90; border: 0.1em solid;"">
+  <strong>Path:</strong><p><span class="http-verb-label" id= style="top: -1px; width: 55px; border: 0.1em solid;">
 POST
 </span>
 {{host}}/<code>{{bookingService}}/v2/accounts/{{accountId}}/orders</code></p>
@@ -5195,7 +5258,7 @@ POST
 </tbody></table>
 <h2 id='get-it-now'>Get it now</h2>
 <blockquote>
-<p><span class="http-verb-label" style="top: -1px; width: 55px; background-color: #49cc90; border: 0.1em solid;"">
+<p><span class="http-verb-label" id= style="top: -1px; width: 55px; border: 0.1em solid;">
 POST
 </span>
 {{host}}/{{bookingService}}/v2/accounts/{{accountId}}/orders</p>
@@ -5370,9 +5433,9 @@ POST
 }&#39;</p>
 </code></pre></details>
 
-<div class="code-block-no-wrap-header">Http reponse codes :<p><span class="http-resp-label" style="top: -1px; width: 30px; background-color: #49cc90; border: 0.1em solid;">201</span></p>
-<p><span class="http-resp-label" style="top: -1px; width: 30px; background-color: red; border: 0.1em solid;">4xx</span></p>
-<p><span class="http-resp-label" style="top: -1px; width: 30px; background-color: red; border: 0.1em solid;">5xx</span></p>
+<div class="code-block-no-wrap-header">Http reponse codes :<p><span class="http-resp-label" id= style="top: -1px; width: 30px; border: 0.1em solid;">201</span></p>
+<p><span class="http-resp-label" id= style="top: -1px; width: 30px; border: 0.1em solid;">4xx</span></p>
+<p><span class="http-resp-label" id= style="top: -1px; width: 30px; border: 0.1em solid;">5xx</span></p>
 </div>
 
 <details><summary class="highlight plaintext">Expand for response</summary><pre><code><p>{
@@ -5588,7 +5651,7 @@ The <code>code</code> panel exemplifies how to send an <code>Express/ASAP</code>
 <p>Create booking requests for an Express/ASAP delivery for same day or in the future.</p>
 <h2 id='get-it-later'>Get it later</h2>
 <blockquote>
-<p><span class="http-verb-label" style="top: -1px; width: 55px; background-color: #49cc90; border: 0.1em solid;"">
+<p><span class="http-verb-label" id= style="top: -1px; width: 55px; border: 0.1em solid;">
 POST
 </span>
 {{host}}/{{bookingService}}/v2/accounts/{{accountId}}/timeslots</p>
@@ -5626,7 +5689,7 @@ POST
 }&#39;</p>
 </code></pre></details>
 
-<p><span class="http-verb-label" style="top: -1px; width: 55px; background-color: #49cc90; border: 0.1em solid;"">
+<p><span class="http-verb-label" id= style="top: -1px; width: 55px; border: 0.1em solid;">
 POST
 </span>
 {{host}}/{{bookingService}}/v2/accounts/{{accountId}}/orders</p>
@@ -5789,9 +5852,9 @@ POST
 }&#39;</p>
 </code></pre></details>
 
-<div class="code-block-no-wrap-header">Http reponse codes :<p><span class="http-resp-label" style="top: -1px; width: 30px; background-color: #49cc90; border: 0.1em solid;">201</span></p>
-<p><span class="http-resp-label" style="top: -1px; width: 30px; background-color: red; border: 0.1em solid;">4xx</span></p>
-<p><span class="http-resp-label" style="top: -1px; width: 30px; background-color: red; border: 0.1em solid;">5xx</span></p>
+<div class="code-block-no-wrap-header">Http reponse codes :<p><span class="http-resp-label" id= style="top: -1px; width: 30px; border: 0.1em solid;">201</span></p>
+<p><span class="http-resp-label" id= style="top: -1px; width: 30px; border: 0.1em solid;">4xx</span></p>
+<p><span class="http-resp-label" id= style="top: -1px; width: 30px; border: 0.1em solid;">5xx</span></p>
 </div>
 
 <details><summary class="highlight plaintext">Expand for response</summary><pre><code><p>{
@@ -6012,7 +6075,7 @@ The request in the <code>code pane</code> will create an order scheduled for lat
 </ol>
 <h2 id='returns'>Returns</h2>
 <blockquote>
-<p><span class="http-verb-label" style="top: -1px; width: 55px; background-color: #49cc90; border: 0.1em solid;"">
+<p><span class="http-verb-label" id= style="top: -1px; width: 55px; border: 0.1em solid;">
 POST
 </span>
 {{host}}/{{bookingService}}/v2/accounts/{{accountId}}/orders</p>
@@ -6185,9 +6248,9 @@ POST
 }&#39;</p>
 </code></pre></details>
 
-<div class="code-block-no-wrap-header">Http reponse codes :<p><span class="http-resp-label" style="top: -1px; width: 30px; background-color: #49cc90; border: 0.1em solid;">201</span></p>
-<p><span class="http-resp-label" style="top: -1px; width: 30px; background-color: red; border: 0.1em solid;">4xx</span></p>
-<p><span class="http-resp-label" style="top: -1px; width: 30px; background-color: red; border: 0.1em solid;">5xx</span></p>
+<div class="code-block-no-wrap-header">Http reponse codes :<p><span class="http-resp-label" id= style="top: -1px; width: 30px; border: 0.1em solid;">201</span></p>
+<p><span class="http-resp-label" id= style="top: -1px; width: 30px; border: 0.1em solid;">4xx</span></p>
+<p><span class="http-resp-label" id= style="top: -1px; width: 30px; border: 0.1em solid;">5xx</span></p>
 </div>
 
 <details><summary class="highlight plaintext">Expand for response</summary><pre><code><p>{
@@ -6675,7 +6738,7 @@ code_sample
 </ul>
 <h2 id='cancel-an-order'>Cancel an order</h2>
 <blockquote>
-<p><span class="http-verb-label" style="top: -1px; width: 55px; background-color: #f93e3e; border: 0.1em solid;"">
+<p><span class="http-verb-label" id=delete style="top: -1px; width: 55px; border: 0.1em solid;">
 DELETE
 </span>
 http://lol.com/<code>{:param}</code>/<code>{:param}</code></p>
@@ -6686,8 +6749,8 @@ http://lol.com/<code>{:param}</code>/<code>{:param}</code></p>
 }</p>
 </code></pre></details>
 
-<div class="code-block-no-wrap-header">Http reponse codes :<p><span class="http-resp-label" style="top: -1px; width: 30px; background-color: #49cc90; border: 0.1em solid;">201</span></p>
-<p><span class="http-resp-label" style="top: -1px; width: 30px; background-color: red; border: 0.1em solid;">4xx</span></p>
+<div class="code-block-no-wrap-header">Http reponse codes :<p><span class="http-resp-label" id= style="top: -1px; width: 30px; border: 0.1em solid;">201</span></p>
+<p><span class="http-resp-label" id= style="top: -1px; width: 30px; border: 0.1em solid;">4xx</span></p>
 </div>
 
 <details><summary class="highlight plaintext">Expand for response</summary><pre><code><p>int main() {
@@ -7288,7 +7351,7 @@ presented to an end-user for selection.
 <!-- JavaScript -->
 
 <blockquote>
-<details><summary class=>Expand for </summary><pre><code><p>curl -X POST \
+<details><summary class=>Expand for ASAP Order</summary><pre><code><p>curl -X POST \
   https://public-api-prod.onthedot.com/booking/v2/accounts/sandbox/orders \
   -H &#39;Content-Type: application/json&#39; \
   -H &#39;authorization: <code>&lt;Your Own API Bearer Taoken&gt;</code>&#39; \
@@ -7458,20 +7521,26 @@ presented to an end-user for selection.
 }&#39;</p>
 </code></pre></details>
 </blockquote>
-<h4 id='jkhgkhgkh'>jkhgkhgkh</h4>
+
 <blockquote>
-<p><span class="http-verb-label" style="top: -1px; width: 55px; background-color: #61affe; border: 0.1em solid;"">
+<p><span class="http-verb-label" id=get style="top: -1px; width: 55px; border: 0.1em solid;">
 GET
 </span>
 http://<code>{lol}</code>.com/order/<code>{parma:}</code></p>
 </blockquote>
-<pre class="highlight javascript tab-javascript"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Hello, world!'</span><span class="p">);</span>
-<span class="err">#</span><span class="mi">0</span><span class="nx">f6ab4</span>
-</code></pre>
+
+<blockquote>
+<details><summary class=>Expand for code pane</summary><pre><code><p>int main() {
+    printf(&quot;Hello World!&quot;);
+    return 0;
+}</p>
+</code></pre></details>
+</blockquote>
+
 <!-- Python -->
 
 <blockquote>
-<p><span class="http-verb-label" style="top: -1px; width: 55px; background-color: #49cc90; border: 0.1em solid;"">
+<p><span class="http-verb-label" id=post style="top: -1px; width: 55px; border: 0.1em solid;">
 POST
 </span>
 http://lol.com</p>
@@ -7481,7 +7550,7 @@ http://lol.com</p>
 <!-- C -->
 
 <blockquote>
-<p><span class="http-verb-label" style="top: -1px; width: 55px; background-color: #fca130; border: 0.1em solid;"">
+<p><span class="http-verb-label" id=put style="top: -1px; width: 55px; border: 0.1em solid;">
 PUT
 </span>
 http://lol.com</p>
@@ -7492,10 +7561,12 @@ http://lol.com</p>
 }
 </code></pre>
 <blockquote>
-<div class="code-block-no-wrap-header">Response http codes :<p><span class="http-resp-label" style="top: -1px; width: 30px; background-color: #49cc90; border: 0.1em solid;">201</span></p>
-<p><span class="http-resp-label" style="top: -1px; width: 30px; background-color: red; border: 0.1em solid;">4xx</span></p>
+<div class="code-block-no-wrap-header">Response http codes :<p><span class="http-resp-label" id=twox style="top: -1px; width: 30px; border: 0.1em solid;">201</span></p>
+<p><span class="http-resp-label" id=fourx style="top: -1px; width: 30px; border: 0.1em solid;">4xx</span></p>
 </div>
 </blockquote>
+
+<p><span class="http-resp-label" id=4xx style="top: -1px; width: 30px; border: 0.1em solid;">4xx</span></p>
 
 <p><strong>Asides</strong>
 <aside class="notice">
