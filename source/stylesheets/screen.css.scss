@@ -505,7 +505,7 @@ a {
         line-height: 1.5;
         padding: 3px;
         border-radius: 3px;
-        @extend %break-words;
+        // @extend %break-words;
         @extend %code-font;
     }
     pre>code {
@@ -838,7 +838,7 @@ details pre {
     display: flex;
     flex-direction: row;
     padding: 13px 13px 0 13px;
-    background: #575759;
+    background: #b3b3b3;
     color: #EEEEF2;
     border-radius: 5px;
 }
