@@ -413,7 +413,7 @@ Diagram below is a high level overview of our Booking API features and integrati
 <p><img src="images/OTD-API-HLV-slate.png" alt="HLV" /></p>
 
 <blockquote>
-<details><summary class=>Expand for Lucid Charts UML Markup</summary><pre><code><p>note over Developer, &quot;Create Booking&quot;: Create booking without a &quot;timeslotId&quot;
+<details><summary class=>Expand for Lucid Charts UML Markup</summary><pre><code class=><p>note over Developer, &quot;Create Booking&quot;: Create booking without a &quot;timeslotId&quot;
 Developer -&gt; &quot;Create Booking&quot;: POST /v2/accounts/{{accountId}}/orders
 Developer &lt;-- &quot;Create Booking&quot;: 201 OK
 note over Developer, &quot;Create Booking&quot;: Creating a booking with a &quot;timeslotId&quot;
@@ -447,7 +447,7 @@ Developer &lt;-- &quot;Cosmo Webhook&quot;:{event driven}</p>
 <p>Currently, all the APIs are JSON-based APIs. They support standard HTTP verbs for the public version of Booking API, for example, GET, POST and PUT.</p>
 <h3 id='resource-url-format'>Resource URL Format</h3>
 <blockquote>
-<p><code>host</code>/<code>service</code>/version/<code>resource_type</code>/<code>[sub-resource|identifiers]</code>/resource/?query_string</p>
+<p><code>https://public-api-prod.onthedot.com/booking/v2/accounts/sandbox/orders/?query_string</code></p>
 </blockquote>
 
 <ul>
@@ -497,10 +497,6 @@ Developer &lt;-- &quot;Cosmo Webhook&quot;:{event driven}</p>
 <td>/?...</td>
 </tr>
 </tbody></table>
-
-<ul>
-<li>e.g.: <code>https://public-api-prod.onthedot.com/booking/v2/accounts/sandbox/orders</code></li>
-</ul>
 <h2 id='methods-supported-for-published-booking-apis'>Methods supported for published Booking APIs</h2>
 <table><thead>
 <tr>
@@ -508,25 +504,29 @@ Developer &lt;-- &quot;Cosmo Webhook&quot;:{event driven}</p>
 <th>Description</th>
 </tr>
 </thead><tbody>
-<tr>
-<td>GET</td>
-<td>Retrieve booking or collection of bookings</td>
-</tr>
-<tr>
-<td>POST</td>
-<td>Creating new booking</td>
-</tr>
-<tr>
-<td>PUT</td>
-<td>Update the existing booking</td>
-</tr>
-<tr>
-<td></td>
-<td>Cancel a booking</td>
-</tr>
 </tbody></table>
+
+<p><span class="http-verb-label" id=get style="top: -1px; width: 55px; border: 0.1em solid;">
+GET
+</span>
+Retrieve booking or collection of bookings</p>
+
+<p><span class="http-verb-label" id=post style="top: -1px; width: 55px; border: 0.1em solid;">
+POST
+</span>
+Creating new booking</p>
+
+<p><span class="http-verb-label" id=put style="top: -1px; width: 55px; border: 0.1em solid;">
+PUT
+</span>
+Update the existing booking</p>
+
+<p><span class="http-verb-label" id=put style="top: -1px; width: 55px; border: 0.1em solid;">
+PUT
+</span>
+Cancel a booking</p>
 <h2 id='request-format'>Request format</h2>
-<p>Currently, Booking API supports only JSON-based requests. The API Bearer Token is mandatory for all the requests as part of header.</p>
+<p>Currently, Booking API supports only JSON-based requests. The <code>API Bearer Token</code> is mandatory for all the requests as part of header.</p>
 <h3 id='header-definition'>Header definition</h3>
 <p>Definition of the request headers is as follows:</p>
 
@@ -560,7 +560,7 @@ Developer &lt;-- &quot;Cosmo Webhook&quot;:{event driven}</p>
 <td>String</td>
 <td>M</td>
 <td>API Bearer Token</td>
-<td>Accepts the valid <code>API-key</code> in the provided format that was created during the user subscription process</td>
+<td>Accepts the valid <code>API Bearer tokem</code> in the provided format that was created during the user subscription process</td>
 </tr>
 <tr>
 <td>x-trace-id</td>
@@ -571,7 +571,7 @@ Developer &lt;-- &quot;Cosmo Webhook&quot;:{event driven}</p>
 </tr>
 </tbody></table>
 <h2 id='security'>Security</h2>
-<p><strong>All APIs require an <code>Authorization</code> header.</strong></p>
+<p><strong>All APIs require an <code>Authorization</code> header key with the <code>API Bearer token</code> as value.</strong></p>
 
 <ul>
 <li><p>You will need to register <a href="https://developer.onthedot.com/create">here</a> to obtain a token by creating an <code>app</code> and subscribing to our <code>Sandbox</code> API.</p></li>
@@ -598,7 +598,7 @@ The date and time object used in the request or response supports ISO8601 format
 </tr>
 </tbody></table>
 
-<details open style="width:60%; margin: 10px; padding-left: 20px; float: left;"><summary class=xxx style="margin-bottom: 5px;">Caveat: Local Time</summary><pre style="background: none; margin: 0px; padding-left: 20px;"><code class= style="width: 100% !important;"><p>// Caveat: Local times
+<details open style="width:60%; margin: 10px; padding-left: 20px; float: left;"><summary class=xxx style="margin-bottom: 5px;">Caveat: Local Time</summary><pre style="background: none; margin: 0px; padding-left: 20px;"><code class=json style="width: 100% !important;"><p>// Caveat: Local times
     &quot;dates&quot;: {
         &quot;2018-08-09&quot;: {
             &quot;openTime&quot;: &quot;12:00&quot;,
@@ -612,12 +612,12 @@ The date and time object used in the request or response supports ISO8601 format
 </code></pre></details>
 
 <blockquote>
-<details><summary class=>Expand for Scheduled Timeslot</summary><pre><code><p>curl -X POST \
+<details><summary class=>Expand for Timeslot Request</summary><pre><code class=json><p>curl -X POST \
   https://public-api-prod.onthedot.com/booking/v2/accounts/sandbox/timeslots \
   -H &#39;Accept: application/json&#39; \
   -H &#39;Authorization: <code>&lt;Your API Bearer Token&gt;</code>&#39; \
   -H &#39;Content-Type: application/json&#39; \
-  -H &#39;X-Trace-Id: 812100a5-36f5-44b2-8ee6-aded527f1e8a&#39; \
+  -H &#39;X-Trace-Id: <code>&lt;your uniques GUID&gt;</code>&#39; \
   -d &#39;{
     &quot;partnerId&quot;: &quot;mypartner&quot;,
     &quot;serviceType&quot;: &quot;asap&quot;,
@@ -642,7 +642,7 @@ The date and time object used in the request or response supports ISO8601 format
         }
     },
     &quot;packageReadyAt&quot;: &quot;2018-08-09T12:15:00.000Z&quot;,
-    &quot;dates&quot;: {
+    <code>&quot;dates&quot;: {
         &quot;2018-08-09&quot;: {
             &quot;openTime&quot;: &quot;12:00&quot;,
             &quot;closeTime&quot;: &quot;17:00&quot;
@@ -651,14 +651,14 @@ The date and time object used in the request or response supports ISO8601 format
             &quot;openTime&quot;: &quot;12:00&quot;,
             &quot;closeTime&quot;: &quot;16:00&quot;
         }
-    },
+    }</code>,
     &quot;additionalNoOfDays&quot;: 5
 }&#39;</p>
 </code></pre></details>
 </blockquote>
 <h3 id='obtain-a-calendar-of-timeslots'>Obtain a calendar of timeslots</h3>
 <p>The <code>/timeslots</code> request allows a whole calendar of timeslotId&#39;s to be obtained if the <code>&quot;dates&quot;:{...}</code> contains a starting date at least.
-<details open style="width:60%; margin: 10px; padding-left: 20px; float: left;"><summary class=xxx style="margin-bottom: 5px;">Calendar</summary><pre style="background: none; margin: 0px; padding-left: 20px;"><code class= style="width: 100% !important;"><p>// Passing a starting date and a number of additional days.
+<details open style="width:60%; margin: 10px; padding-left: 20px; float: left;"><summary class=xxx style="margin-bottom: 5px;">Calendar</summary><pre style="background: none; margin: 0px; padding-left: 20px;"><code class=json style="width: 100% !important;"><p>// Passing a starting date and a number of additional days.
 {
   ...
   &quot;dates&quot;: {
@@ -773,7 +773,7 @@ The date and time object used in the request or response supports ISO8601 format
 <li>Signup to get access to our Sandbox <a href="https://developer.onthedot.com/create">here</a>.
 
 <ul>
-<li>Create an app and subcribe to the <code>Sandbox</code> API product to obtain your <code>API Token</code>
+<li>Create an app and subcribe to the <code>Sandbox</code> API product to obtain your <code>API Bearer token</code>
 
 <ul>
 <li>Download and configure the tailored Postman collections and enviroment below to testdrive our APIs without any commitment.</li>
@@ -794,7 +794,7 @@ The date and time object used in the request or response supports ISO8601 format
 </ul>
 
 <aside class="notice">
-  <strong>POSTMAN: </strong> Postman is widely used by developers and ensures you hit the ground running.
+  <strong>POSTMAN: </strong> Postman is widely amongst developers and enables development to hit the ground running.
 </aside>
 
 <p><strong>Postman</strong> has two files: <em>collection</em> and <em>enviroment</em>. A <code>collection</code> is available for each booking type. <code>Enviroment</code> is the same for all collections and is pre-set for the <code>sandbox</code> partner/account with the seed data described <a href="#sandbox-seed-data">below.</a></p>
@@ -809,21 +809,19 @@ The date and time object used in the request or response supports ISO8601 format
 </ul>
 <h2 id='sandbox-seed-data'>Sandbox Seed Data</h2>
 <aside class="notice">
-Sandbox <code>seed data</code> below allows developers to test their integration with bookings <code>within configured SLA</code> and <code>outside configured SLA</code>.
+Sandbox <code>seed data</code> published in here allows developers to test their integration with bookings <code>within configured SLA</code> and <code>outside configured SLA</code>.
 </aside>
-
-<p>Please head to <a href="#">Seed Data</a> sections to learn what is configured for the <code>sandbox</code> account you are using.</p>
 
 <p><strong>Account</strong></p>
 
 <ul>
-<li>Sandbox seed data <strong>accountID</strong> is: <strong><code>sandbox</code></strong></li>
+<li>Sandbox has only one accound configured, the <strong>&quot;accountID&quot;</strong> is: <strong><code>sandbox</code></strong></li>
 </ul>
 
 <p><strong>Places</strong></p>
 
 <blockquote>
-<details><summary class=xxx>Expand for <code>Store</code></summary><pre><code><p>{
+<details><summary class=xxx>Expand for <code>Sandbox Place details</code></summary><pre><code class=><p>{
     &quot;partnerId&quot;: &quot;sandbox&quot;,
     &quot;placeId&quot;: &quot;sandbox-store&quot;,
     &quot;postcode&quot;: &quot;EC2A 4PH&quot;,
@@ -882,7 +880,7 @@ Sandbox <code>seed data</code> below allows developers to test their integration
 </blockquote>
 
 <ul>
-<li><p>Sandbox has 1 place configured: <code>&quot;placeId&quot;: &quot;sandbox-store&quot;</code></p>
+<li><p>Sandbox has only one place configured: <strong>&quot;placeId&quot;</strong>: <strong><code>sandbox-store</code></strong></p>
 
 <ul>
 <li>Postcode and Coordinates:
@@ -894,12 +892,14 @@ Sandbox <code>seed data</code> below allows developers to test their integration
 </ul></li>
 </ul>
 <h3 id='maxdistance'><code>maxDistance</code>:</h3>
-<p>*  Maxim allowed distance for <code>sandbox-store</code> SLAs is configured by service and vehicle type, currently set to : <strong><code>4 miles</code></strong> to enable testing of API behaviour should delivery be <code>in</code> or <code>out</code> of the account configured max routed distance.</p>
+<ul>
+<li>Maxim allowed distance for <code>sandbox-store</code> SLAs is configured by service and vehicle type, currently set to : <strong><code>4 miles</code></strong> to enable testing of API behaviour should delivery be <code>in</code> or <code>out</code> of the account configured <code>max routed</code> distance.</li>
+</ul>
 
 <p><strong>SLAs</strong></p>
 
 <ul>
-<li>Sandbox account <code>sandbox</code> had the following <code>services</code> configured in 2 zones: <code>M25</code> and <code>National</code></li>
+<li>Sandbox account <code>sandbox</code> has currently the following <code>services</code> configured in 2 UK zones: <code>M25</code> and <code>National</code></li>
 </ul>
 
 <table><thead>
@@ -917,6 +917,10 @@ Sandbox <code>seed data</code> below allows developers to test their integration
 <td><code>timeslot</code>,<code>timewindow</code>,<code>asap</code>,<code>return</code>,<code>2hour</code>,<code>3hour</code>,<code>sameday</code>,<code>2hour-later</code>,<code>4hour-later</code></td>
 </tr>
 </tbody></table>
+
+<ul>
+<li>N.B. For development select one service, e.g. <strong><code>asap</code></strong> if you like to make bookings uing the sandbox place as the pickup point . Any distance  &lt; <code>4 miles</code> should lead to a successful booking.</li>
+</ul>
 <h2 id='before-you-start'>Before you start</h2><h3 id='job-journey-type'>Job Journey Type</h3>
 <p>Each job must have a <code>&lt;order&gt;.&lt;job&gt;.metadata.journeyType</code> defined.  The valid values are:</p>
 
@@ -940,19 +944,187 @@ Sandbox <code>seed data</code> below allows developers to test their integration
 <p><strong>Note</strong>: regardless of <code>journeyType</code>, <code>collection</code> is always the pick up location, and <code>delivery</code> is always the drop off location.</p>
 </blockquote>
 <h3 id='service-type'>Service Type</h3>
-<p>A service type defines a set of pre-agreed constraints for bookings.  A new user must have the service type set up before they can create bookings.</p>
+<p>A service type defines a set of pre-agreed constraints for bookings.  A new user must use the correct service type set up in the corresponding region within the SLA before they can create bookings.</p>
 
 <ul>
 <li><p>Currently all supported service types: <code>sameday</code>, <code>asap</code>,<code>4hour</code>,<code>timeslot</code>,<code>timewindow</code>,<code>asap</code>,<code>return</code>,<code>2hour</code>,<code>3hour</code>,<code>sameday</code>,<code>2hour-later</code>,<code>4hour-later</code></p></li>
 <li><p>Sandbox service types are described in <a href="#sandbox-seed-data">seed data above</a>.</p></li>
 </ul>
 <h3 id='place'>Place</h3>
+<blockquote>
+<details><summary class=xxx>Expand for <code>Sandbox Place details</code></summary><pre><code class=><p>{
+    &quot;partnerId&quot;: &quot;sandbox&quot;,
+    &quot;placeId&quot;: &quot;sandbox-store&quot;,
+    &quot;postcode&quot;: &quot;EC2A 4PH&quot;,
+    &quot;coordinates&quot;: {
+        &quot;latitude&quot;: 51.523317,
+        &quot;longitude&quot;: -0.080965
+    },
+    &quot;address&quot;: {
+        &quot;street&quot;: [&quot;CitySprint - London Central Service Centre&quot;, &quot;58-62 Scrutton St&quot;],
+        &quot;town&quot;: &quot;Hackney&quot;,
+        &quot;state&quot;: &quot;London&quot;,
+        &quot;country&quot;: &quot;United Kingdom&quot;
+    },
+    &quot;region&quot;: &quot;M25&quot;,
+    &quot;openTime&quot;: {
+        &quot;days&quot;: {
+            &quot;Friday&quot;: {
+                &quot;openTime&quot;: &quot;00:01&quot;,
+                &quot;closeTime&quot;: &quot;23:59&quot;
+            },
+            &quot;Monday&quot;: {
+                &quot;openTime&quot;: &quot;00:01&quot;,
+                &quot;closeTime&quot;: &quot;23:59&quot;
+            },
+            &quot;Saturday&quot;: {
+                &quot;openTime&quot;: &quot;00:01&quot;,
+                &quot;closeTime&quot;: &quot;23:59&quot;
+            },
+            &quot;Sunday&quot;: {
+                &quot;openTime&quot;: &quot;00:01&quot;,
+                &quot;closeTime&quot;: &quot;23:59&quot;
+            },
+            &quot;Thursday&quot;: {
+                &quot;openTime&quot;: &quot;00:01&quot;,
+                &quot;closeTime&quot;: &quot;23:59&quot;
+            },
+            &quot;Tuesday&quot;: {
+                &quot;openTime&quot;: &quot;00:01&quot;,
+                &quot;closeTime&quot;: &quot;23:59&quot;
+            },
+            &quot;Wednesday&quot;: {
+                &quot;openTime&quot;: &quot;00:01&quot;,
+                &quot;closeTime&quot;: &quot;23:59&quot;
+            }
+        }
+    },
+    &quot;contact&quot;: {
+        &quot;name&quot;: &quot;ON THE DOT&quot;,
+        &quot;mobile&quot;: &quot;62737283728&quot;,
+        &quot;phone&quot;: &quot;7232372783&quot;,
+        &quot;email&quot;: &quot;test121@test.com&quot;
+    },
+    &quot;timezone&quot;: &quot;Europe/London&quot;
+}</p>
+</code></pre></details>
+</blockquote>
+
 <p>Each stop must contain a valid place(address), which represents a physical location.</p>
 
 <p>The user can either contact OTD to set up places for them so they can use a place ID when creating bookings, or use a valid address instead.</p>
 <h3 id='status'>Status</h3>
-<p>Both <code>order</code> and <code>job</code> have status.  They are updated with realtime events.
-<code>&quot;created&quot; &quot;cancelled&quot; &quot;offline&quot; &quot;allocated&quot; &quot;nearby_collection&quot; &quot;auto_arrived_at_collection&quot; &quot;arrived_at_collection&quot; &quot;collected&quot; &quot;nearby_delivery&quot; &quot;auto_arrived_at_delivery&quot; &quot;arrived_at_delivery&quot; &quot;delivered&quot;, &quot;at_risk&quot;, &quot;delayed&quot;</code></p>
+<p>Both <code>order</code> and <code>job</code> have status.  They are updated with realtime events via <strong><code>webhooks</code></strong>.</p>
+
+<p><code>&quot;created&quot; &quot;cancelled&quot; &quot;offline&quot; &quot;allocated&quot; &quot;nearby_collection&quot; &quot;auto_arrived_at_collection&quot; &quot;arrived_at_collection&quot; &quot;collected&quot; &quot;nearby_delivery&quot; &quot;auto_arrived_at_delivery&quot; &quot;arrived_at_delivery&quot; &quot;delivered&quot;, &quot;at_risk&quot;, &quot;delayed&quot;</code></p>
+
+<p>A webhook (also called a web callback or HTTP push API) is a way for OTD APIs to provide other applications with real-time information. A webhook delivers data to other applications as it happens, meaning you get data immediately. ... This makes webhooks much more efficient for both provider and consumer</p>
+
+<table><thead>
+<tr>
+<th>Webhook Status</th>
+<th>Meaning</th>
+<th>Friendly Status</th>
+<th>Sent via Webhooks</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>created</code></td>
+<td>The job was created.</td>
+<td>Booked</td>
+<td>√</td>
+</tr>
+<tr>
+<td><code>offline</code></td>
+<td>The job is offline (this means an internal error, please contact OTD support).</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>amended</code></td>
+<td>Boooking was amended</td>
+<td>Amended</td>
+<td>√</td>
+</tr>
+<tr>
+<td><code>allocated</code></td>
+<td>A courier has accepted the job.</td>
+<td>Allocated to Driver</td>
+<td>√</td>
+</tr>
+<tr>
+<td><code>nearby_collection</code></td>
+<td>Courier nearby collection</td>
+<td>Near By Collection</td>
+<td>√</td>
+</tr>
+<tr>
+<td><code>auto_arrived_at_collection</code></td>
+<td>Courier nearby collection</td>
+<td>Near By Collection</td>
+<td>√</td>
+</tr>
+<tr>
+<td><code>arrived_at_collection</code></td>
+<td>Courier has arrived at the collection address.</td>
+<td>Driver at the Store</td>
+<td>√</td>
+</tr>
+<tr>
+<td><code>collected</code></td>
+<td>Courier has collected the item.</td>
+<td>Parcells Collected</td>
+<td>√</td>
+</tr>
+<tr>
+<td><code>nearby_delivery</code></td>
+<td>Courier nearby delivery</td>
+<td>Near By Delivery</td>
+<td>√</td>
+</tr>
+<tr>
+<td><code>auto_arrived_at_delivery</code></td>
+<td>Courier nearby delivery</td>
+<td>Near By Delivery</td>
+<td>√</td>
+</tr>
+<tr>
+<td><code>arrived_at_delivery</code></td>
+<td>Courier has arrived at the delivery address.</td>
+<td>Driver at the Delivery</td>
+<td>√</td>
+</tr>
+<tr>
+<td><code>at_risk</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>delayed</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>delivered</code></td>
+<td>Courier has delivered the item.</td>
+<td>Delivered</td>
+<td>√</td>
+</tr>
+<tr>
+<td><code>cancelled</code></td>
+<td>The job has been cancelled (this means the whole order has been cancelled too).</td>
+<td>Cancelled</td>
+<td>√</td>
+</tr>
+<tr>
+<td><code>returned_to_depot</code></td>
+<td>Courier failed to deliver the item and it has been returned to depot.</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody></table>
 <h3 id='job-status'>Job Status</h3>
 <ul>
 <li><strong><code>Near by</code></strong> is a new status trigger when a courier is xx metres from a stop.</li>
@@ -2045,7 +2217,7 @@ POST
   -H &#39;Accept: application/json&#39; \
   -H &#39;Authorization: <code>&lt;Your API Bearer Token&gt;</code>&#39; \
   -H &#39;Content-Type: application/json&#39; \
-  -H &#39;X-Trace-Id: 812100a5-36f5-44b2-8ee6-aded527f1e8a&#39; \
+  -H &#39;X-Trace-Id: <code>&lt;your uniques GUID&gt;</code>&#39; \
   -d &#39;{
     &quot;partnerId&quot;: &quot;mypartner&quot;,
     &quot;serviceType&quot;: &quot;asap&quot;,
@@ -2070,7 +2242,7 @@ POST
         }
     },
     &quot;packageReadyAt&quot;: &quot;2018-08-09T12:15:00.000Z&quot;,
-    &quot;dates&quot;: {
+    <code>&quot;dates&quot;: {
         &quot;2018-08-09&quot;: {
             &quot;openTime&quot;: &quot;12:00&quot;,
             &quot;closeTime&quot;: &quot;17:00&quot;
@@ -2079,7 +2251,7 @@ POST
             &quot;openTime&quot;: &quot;12:00&quot;,
             &quot;closeTime&quot;: &quot;16:00&quot;
         }
-    },
+    }</code>,
     &quot;additionalNoOfDays&quot;: 5
 }&#39;</p>
 </code></pre></details>
@@ -3647,106 +3819,227 @@ presented to an end-user for selection.
 <td>Unauthorized</td>
 </tr>
 </tbody></table>
-<h1 id='webhooks'>Webhooks</h1><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"carrierCode"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"acceptancetestpartner::30019500::1"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"isoLang"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"locale"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"eventId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"eventTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-05-10T13:58:46.879Z"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"orderInfo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"orderNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30019500"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"deliveryNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test9bebf211d1d64c24ade46b2ddecba1b8"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"shipmentNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"tracking"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"trackingID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://trackmydriver-devnew.lastmilelink.technology/acceptancetestpartner::30019500?token=59Evo7T3nP1S36ipVYTRIpomqoj%2BxUJaKg5qNeWJLmQ%3D"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"pickupETA"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"deliveryETA"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-05-11T12:45:00.000Z"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"deliveryDeadline"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"deliveryComplete"</span><span class="p">:</span><span class="w"> </span><span class="s2">"N"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"deliveryStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Accepted by Driver"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"reasonCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"reasonText"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"pickup"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"storeId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"acceptanceteststore"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"pickupName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TEST CONTACT"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"pickupStreetNo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"76"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"pickupStreet"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DOCK ROAD"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"pickupDistrict"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"pickupCity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GRAYS"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"pickupState"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"pickupPostalCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RM17 6EY"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"pickupCountryCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"United Kingdom"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"pickupPhoneNo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"62737283728"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"pickupBusiness"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"pickupLat"</span><span class="p">:</span><span class="w"> </span><span class="mf">51.476936</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"pickupLong"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.342289</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"shipto"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"shiptoFirstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RAJ Updated TEST"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"shiptoLastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"shiptoStreetNo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Flat 22"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"shiptoStreet"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bell House,Wharf Road"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"shiptoDistrict"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"shiptoCity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GRAYS"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"shiptoState"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"shiptoPostalCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RM17 5WX"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"shiptoCountryCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GB"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"shiptoLat"</span><span class="p">:</span><span class="w"> </span><span class="mf">51.476216</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"shiptoLong"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.314144</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"courier"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"courierName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RAJ BEEMI"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"courierPhone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"courierEmail"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"courierLat"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"courierLong"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"courierPhotoURL"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"vehicle"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"vehilceType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"car"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"licensePlate"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"vehicleMake"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"vehicleModel"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"deliveryPOD"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"recipientName"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"customerSigURL"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"relatedItems"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-  </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"deliveredTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"createdTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-05-10T13:58:27.591Z"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"updatedTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-05-10T13:58:31.682Z"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"eta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"collection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-05-10T13:58:27.591Z"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"delivery"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-05-10T14:58:27.591Z"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<hr>
-
-<p><code>POST</code> /V2/ACCOUNTS/{ACCOUNTID}/TIMESLOTS</p>
-
-<hr>
+<h1 id='webhooks'>Webhooks</h1>
+<blockquote>
+<details><summary class=xxx>Expand for Webhook Body</summary><pre><code class=json><p>{
+  &quot;carrierCode&quot;: {
+    &quot;uuid&quot;: &quot;sandbox::30019500::1&quot;,
+    &quot;isoLang&quot;: &quot;&quot;,
+    &quot;locale&quot;: &quot;&quot;,
+    &quot;timezone&quot;: &quot;&quot;
+  },
+  &quot;event&quot;: {
+    &quot;eventId&quot;: &quot;-&quot;,
+    &quot;eventTimestamp&quot;: &quot;2019-05-10T13:58:46.879Z&quot;
+  },
+  &quot;orderInfo&quot;: {
+    &quot;orderNumber&quot;: &quot;30019500&quot;,
+    &quot;deliveryNumber&quot;: &quot;test9bebf211d1d64c24ade46b2ddecba1b8&quot;,
+    &quot;shipmentNumber&quot;: &quot;&quot;
+  },
+  &quot;tracking&quot;: {
+    &quot;trackingID&quot;: &quot;https://trackmydriver-devnew.lastmilelink.technology/acceptancetestpartner::30019500?token=59Evo7T3nP1S36ipVYTRIpomqoj%2BxUJaKg5qNeWJLmQ%3D&quot;,
+    &quot;pickupETA&quot;: &quot;-&quot;,
+    &quot;deliveryETA&quot;: &quot;2019-05-11T12:45:00.000Z&quot;,
+    &quot;deliveryDeadline&quot;: &quot;-&quot;,
+    &quot;deliveryComplete&quot;: &quot;N&quot;,
+    &quot;deliveryStatus&quot;: &quot;Accepted by Driver&quot;, //this is the friendly name
+    &quot;reasonCode&quot;: &quot;&quot;,
+    &quot;reasonText&quot;: &quot;&quot;
+  },
+  &quot;pickup&quot;: {
+    &quot;storeId&quot;: &quot;sandbox-store&quot;,
+    &quot;pickupName&quot;: &quot;TEST CONTACT&quot;,
+    &quot;pickupStreetNo&quot;: &quot;76&quot;,
+    &quot;pickupStreet&quot;: &quot;DOCK ROAD&quot;,
+    &quot;pickupDistrict&quot;: &quot;-&quot;,
+    &quot;pickupCity&quot;: &quot;GRAYS&quot;,
+    &quot;pickupState&quot;: &quot;&quot;,
+    &quot;pickupPostalCode&quot;: &quot;RM17 6EY&quot;,
+    &quot;pickupCountryCode&quot;: &quot;United Kingdom&quot;,
+    &quot;pickupPhoneNo&quot;: &quot;62737283728&quot;,
+    &quot;pickupBusiness&quot;: &quot;-&quot;,
+    &quot;pickupLat&quot;: 51.476936,
+    &quot;pickupLong&quot;: 0.342289
+  },
+  &quot;shipto&quot;: {
+    &quot;shiptoFirstName&quot;: &quot;RAJ Updated TEST&quot;,
+    &quot;shiptoLastName&quot;: &quot;&quot;,
+    &quot;shiptoStreetNo&quot;: &quot;Flat 22&quot;,
+    &quot;shiptoStreet&quot;: &quot;Bell House,Wharf Road&quot;,
+    &quot;shiptoDistrict&quot;: &quot;-&quot;,
+    &quot;shiptoCity&quot;: &quot;GRAYS&quot;,
+    &quot;shiptoState&quot;: &quot;-&quot;,
+    &quot;shiptoPostalCode&quot;: &quot;RM17 5WX&quot;,
+    &quot;shiptoCountryCode&quot;: &quot;GB&quot;,
+    &quot;shiptoLat&quot;: 51.476216,
+    &quot;shiptoLong&quot;: 0.314144
+  },
+  &quot;courier&quot;: {
+    &quot;courierName&quot;: &quot;RAJ BEEMI&quot;,
+    &quot;courierPhone&quot;: &quot;-&quot;,
+    &quot;courierEmail&quot;: &quot;&quot;,
+    &quot;courierLat&quot;: &quot;-&quot;,
+    &quot;courierLong&quot;: &quot;-&quot;,
+    &quot;courierPhotoURL&quot;: &quot;&quot;
+  },
+  &quot;vehicle&quot;: {
+    &quot;vehilceType&quot;: &quot;car&quot;,
+    &quot;licensePlate&quot;: &quot;&quot;,
+    &quot;vehicleMake&quot;: &quot;&quot;,
+    &quot;vehicleModel&quot;: &quot;&quot;
+  },
+  &quot;deliveryPOD&quot;: {
+    &quot;recipientName&quot;: &quot;&quot;,
+    &quot;customerSigURL&quot;: &quot;&quot;
+  },
+  &quot;relatedItems&quot;: {},
+  &quot;timestamp&quot;: {
+    &quot;deliveredTimestamp&quot;: &quot;&quot;,
+    &quot;createdTimestamp&quot;: &quot;2019-05-10T13:58:27.591Z&quot;,
+    &quot;updatedTimestamp&quot;: &quot;2019-05-10T13:58:31.682Z&quot;
+  },
+  &quot;eta&quot;: {
+    &quot;collection&quot;: &quot;2019-05-10T13:58:27.591Z&quot;,
+    &quot;delivery&quot;: &quot;2019-05-10T14:58:27.591Z&quot;
+  }
+}</p>
+</code></pre></details>
+</blockquote>
 
 <aside class="notice">
-<strong>Summary</strong> Get push notifcations on the endpoint of your choice
-
-<strong>Description</strong> This API returns a push messages for a range of events or exceptions
+  A webhook (also called a web callback or HTTP push API) is a way for OTD APIs to provide other applications with real-time information. A webhook delivers data to other applications as it happens, meaning you get data immediately. ... This makes webhooks much more efficient for both provider and consumer
 </aside>
+
+<details open style="width:60%; margin: 10px; padding-left: 20px; float: left;"><summary class=xxx style="margin-bottom: 5px;">Partner config: We support Headers with the `POST` request to your `ENDPOINT`</summary><pre style="background: none; margin: 0px; padding-left: 20px;"><code class=json style="width: 100% !important;"><p>&quot;status&quot;: {
+  &quot;accepted&quot;: {
+      &quot;customStatus&quot;: &quot;Accepted by Driver&quot;,
+      &quot;hooks&quot;: [
+          {
+              &quot;endpoint&quot;: &quot;<code>&lt;your endpoint or a public push bin&gt;</code>&quot;,
+              &quot;methodType&quot;: &quot;POST&quot;,
+              &quot;headers&quot;: {
+                  &quot;authorization&quot;: &quot;&quot;
+              },
+              &quot;Statuses&quot;: null
+          }
+      ]
+  }
+}</p>
+</code></pre></details>
+
+<p><strong>Table: Webhooks Events</strong></p>
+
+<table><thead>
+<tr>
+<th>Webhook Status</th>
+<th>Meaning</th>
+<th>Friendly Status</th>
+<th>Sent as <code>webhook</code></th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>created</code></td>
+<td>The job was created.</td>
+<td>Booked</td>
+<td>√</td>
+</tr>
+<tr>
+<td><code>offline</code></td>
+<td>The job is offline (this means an internal error, please contact OTD support).</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>amended</code></td>
+<td>Boooking was amended</td>
+<td>Amended</td>
+<td>√</td>
+</tr>
+<tr>
+<td><code>allocated</code></td>
+<td>A courier has accepted the job.</td>
+<td>Allocated to Driver</td>
+<td>√</td>
+</tr>
+<tr>
+<td><code>nearby_collection</code></td>
+<td>Courier nearby collection</td>
+<td>Near By Collection</td>
+<td>√</td>
+</tr>
+<tr>
+<td><code>auto_arrived_at_collection</code></td>
+<td>Courier nearby collection</td>
+<td>Near By Collection</td>
+<td>√</td>
+</tr>
+<tr>
+<td><code>arrived_at_collection</code></td>
+<td>Courier has arrived at the collection address.</td>
+<td>Driver at the Store</td>
+<td>√</td>
+</tr>
+<tr>
+<td><code>collected</code></td>
+<td>Courier has collected the item.</td>
+<td>Parcells Collected</td>
+<td>√</td>
+</tr>
+<tr>
+<td><code>nearby_delivery</code></td>
+<td>Courier nearby delivery</td>
+<td>Near By Delivery</td>
+<td>√</td>
+</tr>
+<tr>
+<td><code>auto_arrived_at_delivery</code></td>
+<td>Courier nearby delivery</td>
+<td>Near By Delivery</td>
+<td>√</td>
+</tr>
+<tr>
+<td><code>arrived_at_delivery</code></td>
+<td>Courier has arrived at the delivery address.</td>
+<td>Driver at the Delivery</td>
+<td>√</td>
+</tr>
+<tr>
+<td><code>at_risk</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>delayed</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>delivered</code></td>
+<td>Courier has delivered the item.</td>
+<td>Delivered</td>
+<td>√</td>
+</tr>
+<tr>
+<td><code>cancelled</code></td>
+<td>The job has been cancelled (this means the whole order has been cancelled too).</td>
+<td>Cancelled</td>
+<td>√</td>
+</tr>
+<tr>
+<td><code>returned_to_depot</code></td>
+<td>Courier failed to deliver the item and it has been returned to depot.</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody></table>
 <h1 id='samples'>Samples</h1>
 <!-- JavaScript -->
 
 <blockquote>
-<details><summary class=>Expand for ASAP Order</summary><pre><code><p>curl -X POST \
+<details><summary class=>Expand for ASAP Order</summary><pre><code class=><p>curl -X POST \
   https://public-api-prod.onthedot.com/booking/v2/accounts/sandbox/orders \
   -H &#39;Content-Type: application/json&#39; \
   -H &#39;authorization: <code>&lt;Your Own API Bearer Taoken&gt;</code>&#39; \
@@ -3924,8 +4217,14 @@ GET
 http://<code>{lol}</code>.com/order/<code>{parma:}</code></p>
 </blockquote>
 
+<details open style="width:60%; margin: 10px; padding-left: 20px; float: left;"><summary class=xxx style="margin-bottom: 5px;">Example</summary><pre style="background: none; margin: 0px; padding-left: 20px;"><code class=json style="width: 100% !important;"><p>int main() {
+    printf(&quot;Hello World!&quot;);
+    return 0;
+}</p>
+</code></pre></details>
+
 <blockquote>
-<details><summary class=>Expand for code pane</summary><pre><code><p>int main() {
+<details><summary class=xxx>Expand for Example</summary><pre><code class=json><p>int main() {
     printf(&quot;Hello World!&quot;);
     return 0;
 }</p>
@@ -3960,8 +4259,6 @@ http://lol.com</p>
 <p><span class="http-resp-label" id=fourx style="top: -1px; width: 30px; border: 0.1em solid;">4xx</span></p>
 </div>
 </blockquote>
-
-<p><span class="http-resp-label" id=4xx style="top: -1px; width: 30px; border: 0.1em solid;">4xx</span></p>
 
 <p><strong>Asides</strong>
 <aside class="notice">
