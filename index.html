@@ -794,14 +794,14 @@ The date and time object used in the request or response supports ISO8601 format
 </ul>
 
 <aside class="notice">
-  <strong>POSTMAN: </strong> Postman is widely amongst developers and enables development to hit the ground running.
+  <strong>POSTMAN: </strong> Postman is widely used amongst developers, enabling immediate development kick-off.
 </aside>
 
-<p><strong>Postman</strong> has two files: <em>collection</em> and <em>enviroment</em>. A <code>collection</code> is available for each booking type. <code>Enviroment</code> is the same for all collections and is pre-set for the <code>sandbox</code> partner/account with the seed data described <a href="#sandbox-seed-data">below.</a></p>
+<p><strong>Postman</strong> consists of two files: <em>collection</em> and <em>enviroment</em>. The <code>collection</code> has all the APIs request.  The <code>Enviroment</code> is pre-set to <code>sandbox</code> partner/account with the seed data described <a href="#sandbox-seed-data">below.</a></p>
 
 <ul>
-<li>Click on <a href="postman/OTD-Sandbox-Prod.postman_collection.json"><img src="images/PostmanCollection.png" alt="Postman" /></a> to download our Postman API Collection.</li>
-<li>Click on <a href="postman/OTD-Sandbox-Prod.postman_environment.json"><img src="images/PostmanEnv.png" alt="Postman" /></a> to download our Postman sandbox enviroment
+<li>Click <a href="/postman/OTD-Sandbox-Prod.postman_collection.json" download><img src="images/PostmanCollection.png"></a> to download <code>Postman Collection</code>.</li>
+<li><p>Click <a href="/postman/OTD-Sandbox-Prod.postman_environment.json" download><img src="images/PostmanEnv.png"></a> to download <code>Postman Enviroment</code>.</p>
 
 <ul>
 <li>N.B. Postman enviroment requires your own <code>API Bearer Token</code> which can be obtained by following the steps <a href="#signup-to-otd-sandbox">above.</a></li>
@@ -922,6 +922,10 @@ Sandbox <code>seed data</code> published in here allows developers to test their
 <li>N.B. For development select one service, e.g. <strong><code>asap</code></strong> if you like to make bookings uing the sandbox place as the pickup point . Any distance  &lt; <code>4 miles</code> should lead to a successful booking.</li>
 </ul>
 <h2 id='before-you-start'>Before you start</h2><h3 id='job-journey-type'>Job Journey Type</h3>
+<aside class="note">
+Regardless of <code>journeyType</code>, <code>collection</code> is always the pick up location, and <code>delivery</code> is always the drop off location.
+</aside>
+
 <p>Each job must have a <code>&lt;order&gt;.&lt;job&gt;.metadata.journeyType</code> defined.  The valid values are:</p>
 
 <table><thead>
@@ -941,7 +945,6 @@ Sandbox <code>seed data</code> published in here allows developers to test their
 </tbody></table>
 
 <blockquote>
-<p><strong>Note</strong>: regardless of <code>journeyType</code>, <code>collection</code> is always the pick up location, and <code>delivery</code> is always the drop off location.</p>
 </blockquote>
 <h3 id='service-type'>Service Type</h3>
 <p>A service type defines a set of pre-agreed constraints for bookings.  A new user must use the correct service type set up in the corresponding region within the SLA before they can create bookings.</p>
