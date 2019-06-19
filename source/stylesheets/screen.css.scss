@@ -584,7 +584,7 @@ a {
         color: $aside-success-bord-left;
     }
     aside.path:before {
-        @extend %icon-path-sign;
+        @extend %icon-info-sign;
         color: $aside-path-bord-left;
     }
     .search-highlight {
@@ -732,14 +732,15 @@ details pre {
     display: inline-block;
     position: relative;
     //top: -2px;
-    padding: 2px 3px;
-    //border-left: 4px solid;//border-left-color: #F1D32F;
+    padding: 4px;
+    // border-left: 4px solid;
+    // border-left-color: #F1D32F;
     margin-right: 4px;
     text-align: center;
     border-radius: 2px;
     line-height: 1;
     font-weight: 600;
-    font-size: 12px;
+    font-size: 11px;
     opacity: 0.8;
     background-color: #999;
     color: #fff;
