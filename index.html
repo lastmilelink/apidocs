@@ -943,9 +943,6 @@ Regardless of <code>journeyType</code>, <code>collection</code> is always the pi
 <td>The job is a return of some products (usually from home to store)</td>
 </tr>
 </tbody></table>
-
-<blockquote>
-</blockquote>
 <h3 id='service-type'>Service Type</h3>
 <p>A service type defines a set of pre-agreed constraints for bookings.  A new user must use the correct service type set up in the corresponding region within the SLA before they can create bookings.</p>
 
@@ -1129,66 +1126,70 @@ Regardless of <code>journeyType</code>, <code>collection</code> is always the pi
 </tr>
 </tbody></table>
 <h3 id='job-status'>Job Status</h3>
+<blockquote>
+<p>Status representing a job execution state.</p>
+</blockquote>
+
 <ul>
 <li><strong><code>Near by</code></strong> is a new status trigger when a courier is xx metres from a stop.</li>
 </ul>
 
 <blockquote>
-<p>Status representing a job execution state.
-<details><summary class="">Expand for job state</summary><pre><code><pre class="highlight json tab-json"><code><span class="s2">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-  </span><span class="s2">&quot;progressStatus&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;allocated&quot;</span><span class="p">,</span><span class="w">
-    </span><span class="s2">&quot;updatedAt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019-01-02T13:18:53.087Z&quot;</span><span class="w">
+<details><summary class=xxx>Expand for job status object</summary><pre><code class=json><pre class="highlight json tab-json"><code><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="s2">"progressStatus"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"allocated"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-02T13:18:53.087Z"</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">&quot;courierStatus&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">&quot;location&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">&quot;longitude&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1701</span><span class="p">,</span><span class="w">
-      </span><span class="s2">&quot;latitude&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">51.5701</span><span class="w">
+  </span><span class="s2">"courierStatus"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"location"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1701</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">51.5701</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">&quot;updatedAt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019-01-02T13:18:53.087Z&quot;</span><span class="w">
+    </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-02T13:18:53.087Z"</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">&quot;incidents&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="s2">"incidents"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;85ad3dd6-05d3-4023-b1e6-74042b7ff138&quot;</span><span class="p">,</span><span class="w">
-      </span><span class="s2">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;created&quot;</span><span class="p">,</span><span class="w">
-      </span><span class="s2">&quot;reason&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1B&quot;</span><span class="p">,</span><span class="w">
-        </span><span class="s2">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Partner Cancellation&quot;</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"85ad3dd6-05d3-4023-b1e6-74042b7ff138"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"created"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"reason"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1B"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Partner Cancellation"</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">&quot;impact&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;7H&quot;</span><span class="p">,</span><span class="w">
-        </span><span class="s2">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Unable to Fulfil Order&quot;</span><span class="w">
+      </span><span class="s2">"impact"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7H"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unable to Fulfil Order"</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">&quot;createdAt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019-01-02T13:18:53.087Z&quot;</span><span class="p">,</span><span class="w">
-      </span><span class="s2">&quot;updatedAt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019-01-02T13:18:53.087Z&quot;</span><span class="w">
+      </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-02T13:18:53.087Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-02T13:18:53.087Z"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></code></pre></details></p>
+</span></code></pre></code></pre></details>
 </blockquote>
 
-<p>Here is an example job status object.</p>
-
 <ul>
-<li>Job status is further divided into the following types.</li>
+<li>Here is an example job status object.</li>
 </ul>
 <h3 id='progress-status'>Progress Status</h3>
-<p>Example:
-<code>
-&quot;progressStatus&quot;: {
+<p>Example:</p>
+
+<details open style="width:60%; margin: 10px; padding-left: 20px; float: left;"><summary class=xxx style="margin-bottom: 5px;">Progress Status object</summary><pre style="background: none; margin: 0px; padding-left: 20px;"><code class=json style="width: 100% !important;"><p>&quot;progressStatus&quot;: {
   &quot;status&quot;: &quot;allocated&quot;,
   &quot;updatedAt&quot;: &quot;2019-01-02T13:18:53.087Z&quot;
-}
-</code></p>
+}</p>
+</code></pre></details>
 
-<p>Our platform has the following standard event codes which can be sent via webhooks <code>as is</code> or be replaced with <code>custom status</code> which can be consumed by the integrating party. The configuration will be specific to the partner. Sandbox is configured to send out the <code>custom status</code>
-* <code>N.B.</code>: Within all booking request, you will always need to use the <code>OTD Status</code></p>
+<p>Our platform has the following <code>standard event codes</code> which can be sent via webhooks <code>as is</code> or have the friendly <code>custom status</code> set with 3rd party codes from the integrating party. The configuration will be specific to the each partner. Sandbox is configured to send out the <code>custom status</code></p>
+
+<aside class="warning">
+<strong>N.B.</strong>: Within all booking request, you will always need to use the OTD <code>standard event codes</code>
+</aside>
 
 <table><thead>
 <tr>
-<th>OTD Status</th>
+<th>OTD Standard event codes</th>
 <th>Meaning</th>
-<th>Custom Status</th>
+<th>Friendly Status</th>
 <th>Sent via Webhooks</th>
 </tr>
 </thead><tbody>
@@ -1199,13 +1200,31 @@ Regardless of <code>journeyType</code>, <code>collection</code> is always the pi
 <td>√</td>
 </tr>
 <tr>
+<td><code>offline</code></td>
+<td>The job is offline (this means an internal error, please contact OTD support).</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>amended</code></td>
+<td>Boooking was amended</td>
+<td>Amended</td>
+<td>√</td>
+</tr>
+<tr>
 <td><code>allocated</code></td>
 <td>A courier has accepted the job.</td>
 <td>Allocated to Driver</td>
 <td>√</td>
 </tr>
 <tr>
-<td><code>autoarrivedat-collection</code></td>
+<td><code>nearby_collection</code></td>
+<td>Courier nearby collection</td>
+<td>Near By Collection</td>
+<td>√</td>
+</tr>
+<tr>
+<td><code>auto_arrived_at_collection</code></td>
 <td>Courier nearby collection</td>
 <td>Near By Collection</td>
 <td>√</td>
@@ -1223,7 +1242,13 @@ Regardless of <code>journeyType</code>, <code>collection</code> is always the pi
 <td>√</td>
 </tr>
 <tr>
-<td><code>autoarrivedat-delivery</code></td>
+<td><code>nearby_delivery</code></td>
+<td>Courier nearby delivery</td>
+<td>Near By Delivery</td>
+<td>√</td>
+</tr>
+<tr>
+<td><code>auto_arrived_at_delivery</code></td>
 <td>Courier nearby delivery</td>
 <td>Near By Delivery</td>
 <td>√</td>
@@ -1233,6 +1258,18 @@ Regardless of <code>journeyType</code>, <code>collection</code> is always the pi
 <td>Courier has arrived at the delivery address.</td>
 <td>Driver at the Delivery</td>
 <td>√</td>
+</tr>
+<tr>
+<td><code>at_risk</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>delayed</code></td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
 <tr>
 <td><code>delivered</code></td>
@@ -1247,20 +1284,8 @@ Regardless of <code>journeyType</code>, <code>collection</code> is always the pi
 <td>√</td>
 </tr>
 <tr>
-<td><code>amended</code></td>
-<td>Boooking was amended</td>
-<td>Amended</td>
-<td>√</td>
-</tr>
-<tr>
 <td><code>returned_to_depot</code></td>
 <td>Courier failed to deliver the item and it has been returned to depot.</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr>
-<td><code>offline</code></td>
-<td>The job is offline (this means an internal error, please contact OTD support).</td>
 <td>-</td>
 <td>-</td>
 </tr>
@@ -1330,19 +1355,28 @@ Regardless of <code>journeyType</code>, <code>collection</code> is always the pi
 </tbody></table>
 <h3 id='courier-status'>Courier Status</h3>
 <p>Example:
-<code>
-&quot;courierStatus&quot;: {
+<details open style="width:60%; margin: 10px; padding-left: 20px; float: left;"><summary class=xxx style="margin-bottom: 5px;">Courier Status</summary><pre style="background: none; margin: 0px; padding-left: 20px;"><code class=json style="width: 100% !important;"><p>&quot;courierStatus&quot;: {
   &quot;location&quot;: {
     &quot;longitude&quot;: 0.1701,
     &quot;latitude&quot;: 51.5701
   },
   &quot;updatedAt&quot;: &quot;2019-01-02T13:18:53.087Z&quot;
-}
-</code>
-* This gives the realtime courier location data.</p>
+}</p>
+</code></pre></details></p>
+
+<ul>
+<li>This gives the realtime courier location data.</li>
+</ul>
 <h1 id='booking-service-apis-v2-0'>Booking Service APIs V2.0</h1><h2 id='create-an-order'>Create an order</h2>
 <blockquote>
-<details><summary class="">Expand for request</summary><pre><code><p>curl -X POST \
+<p><span class="http-verb-label" id=post style="top: -1px; width: 55px; border: 0.1em solid;">
+POST
+</span>
+see example <code>request</code> below ...</p>
+</blockquote>
+
+<blockquote>
+<details><summary class=xxx>Expand for Asap/Express Request</summary><pre><code class=bash><p>curl -X POST \
   https://public-api-prod.onthedot.com/booking/v2/accounts/sandbox/orders \
   -H &#39;Content-Type: application/json&#39; \
   -H &#39;authorization: <code>&lt;Your Own API Bearer Taoken&gt;</code>&#39; \
@@ -1511,13 +1545,10 @@ Regardless of <code>journeyType</code>, <code>collection</code> is always the pi
     ]
 }&#39;</p>
 </code></pre></details>
+</blockquote>
 
-<div class="code-block-no-wrap-header">Http reponse codes :<p><span class="http-resp-label" id= style="top: -1px; width: 30px; border: 0.1em solid;">201</span></p>
-<p><span class="http-resp-label" id= style="top: -1px; width: 30px; border: 0.1em solid;">4xx</span></p>
-<p><span class="http-resp-label" id= style="top: -1px; width: 30px; border: 0.1em solid;">5xx</span></p>
-</div>
-
-<details><summary class="">Expand for response</summary><pre><code><p>{
+<blockquote>
+<details><summary class=xxx>Expand for Response body</summary><pre><code class=json><p>{
     &quot;id&quot;: &quot;1559211073&quot;,
     &quot;metadata&quot;: {
         &quot;externalAccountId&quot;: &quot;W99969&quot;,
@@ -1721,11 +1752,18 @@ Regardless of <code>journeyType</code>, <code>collection</code> is always the pi
 </code></pre></details>
 </blockquote>
 
+<blockquote>
+<div class="code-block-no-wrap-header">Response http codes :<p><span class="http-resp-label" id=twox style="top: -1px; width: 30px; border: 0.1em solid;">201</span></p>
+<p><span class="http-resp-label" id=fourx style="top: -1px; width: 30px; border: 0.1em solid;">4xx</span></p>
+<p><span class="http-resp-label" id=fivex style="top: -1px; width: 30px; border: 0.1em solid;">5xx</span></p>
+</div>
+</blockquote>
+
 <aside class="path">
-  <strong>Path:</strong><p><span class="http-verb-label" id= style="top: -1px; width: 55px; border: 0.1em solid;">
+  <strong>Path:</strong><p><span class="http-verb-label" id=post style="top: -1px; width: 55px; border: 0.1em solid;">
 POST
 </span>
-{{host}}/<code>{{bookingService}}/v2/accounts/{{accountId}}/orders</code></p>
+<code>{{host}}</code>/<code>{{bookingService}}</code>/v2/accounts/<code>{{accountId}}</code>/orders</p>
 
 </aside>
 
@@ -1734,24 +1772,62 @@ POST
 <ul>
 <li>Consideration must be given to the following attributes shown left in <code>metaData</code>, <code>customData</code> and <code>requires</code> sections of request body depending on the agreed operations flow with us.</li>
 </ul>
+<h4 id='metadata'>* <strong><code>metadata</code></strong></h4>
+<details open style="width:60%; margin: 10px; padding-left: 20px; float: left;"><summary class=xxx style="margin-bottom: 5px;">metaData</summary><pre style="background: none; margin: 0px; padding-left: 20px;"><code class=json style="width: 100% !important;"><p>&quot;metadata&quot;: {
+  &quot;externalAccountId&quot;: &quot;W99969&quot;,
+  &quot;clientRefId&quot;: &quot;CLIENT-REF-1559211073&quot;,
+  &quot;sector&quot;: &quot;Ent Retail&quot;,
+  &quot;vehicleType&quot;: &quot;car&quot;,
+  &quot;serviceType&quot;: &quot;asap&quot;,
+  &quot;trackingUrl&quot;: &quot;https://trackmydriver.lastmilelink.eu/sandbox::1559211073?token=93uQp9OZgBoW6%2FgYQd2%2FfADCzpdmHbYtwCQ0PouEWUE%3D&quot;,
+  &quot;isTest&quot;: true
+}</p>
+</code></pre></details>
+<h4 id='customdata'>* <strong><code>customData</code></strong></h4>
+<details open style="width:60%; margin: 10px; padding-left: 20px; float: left;"><summary class=xxx style="margin-bottom: 5px;">customData</summary><pre style="background: none; margin: 0px; padding-left: 20px;"><code class=json style="width: 100% !important;"><p>&quot;customData&quot;: {
+  &quot;caller&quot;: &quot;Booking&quot;,
+  &quot;reference_1&quot;: &quot;kingsman@kingsman.com&quot;,
+  &quot;reference_2&quot;: &quot;Kingsman&quot;
+}</p>
+</code></pre></details>
 <h3 id='requires-section'>Requires section</h3>
 <ul>
-<li>Depending on the agreed flow , the requires section  of the booking request can contain the following <code>optional</code> values. Passing any of those will ahve an impact on the job flow and which actions must happen at stops:</li>
+<li>Depending on the agreed flow , the requires section  of the booking request can contain the following <code>optional</code> values: <code>&quot;ageVerification&quot;,&quot;collectionSignOff&quot;,&quot;deliverySignOff&quot;</code>. Passing any of those will have an impact on the job flow and which actions must happen at pick up and drop off.</li>
 </ul>
-
-<p><code>
-      &quot;requires&quot;: [
-                &quot;ageVerification&quot;,
-                &quot;collectionSignOff&quot;,
-                &quot;deliverySignOff&quot;
-      ],
-</code></p>
+<h4 id='requires'>* <strong><code>requires</code></strong></h4>
+<details open style="width:60%; margin: 10px; padding-left: 20px; float: left;"><summary class=xxx style="margin-bottom: 5px;">requires</summary><pre style="background: none; margin: 0px; padding-left: 20px;"><code class=json style="width: 100% !important;"><p>&quot;requires&quot;: [
+  &quot;ageVerification&quot;,
+  &quot;collectionSignOff&quot;,
+  &quot;deliverySignOff&quot;
+]</p>
+</code></pre></details>
 
 <ul>
-<li><code>N.B.</code>: &quot;ageVerification&quot; is required if your order has items requiring us perform age validation, commonly reffered as &quot;Think25&quot; or &quot;Challenge25&quot;.</li>
+<li><code>N.B.</code>: <code>&quot;ageVerification&quot;</code> is required if your order has items requiring us perform age validation, commonly reffered as <code>&quot;Think25&quot; or &quot;Challenge25&quot;</code>.</li>
 </ul>
+<h3 id='booking-jobs-timeslot'>booking.jobs.timeslot</h3>
+<p>There are 2 ways to pass in the collection and delivery timestamps within a booking request:</p>
+
+<p><strong>1)</strong> By requesting a <code>timeslotId</code> from our platform</p>
+<h4 id='timeslotid'>* <strong><code>timeslotId</code></strong></h4>
+<details open style="width:60%; margin: 10px; padding-left: 20px; float: left;"><summary class=xxx style="margin-bottom: 5px;">timeslotId</summary><pre style="background: none; margin: 0px; padding-left: 20px;"><code class=json style="width: 100% !important;"><p>&quot;timeslot&quot;: { &quot;id&quot;: &quot;NGM1M2E5OTYtYWJmYS00MDAyLWFjMzctNzBlZThiOWIxM2E3fnpQVzZvWVhQaXdsOEJ5RHVrWjRQVjZITEJqcEdHcX5FQzJBKzRQSH5ERTExKzBBQX4xNTU5MTM4Mjc5fjE1NTkxMzg4MjB+MTIwfjkwfjE5Mi4xMzYwMDB+YXNhcH5mYWxzZX5mYWxzZQ==&quot; }</p>
+</code></pre></details>
+
+<p><strong>2)</strong> By passing explicit <code>timeslot.collection</code> and <code>timeslot.delivery</code> values</p>
+<h4 id='timeslotid-2'>* <strong><code>timeslotId</code></strong></h4>
+<details open style="width:60%; margin: 10px; padding-left: 20px; float: left;"><summary class=xxx style="margin-bottom: 5px;">timeslotId</summary><pre style="background: none; margin: 0px; padding-left: 20px;"><code class=json style="width: 100% !important;"><p>&quot;timeslot&quot;: {
+  &quot;collection&quot;: {
+      &quot;from&quot;: &quot;2019-05-30T11:00:00.000Z&quot;,
+      &quot;to&quot;: &quot;2019-05-30T12:00:00.000Z&quot;
+  },
+  &quot;delivery&quot;: {
+      &quot;from&quot;: &quot;2019-05-30T13:00:00.000Z&quot;,
+      &quot;to&quot;: &quot;2019-05-30T14:00:00.000Z&quot;
+  }
+}</p>
+</code></pre></details>
 <h3 id='booking-instructions'>Booking Instructions</h3>
-<p>Our platform can courier instructions at various levels:</p>
+<p>Our platform can accept and pass courier instructions at various levels within a booking request:</p>
 
 <ol>
 <li>Booking instructions</li>
@@ -1762,6 +1838,35 @@ POST
 <p>This API allows the caller to set all the job, stops, notifcations, timeslots, stops, items... with their own values.</p>
 
 <p>If the caller sends only timeslot ID or place ID, then the relevant services will be called to get the details.</p>
+<h3 id='booking-stops-places'>booking.stops.places</h3>
+<p>Similar to the the timeslot , booking request accepts explicit or encoded ones via a <code>placeId</code>. The 2 ways are illustrated below:</p>
+
+<p><strong>1)</strong> By requesting a <code>timeslotId</code> from our platform</p>
+<h4 id='placeid'>* <strong><code>placeId</code></strong></h4>
+<details open style="width:60%; margin: 10px; padding-left: 20px; float: left;"><summary class=xxx style="margin-bottom: 5px;">placeId</summary><pre style="background: none; margin: 0px; padding-left: 20px;"><code class=json style="width: 100% !important;"><p>&quot;place&quot;: {
+  &quot;id&quot;: &quot;sandbox-store&quot;
+}</p>
+</code></pre></details>
+
+<p><strong>2)</strong> By passing explicit passing the full address via  the `booking.stop.places values.
+<aside class="warning">
+When passing the place address explicitly , there is no need to pass the <code>location:
+$ref: &#39;#/definitions/Coordinates&#39;</code> object you will find in our Swagger API definition.
+</aside></p>
+<h4 id='place-explicit-address'>* <strong><code>place explicit address</code></strong></h4>
+<details open style="width:60%; margin: 10px; padding-left: 20px; float: left;"><summary class=xxx style="margin-bottom: 5px;">place full address</summary><pre style="background: none; margin: 0px; padding-left: 20px;"><code class=json style="width: 100% !important;"><p>&quot;place&quot;: {
+                &quot;address&quot;: {
+                    &quot;country&quot;: &quot;GBR&quot;,
+                    &quot;town&quot;: &quot;London&quot;,
+                    &quot;streets&quot;: [
+                        &quot;FLAT 111&quot;,
+                        &quot;ICON BUILDING&quot;
+                    ],
+                    &quot;postcode&quot;: &quot;IG1 2FJ&quot;,
+                    &quot;companyName&quot;: &quot;SANDBOX-OTD-COMPANY&quot;
+                }
+            }</p>
+</code></pre></details>
 
 <p><strong>Parameters</strong></p>
 
@@ -1817,12 +1922,14 @@ POST
 </tbody></table>
 <h2 id='get-it-now'>Get it now</h2>
 <blockquote>
-<p><span class="http-verb-label" id= style="top: -1px; width: 55px; border: 0.1em solid;">
+<p><span class="http-verb-label" id=post style="top: -1px; width: 55px; border: 0.1em solid;">
 POST
 </span>
-{{host}}/{{bookingService}}/v2/accounts/{{accountId}}/orders</p>
+see example <code>request</code> below ...</p>
+</blockquote>
 
-<details><summary class="">Expand for request</summary><pre><code><p>curl -X POST \
+<blockquote>
+<details><summary class=xxx>Expand for Asap/Express Request</summary><pre><code class=bash><p>curl -X POST \
   https://public-api-prod.onthedot.com/booking/v2/accounts/sandbox/orders \
   -H &#39;Content-Type: application/json&#39; \
   -H &#39;authorization: <code>&lt;Your Own API Bearer Taoken&gt;</code>&#39; \
@@ -1991,13 +2098,10 @@ POST
     ]
 }&#39;</p>
 </code></pre></details>
+</blockquote>
 
-<div class="code-block-no-wrap-header">Http reponse codes :<p><span class="http-resp-label" id= style="top: -1px; width: 30px; border: 0.1em solid;">201</span></p>
-<p><span class="http-resp-label" id= style="top: -1px; width: 30px; border: 0.1em solid;">4xx</span></p>
-<p><span class="http-resp-label" id= style="top: -1px; width: 30px; border: 0.1em solid;">5xx</span></p>
-</div>
-
-<details><summary class="">Expand for response</summary><pre><code><p>{
+<blockquote>
+<details><summary class=xxx>Expand for Response body</summary><pre><code class=json><p>{
     &quot;id&quot;: &quot;1559211073&quot;,
     &quot;metadata&quot;: {
         &quot;externalAccountId&quot;: &quot;W99969&quot;,
@@ -2201,70 +2305,38 @@ POST
 </code></pre></details>
 </blockquote>
 
+<blockquote>
+<div class="code-block-no-wrap-header">Response http codes :<p><span class="http-resp-label" id=twox style="top: -1px; width: 30px; border: 0.1em solid;">201</span></p>
+<p><span class="http-resp-label" id=fourx style="top: -1px; width: 30px; border: 0.1em solid;">4xx</span></p>
+<p><span class="http-resp-label" id=fivex style="top: -1px; width: 30px; border: 0.1em solid;">5xx</span></p>
+</div>
+</blockquote>
+
+<aside class="path">
+  <strong>Path:</strong><p><span class="http-verb-label" id=post style="top: -1px; width: 55px; border: 0.1em solid;">
+POST
+</span>
+<code>{{host}}</code>/<code>{{bookingService}}</code>/v2/accounts/<code>{{accountId}}</code>/orders</p>
+
+</aside>
+
 <aside class="notice">
-The <code>code</code> panel exemplifies how to send an <code>Express/ASAP</code> request
+The request example on the right hand side <code>code pane</code> will create an ASAP/Express booking.
 </aside>
 
 <p><img src="images/OTD_H_GITN.png" alt="Express/ASAP" /></p>
 
-<p>Create booking requests for an Express/ASAP delivery for same day or in the future.</p>
+<p>Create booking requests for an Express/ASAP delivery for same day having an <code>all in window</code> to pick and deliver within or the first possible <code>delivery timeslot</code> after the good are ready to collect .</p>
 <h2 id='get-it-later'>Get it later</h2>
 <blockquote>
-<p><span class="http-verb-label" id= style="top: -1px; width: 55px; border: 0.1em solid;">
+<p><span class="http-verb-label" id=post style="top: -1px; width: 55px; border: 0.1em solid;">
 POST
 </span>
-{{host}}/{{bookingService}}/v2/accounts/{{accountId}}/timeslots</p>
+see example <code>request</code> below ...</p>
+</blockquote>
 
-<details><summary class="">Expand for Timeslot request</summary><pre><code><p>curl -X POST \
-  https://public-api-prod.onthedot.com/booking/v2/accounts/sandbox/timeslots \
-  -H &#39;Accept: application/json&#39; \
-  -H &#39;Authorization: <code>&lt;Your API Bearer Token&gt;</code>&#39; \
-  -H &#39;Content-Type: application/json&#39; \
-  -H &#39;X-Trace-Id: <code>&lt;your uniques GUID&gt;</code>&#39; \
-  -d &#39;{
-    &quot;partnerId&quot;: &quot;mypartner&quot;,
-    &quot;serviceType&quot;: &quot;asap&quot;,
-    &quot;collection&quot;: {
-        &quot;id&quot;: &quot;myplace&quot;,
-        &quot;address&quot;: {
-            &quot;country&quot;: &quot;GBR&quot;,
-            &quot;town&quot;: &quot;London&quot;,
-            &quot;streets&quot;: [&quot;Royal Opera House&quot;, &quot;Bow Street&quot;],
-            &quot;postcode&quot;: &quot;WC2E 9DD&quot;,
-            &quot;companyName&quot;: &quot;mycompany&quot;
-        }
-    },
-    &quot;delivery&quot;: {
-        &quot;id&quot;: &quot;myplace&quot;,
-        &quot;address&quot;: {
-            &quot;country&quot;: &quot;GBR&quot;,
-            &quot;town&quot;: &quot;London&quot;,
-            &quot;streets&quot;: [&quot;Royal Opera House&quot;, &quot;Bow Street&quot;],
-            &quot;postcode&quot;: &quot;WC2E 9DD&quot;,
-            &quot;companyName&quot;: &quot;mycompany&quot;
-        }
-    },
-    &quot;packageReadyAt&quot;: &quot;2018-08-09T12:15:00.000Z&quot;,
-    <code>&quot;dates&quot;: {
-        &quot;2018-08-09&quot;: {
-            &quot;openTime&quot;: &quot;12:00&quot;,
-            &quot;closeTime&quot;: &quot;17:00&quot;
-        },
-        &quot;2018-08-10&quot;: {
-            &quot;openTime&quot;: &quot;12:00&quot;,
-            &quot;closeTime&quot;: &quot;16:00&quot;
-        }
-    }</code>,
-    &quot;additionalNoOfDays&quot;: 5
-}&#39;</p>
-</code></pre></details>
-
-<p><span class="http-verb-label" id= style="top: -1px; width: 55px; border: 0.1em solid;">
-POST
-</span>
-{{host}}/{{bookingService}}/v2/accounts/{{accountId}}/orders</p>
-
-<details><summary class="">Expand for Booking request</summary><pre><code><p>curl -X POST \
+<blockquote>
+<details><summary class=xxx>Expand for Scheduled Request</summary><pre><code class=bash><p>curl -X POST \
   https://public-api-prod.onthedot.com/booking/v2/accounts/sandbox/orders \
   -H &#39;authorization: <code>&lt;Your API Bearer Token&gt;</code>&#39; \
   -H &#39;cache-control: no-cache&#39; \
@@ -2421,13 +2493,10 @@ POST
     ]
 }&#39;</p>
 </code></pre></details>
+</blockquote>
 
-<div class="code-block-no-wrap-header">Http reponse codes :<p><span class="http-resp-label" id= style="top: -1px; width: 30px; border: 0.1em solid;">201</span></p>
-<p><span class="http-resp-label" id= style="top: -1px; width: 30px; border: 0.1em solid;">4xx</span></p>
-<p><span class="http-resp-label" id= style="top: -1px; width: 30px; border: 0.1em solid;">5xx</span></p>
-</div>
-
-<details><summary class="">Expand for response</summary><pre><code><p>{
+<blockquote>
+<details><summary class=xxx>Expand for Response body</summary><pre><code class=json><p>{
     &quot;id&quot;: &quot;1559212481&quot;,
     &quot;metadata&quot;: {
         &quot;externalAccountId&quot;: &quot;W99969&quot;,
@@ -2629,8 +2698,23 @@ POST
 </code></pre></details>
 </blockquote>
 
+<blockquote>
+<div class="code-block-no-wrap-header">Response http codes :<p><span class="http-resp-label" id=twox style="top: -1px; width: 30px; border: 0.1em solid;">201</span></p>
+<p><span class="http-resp-label" id=fourx style="top: -1px; width: 30px; border: 0.1em solid;">4xx</span></p>
+<p><span class="http-resp-label" id=fivex style="top: -1px; width: 30px; border: 0.1em solid;">5xx</span></p>
+</div>
+</blockquote>
+
+<aside class="path">
+  <strong>Path:</strong><p><span class="http-verb-label" id=post style="top: -1px; width: 55px; border: 0.1em solid;">
+POST
+</span>
+<code>{{host}}</code>/<code>{{bookingService}}</code>/v2/accounts/<code>{{accountId}}</code>/orders</p>
+
+</aside>
+
 <aside class="notice">
-The request in the <code>code pane</code> will create an order scheduled for later same day. You can create order for a future date.
+The request example on the right hand side <code>code pane</code> will create a scheduled booking for later same day. You can also create schedule bookings for a future date(s).
 </aside>
 
 <p><img src="images/OTD_H_GITL.png" alt="Scheduled" /></p>
@@ -2639,34 +2723,41 @@ The request in the <code>code pane</code> will create an order scheduled for lat
 
 <ol>
 <li><p>First you will have to call the <code>timeslot</code> service to get a range of slots based on the SLA configured for the given service.</p></li>
-<li><p>Select a suitable slot and use it within the booking request timeslot object: <code>&quot;timeslot&quot;: {
-&quot;id&quot;: &quot;NGM1M2E5OTYtYWJmYS00MDAyLWFjMzctNzBlZThiOWIxM2E3fnpQVzZvWVhQaXdsOEJ5RHVrWjRQVjZITEJqcEdHcX5FQzJBKzRQSH5ERTExKzBBQX4xNTU5MTM4Mjc5fjE1NTkxMzg4MjB+MTIwfjkwfjE5Mi4xMzYwMDB+YXNhcH5mYWxzZX5mYWxzZQ==&quot;
-}</code></p></li>
+<li><p>Select a suitable slot and use it within the booking request timeslot object: `</p></li>
 </ol>
+<h4 id='timeslotid-3'>* <strong><code>timeslotId</code></strong></h4>
+<details open style="width:60%; margin: 10px; padding-left: 20px; float: left;"><summary class=xxx style="margin-bottom: 5px;">timeslotId</summary><pre style="background: none; margin: 0px; padding-left: 20px;"><code class=json style="width: 100% !important;"><p>&quot;timeslot&quot;: { &quot;id&quot;: &quot;NGM1M2E5OTYtYWJmYS00MDAyLWFjMzctNzBlZThiOWIxM2E3fnpQVzZvWVhQaXdsOEJ5RHVrWjRQVjZITEJqcEdHcX5FQzJBKzRQSH5ERTExKzBBQX4xNTU5MTM4Mjc5fjE1NTkxMzg4MjB+MTIwfjkwfjE5Mi4xMzYwMDB+YXNhcH5mYWxzZX5mYWxzZQ==&quot; }</p>
+</code></pre></details>
+
+<p><img src="images/API-Docs.png" alt="Sequence Diagram" /></p>
 <h2 id='returns'>Returns</h2>
 <blockquote>
-<p><span class="http-verb-label" id= style="top: -1px; width: 55px; border: 0.1em solid;">
+<p><span class="http-verb-label" id=post style="top: -1px; width: 55px; border: 0.1em solid;">
 POST
 </span>
-{{host}}/{{bookingService}}/v2/accounts/{{accountId}}/orders</p>
+see example <code>request</code> below ...</p>
+</blockquote>
 
-<details><summary class="">Expand for request</summary><pre><code><p>curl -X POST \
+<blockquote>
+<details><summary class=xxx>Expand for Return</summary><pre><code class=bash><p>curl -X POST \
   https://public-api-prod.onthedot.com/booking/v2/accounts/sandbox/orders \
   -H &#39;Content-Type: application/json&#39; \
-  -H &#39;authorization: <code>&lt;Your API Bearer Token &gt;</code>&#39; \
+  -H &#39;authorization: <code>&lt;Your Own API Bearer Taoken&gt;</code>&#39; \
   -H &#39;cache-control: no-cache&#39; \
-  -H &#39;x-trace-id: ae7adc98-82e2-41ec-b215-79717cf722ac&#39; \
+  -H &#39;x-trace-id: ad095cc0-6c52-491a-a2cf-a3408c801a55&#39; \
   -d &#39;{
-    &quot;id&quot;: &quot;1559213330&quot;,
+    &quot;id&quot;: &quot;1559209422&quot;,
     &quot;metadata&quot;: {
-        &quot;clientRefId&quot;:&quot;CLIENT-REF-1559213330&quot;,
-        &quot;serviceType&quot;: &quot;return&quot;,
-        &quot;vehicleType&quot;:&quot;car&quot;
+        &quot;clientRefId&quot;:&quot;CLIENT-REF-1559209422&quot;,
+        &quot;serviceType&quot;: &quot;asap&quot;,
+        &quot;isTest&quot;:True
     },
     &quot;customData&quot;: {
-        &quot;caller&quot;:&quot;Booking&quot;,
+      &quot;caller&quot;:&quot;API&quot;,
+      &quot;Customer&quot;:&quot;<code>CustomerName</code>&quot;
         &quot;reference_1&quot;: &quot;kingsman@kingsman.com&quot;,
-        &quot;reference_2&quot;: &quot;Kingsman&quot;
+        &quot;reference_2&quot;: &quot;Kingsman&quot;,
+        <code>&quot;citytrak-department&quot;: &quot;&lt;CoopOrderReference&gt;”</code>
     },
     &quot;contact&quot;: {
         &quot;name&quot;: &quot;James Moriarty&quot;,
@@ -2761,12 +2852,12 @@ POST
             ],
             &quot;timeslot&quot;: {
                 &quot;collection&quot;: {
-                    &quot;from&quot;: &quot;2019-05-31T11:00:00.000Z&quot;,
-                    &quot;to&quot;: &quot;2019-05-31T13:00:00.000Z&quot;
+                    &quot;from&quot;: &quot;2019-05-30T11:00:00.000Z&quot;,
+                    &quot;to&quot;: &quot;2019-05-30T12:00:00.000Z&quot;
                 },
                 &quot;delivery&quot;: {
-                    &quot;from&quot;: &quot;2019-05-31T13:00:00.000Z&quot;,
-                    &quot;to&quot;: &quot;2019-05-31T21:30:00.000Z&quot;
+                    &quot;from&quot;: &quot;2019-05-30T13:00:00.000Z&quot;,
+                    &quot;to&quot;: &quot;2019-05-30T14:00:00.000Z&quot;
                 }
             },
             &quot;collection&quot;: {
@@ -2817,21 +2908,18 @@ POST
     ]
 }&#39;</p>
 </code></pre></details>
+</blockquote>
 
-<div class="code-block-no-wrap-header">Http reponse codes :<p><span class="http-resp-label" id= style="top: -1px; width: 30px; border: 0.1em solid;">201</span></p>
-<p><span class="http-resp-label" id= style="top: -1px; width: 30px; border: 0.1em solid;">4xx</span></p>
-<p><span class="http-resp-label" id= style="top: -1px; width: 30px; border: 0.1em solid;">5xx</span></p>
-</div>
-
-<details><summary class="">Expand for response</summary><pre><code><p>{
-    &quot;id&quot;: &quot;1559213451&quot;,
+<blockquote>
+<details><summary class=xxx>Expand for Response body</summary><pre><code class=json><p>{
+    &quot;id&quot;: &quot;1559211073&quot;,
     &quot;metadata&quot;: {
-        &quot;externalAccountId&quot;: &quot;CS023671&quot;,
-        &quot;clientRefId&quot;: &quot;CLIENT-REF-1559213451&quot;,
+        &quot;externalAccountId&quot;: &quot;W99969&quot;,
+        &quot;clientRefId&quot;: &quot;CLIENT-REF-1559211073&quot;,
         &quot;sector&quot;: &quot;Ent Retail&quot;,
         &quot;vehicleType&quot;: &quot;car&quot;,
-        &quot;serviceType&quot;: &quot;return&quot;,
-        &quot;trackingUrl&quot;: &quot;https://trackmydriver.lastmilelink.eu/sandbox::1559213451?token=fiitzb44JosWvQSH8bd0EGbnHptj1rniPJBNLo0vLXw%3D&quot;,
+        &quot;serviceType&quot;: &quot;asap&quot;,
+        &quot;trackingUrl&quot;: &quot;https://trackmydriver.lastmilelink.eu/sandbox::1559211073?token=93uQp9OZgBoW6%2FgYQd2%2FfADCzpdmHbYtwCQ0PouEWUE%3D&quot;,
         &quot;isTest&quot;: true
     },
     &quot;customData&quot;: {
@@ -2937,11 +3025,11 @@ POST
                 &quot;id&quot;: &quot;&quot;,
                 &quot;collection&quot;: {
                     &quot;from&quot;: &quot;2019-05-31T11:00:00.000Z&quot;,
-                    &quot;to&quot;: &quot;2019-05-31T13:00:00.000Z&quot;
+                    &quot;to&quot;: &quot;2019-05-31T12:00:00.000Z&quot;
                 },
                 &quot;delivery&quot;: {
                     &quot;from&quot;: &quot;2019-05-31T13:00:00.000Z&quot;,
-                    &quot;to&quot;: &quot;2019-05-31T21:30:00.000Z&quot;
+                    &quot;to&quot;: &quot;2019-05-31T14:00:00.000Z&quot;
                 }
             },
             &quot;requires&quot;: [
@@ -2952,13 +3040,41 @@ POST
             &quot;status&quot;: {
                 &quot;progressStatus&quot;: {
                     &quot;status&quot;: &quot;created&quot;,
-                    &quot;updatedAt&quot;: &quot;2019-05-30T10:50:51.737Z&quot;
+                    &quot;updatedAt&quot;: &quot;2019-05-30T10:11:13.420Z&quot;
                 },
                 &quot;courierStatus&quot;: null
             }
         }
     ],
     &quot;stops&quot;: [
+        {
+            &quot;id&quot;: &quot;2&quot;,
+            &quot;contact&quot;: {
+                &quot;name&quot;: &quot;John Watson&quot;,
+                &quot;mobile&quot;: &quot;+447777777778&quot;,
+                &quot;email&quot;: &quot;jw@gmail.com&quot;
+            },
+            &quot;place&quot;: {
+                &quot;position&quot;: {
+                    &quot;coordinates&quot;: {
+                        &quot;latitude&quot;: 51.557963,
+                        &quot;longitude&quot;: 0.067261
+                    }
+                },
+                &quot;address&quot;: {
+                    &quot;country&quot;: &quot;GBR&quot;,
+                    &quot;town&quot;: &quot;London&quot;,
+                    &quot;streets&quot;: [
+                        &quot;FLAT 111&quot;,
+                        &quot;ICON BUILDING&quot;
+                    ],
+                    &quot;postcode&quot;: &quot;IG1 2FJ&quot;,
+                    &quot;companyName&quot;: &quot;SANDBOX-OTD-COMPANY&quot;
+                },
+                &quot;ulez&quot;: false
+            },
+            &quot;instructions&quot;: &quot;You can park at Front Garden at my house&quot;
+        },
         {
             &quot;id&quot;: &quot;1&quot;,
             &quot;contact&quot;: {
@@ -2987,7 +3103,404 @@ POST
                 &quot;ulez&quot;: true
             },
             &quot;instructions&quot;: &quot;Park at Store back Door&quot;
+        }
+    ],
+    &quot;status&quot;: {
+        &quot;status&quot;: &quot;created&quot;,
+        &quot;updatedAt&quot;: &quot;2019-05-30T10:11:13.420Z&quot;
+    },
+    &quot;createdAt&quot;: &quot;2019-05-30T10:11:13.420Z&quot;,
+    &quot;updatedAt&quot;: &quot;2019-05-30T10:11:13.420Z&quot;
+}</p>
+</code></pre></details>
+</blockquote>
+
+<blockquote>
+<div class="code-block-no-wrap-header">Response http codes :<p><span class="http-resp-label" id=twox style="top: -1px; width: 30px; border: 0.1em solid;">201</span></p>
+<p><span class="http-resp-label" id=fourx style="top: -1px; width: 30px; border: 0.1em solid;">4xx</span></p>
+<p><span class="http-resp-label" id=fivex style="top: -1px; width: 30px; border: 0.1em solid;">5xx</span></p>
+</div>
+</blockquote>
+
+<aside class="path">
+  <strong>Path:</strong><p><span class="http-verb-label" id=post style="top: -1px; width: 55px; border: 0.1em solid;">
+POST
+</span>
+<code>{{host}}</code>/<code>{{bookingService}}</code>/v2/accounts/<code>{{accountId}}</code>/orders</p>
+
+</aside>
+
+<aside class="notice">
+The request sample in the left <code>code pane</code> will create a return for a previous delivery booking request. PLease note the job.journeyType is <code>return</code> in this sample.
+</aside>
+
+<p><img src="images/OTD_H_RTD.png" alt="Returns to Depot/Origin" /></p>
+
+<p>Create a return, return to origin or to an alternative location booking request for same day or scheduled in the future.</p>
+<h3 id='wait-and-return'>Wait and Return</h3>
+<p>A particular case of a return is <code>Wait and Return</code> where courier are required to return special packaging or a number of items from that delivery.</p>
+
+<ul>
+<li>The booking request will have a <code>wait and return</code> service and contain 2 jobs within the same Booking request.</li>
+</ul>
+<h2 id='real-time-tracking'>Real time tracking</h2>
+<blockquote>
+<p><span class="http-verb-label" id=post style="top: -1px; width: 55px; border: 0.1em solid;">
+POST
+</span>
+see example <code>request</code> below ...</p>
+</blockquote>
+
+<blockquote>
+<details><summary class=xxx>Expand for ETAs object</summary><pre><code class=json><p>&quot;eta&quot;: {
+  &quot;collection&quot;: &quot;2019-05-10T13:58:27.591Z&quot;,
+  &quot;delivery&quot;: &quot;2019-05-10T14:58:27.591Z&quot;
+}</p>
+</code></pre></details>
+</blockquote>
+
+<blockquote>
+<div class="code-block-no-wrap-header">Expected Response http codes :<p><span class="http-resp-label" id=twox style="top: -1px; width: 30px; border: 0.1em solid;">2xx</span></p>
+</div>
+</blockquote>
+
+<aside class="path">
+  <strong>Path:</strong><p><span class="http-verb-label" id=post style="top: -1px; width: 55px; border: 0.1em solid;">
+POST
+</span>
+{URL}</p>
+
+</aside>
+
+<aside class="notice">
+  Real time tracking and dynamic ETA : <code><strong>eta.collection</strong> ( estimated time of collection )</code> and <code><strong>eta.delivery</strong> ( estimated time of delivery )</code>
+</aside>
+
+<p><img src="images/OTD_H_RTTE.png" alt="Real Time Notifications" /></p>
+
+<p>On demand, flexible real time tracking events with dynamic ETAs. Our webhooks contain the <code>&quot;eta&quot;: {
+  &quot;collection&quot;: &quot;2019-05-10T13:58:27.591Z&quot;,
+  &quot;delivery&quot;: &quot;2019-05-10T14:58:27.591Z&quot;
+}</code> object.</p>
+
+<p><code>REVIEW</code> Our platform expects to receive a response of <code>2xx</code> when a successful push was made. <code>REVIEW</code></p>
+<h2 id='real-time-notifications'>Real time notifications</h2>
+<blockquote>
+<p><span class="http-verb-label" id=post style="top: -1px; width: 55px; border: 0.1em solid;">
+POST
+</span>
+see example <code>request</code> below ...</p>
+</blockquote>
+
+<blockquote>
+<details><summary class=xxx>Expand for Return</summary><pre><code class=bash><p>curl -X POST \
+  https://public-api-prod.onthedot.com/booking/v2/accounts/sandbox/orders \
+  -H &#39;Content-Type: application/json&#39; \
+  -H &#39;authorization: <code>&lt;Your Own API Bearer Taoken&gt;</code>&#39; \
+  -H &#39;cache-control: no-cache&#39; \
+  -H &#39;x-trace-id: ad095cc0-6c52-491a-a2cf-a3408c801a55&#39; \
+  -d &#39;{
+    &quot;id&quot;: &quot;1559209422&quot;,
+    &quot;metadata&quot;: {
+        &quot;clientRefId&quot;:&quot;CLIENT-REF-1559209422&quot;,
+        &quot;serviceType&quot;: &quot;asap&quot;,
+        &quot;isTest&quot;:True
+    },
+    &quot;customData&quot;: {
+      &quot;caller&quot;:&quot;API&quot;,
+      &quot;Customer&quot;:&quot;<code>CustomerName</code>&quot;
+        &quot;reference_1&quot;: &quot;kingsman@kingsman.com&quot;,
+        &quot;reference_2&quot;: &quot;Kingsman&quot;,
+        <code>&quot;citytrak-department&quot;: &quot;&lt;CoopOrderReference&gt;”</code>
+    },
+    &quot;contact&quot;: {
+        &quot;name&quot;: &quot;James Moriarty&quot;,
+        &quot;mobile&quot;: &quot;+447888888889&quot;,
+        &quot;phone&quot;: &quot;020812718278&quot;,
+        &quot;email&quot;: &quot;jm@gmail.com&quot;
+    },
+    &quot;notification&quot;: {
+        &quot;emails&quot;: [
+            {
+                &quot;email&quot;: &quot;rbeemi@onthedot.com&quot;,
+                &quot;statuses&quot;: [
+                    &quot;created&quot;,
+                    &quot;allocated&quot;,
+                    &quot;arrived_at_collection&quot;,
+                    &quot;collected&quot;,
+                    &quot;arrived_at_delivery&quot;,
+                    &quot;delivered&quot;
+                ]
+            }
+        ],
+        &quot;sms&quot;: [
+            {
+                &quot;number&quot;: &quot;+4477772888442&quot;,
+                &quot;statuses&quot;: [
+                    &quot;created&quot;,
+                    &quot;allocated&quot;,
+                    &quot;arrived_at_collection&quot;,
+                    &quot;collected&quot;,
+                    &quot;arrived_at_delivery&quot;,
+                    &quot;delivered&quot;
+                ]
+            }
+        ],
+        &quot;webhooks&quot;: [
+            {
+                &quot;endpoint&quot;: &quot;https://enit24ti5gez.x.pipedream.net/&quot;,
+                &quot;methodType&quot;: &quot;POST&quot;,
+                &quot;headers&quot;: {
+                    &quot;authorization&quot;: &quot;&quot;,
+                    &quot;company&quot;: &quot;&quot;
+                },
+                &quot;statuses&quot;: [
+                    &quot;created&quot;,
+                    &quot;allocated&quot;,
+                    &quot;arrived_at_collection&quot;,
+                    &quot;collected&quot;,
+                    &quot;arrived_at_delivery&quot;,
+                    &quot;delivered&quot;
+                ]
+            }
+        ]
+    },
+    &quot;jobs&quot;: [
+        {
+            &quot;id&quot;: &quot;1&quot;,
+            &quot;metadata&quot;: {
+                &quot;journeyType&quot;: &quot;return&quot;
+            },
+            &quot;requires&quot;: [
+                &quot;ageVerification&quot;,
+                &quot;collectionSignOff&quot;,
+                &quot;deliverySignOff&quot;
+            ],
+            &quot;items&quot;: [
+                {
+                    &quot;id&quot;: &quot;1&quot;,
+                    &quot;description&quot;: &quot;Book&quot;,
+                    &quot;quantity&quot;: 5,
+                    &quot;metrics&quot;: {
+                        &quot;weight&quot;: 4,
+                        &quot;dimension&quot;: {
+                            &quot;width&quot;: 10,
+                            &quot;height&quot;: 5,
+                            &quot;length&quot;: 20
+                        }
+                    }
+                },
+                {
+                    &quot;id&quot;: &quot;2&quot;,
+                    &quot;description&quot;: &quot;Book marker&quot;,
+                    &quot;quantity&quot;: 4,
+                    &quot;metrics&quot;: {
+                        &quot;weight&quot;: 10,
+                        &quot;dimension&quot;: {
+                            &quot;width&quot;: 10,
+                            &quot;height&quot;: 0.5,
+                            &quot;length&quot;: 20
+                        }
+                    }
+                }
+            ],
+            &quot;timeslot&quot;: {
+                &quot;collection&quot;: {
+                    &quot;from&quot;: &quot;2019-05-30T11:00:00.000Z&quot;,
+                    &quot;to&quot;: &quot;2019-05-30T12:00:00.000Z&quot;
+                },
+                &quot;delivery&quot;: {
+                    &quot;from&quot;: &quot;2019-05-30T13:00:00.000Z&quot;,
+                    &quot;to&quot;: &quot;2019-05-30T14:00:00.000Z&quot;
+                }
+            },
+            &quot;collection&quot;: {
+                &quot;stopId&quot;: &quot;2&quot;,
+                &quot;instructions&quot;: &quot;Collect Box From Main Garage&quot;
+            },
+            &quot;delivery&quot;: {
+                &quot;stopId&quot;: &quot;1&quot;,
+                &quot;instructions&quot;: &quot;Ring main Door Bell&quot;
+            }
+        }
+    ],
+    &quot;stops&quot;: [
+        {
+            &quot;id&quot;: &quot;1&quot;,
+            &quot;contact&quot;: {
+                &quot;name&quot;: &quot;Sherlock Holmes&quot;,
+                &quot;mobile&quot;: &quot;+447777777777&quot;,
+                &quot;phone&quot;: &quot;02091212121212&quot;,
+                &quot;email&quot;: &quot;sh@gmail.com&quot;
+            },
+            &quot;place&quot;: {
+                &quot;id&quot;: &quot;sandbox-store&quot;
+            },
+            &quot;instructions&quot;: &quot;Park at Store back Door&quot;
         },
+        {
+            &quot;id&quot;: &quot;2&quot;,
+            &quot;contact&quot;: {
+                &quot;name&quot;: &quot;John Watson&quot;,
+                &quot;mobile&quot;: &quot;+447777777778&quot;,
+                &quot;email&quot;: &quot;jw@gmail.com&quot;
+            },
+            &quot;place&quot;: {
+                &quot;address&quot;: {
+                    &quot;country&quot;: &quot;GBR&quot;,
+                    &quot;town&quot;: &quot;London&quot;,
+                    &quot;streets&quot;: [
+                        &quot;FLAT 111&quot;,
+                        &quot;ICON BUILDING&quot;
+                    ],
+                    &quot;postcode&quot;: &quot;IG1 2FJ&quot;,
+                    &quot;companyName&quot;: &quot;SANDBOX-OTD-COMPANY&quot;
+                }
+            },
+            &quot;instructions&quot;: &quot;You can park at Front Garden at my house&quot;
+        }
+    ]
+}&#39;</p>
+</code></pre></details>
+</blockquote>
+
+<blockquote>
+<details><summary class=xxx>Expand for Response body</summary><pre><code class=json><p>{
+    &quot;id&quot;: &quot;1559211073&quot;,
+    &quot;metadata&quot;: {
+        &quot;externalAccountId&quot;: &quot;W99969&quot;,
+        &quot;clientRefId&quot;: &quot;CLIENT-REF-1559211073&quot;,
+        &quot;sector&quot;: &quot;Ent Retail&quot;,
+        &quot;vehicleType&quot;: &quot;car&quot;,
+        &quot;serviceType&quot;: &quot;asap&quot;,
+        &quot;trackingUrl&quot;: &quot;https://trackmydriver.lastmilelink.eu/sandbox::1559211073?token=93uQp9OZgBoW6%2FgYQd2%2FfADCzpdmHbYtwCQ0PouEWUE%3D&quot;,
+        &quot;isTest&quot;: true
+    },
+    &quot;customData&quot;: {
+        &quot;caller&quot;: &quot;Booking&quot;,
+        &quot;reference_1&quot;: &quot;kingsman@kingsman.com&quot;,
+        &quot;reference_2&quot;: &quot;Kingsman&quot;
+    },
+    &quot;contact&quot;: {
+        &quot;name&quot;: &quot;James Moriarty&quot;,
+        &quot;mobile&quot;: &quot;+447888888889&quot;,
+        &quot;phone&quot;: &quot;020812718278&quot;,
+        &quot;email&quot;: &quot;jm@gmail.com&quot;
+    },
+    &quot;notification&quot;: {
+        &quot;emails&quot;: [
+            {
+                &quot;email&quot;: &quot;rbeemi@onthedot.com&quot;,
+                &quot;statuses&quot;: [
+                    &quot;created&quot;,
+                    &quot;allocated&quot;,
+                    &quot;arrived_at_collection&quot;,
+                    &quot;collected&quot;,
+                    &quot;arrived_at_delivery&quot;,
+                    &quot;delivered&quot;
+                ]
+            }
+        ],
+        &quot;sms&quot;: [
+            {
+                &quot;number&quot;: &quot;+4477772888442&quot;,
+                &quot;statuses&quot;: [
+                    &quot;created&quot;,
+                    &quot;allocated&quot;,
+                    &quot;arrived_at_collection&quot;,
+                    &quot;collected&quot;,
+                    &quot;arrived_at_delivery&quot;,
+                    &quot;delivered&quot;
+                ]
+            }
+        ],
+        &quot;webhooks&quot;: [
+            {
+                &quot;endpoint&quot;: &quot;https://enit24ti5gez.x.pipedream.net/&quot;,
+                &quot;methodType&quot;: &quot;POST&quot;,
+                &quot;headers&quot;: {
+                    &quot;authorization&quot;: &quot;&quot;,
+                    &quot;company&quot;: &quot;&quot;
+                },
+                &quot;statuses&quot;: [
+                    &quot;created&quot;,
+                    &quot;allocated&quot;,
+                    &quot;arrived_at_collection&quot;,
+                    &quot;collected&quot;,
+                    &quot;arrived_at_delivery&quot;,
+                    &quot;delivered&quot;
+                ]
+            }
+        ]
+    },
+    &quot;jobs&quot;: [
+        {
+            &quot;id&quot;: &quot;1&quot;,
+            &quot;metadata&quot;: {
+                &quot;journeyType&quot;: &quot;return&quot;
+            },
+            &quot;items&quot;: [
+                {
+                    &quot;id&quot;: &quot;1&quot;,
+                    &quot;description&quot;: &quot;Book&quot;,
+                    &quot;quantity&quot;: 5,
+                    &quot;metrics&quot;: {
+                        &quot;weight&quot;: 4,
+                        &quot;dimension&quot;: {
+                            &quot;width&quot;: 10,
+                            &quot;height&quot;: 5,
+                            &quot;length&quot;: 20
+                        }
+                    }
+                },
+                {
+                    &quot;id&quot;: &quot;2&quot;,
+                    &quot;description&quot;: &quot;Book marker&quot;,
+                    &quot;quantity&quot;: 4,
+                    &quot;metrics&quot;: {
+                        &quot;weight&quot;: 10,
+                        &quot;dimension&quot;: {
+                            &quot;width&quot;: 10,
+                            &quot;height&quot;: 0.5,
+                            &quot;length&quot;: 20
+                        }
+                    }
+                }
+            ],
+            &quot;collection&quot;: {
+                &quot;stopId&quot;: &quot;2&quot;,
+                &quot;instructions&quot;: &quot;Collect Box From Main Garage&quot;
+            },
+            &quot;delivery&quot;: {
+                &quot;stopId&quot;: &quot;1&quot;,
+                &quot;instructions&quot;: &quot;Ring main Door Bell&quot;
+            },
+            &quot;timeslot&quot;: {
+                &quot;id&quot;: &quot;&quot;,
+                &quot;collection&quot;: {
+                    &quot;from&quot;: &quot;2019-05-31T11:00:00.000Z&quot;,
+                    &quot;to&quot;: &quot;2019-05-31T12:00:00.000Z&quot;
+                },
+                &quot;delivery&quot;: {
+                    &quot;from&quot;: &quot;2019-05-31T13:00:00.000Z&quot;,
+                    &quot;to&quot;: &quot;2019-05-31T14:00:00.000Z&quot;
+                }
+            },
+            &quot;requires&quot;: [
+                &quot;ageVerification&quot;,
+                &quot;collectionSignOff&quot;,
+                &quot;deliverySignOff&quot;
+            ],
+            &quot;status&quot;: {
+                &quot;progressStatus&quot;: {
+                    &quot;status&quot;: &quot;created&quot;,
+                    &quot;updatedAt&quot;: &quot;2019-05-30T10:11:13.420Z&quot;
+                },
+                &quot;courierStatus&quot;: null
+            }
+        }
+    ],
+    &quot;stops&quot;: [
         {
             &quot;id&quot;: &quot;2&quot;,
             &quot;contact&quot;: {
@@ -3015,40 +3528,62 @@ POST
                 &quot;ulez&quot;: false
             },
             &quot;instructions&quot;: &quot;You can park at Front Garden at my house&quot;
+        },
+        {
+            &quot;id&quot;: &quot;1&quot;,
+            &quot;contact&quot;: {
+                &quot;name&quot;: &quot;Sherlock Holmes&quot;,
+                &quot;mobile&quot;: &quot;+447777777777&quot;,
+                &quot;phone&quot;: &quot;02091212121212&quot;,
+                &quot;email&quot;: &quot;sh@gmail.com&quot;
+            },
+            &quot;place&quot;: {
+                &quot;id&quot;: &quot;sandbox-store&quot;,
+                &quot;position&quot;: {
+                    &quot;coordinates&quot;: {
+                        &quot;latitude&quot;: 51.523317,
+                        &quot;longitude&quot;: -0.080965
+                    }
+                },
+                &quot;address&quot;: {
+                    &quot;country&quot;: &quot;United Kingdom&quot;,
+                    &quot;town&quot;: &quot;Hackney&quot;,
+                    &quot;streets&quot;: [
+                        &quot;CitySprint - London Central Service Centre&quot;,
+                        &quot;58-62 Scrutton St&quot;
+                    ],
+                    &quot;postcode&quot;: &quot;EC2A 4PH&quot;
+                },
+                &quot;ulez&quot;: true
+            },
+            &quot;instructions&quot;: &quot;Park at Store back Door&quot;
         }
     ],
     &quot;status&quot;: {
         &quot;status&quot;: &quot;created&quot;,
-        &quot;updatedAt&quot;: &quot;2019-05-30T10:50:51.737Z&quot;
+        &quot;updatedAt&quot;: &quot;2019-05-30T10:11:13.420Z&quot;
     },
-    &quot;createdAt&quot;: &quot;2019-05-30T10:50:51.737Z&quot;,
-    &quot;updatedAt&quot;: &quot;2019-05-30T10:50:51.737Z&quot;
+    &quot;createdAt&quot;: &quot;2019-05-30T10:11:13.420Z&quot;,
+    &quot;updatedAt&quot;: &quot;2019-05-30T10:11:13.420Z&quot;
 }</p>
 </code></pre></details>
 </blockquote>
 
-<aside class="notice">
-The request sample in the left <code>code pane</code> will create a return to depot order.
+<blockquote>
+<div class="code-block-no-wrap-header">Response http codes :<p><span class="http-resp-label" id=twox style="top: -1px; width: 30px; border: 0.1em solid;">201</span></p>
+<p><span class="http-resp-label" id=fourx style="top: -1px; width: 30px; border: 0.1em solid;">4xx</span></p>
+<p><span class="http-resp-label" id=fivex style="top: -1px; width: 30px; border: 0.1em solid;">5xx</span></p>
+</div>
+</blockquote>
+
+<aside class="path">
+  <strong>Path:</strong><p><span class="http-verb-label" id=post style="top: -1px; width: 55px; border: 0.1em solid;">
+POST
+</span>
+<code>{{host}}</code>/<code>{{bookingService}}</code>/v2/accounts/<code>{{accountId}}</code>/orders</p>
+
 </aside>
 
-<p><img src="images/OTD_H_RTD.png" alt="Returns to Depot/Origin" /></p>
-
-<p>Create a return to origin or to an alternative location booking request for same day or scheduled in the future</p>
-<h3 id='wait-and-return'>Wait and Return</h3>
-<p>A particular case of a return is <code>Wait and Return</code> where courier are required to return special packaging or a number of items from that delivery.</p>
-
-<ul>
-<li>The booking request will have a <code>wait and return</code> service and contain 2 jobs within the same Booking request.</li>
-</ul>
-<h2 id='real-time-tracking'>Real time tracking</h2>
-<aside class="notice">
-  Real time tracking and dynamic ETA : <code><strong>ETC</strong> ( estimated time of collection )</code> and <code><strong>ETD</strong> ( estimated time of delivery )</code>
-</aside>
-
-<p><img src="images/OTD_H_RTTE.png" alt="Real Time Notifications" /></p>
-
-<p>On demand, flexible real time tracking events with dynamic ETAs. Our webhooks contain the</p>
-<h2 id='real-time-notifications'>Real time notifications</h2>
 <aside class="notice">
   Real time notifications as `e-mail`, `sms` or `web-hooks` containing dynamic ETA : <code><strong>ETC</strong> ( estimated time of collection )</code> and <code><strong>ETD</strong> ( estimated time of delivery )</code>, `courier name`, `proof of delivery and collection`, e.t.c.
 </aside>
@@ -3056,10 +3591,406 @@ The request sample in the left <code>code pane</code> will create a return to de
 <p><img src="images/OTD_H_RTN.png" alt="Real Time Notifications" /></p>
 
 <h5>Fully configurable on-demand real-time push Web-hooks, SMS and E-mail notifcations</h5>
-<h2 id='search-an-order'>Search an order</h2><pre class="highlight javascript"><code>
-  <span class="nx">code_sample</span>
+<h2 id='search-an-order'>Search an order</h2>
+<blockquote>
+<p><span class="http-verb-label" id=post style="top: -1px; width: 55px; border: 0.1em solid;">
+POST
+</span>
+see example <code>request</code> below ...</p>
+</blockquote>
 
-</code></pre>
+<blockquote>
+<details><summary class=xxx>Expand for Return</summary><pre><code class=bash><p>curl -X POST \
+  https://public-api-prod.onthedot.com/booking/v2/accounts/sandbox/orders \
+  -H &#39;Content-Type: application/json&#39; \
+  -H &#39;authorization: <code>&lt;Your Own API Bearer Taoken&gt;</code>&#39; \
+  -H &#39;cache-control: no-cache&#39; \
+  -H &#39;x-trace-id: ad095cc0-6c52-491a-a2cf-a3408c801a55&#39; \
+  -d &#39;{
+    &quot;id&quot;: &quot;1559209422&quot;,
+    &quot;metadata&quot;: {
+        &quot;clientRefId&quot;:&quot;CLIENT-REF-1559209422&quot;,
+        &quot;serviceType&quot;: &quot;asap&quot;,
+        &quot;isTest&quot;:True
+    },
+    &quot;customData&quot;: {
+      &quot;caller&quot;:&quot;API&quot;,
+      &quot;Customer&quot;:&quot;<code>CustomerName</code>&quot;
+        &quot;reference_1&quot;: &quot;kingsman@kingsman.com&quot;,
+        &quot;reference_2&quot;: &quot;Kingsman&quot;,
+        <code>&quot;citytrak-department&quot;: &quot;&lt;CoopOrderReference&gt;”</code>
+    },
+    &quot;contact&quot;: {
+        &quot;name&quot;: &quot;James Moriarty&quot;,
+        &quot;mobile&quot;: &quot;+447888888889&quot;,
+        &quot;phone&quot;: &quot;020812718278&quot;,
+        &quot;email&quot;: &quot;jm@gmail.com&quot;
+    },
+    &quot;notification&quot;: {
+        &quot;emails&quot;: [
+            {
+                &quot;email&quot;: &quot;rbeemi@onthedot.com&quot;,
+                &quot;statuses&quot;: [
+                    &quot;created&quot;,
+                    &quot;allocated&quot;,
+                    &quot;arrived_at_collection&quot;,
+                    &quot;collected&quot;,
+                    &quot;arrived_at_delivery&quot;,
+                    &quot;delivered&quot;
+                ]
+            }
+        ],
+        &quot;sms&quot;: [
+            {
+                &quot;number&quot;: &quot;+4477772888442&quot;,
+                &quot;statuses&quot;: [
+                    &quot;created&quot;,
+                    &quot;allocated&quot;,
+                    &quot;arrived_at_collection&quot;,
+                    &quot;collected&quot;,
+                    &quot;arrived_at_delivery&quot;,
+                    &quot;delivered&quot;
+                ]
+            }
+        ],
+        &quot;webhooks&quot;: [
+            {
+                &quot;endpoint&quot;: &quot;https://enit24ti5gez.x.pipedream.net/&quot;,
+                &quot;methodType&quot;: &quot;POST&quot;,
+                &quot;headers&quot;: {
+                    &quot;authorization&quot;: &quot;&quot;,
+                    &quot;company&quot;: &quot;&quot;
+                },
+                &quot;statuses&quot;: [
+                    &quot;created&quot;,
+                    &quot;allocated&quot;,
+                    &quot;arrived_at_collection&quot;,
+                    &quot;collected&quot;,
+                    &quot;arrived_at_delivery&quot;,
+                    &quot;delivered&quot;
+                ]
+            }
+        ]
+    },
+    &quot;jobs&quot;: [
+        {
+            &quot;id&quot;: &quot;1&quot;,
+            &quot;metadata&quot;: {
+                &quot;journeyType&quot;: &quot;return&quot;
+            },
+            &quot;requires&quot;: [
+                &quot;ageVerification&quot;,
+                &quot;collectionSignOff&quot;,
+                &quot;deliverySignOff&quot;
+            ],
+            &quot;items&quot;: [
+                {
+                    &quot;id&quot;: &quot;1&quot;,
+                    &quot;description&quot;: &quot;Book&quot;,
+                    &quot;quantity&quot;: 5,
+                    &quot;metrics&quot;: {
+                        &quot;weight&quot;: 4,
+                        &quot;dimension&quot;: {
+                            &quot;width&quot;: 10,
+                            &quot;height&quot;: 5,
+                            &quot;length&quot;: 20
+                        }
+                    }
+                },
+                {
+                    &quot;id&quot;: &quot;2&quot;,
+                    &quot;description&quot;: &quot;Book marker&quot;,
+                    &quot;quantity&quot;: 4,
+                    &quot;metrics&quot;: {
+                        &quot;weight&quot;: 10,
+                        &quot;dimension&quot;: {
+                            &quot;width&quot;: 10,
+                            &quot;height&quot;: 0.5,
+                            &quot;length&quot;: 20
+                        }
+                    }
+                }
+            ],
+            &quot;timeslot&quot;: {
+                &quot;collection&quot;: {
+                    &quot;from&quot;: &quot;2019-05-30T11:00:00.000Z&quot;,
+                    &quot;to&quot;: &quot;2019-05-30T12:00:00.000Z&quot;
+                },
+                &quot;delivery&quot;: {
+                    &quot;from&quot;: &quot;2019-05-30T13:00:00.000Z&quot;,
+                    &quot;to&quot;: &quot;2019-05-30T14:00:00.000Z&quot;
+                }
+            },
+            &quot;collection&quot;: {
+                &quot;stopId&quot;: &quot;2&quot;,
+                &quot;instructions&quot;: &quot;Collect Box From Main Garage&quot;
+            },
+            &quot;delivery&quot;: {
+                &quot;stopId&quot;: &quot;1&quot;,
+                &quot;instructions&quot;: &quot;Ring main Door Bell&quot;
+            }
+        }
+    ],
+    &quot;stops&quot;: [
+        {
+            &quot;id&quot;: &quot;1&quot;,
+            &quot;contact&quot;: {
+                &quot;name&quot;: &quot;Sherlock Holmes&quot;,
+                &quot;mobile&quot;: &quot;+447777777777&quot;,
+                &quot;phone&quot;: &quot;02091212121212&quot;,
+                &quot;email&quot;: &quot;sh@gmail.com&quot;
+            },
+            &quot;place&quot;: {
+                &quot;id&quot;: &quot;sandbox-store&quot;
+            },
+            &quot;instructions&quot;: &quot;Park at Store back Door&quot;
+        },
+        {
+            &quot;id&quot;: &quot;2&quot;,
+            &quot;contact&quot;: {
+                &quot;name&quot;: &quot;John Watson&quot;,
+                &quot;mobile&quot;: &quot;+447777777778&quot;,
+                &quot;email&quot;: &quot;jw@gmail.com&quot;
+            },
+            &quot;place&quot;: {
+                &quot;address&quot;: {
+                    &quot;country&quot;: &quot;GBR&quot;,
+                    &quot;town&quot;: &quot;London&quot;,
+                    &quot;streets&quot;: [
+                        &quot;FLAT 111&quot;,
+                        &quot;ICON BUILDING&quot;
+                    ],
+                    &quot;postcode&quot;: &quot;IG1 2FJ&quot;,
+                    &quot;companyName&quot;: &quot;SANDBOX-OTD-COMPANY&quot;
+                }
+            },
+            &quot;instructions&quot;: &quot;You can park at Front Garden at my house&quot;
+        }
+    ]
+}&#39;</p>
+</code></pre></details>
+</blockquote>
+
+<blockquote>
+<details><summary class=xxx>Expand for Response body</summary><pre><code class=json><p>{
+    &quot;id&quot;: &quot;1559211073&quot;,
+    &quot;metadata&quot;: {
+        &quot;externalAccountId&quot;: &quot;W99969&quot;,
+        &quot;clientRefId&quot;: &quot;CLIENT-REF-1559211073&quot;,
+        &quot;sector&quot;: &quot;Ent Retail&quot;,
+        &quot;vehicleType&quot;: &quot;car&quot;,
+        &quot;serviceType&quot;: &quot;asap&quot;,
+        &quot;trackingUrl&quot;: &quot;https://trackmydriver.lastmilelink.eu/sandbox::1559211073?token=93uQp9OZgBoW6%2FgYQd2%2FfADCzpdmHbYtwCQ0PouEWUE%3D&quot;,
+        &quot;isTest&quot;: true
+    },
+    &quot;customData&quot;: {
+        &quot;caller&quot;: &quot;Booking&quot;,
+        &quot;reference_1&quot;: &quot;kingsman@kingsman.com&quot;,
+        &quot;reference_2&quot;: &quot;Kingsman&quot;
+    },
+    &quot;contact&quot;: {
+        &quot;name&quot;: &quot;James Moriarty&quot;,
+        &quot;mobile&quot;: &quot;+447888888889&quot;,
+        &quot;phone&quot;: &quot;020812718278&quot;,
+        &quot;email&quot;: &quot;jm@gmail.com&quot;
+    },
+    &quot;notification&quot;: {
+        &quot;emails&quot;: [
+            {
+                &quot;email&quot;: &quot;rbeemi@onthedot.com&quot;,
+                &quot;statuses&quot;: [
+                    &quot;created&quot;,
+                    &quot;allocated&quot;,
+                    &quot;arrived_at_collection&quot;,
+                    &quot;collected&quot;,
+                    &quot;arrived_at_delivery&quot;,
+                    &quot;delivered&quot;
+                ]
+            }
+        ],
+        &quot;sms&quot;: [
+            {
+                &quot;number&quot;: &quot;+4477772888442&quot;,
+                &quot;statuses&quot;: [
+                    &quot;created&quot;,
+                    &quot;allocated&quot;,
+                    &quot;arrived_at_collection&quot;,
+                    &quot;collected&quot;,
+                    &quot;arrived_at_delivery&quot;,
+                    &quot;delivered&quot;
+                ]
+            }
+        ],
+        &quot;webhooks&quot;: [
+            {
+                &quot;endpoint&quot;: &quot;https://enit24ti5gez.x.pipedream.net/&quot;,
+                &quot;methodType&quot;: &quot;POST&quot;,
+                &quot;headers&quot;: {
+                    &quot;authorization&quot;: &quot;&quot;,
+                    &quot;company&quot;: &quot;&quot;
+                },
+                &quot;statuses&quot;: [
+                    &quot;created&quot;,
+                    &quot;allocated&quot;,
+                    &quot;arrived_at_collection&quot;,
+                    &quot;collected&quot;,
+                    &quot;arrived_at_delivery&quot;,
+                    &quot;delivered&quot;
+                ]
+            }
+        ]
+    },
+    &quot;jobs&quot;: [
+        {
+            &quot;id&quot;: &quot;1&quot;,
+            &quot;metadata&quot;: {
+                &quot;journeyType&quot;: &quot;return&quot;
+            },
+            &quot;items&quot;: [
+                {
+                    &quot;id&quot;: &quot;1&quot;,
+                    &quot;description&quot;: &quot;Book&quot;,
+                    &quot;quantity&quot;: 5,
+                    &quot;metrics&quot;: {
+                        &quot;weight&quot;: 4,
+                        &quot;dimension&quot;: {
+                            &quot;width&quot;: 10,
+                            &quot;height&quot;: 5,
+                            &quot;length&quot;: 20
+                        }
+                    }
+                },
+                {
+                    &quot;id&quot;: &quot;2&quot;,
+                    &quot;description&quot;: &quot;Book marker&quot;,
+                    &quot;quantity&quot;: 4,
+                    &quot;metrics&quot;: {
+                        &quot;weight&quot;: 10,
+                        &quot;dimension&quot;: {
+                            &quot;width&quot;: 10,
+                            &quot;height&quot;: 0.5,
+                            &quot;length&quot;: 20
+                        }
+                    }
+                }
+            ],
+            &quot;collection&quot;: {
+                &quot;stopId&quot;: &quot;2&quot;,
+                &quot;instructions&quot;: &quot;Collect Box From Main Garage&quot;
+            },
+            &quot;delivery&quot;: {
+                &quot;stopId&quot;: &quot;1&quot;,
+                &quot;instructions&quot;: &quot;Ring main Door Bell&quot;
+            },
+            &quot;timeslot&quot;: {
+                &quot;id&quot;: &quot;&quot;,
+                &quot;collection&quot;: {
+                    &quot;from&quot;: &quot;2019-05-31T11:00:00.000Z&quot;,
+                    &quot;to&quot;: &quot;2019-05-31T12:00:00.000Z&quot;
+                },
+                &quot;delivery&quot;: {
+                    &quot;from&quot;: &quot;2019-05-31T13:00:00.000Z&quot;,
+                    &quot;to&quot;: &quot;2019-05-31T14:00:00.000Z&quot;
+                }
+            },
+            &quot;requires&quot;: [
+                &quot;ageVerification&quot;,
+                &quot;collectionSignOff&quot;,
+                &quot;deliverySignOff&quot;
+            ],
+            &quot;status&quot;: {
+                &quot;progressStatus&quot;: {
+                    &quot;status&quot;: &quot;created&quot;,
+                    &quot;updatedAt&quot;: &quot;2019-05-30T10:11:13.420Z&quot;
+                },
+                &quot;courierStatus&quot;: null
+            }
+        }
+    ],
+    &quot;stops&quot;: [
+        {
+            &quot;id&quot;: &quot;2&quot;,
+            &quot;contact&quot;: {
+                &quot;name&quot;: &quot;John Watson&quot;,
+                &quot;mobile&quot;: &quot;+447777777778&quot;,
+                &quot;email&quot;: &quot;jw@gmail.com&quot;
+            },
+            &quot;place&quot;: {
+                &quot;position&quot;: {
+                    &quot;coordinates&quot;: {
+                        &quot;latitude&quot;: 51.557963,
+                        &quot;longitude&quot;: 0.067261
+                    }
+                },
+                &quot;address&quot;: {
+                    &quot;country&quot;: &quot;GBR&quot;,
+                    &quot;town&quot;: &quot;London&quot;,
+                    &quot;streets&quot;: [
+                        &quot;FLAT 111&quot;,
+                        &quot;ICON BUILDING&quot;
+                    ],
+                    &quot;postcode&quot;: &quot;IG1 2FJ&quot;,
+                    &quot;companyName&quot;: &quot;SANDBOX-OTD-COMPANY&quot;
+                },
+                &quot;ulez&quot;: false
+            },
+            &quot;instructions&quot;: &quot;You can park at Front Garden at my house&quot;
+        },
+        {
+            &quot;id&quot;: &quot;1&quot;,
+            &quot;contact&quot;: {
+                &quot;name&quot;: &quot;Sherlock Holmes&quot;,
+                &quot;mobile&quot;: &quot;+447777777777&quot;,
+                &quot;phone&quot;: &quot;02091212121212&quot;,
+                &quot;email&quot;: &quot;sh@gmail.com&quot;
+            },
+            &quot;place&quot;: {
+                &quot;id&quot;: &quot;sandbox-store&quot;,
+                &quot;position&quot;: {
+                    &quot;coordinates&quot;: {
+                        &quot;latitude&quot;: 51.523317,
+                        &quot;longitude&quot;: -0.080965
+                    }
+                },
+                &quot;address&quot;: {
+                    &quot;country&quot;: &quot;United Kingdom&quot;,
+                    &quot;town&quot;: &quot;Hackney&quot;,
+                    &quot;streets&quot;: [
+                        &quot;CitySprint - London Central Service Centre&quot;,
+                        &quot;58-62 Scrutton St&quot;
+                    ],
+                    &quot;postcode&quot;: &quot;EC2A 4PH&quot;
+                },
+                &quot;ulez&quot;: true
+            },
+            &quot;instructions&quot;: &quot;Park at Store back Door&quot;
+        }
+    ],
+    &quot;status&quot;: {
+        &quot;status&quot;: &quot;created&quot;,
+        &quot;updatedAt&quot;: &quot;2019-05-30T10:11:13.420Z&quot;
+    },
+    &quot;createdAt&quot;: &quot;2019-05-30T10:11:13.420Z&quot;,
+    &quot;updatedAt&quot;: &quot;2019-05-30T10:11:13.420Z&quot;
+}</p>
+</code></pre></details>
+</blockquote>
+
+<blockquote>
+<div class="code-block-no-wrap-header">Response http codes :<p><span class="http-resp-label" id=twox style="top: -1px; width: 30px; border: 0.1em solid;">201</span></p>
+<p><span class="http-resp-label" id=fourx style="top: -1px; width: 30px; border: 0.1em solid;">4xx</span></p>
+<p><span class="http-resp-label" id=fivex style="top: -1px; width: 30px; border: 0.1em solid;">5xx</span></p>
+</div>
+</blockquote>
+
+<aside class="path">
+  <strong>Path:</strong><p><span class="http-verb-label" id=post style="top: -1px; width: 55px; border: 0.1em solid;">
+POST
+</span>
+<code>{{host}}</code>/<code>{{bookingService}}</code>/v2/accounts/<code>{{accountId}}</code>/orders</p>
+
+</aside>
+
 <hr>
 
 <ul>
@@ -3077,10 +4008,7 @@ The request sample in the left <code>code pane</code> will create a return to de
 
 <p><code>coordinates</code> can be any point on Earth.</p>
 
-<p>Paging is supported.  See request and response for details.</p>
-
-<p><strong>HTTP Request</strong>
-<code>POST</code><code>/v2/accounts/{accountId}/orders/search</code></p>
+<p>Pagination is supported.  See request and response for details.</p>
 
 <p><strong>Parameters</strong></p>
 
