@@ -337,7 +337,7 @@
         <h1 id='introduction'>Introduction</h1>
 <p><strong>Welcome to the On the dot Booking Service V2.0 APIs Reference documentation.</strong></p>
 
-<p>This documentation is currently in <code>Beta</code> and will be updated over the next few months. Should you require further assistance using our APIs, please contact our Partner team <strong>partners@onthedot.com</strong>.</p>
+<p>This documentation will be constantly updated over the next few months and each time there are new features or APIs published. Should you require further assistance using our APIs, please contact our Partner team <strong>partners@onthedot.com</strong>.</p>
 
 <aside class="notice">
 <strong>Please note:</strong>
@@ -598,7 +598,7 @@ The date and time object used in the request or response supports ISO8601 format
 </tr>
 </tbody></table>
 
-<details open style="width:60%; margin: 10px; padding-left: 20px; float: left;"><summary class=xxx style="margin-bottom: 5px;">Caveat: Local Time</summary><pre style="background: none; margin: 0px; padding-left: 20px;"><code class=json style="width: 100% !important;"><p>// Caveat: Local times
+<details open style="width:60%; margin: 10px; padding-left: 20px; float: left; clear:both;"><summary class=xxx style="margin-bottom: 5px;">Caveat: Local Time</summary><pre style="background: none; margin: 0px; padding-left: 20px;"><code class=json style="width: 100% !important;"><p>// Caveat: Local times
     &quot;dates&quot;: {
         &quot;2018-08-09&quot;: {
             &quot;openTime&quot;: &quot;12:00&quot;,
@@ -658,7 +658,7 @@ The date and time object used in the request or response supports ISO8601 format
 </blockquote>
 <h3 id='obtain-a-calendar-of-timeslots'>Obtain a calendar of timeslots</h3>
 <p>The <code>/timeslots</code> request allows a whole calendar of timeslotId&#39;s to be obtained if the <code>&quot;dates&quot;:{...}</code> contains a starting date at least.
-<details open style="width:60%; margin: 10px; padding-left: 20px; float: left;"><summary class=xxx style="margin-bottom: 5px;">Calendar</summary><pre style="background: none; margin: 0px; padding-left: 20px;"><code class=json style="width: 100% !important;"><p>// Passing a starting date and a number of additional days.
+<details open style="width:60%; margin: 10px; padding-left: 20px; float: left; clear:both;"><summary class=xxx style="margin-bottom: 5px;">Calendar</summary><pre style="background: none; margin: 0px; padding-left: 20px;"><code class=json style="width: 100% !important;"><p>// Passing a starting date and a number of additional days.
 {
   ...
   &quot;dates&quot;: {
@@ -1173,7 +1173,7 @@ Regardless of <code>journeyType</code>, <code>collection</code> is always the pi
 <h3 id='progress-status'>Progress Status</h3>
 <p>Example:</p>
 
-<details open style="width:60%; margin: 10px; padding-left: 20px; float: left;"><summary class=xxx style="margin-bottom: 5px;">Progress Status object</summary><pre style="background: none; margin: 0px; padding-left: 20px;"><code class=json style="width: 100% !important;"><p>&quot;progressStatus&quot;: {
+<details open style="width:60%; margin: 10px; padding-left: 20px; float: left; clear:both;"><summary class=xxx style="margin-bottom: 5px;">Progress Status object</summary><pre style="background: none; margin: 0px; padding-left: 20px;"><code class=json style="width: 100% !important;"><p>&quot;progressStatus&quot;: {
   &quot;status&quot;: &quot;allocated&quot;,
   &quot;updatedAt&quot;: &quot;2019-01-02T13:18:53.087Z&quot;
 }</p>
@@ -1355,7 +1355,7 @@ Regardless of <code>journeyType</code>, <code>collection</code> is always the pi
 </tbody></table>
 <h3 id='courier-status'>Courier Status</h3>
 <p>Example:
-<details open style="width:60%; margin: 10px; padding-left: 20px; float: left;"><summary class=xxx style="margin-bottom: 5px;">Courier Status</summary><pre style="background: none; margin: 0px; padding-left: 20px;"><code class=json style="width: 100% !important;"><p>&quot;courierStatus&quot;: {
+<details open style="width:60%; margin: 10px; padding-left: 20px; float: left; clear:both;"><summary class=xxx style="margin-bottom: 5px;">Courier Status</summary><pre style="background: none; margin: 0px; padding-left: 20px;"><code class=json style="width: 100% !important;"><p>&quot;courierStatus&quot;: {
   &quot;location&quot;: {
     &quot;longitude&quot;: 0.1701,
     &quot;latitude&quot;: 51.5701
@@ -1773,7 +1773,7 @@ POST
 <li>Consideration must be given to the following attributes shown left in <code>metaData</code>, <code>customData</code> and <code>requires</code> sections of request body depending on the agreed operations flow with us.</li>
 </ul>
 <h4 id='metadata'>* <strong><code>metadata</code></strong></h4>
-<details open style="width:60%; margin: 10px; padding-left: 20px; float: left;"><summary class=xxx style="margin-bottom: 5px;">metaData</summary><pre style="background: none; margin: 0px; padding-left: 20px;"><code class=json style="width: 100% !important;"><p>&quot;metadata&quot;: {
+<details open style="width:60%; margin: 10px; padding-left: 20px; float: left; clear:both;"><summary class=xxx style="margin-bottom: 5px;">metaData</summary><pre style="background: none; margin: 0px; padding-left: 20px;"><code class=json style="width: 100% !important;"><p>&quot;metadata&quot;: {
   &quot;externalAccountId&quot;: &quot;W99969&quot;,
   &quot;clientRefId&quot;: &quot;CLIENT-REF-1559211073&quot;,
   &quot;sector&quot;: &quot;Ent Retail&quot;,
@@ -1784,7 +1784,7 @@ POST
 }</p>
 </code></pre></details>
 <h4 id='customdata'>* <strong><code>customData</code></strong></h4>
-<details open style="width:60%; margin: 10px; padding-left: 20px; float: left;"><summary class=xxx style="margin-bottom: 5px;">customData</summary><pre style="background: none; margin: 0px; padding-left: 20px;"><code class=json style="width: 100% !important;"><p>&quot;customData&quot;: {
+<details open style="width:60%; margin: 10px; padding-left: 20px; float: left; clear:both;"><summary class=xxx style="margin-bottom: 5px;">customData</summary><pre style="background: none; margin: 0px; padding-left: 20px;"><code class=json style="width: 100% !important;"><p>&quot;customData&quot;: {
   &quot;caller&quot;: &quot;Booking&quot;,
   &quot;reference_1&quot;: &quot;kingsman@kingsman.com&quot;,
   &quot;reference_2&quot;: &quot;Kingsman&quot;
@@ -1795,7 +1795,7 @@ POST
 <li>Depending on the agreed flow , the requires section  of the booking request can contain the following <code>optional</code> values: <code>&quot;ageVerification&quot;,&quot;collectionSignOff&quot;,&quot;deliverySignOff&quot;</code>. Passing any of those will have an impact on the job flow and which actions must happen at pick up and drop off.</li>
 </ul>
 <h4 id='requires'>* <strong><code>requires</code></strong></h4>
-<details open style="width:60%; margin: 10px; padding-left: 20px; float: left;"><summary class=xxx style="margin-bottom: 5px;">requires</summary><pre style="background: none; margin: 0px; padding-left: 20px;"><code class=json style="width: 100% !important;"><p>&quot;requires&quot;: [
+<details open style="width:60%; margin: 10px; padding-left: 20px; float: left; clear:both;"><summary class=xxx style="margin-bottom: 5px;">requires</summary><pre style="background: none; margin: 0px; padding-left: 20px;"><code class=json style="width: 100% !important;"><p>&quot;requires&quot;: [
   &quot;ageVerification&quot;,
   &quot;collectionSignOff&quot;,
   &quot;deliverySignOff&quot;
@@ -1810,12 +1810,12 @@ POST
 
 <p><strong>1)</strong> By requesting a <code>timeslotId</code> from our platform</p>
 <h4 id='timeslotid'>* <strong><code>timeslotId</code></strong></h4>
-<details open style="width:60%; margin: 10px; padding-left: 20px; float: left;"><summary class=xxx style="margin-bottom: 5px;">timeslotId</summary><pre style="background: none; margin: 0px; padding-left: 20px;"><code class=json style="width: 100% !important;"><p>&quot;timeslot&quot;: { &quot;id&quot;: &quot;NGM1M2E5OTYtYWJmYS00MDAyLWFjMzctNzBlZThiOWIxM2E3fnpQVzZvWVhQaXdsOEJ5RHVrWjRQVjZITEJqcEdHcX5FQzJBKzRQSH5ERTExKzBBQX4xNTU5MTM4Mjc5fjE1NTkxMzg4MjB+MTIwfjkwfjE5Mi4xMzYwMDB+YXNhcH5mYWxzZX5mYWxzZQ==&quot; }</p>
+<details open style="width:60%; margin: 10px; padding-left: 20px; float: left; clear:both;"><summary class=xxx style="margin-bottom: 5px;">timeslotId</summary><pre style="background: none; margin: 0px; padding-left: 20px;"><code class=json style="width: 100% !important;"><p>&quot;timeslot&quot;: { &quot;id&quot;: &quot;NGM1M2E5OTYtYWJmYS00MDAyLWFjMzctNzBlZThiOWIxM2E3fnpQVzZvWVhQaXdsOEJ5RHVrWjRQVjZITEJqcEdHcX5FQzJBKzRQSH5ERTExKzBBQX4xNTU5MTM4Mjc5fjE1NTkxMzg4MjB+MTIwfjkwfjE5Mi4xMzYwMDB+YXNhcH5mYWxzZX5mYWxzZQ==&quot; }</p>
 </code></pre></details>
 
 <p><strong>2)</strong> By passing explicit <code>timeslot.collection</code> and <code>timeslot.delivery</code> values</p>
 <h4 id='timeslotid-2'>* <strong><code>timeslotId</code></strong></h4>
-<details open style="width:60%; margin: 10px; padding-left: 20px; float: left;"><summary class=xxx style="margin-bottom: 5px;">timeslotId</summary><pre style="background: none; margin: 0px; padding-left: 20px;"><code class=json style="width: 100% !important;"><p>&quot;timeslot&quot;: {
+<details open style="width:60%; margin: 10px; padding-left: 20px; float: left; clear:both;"><summary class=xxx style="margin-bottom: 5px;">timeslotId</summary><pre style="background: none; margin: 0px; padding-left: 20px;"><code class=json style="width: 100% !important;"><p>&quot;timeslot&quot;: {
   &quot;collection&quot;: {
       &quot;from&quot;: &quot;2019-05-30T11:00:00.000Z&quot;,
       &quot;to&quot;: &quot;2019-05-30T12:00:00.000Z&quot;
@@ -1843,7 +1843,7 @@ POST
 
 <p><strong>1)</strong> By requesting a <code>timeslotId</code> from our platform</p>
 <h4 id='placeid'>* <strong><code>placeId</code></strong></h4>
-<details open style="width:60%; margin: 10px; padding-left: 20px; float: left;"><summary class=xxx style="margin-bottom: 5px;">placeId</summary><pre style="background: none; margin: 0px; padding-left: 20px;"><code class=json style="width: 100% !important;"><p>&quot;place&quot;: {
+<details open style="width:60%; margin: 10px; padding-left: 20px; float: left; clear:both;"><summary class=xxx style="margin-bottom: 5px;">placeId</summary><pre style="background: none; margin: 0px; padding-left: 20px;"><code class=json style="width: 100% !important;"><p>&quot;place&quot;: {
   &quot;id&quot;: &quot;sandbox-store&quot;
 }</p>
 </code></pre></details>
@@ -1854,7 +1854,7 @@ When passing the place address explicitly , there is no need to pass the <code>l
 $ref: &#39;#/definitions/Coordinates&#39;</code> object you will find in our Swagger API definition.
 </aside></p>
 <h4 id='place-explicit-address'>* <strong><code>place explicit address</code></strong></h4>
-<details open style="width:60%; margin: 10px; padding-left: 20px; float: left;"><summary class=xxx style="margin-bottom: 5px;">place full address</summary><pre style="background: none; margin: 0px; padding-left: 20px;"><code class=json style="width: 100% !important;"><p>&quot;place&quot;: {
+<details open style="width:60%; margin: 10px; padding-left: 20px; float: left; clear:both;"><summary class=xxx style="margin-bottom: 5px;">place full address</summary><pre style="background: none; margin: 0px; padding-left: 20px;"><code class=json style="width: 100% !important;"><p>&quot;place&quot;: {
                 &quot;address&quot;: {
                     &quot;country&quot;: &quot;GBR&quot;,
                     &quot;town&quot;: &quot;London&quot;,
@@ -2726,7 +2726,7 @@ The request example on the right hand side <code>code pane</code> will create a 
 <li><p>Select a suitable slot and use it within the booking request timeslot object: `</p></li>
 </ol>
 <h4 id='timeslotid-3'>* <strong><code>timeslotId</code></strong></h4>
-<details open style="width:60%; margin: 10px; padding-left: 20px; float: left;"><summary class=xxx style="margin-bottom: 5px;">timeslotId</summary><pre style="background: none; margin: 0px; padding-left: 20px;"><code class=json style="width: 100% !important;"><p>&quot;timeslot&quot;: { &quot;id&quot;: &quot;NGM1M2E5OTYtYWJmYS00MDAyLWFjMzctNzBlZThiOWIxM2E3fnpQVzZvWVhQaXdsOEJ5RHVrWjRQVjZITEJqcEdHcX5FQzJBKzRQSH5ERTExKzBBQX4xNTU5MTM4Mjc5fjE1NTkxMzg4MjB+MTIwfjkwfjE5Mi4xMzYwMDB+YXNhcH5mYWxzZX5mYWxzZQ==&quot; }</p>
+<details open style="width:60%; margin: 10px; padding-left: 20px; float: left; clear:both;"><summary class=xxx style="margin-bottom: 5px;">timeslotId</summary><pre style="background: none; margin: 0px; padding-left: 20px;"><code class=json style="width: 100% !important;"><p>&quot;timeslot&quot;: { &quot;id&quot;: &quot;NGM1M2E5OTYtYWJmYS00MDAyLWFjMzctNzBlZThiOWIxM2E3fnpQVzZvWVhQaXdsOEJ5RHVrWjRQVjZITEJqcEdHcX5FQzJBKzRQSH5ERTExKzBBQX4xNTU5MTM4Mjc5fjE1NTkxMzg4MjB+MTIwfjkwfjE5Mi4xMzYwMDB+YXNhcH5mYWxzZX5mYWxzZQ==&quot; }</p>
 </code></pre></details>
 
 <p><img src="images/API-Docs.png" alt="Sequence Diagram" /></p>
@@ -4842,7 +4842,7 @@ presented to an end-user for selection.
   A webhook (also called a web callback or HTTP push API) is a way for OTD APIs to provide other applications with real-time information. A webhook delivers data to other applications as it happens, meaning you get data immediately. ... This makes webhooks much more efficient for both provider and consumer
 </aside>
 
-<details open style="width:60%; margin: 10px; padding-left: 20px; float: left;"><summary class=xxx style="margin-bottom: 5px;">Partner config: We support Headers with the `POST` request to your `ENDPOINT`</summary><pre style="background: none; margin: 0px; padding-left: 20px;"><code class=json style="width: 100% !important;"><p>&quot;status&quot;: {
+<details open style="width:60%; margin: 10px; padding-left: 20px; float: left; clear:both;"><summary class=xxx style="margin-bottom: 5px;">Partner config: We support Headers with the `POST` request to your `ENDPOINT`</summary><pre style="background: none; margin: 0px; padding-left: 20px;"><code class=json style="width: 100% !important;"><p>&quot;status&quot;: {
   &quot;accepted&quot;: {
       &quot;customStatus&quot;: &quot;Accepted by Driver&quot;,
       &quot;hooks&quot;: [
@@ -4967,7 +4967,7 @@ presented to an end-user for selection.
 </tr>
 </tbody></table>
 <h1 id='samples'>Samples</h1>
-<details open style="width:60%; margin: 10px; padding-left: 20px; float: left;"><summary class=xxx style="margin-bottom: 5px;">Mid code example</summary><pre style="background: none; margin: 0px; padding-left: 20px;"><code class=json style="width: 100% !important;"><p>int main() {
+<details open style="width:60%; margin: 10px; padding-left: 20px; float: left; clear:both;"><summary class=xxx style="margin-bottom: 5px;">Mid code example</summary><pre style="background: none; margin: 0px; padding-left: 20px;"><code class=json style="width: 100% !important;"><p>int main() {
     printf(&quot;Hello World!&quot;);
     return 0;
 }</p>
