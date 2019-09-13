@@ -921,7 +921,115 @@ Sandbox <code>seed data</code> published in here allows developers to test their
 <ul>
 <li>N.B. For development select one service, e.g. <strong><code>asap</code></strong> if you like to make bookings uing the sandbox place as the pickup point . Any distance  &lt; <code>4 miles</code> should lead to a successful booking.</li>
 </ul>
-<h2 id='before-you-start'>Before you start</h2><h3 id='job-journey-type'>Job Journey Type</h3>
+<h2 id='before-you-start'>Before you start</h2>
+<h3 id="delivery-option">Delivery Options</h3>
+
+<p>
+<b>Get a Delivery Timeslot:</b>
+    <ul>
+        <li>You need to make 2 requests; these are the 2 steps
+            <ul>
+                    <li>a. Request 1: Get the available slots - you can display these to your customer</li>
+                    <li>b. Request 2: Using the Slot ID selected by your customer  - create the order</li>
+            </ul>
+        </li>
+        <li>We have a number of service types in this case we are using the <a href="#get-it-later">timeslot service</a>
+            <ul>
+                <li>We have a wide range of service type options that you will need to arrange with your account manager - see the full list of option <a href="#service-type">here</a></li>
+            </ul>
+        </li>
+        <li>A Place in the our platform is a location of yours we regularly send our drivers to and have hours of operations. We need to set these up please use the CSV file here to provide this detail.</li>
+    </li>
+    </ul>
+</p>
+<p>
+<b>You decide the Delivery Window:</b>
+<ul>
+    <li>You make 1 request to create this order with the collection / delivery time windows you need.</li>
+    <li>This will be checked against the delivery SLA agreed with your account manager; services includes:</li>
+    <ul>
+        <li>2 hour</li>
+        <li>3 hour</li>
+        <li>5 hour</li>
+    </ul>
+    <li>A Place in the our platform is a location of yours we regularly send our drivers to and have hours of operations. We need to set these up please use the CSV file here to provide this detail.</li>
+    </ul>
+</p>
+
+<p>
+<h3 id='place'>What is a place</h3>
+<blockquote>
+        <details><summary class=xxx>Expand for <code>Sandbox Place details</code></summary><pre><code class=><p>{
+            &quot;partnerId&quot;: &quot;sandbox&quot;,
+            &quot;placeId&quot;: &quot;sandbox-store&quot;,
+            &quot;postcode&quot;: &quot;EC2A 4PH&quot;,
+            &quot;coordinates&quot;: {
+                &quot;latitude&quot;: 51.523317,
+                &quot;longitude&quot;: -0.080965
+            },
+            &quot;address&quot;: {
+                &quot;street&quot;: [&quot;CitySprint - London Central Service Centre&quot;, &quot;58-62 Scrutton St&quot;],
+                &quot;town&quot;: &quot;Hackney&quot;,
+                &quot;state&quot;: &quot;London&quot;,
+                &quot;country&quot;: &quot;United Kingdom&quot;
+            },
+            &quot;region&quot;: &quot;M25&quot;,
+            &quot;openTime&quot;: {
+                &quot;days&quot;: {
+                    &quot;Friday&quot;: {
+                        &quot;openTime&quot;: &quot;00:01&quot;,
+                        &quot;closeTime&quot;: &quot;23:59&quot;
+                    },
+                    &quot;Monday&quot;: {
+                        &quot;openTime&quot;: &quot;00:01&quot;,
+                        &quot;closeTime&quot;: &quot;23:59&quot;
+                    },
+                    &quot;Saturday&quot;: {
+                        &quot;openTime&quot;: &quot;00:01&quot;,
+                        &quot;closeTime&quot;: &quot;23:59&quot;
+                    },
+                    &quot;Sunday&quot;: {
+                        &quot;openTime&quot;: &quot;00:01&quot;,
+                        &quot;closeTime&quot;: &quot;23:59&quot;
+                    },
+                    &quot;Thursday&quot;: {
+                        &quot;openTime&quot;: &quot;00:01&quot;,
+                        &quot;closeTime&quot;: &quot;23:59&quot;
+                    },
+                    &quot;Tuesday&quot;: {
+                        &quot;openTime&quot;: &quot;00:01&quot;,
+                        &quot;closeTime&quot;: &quot;23:59&quot;
+                    },
+                    &quot;Wednesday&quot;: {
+                        &quot;openTime&quot;: &quot;00:01&quot;,
+                        &quot;closeTime&quot;: &quot;23:59&quot;
+                    }
+                }
+            },
+            &quot;contact&quot;: {
+                &quot;name&quot;: &quot;ON THE DOT&quot;,
+                &quot;mobile&quot;: &quot;62737283728&quot;,
+                &quot;phone&quot;: &quot;7232372783&quot;,
+                &quot;email&quot;: &quot;test121@test.com&quot;
+            },
+            &quot;timezone&quot;: &quot;Europe/London&quot;
+        }</p>
+        </code></pre></details>
+        </blockquote>
+<ul>
+    <li>A Place in the our platform is a location of yours we regularly send our drivers to and have hours of operations. We need to set these up please use the CSV file here to provide this detail.</li>
+    <li>A place can be:</li>
+    <ul>
+        <li>A Store</li>
+        <li>A warehouse</li>
+        <li>A distribution centre</li>
+    </ul>
+    <li>We store a number of details about the place to make the delivery easier and to support management of delivery and returns.</li>
+    <li>Please provide a place ID instead of an address for all stops that this applies to in your implementation</li>
+</ul>
+</p>
+
+<h3 id='job-journey-type'>Job Journey Type</h3>
 <aside class="note">
 Regardless of <code>journeyType</code>, <code>collection</code> is always the pick up location, and <code>delivery</code> is always the drop off location.
 </aside>
@@ -950,69 +1058,6 @@ Regardless of <code>journeyType</code>, <code>collection</code> is always the pi
 <li><p>Currently all supported service types: <code>sameday</code>, <code>asap</code>,<code>4hour</code>,<code>timeslot</code>,<code>timewindow</code>,<code>asap</code>,<code>return</code>,<code>2hour</code>,<code>3hour</code>,<code>sameday</code>,<code>2hour-later</code>,<code>4hour-later</code></p></li>
 <li><p>Sandbox service types are described in <a href="#sandbox-seed-data">seed data above</a>.</p></li>
 </ul>
-<h3 id='place'>Place</h3>
-<blockquote>
-<details><summary class=xxx>Expand for <code>Sandbox Place details</code></summary><pre><code class=><p>{
-    &quot;partnerId&quot;: &quot;sandbox&quot;,
-    &quot;placeId&quot;: &quot;sandbox-store&quot;,
-    &quot;postcode&quot;: &quot;EC2A 4PH&quot;,
-    &quot;coordinates&quot;: {
-        &quot;latitude&quot;: 51.523317,
-        &quot;longitude&quot;: -0.080965
-    },
-    &quot;address&quot;: {
-        &quot;street&quot;: [&quot;CitySprint - London Central Service Centre&quot;, &quot;58-62 Scrutton St&quot;],
-        &quot;town&quot;: &quot;Hackney&quot;,
-        &quot;state&quot;: &quot;London&quot;,
-        &quot;country&quot;: &quot;United Kingdom&quot;
-    },
-    &quot;region&quot;: &quot;M25&quot;,
-    &quot;openTime&quot;: {
-        &quot;days&quot;: {
-            &quot;Friday&quot;: {
-                &quot;openTime&quot;: &quot;00:01&quot;,
-                &quot;closeTime&quot;: &quot;23:59&quot;
-            },
-            &quot;Monday&quot;: {
-                &quot;openTime&quot;: &quot;00:01&quot;,
-                &quot;closeTime&quot;: &quot;23:59&quot;
-            },
-            &quot;Saturday&quot;: {
-                &quot;openTime&quot;: &quot;00:01&quot;,
-                &quot;closeTime&quot;: &quot;23:59&quot;
-            },
-            &quot;Sunday&quot;: {
-                &quot;openTime&quot;: &quot;00:01&quot;,
-                &quot;closeTime&quot;: &quot;23:59&quot;
-            },
-            &quot;Thursday&quot;: {
-                &quot;openTime&quot;: &quot;00:01&quot;,
-                &quot;closeTime&quot;: &quot;23:59&quot;
-            },
-            &quot;Tuesday&quot;: {
-                &quot;openTime&quot;: &quot;00:01&quot;,
-                &quot;closeTime&quot;: &quot;23:59&quot;
-            },
-            &quot;Wednesday&quot;: {
-                &quot;openTime&quot;: &quot;00:01&quot;,
-                &quot;closeTime&quot;: &quot;23:59&quot;
-            }
-        }
-    },
-    &quot;contact&quot;: {
-        &quot;name&quot;: &quot;ON THE DOT&quot;,
-        &quot;mobile&quot;: &quot;62737283728&quot;,
-        &quot;phone&quot;: &quot;7232372783&quot;,
-        &quot;email&quot;: &quot;test121@test.com&quot;
-    },
-    &quot;timezone&quot;: &quot;Europe/London&quot;
-}</p>
-</code></pre></details>
-</blockquote>
-
-<p>Each stop must contain a valid place(address), which represents a physical location.</p>
-
-<p>The user can either contact OTD to set up places for them so they can use a place ID when creating bookings, or use a valid address instead.</p>
 <h3 id='status'>Status</h3>
 <p>Both <code>order</code> and <code>job</code> have status.  They are updated with realtime events via <strong><code>webhooks</code></strong>.</p>
 
